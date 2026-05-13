@@ -1,192 +1,35 @@
 'use client';
 
-import {
-ArrowRight, Building2,
-  Check, ChevronDown, ChevronUp, Globe, Key, Layers, MapPin, Package,
-  Receipt, Server, Truck, User, UserRound,
-Users,   Webhook, X, Zap, } from 'lucide-react';
+import { ArrowRight, Check, ChevronDown, ChevronUp, Server, X, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter,CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { track } from '@/lib/analytics/posthog';
 import { cn } from '@/lib/utils';
 
-// ─── Cloud Pricing Tiers ──────────────────────────────────────────────────────
-const CLOUD_TIERS = [
-  {
-    name: 'Micro',
-    monthlyPrice: 25,
-    annualPrice: 20,
-    units: 100,
-    overage: 0.75,
-    description: 'Individuals and very small teams.',
-    featured: true,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Lite',
-    monthlyPrice: 50,
-    annualPrice: 40,
-    units: 180,
-    overage: 0.75,
-    description: 'Small teams getting started.',
-    featured: true,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Essential',
-    monthlyPrice: 100,
-    annualPrice: 80,
-    units: 240,
-    overage: 0.75,
-    description: 'Growing operations with more to manage.',
-    featured: true,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Starter',
-    monthlyPrice: 200,
-    annualPrice: 160,
-    units: 300,
-    overage: 0.75,
-    description: 'Established small teams scaling up.',
-    featured: true,
-    highlight: true,
-    badge: 'Most Popular',
-  },
-  {
-    name: 'Starter Plus',
-    monthlyPrice: 300,
-    annualPrice: 240,
-    units: 500,
-    overage: 0.65,
-    description: 'Enhanced capacity at a lower unit cost.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Scale',
-    monthlyPrice: 400,
-    annualPrice: 320,
-    units: 800,
-    overage: 0.55,
-    description: 'High-volume operational teams.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Scale Plus',
-    monthlyPrice: 500,
-    annualPrice: 400,
-    units: 1200,
-    overage: 0.45,
-    description: 'Serious scale with a lower unit cost.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Pro',
-    monthlyPrice: 600,
-    annualPrice: 480,
-    units: 1700,
-    overage: 0.40,
-    description: 'Power teams running complex operations.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Pro Plus',
-    monthlyPrice: 700,
-    annualPrice: 560,
-    units: 2300,
-    overage: 0.35,
-    description: 'High-throughput pro operations.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Elite',
-    monthlyPrice: 800,
-    annualPrice: 640,
-    units: 3000,
-    overage: 0.30,
-    description: 'Enterprise-grade volume at high velocity.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Elite Plus',
-    monthlyPrice: 900,
-    annualPrice: 720,
-    units: 3800,
-    overage: 0.25,
-    description: 'Maximum capacity before Enterprise.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Enterprise',
-    monthlyPrice: 1000,
-    annualPrice: 800,
-    units: 5000,
-    overage: 0.20,
-    description: 'Full enterprise scale with the lowest unit cost.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-  {
-    name: 'Enterprise Plus',
-    monthlyPrice: 1500,
-    annualPrice: 1200,
-    units: 7500,
-    overage: 0.15,
-    description: 'Largest cloud plan. Maximum capacity.',
-    featured: false,
-    highlight: false,
-    badge: null,
-  },
-];
-
-const FEATURED_TIERS = CLOUD_TIERS.filter((t) => t.featured);
-
-// ─── Resource Unit Costs ──────────────────────────────────────────────────────
-// rolling: true = count persists across billing cycles (does not reset)
-const RESOURCE_UNITS = [
-  { icon: Package, label: 'Order', units: 2, rolling: false },
-  { icon: UserRound, label: 'Contact', units: 1, rolling: false },
-  { icon: MapPin, label: 'Place', units: 1, rolling: false },
-  { icon: Building2, label: 'Vendor', units: 1, rolling: false },
-  { icon: Truck, label: 'Vehicle', units: 1, rolling: true },
-  { icon: User, label: 'Driver', units: 1, rolling: true },
-  { icon: Receipt, label: 'Service Rate', units: 1, rolling: false },
-  { icon: Globe, label: 'Service Area', units: 1, rolling: false },
-  { icon: Layers, label: 'Zone', units: 1, rolling: false },
-  { icon: Users, label: 'User', units: 5, rolling: true },
-  { icon: Webhook, label: 'Webhook', units: 5, rolling: true },
-  { icon: Key, label: 'API Key', units: 1, rolling: true },
-];
-
-// ─── Overage Packs ────────────────────────────────────────────────────────────
-const OVERAGE_PACKS = [
-  { name: 'Small', price: 90, units: 100 },
-  { name: 'Medium', price: 240, units: 300 },
-  { name: 'Large', price: 375, units: 500 },
-  { name: 'Jumbo', price: 700, units: 1000 },
-];
+import PricingCalculator from './pricing-calculator';
+import {
+  CLOUD_TIERS,
+  FEATURED_TIERS,
+  OVERAGE_PACKS,
+  RESOURCE_UNITS,
+  type CloudTier,
+} from './pricing-data';
 
 // ─── Support Tiers ────────────────────────────────────────────────────────────
 const SUPPORT_TIERS = [
@@ -346,11 +189,23 @@ const LICENSE_OPTIONS = [
   },
 ];
 
-// ─── FAQs ─────────────────────────────────────────────────────────────────────
+// ─── FAQs (v3 pricing) ────────────────────────────────────────────────────────
 const FAQS = [
   {
+    q: 'How does Fleetbase compare to Onfleet, Detrack, or Routific?',
+    a: 'Most per-driver TMS platforms charge $29–$99 per driver per month — so a 10-driver fleet typically pays $290–$990/month just for driver seats, before any orders, integrations, or user logins. Fleetbase doesn’t charge per driver. A 10-driver fleet processing 400 orders/month fits on the Essential plan at $100/month, with the full platform included (Fleet-Ops, Storefront, Pallet, Ledger, Marketplace). Use the calculator above to compare with your numbers.',
+  },
+  {
     q: 'What is a Resource Unit?',
-    a: 'Resource Units are the currency of your Fleetbase Cloud plan. Each resource type consumes a set number of units: Orders = 2 units; Users = 5 units; Webhooks = 5 units; Contacts, Places, Vendors, Vehicles, Drivers, Service Rates, Service Areas, Zones, and API Keys = 1 unit each. Most resources reset each billing cycle. Rolling resources — Users, Vehicles, Drivers, Webhooks, and API Keys — do not reset; their count persists into the next billing cycle. You only pay overage for usage beyond your monthly allocation.',
+    a: 'Resource Units are how we measure the structural size of your operation — things like vehicles, customer contacts, delivery addresses, service rates, zones, and users. Each plan includes a monthly allocation. Drivers and orders are tracked for visibility but are NEVER billable — so growing your team or running more deliveries does not increase your bill. Most resources reset each billing cycle. Rolling resources (Users, Vehicles, Webhooks, API Keys) carry their count into the next cycle.',
+  },
+  {
+    q: 'Are orders and drivers really free?',
+    a: 'Yes — neither contributes any units toward your monthly allocation, regardless of how many you have or process. You can add as many drivers as you need and run as many orders as you want without your bill changing. We make money on the resource units that represent the structural size of your business (vehicles, contacts, places, users) and on bundled platform value, not on activity or workforce headcount.',
+  },
+  {
+    q: 'How much does each resource cost in units?',
+    a: 'Vehicles, contacts, places, vendors, service rates, service areas, zones, and API keys are 1 unit each. Users are 5 units each (rolling — they persist across cycles). Webhook endpoints are 5 units each (rolling). Orders and drivers are 0 — they are tracked but never billable.',
   },
   {
     q: 'Can I switch plans at any time?',
@@ -366,7 +221,7 @@ const FAQS = [
   },
   {
     q: 'Is there a free trial?',
-    a: 'Yes — every Cloud plan includes a 7-day free trial capped at 50 resource units. Billing begins when either limit is reached first, so you can evaluate the platform against real operational usage.',
+    a: 'Yes — every Cloud plan includes a 7-day free trial capped at 100 resource units. Billing begins when either limit is reached first, so you can evaluate the platform against real operational usage.',
   },
   {
     q: 'What does the Self-Hosted implementation fee include?',
@@ -376,17 +231,13 @@ const FAQS = [
     q: 'Can I add more Resource Units mid-month?',
     a: 'Yes. You can purchase Resource Unit Packs at any time: Small (100 units / $90), Medium (300 units / $240), Large (500 units / $375), or Jumbo (1,000 units / $700). These top up your allocation immediately.',
   },
-  {
-    q: 'What is Professional Services?',
-    a: 'Professional Services covers custom development work — building bespoke extensions, integrating with your existing ERP/CRM, custom workflow automation, data migration, and training. Pricing is scoped per project. Contact our sales team for a quote.',
-  },
 ];
 
 export default function PricingClient() {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly');
   const [showAllPlans, setShowAllPlans] = useState(false);
 
-  const tierPrice = (tier: (typeof CLOUD_TIERS)[0]) =>
+  const tierPrice = (tier: CloudTier) =>
     billing === 'annual' ? tier.annualPrice : tier.monthlyPrice;
 
   useEffect(() => {
@@ -401,7 +252,7 @@ export default function PricingClient() {
     track('pricing_billing_toggled', { to_cycle: cycle });
   };
 
-  const onTierCtaClick = (tier: (typeof CLOUD_TIERS)[0]) => {
+  const onTierCtaClick = (tier: CloudTier) => {
     track('pricing_tier_cta_clicked', {
       tier: tier.name,
       billing_cycle: billing,
@@ -416,14 +267,19 @@ export default function PricingClient() {
         <div className="container max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs mb-6">
             <span className="text-primary">●</span>
-            <span>Transparent, Usage-Based Pricing</span>
+            <span>Drivers and orders are free — always</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 text-balance">
-            Pay for what you use.{' '}
-            <span className="text-primary">Nothing more.</span>
+            One price for your whole fleet.{' '}
+            <span className="text-primary">Not per driver.</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Fleetbase Cloud starts at $25/month. No per-seat charges. No hidden fees. Self-hosted implementation is a one-time $2,500 fee.
+          <p className="text-xl text-muted-foreground mb-6 max-w-2xl mx-auto">
+            Most TMS platforms charge $29–$99 per driver per month. Fleetbase charges $0.
+            Add as many drivers and process as many orders as you need — your bill won&apos;t
+            change. You pay for the structure of your business, not its activity or workforce.
+          </p>
+          <p className="text-sm text-muted-foreground mb-10 max-w-2xl mx-auto">
+            Cloud starts at $25/month. Self-hosted from $2,500 one-time.
           </p>
 
           {/* Billing Toggle */}
@@ -472,19 +328,17 @@ export default function PricingClient() {
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link
-                href="https://cal.com/shivthakker/enquiry"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-cta-id="contact_sales"
+                href="#calculator"
+                data-cta-id="jump_to_calculator"
                 data-cta-location="pricing_page"
                 data-cta-variant="secondary"
               >
-                Talk to Sales
+                See your price
               </Link>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-4">
-            7 days or 50 resource units — whichever comes first.
+            7 days or 100 resource units — whichever comes first.
           </p>
         </div>
       </section>
@@ -494,8 +348,9 @@ export default function PricingClient() {
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Fleetbase Cloud</h2>
-            <p className="text-muted-foreground">
-              Fully managed. Automatic updates. Unlimited users and drivers. All platform modules included on every plan.
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Fully managed. Automatic updates. Unlimited drivers and orders on every plan.
+              All platform modules included.
             </p>
           </div>
 
@@ -504,7 +359,10 @@ export default function PricingClient() {
             {FEATURED_TIERS.map((tier) => (
               <Card
                 key={tier.name}
-                className={cn('flex flex-col overflow-hidden', tier.highlight && 'border-primary shadow-lg shadow-primary/10 pt-0')}
+                className={cn(
+                  'flex flex-col overflow-hidden',
+                  tier.highlight && 'border-primary shadow-lg shadow-primary/10 pt-0'
+                )}
               >
                 {tier.badge && (
                   <div className="bg-primary text-primary-foreground text-xs font-semibold text-center py-1.5">
@@ -531,7 +389,10 @@ export default function PricingClient() {
                   <div>
                     <span className="text-muted-foreground">Overage:</span> ${tier.overage}/unit
                   </div>
-                  <div className="text-xs text-muted-foreground italic pt-1">{tier.description}</div>
+                  {tier.fits && (
+                    <div className="text-xs text-primary/80 italic pt-1">Fits: {tier.fits}</div>
+                  )}
+                  <div className="text-xs text-muted-foreground italic">{tier.description}</div>
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full" variant="outline" asChild>
@@ -564,7 +425,7 @@ export default function PricingClient() {
                 </>
               ) : (
                 <>
-                  Compare all 13 plans <ChevronDown className="w-4 h-4" />
+                  Compare all {CLOUD_TIERS.length} plans <ChevronDown className="w-4 h-4" />
                 </>
               )}
             </button>
@@ -640,29 +501,57 @@ export default function PricingClient() {
         </div>
       </section>
 
+      {/* Calculator */}
+      <PricingCalculator billing={billing} />
+
       {/* Resource Units Explainer */}
-      <section className="section-padding bg-muted/20">
+      <section className="section-padding">
         <div className="container max-w-4xl mx-auto">
           <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold mb-2">How Resource Units Work</h2>
+            <h2 className="text-2xl font-bold mb-2">One plan covers everything you do</h2>
             <p className="text-muted-foreground">
-              Your plan includes a monthly unit allocation. Each resource type consumes a set number of units per item created. Most resources reset each billing cycle — rolling resources (marked below) carry their count into the next cycle.
+              Per-driver pricing punishes growth. Instead, each plan gives you a monthly
+              <strong className="text-foreground"> activity allowance</strong> measured in resource units.
+              Drivers and orders are <strong className="text-foreground">free</strong>. Everything else
+              draws from your monthly budget — so you can grow your team and run more deliveries without
+              your bill changing.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-3">
             {RESOURCE_UNITS.map((r) => (
-              <div key={r.label} className="bg-card border rounded-xl p-4 text-center">
-                <r.icon className="w-5 h-5 mx-auto mb-2 text-primary" />
-                <div className="text-2xl font-bold">{r.units}</div>
+              <div
+                key={r.label}
+                className={cn(
+                  'bg-card border rounded-xl p-4 text-center',
+                  !r.billable && 'border-green-500/40 bg-green-500/5'
+                )}
+              >
+                <r.icon
+                  className={cn(
+                    'w-5 h-5 mx-auto mb-2',
+                    r.billable ? 'text-primary' : 'text-green-600 dark:text-green-400'
+                  )}
+                />
+                {r.billable ? (
+                  <div className="text-2xl font-bold">{r.units}</div>
+                ) : (
+                  <div className="text-base font-bold text-green-600 dark:text-green-400">FREE</div>
+                )}
                 <div className="text-xs text-muted-foreground mt-0.5">{r.label}</div>
-                {r.rolling && (
-                  <div className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-medium">rolling</div>
+                {r.rolling && r.billable && (
+                  <div className="text-xs text-amber-600 dark:text-amber-400 mt-1 font-medium">
+                    rolling
+                  </div>
                 )}
               </div>
             ))}
           </div>
-          <div className="flex gap-6 text-xs text-muted-foreground mb-8">
+          <div className="flex flex-wrap gap-6 text-xs text-muted-foreground mb-8">
+            <div className="flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-green-500 inline-block" />
+              Free — never billable
+            </div>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-muted-foreground/40 inline-block" />
               Resets each billing cycle
@@ -685,7 +574,9 @@ export default function PricingClient() {
                 <div key={pack.name} className="border rounded-lg p-4 text-center">
                   <div className="text-xs text-muted-foreground font-medium mb-1">{pack.name}</div>
                   <div className="text-xl font-bold">${pack.price}</div>
-                  <div className="text-xs text-muted-foreground">{pack.units.toLocaleString()} units</div>
+                  <div className="text-xs text-muted-foreground">
+                    {pack.units.toLocaleString()} units
+                  </div>
                 </div>
               ))}
             </div>
@@ -694,12 +585,13 @@ export default function PricingClient() {
       </section>
 
       {/* Self-Hosted + Professional Services */}
-      <section className="section-padding">
+      <section className="section-padding bg-muted/20">
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Other Deployment Options</h2>
             <p className="text-muted-foreground">
-              Full control over your infrastructure, or custom-built solutions for your unique requirements.
+              Full control over your infrastructure, or custom-built solutions for your unique
+              requirements.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -791,19 +683,23 @@ export default function PricingClient() {
       </section>
 
       {/* Support Tiers */}
-      <section className="section-padding bg-muted/20">
+      <section className="section-padding">
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Support Levels</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Choose the level of ongoing support that matches your team&apos;s capacity and ambition. Available for both Cloud and Self-Hosted customers.
+              Choose the level of ongoing support that matches your team&apos;s capacity and ambition.
+              Available for both Cloud and Self-Hosted customers.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {SUPPORT_TIERS.map((tier) => (
               <Card
                 key={tier.name}
-                className={cn('flex flex-col', tier.highlight && 'border-primary shadow-lg shadow-primary/10')}
+                className={cn(
+                  'flex flex-col',
+                  tier.highlight && 'border-primary shadow-lg shadow-primary/10'
+                )}
               >
                 <CardHeader className="pb-3">
                   <div className="flex items-center gap-2 mb-1">
@@ -841,19 +737,24 @@ export default function PricingClient() {
       </section>
 
       {/* Commercial License Options */}
-      <section className="section-padding">
+      <section className="section-padding bg-muted/20">
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Commercial License Options</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Building proprietary extensions or integrations? A Commercial License waives AGPL obligations and keeps your custom code private. Fleetbase Core remains open-source — only your extensions are covered.
+              Building proprietary extensions or integrations? A Commercial License waives AGPL
+              obligations and keeps your custom code private. Fleetbase Core remains open-source —
+              only your extensions are covered.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
             {LICENSE_OPTIONS.map((lic) => (
               <Card
                 key={lic.name}
-                className={cn('flex flex-col overflow-hidden', lic.highlight && 'border-primary shadow-lg shadow-primary/10 pt-0')}
+                className={cn(
+                  'flex flex-col overflow-hidden',
+                  lic.highlight && 'border-primary shadow-lg shadow-primary/10 pt-0'
+                )}
               >
                 {lic.highlight && (
                   <div className="bg-primary text-primary-foreground text-xs font-semibold text-center py-1.5">
@@ -899,7 +800,10 @@ export default function PricingClient() {
               Read our licensing guide
             </Link>{' '}
             or{' '}
-            <Link href="https://cal.com/shivthakker/enquiry" className="text-primary underline underline-offset-4">
+            <Link
+              href="https://cal.com/shivthakker/enquiry"
+              className="text-primary underline underline-offset-4"
+            >
               talk to our team
             </Link>
             .
@@ -908,7 +812,7 @@ export default function PricingClient() {
       </section>
 
       {/* FAQ */}
-      <section className="section-padding bg-muted/20">
+      <section className="section-padding">
         <div className="container max-w-3xl mx-auto">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-2">Frequently Asked Questions</h2>
@@ -923,7 +827,9 @@ export default function PricingClient() {
                 <AccordionTrigger className="text-left font-medium py-4 hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-4">{faq.a}</AccordionContent>
+                <AccordionContent className="text-muted-foreground pb-4">
+                  {faq.a}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -931,14 +837,15 @@ export default function PricingClient() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="section-padding">
+      <section className="section-padding bg-muted/20">
         <div className="container max-w-3xl mx-auto">
           <div className="relative rounded-2xl border bg-card overflow-hidden p-12 text-center">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/10 pointer-events-none" />
             <div className="relative">
               <h2 className="text-4xl font-bold mb-4">Ready to get started?</h2>
               <p className="text-muted-foreground mb-8">
-                Try Fleetbase free for 7 days or 50 resource units, whichever comes first. Or speak to our team to find the right plan for your operation.
+                Try Fleetbase free for 7 days or 100 resource units, whichever comes first. Or speak
+                to our team to find the right plan for your operation.
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <Button size="lg" asChild>
