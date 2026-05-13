@@ -98,25 +98,25 @@ export default function PricingCalculator({ billing }: Props) {
   return (
     <section id="calculator" className="section-padding bg-muted/20">
       <div className="container max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs mb-4">
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs mb-3">
             <Calculator className="w-3 h-3 text-primary" />
             <span>Pricing Calculator</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-2 text-balance">
             Tell us about your operation. We&apos;ll find your plan.
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto">
             Drivers and orders are <span className="font-semibold text-foreground">always free</span>.
-            Adjust the numbers below and see what your real bill looks like — and what you&apos;d
-            pay on a typical per-driver competitor.
+            Adjust the numbers below to see your real bill — and what you&apos;d pay on a typical
+            per-driver competitor.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-4">
           {/* Inputs */}
-          <Card className="lg:sticky lg:top-24 self-start">
-            <CardContent className="p-6 space-y-5">
+          <Card className="lg:sticky lg:top-24 self-start py-0 gap-0">
+            <CardContent className="p-5 space-y-3.5">
               {PRIMARY_FIELDS.map((field) => (
                 <CalculatorRow
                   key={field.key}
@@ -128,14 +128,14 @@ export default function PricingCalculator({ billing }: Props) {
 
               <button
                 onClick={() => setAdvancedOpen(!advancedOpen)}
-                className="w-full flex items-center justify-between py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="w-full flex items-center justify-between py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors border-t pt-3"
               >
                 <span>Advanced (contacts, places, webhooks, …)</span>
                 {advancedOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </button>
 
               {advancedOpen && (
-                <div className="space-y-5 pt-2 border-t">
+                <div className="space-y-3.5 pt-1">
                   {ADVANCED_FIELDS.map((field) => (
                     <CalculatorRow
                       key={field.key}
@@ -152,14 +152,17 @@ export default function PricingCalculator({ billing }: Props) {
           {/* Output */}
           <div className="space-y-4">
             {/* Usage */}
-            <Card>
-              <CardContent className="p-6">
+            <Card className="py-0 gap-0">
+              <CardContent className="p-5">
                 <div className="flex items-baseline justify-between mb-3">
                   <div className="text-sm text-muted-foreground">Your monthly usage</div>
-                  <div className="text-3xl font-bold">{total.toLocaleString()} <span className="text-base font-normal text-muted-foreground">units</span></div>
+                  <div className="text-3xl font-bold leading-none">
+                    {total.toLocaleString()}{' '}
+                    <span className="text-base font-normal text-muted-foreground">units</span>
+                  </div>
                 </div>
                 {breakdown.length > 0 ? (
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     {breakdown.map((b) => (
                       <div key={b.key} className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
@@ -168,13 +171,13 @@ export default function PricingCalculator({ billing }: Props) {
                         <span className="font-medium">{b.units.toLocaleString()} units</span>
                       </div>
                     ))}
-                    <div className="border-t pt-1.5 mt-1.5 flex justify-between text-sm">
+                    <div className="border-t pt-1 mt-1 flex justify-between text-sm">
                       <span className="text-muted-foreground">Orders ×{inputs.orders.toLocaleString()}</span>
-                      <span className="font-medium text-green-600 dark:text-green-400">FREE</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">FREE</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Drivers ×{inputs.drivers}</span>
-                      <span className="font-medium text-green-600 dark:text-green-400">FREE</span>
+                      <span className="font-semibold text-green-600 dark:text-green-400">FREE</span>
                     </div>
                   </div>
                 ) : (
@@ -184,14 +187,14 @@ export default function PricingCalculator({ billing }: Props) {
             </Card>
 
             {/* Recommended plan */}
-            <Card className="border-primary shadow-lg shadow-primary/10 overflow-hidden">
+            <Card className="border-primary shadow-lg shadow-primary/10 overflow-hidden py-0 gap-0">
               <div className="bg-primary text-primary-foreground text-xs font-semibold text-center py-1.5">
                 Your recommended plan
               </div>
-              <CardContent className="p-6">
+              <CardContent className="p-5">
                 <div className="flex items-baseline justify-between mb-1">
                   <div className="text-xl font-bold">{recommendation.plan.name}</div>
-                  <div className="text-3xl font-bold">
+                  <div className="text-3xl font-bold leading-none">
                     ${recommendation.totalCost.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                     <span className="text-base font-normal text-muted-foreground">/mo</span>
                   </div>
@@ -237,45 +240,49 @@ export default function PricingCalculator({ billing }: Props) {
             </Card>
 
             {/* Competitor comparison */}
-            {inputs.drivers > 0 && (
-              <Card className="bg-gradient-to-br from-green-500/5 via-transparent to-primary/5">
-                <CardContent className="p-6">
+            {inputs.drivers > 0 && monthlySavings > 0 && (
+              <Card className="border-green-500/60 bg-green-50 dark:bg-green-950/30 py-0 gap-0 overflow-hidden">
+                <CardContent className="p-5">
                   <div className="flex items-center gap-2 mb-3">
                     <Sparkles className="w-4 h-4 text-green-600 dark:text-green-400" />
-                    <div className="text-sm font-semibold">Compared to a typical per-driver TMS</div>
+                    <div className="text-sm font-semibold text-green-900 dark:text-green-100">
+                      Compared to a typical per-driver TMS
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div className="rounded-lg border p-3">
+                  <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                    <div className="rounded-lg border bg-background p-3">
                       <div className="text-xs text-muted-foreground mb-1">Per-driver TMS</div>
-                      <div className="text-lg font-bold">
-                        ${competitorMonthly.toLocaleString()}<span className="text-xs font-normal text-muted-foreground">/mo</span>
+                      <div className="text-lg font-bold line-through decoration-red-500/60 decoration-2">
+                        ${competitorMonthly.toLocaleString()}
+                        <span className="text-xs font-normal text-muted-foreground no-underline">/mo</span>
                       </div>
                       <div className="text-xs text-muted-foreground mt-1">
-                        {inputs.drivers} drivers × ${COMPETITOR_PER_DRIVER_USD}/driver
+                        {inputs.drivers} × ${COMPETITOR_PER_DRIVER_USD}/driver
                       </div>
                     </div>
-                    <div className="rounded-lg border border-primary/30 bg-primary/5 p-3">
+                    <div className="rounded-lg border-2 border-primary bg-primary/10 p-3">
                       <div className="text-xs text-muted-foreground mb-1">Fleetbase</div>
-                      <div className="text-lg font-bold">
-                        ${fleetbaseMonthly.toLocaleString(undefined, { maximumFractionDigits: 0 })}<span className="text-xs font-normal text-muted-foreground">/mo</span>
+                      <div className="text-lg font-bold text-primary">
+                        ${fleetbaseMonthly.toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                        <span className="text-xs font-normal text-muted-foreground">/mo</span>
                       </div>
-                      <div className="text-xs text-muted-foreground mt-1">{recommendation.plan.name} plan, all-in</div>
+                      <div className="text-xs text-muted-foreground mt-1">
+                        {recommendation.plan.name}, all-in
+                      </div>
                     </div>
                   </div>
-                  {monthlySavings > 0 && (
-                    <div className="mt-3 text-sm text-center">
-                      <span className="font-semibold text-green-600 dark:text-green-400">
-                        You save ${monthlySavings.toLocaleString(undefined, { maximumFractionDigits: 0 })}/month
-                      </span>{' '}
-                      <span className="text-muted-foreground">
-                        (${yearlySavings.toLocaleString(undefined, { maximumFractionDigits: 0 })}/year)
-                      </span>
+                  <div className="rounded-lg bg-green-600 dark:bg-green-500 text-white p-3 text-center">
+                    <div className="text-2xl font-bold leading-tight">
+                      Save ${monthlySavings.toLocaleString(undefined, { maximumFractionDigits: 0 })}/mo
                     </div>
-                  )}
+                    <div className="text-xs opacity-90 mt-0.5">
+                      That&apos;s ${yearlySavings.toLocaleString(undefined, { maximumFractionDigits: 0 })} a year
+                    </div>
+                  </div>
                   <p className="text-xs text-muted-foreground mt-3 leading-relaxed">
-                    Per-driver benchmark of ${COMPETITOR_PER_DRIVER_USD}/driver/mo is the midpoint of published
-                    rates from Detrack, OptimoRoute, and Track-POD ($29–$99). Comparison is for drivers
-                    only — competitors typically charge separately for orders, integrations, and users.
+                    Benchmark of ${COMPETITOR_PER_DRIVER_USD}/driver/mo is the midpoint of published rates
+                    from Detrack, OptimoRoute, and Track-POD ($29–$99). Competitors typically charge
+                    separately for orders, integrations, and users.
                   </p>
                 </CardContent>
               </Card>
@@ -296,15 +303,23 @@ function CalculatorRow({
   value: number;
   onChange: (n: number) => void;
 }) {
+  // Skip the inline helper for "free" fields — the FREE badge says it all.
+  const showHelper = field.helper && !field.free;
   return (
     <div>
-      <div className="flex items-baseline justify-between mb-1.5">
-        <label htmlFor={`calc-${field.key}`} className="text-sm font-medium">
-          {field.label}
+      <div className="flex items-center justify-between gap-3 mb-1">
+        <label
+          htmlFor={`calc-${field.key}`}
+          className="text-sm font-medium flex items-center gap-1.5 flex-1 min-w-0"
+        >
+          <span className="truncate">{field.label}</span>
           {field.free && (
-            <span className="ml-2 text-xs font-semibold bg-green-500/15 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full">
+            <span className="text-[10px] font-bold tracking-wide bg-green-500/15 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded-full leading-none">
               FREE
             </span>
+          )}
+          {showHelper && (
+            <span className="text-xs text-muted-foreground font-normal">· {field.helper}</span>
           )}
         </label>
         <input
@@ -319,7 +334,7 @@ function CalculatorRow({
             const n = Number(e.target.value);
             if (Number.isFinite(n)) onChange(Math.max(field.min, Math.min(field.max, Math.round(n))));
           }}
-          className="w-20 text-right text-sm border rounded px-2 py-1 bg-background"
+          className="w-16 text-right text-sm border rounded px-2 py-0.5 bg-background"
         />
       </div>
       <input
@@ -331,13 +346,10 @@ function CalculatorRow({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         className={cn(
-          'w-full accent-primary cursor-pointer',
+          'w-full accent-primary cursor-pointer h-1.5',
           field.free && 'opacity-90'
         )}
       />
-      {field.helper && (
-        <div className="text-xs text-muted-foreground mt-1">{field.helper}</div>
-      )}
     </div>
   );
 }
