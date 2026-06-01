@@ -169,7 +169,7 @@ jobs:
           npx --yes @openai/codex@latest exec \
             --cd "$GITHUB_WORKSPACE" \
             --sandbox workspace-write \
-            --ask-for-approval never \
+            -c approval_policy=never \
             --model "$OPENAI_CODEX_MODEL" \
             --output-last-message content-agent-output/codex-last-message.md \
             <<'EOF'
