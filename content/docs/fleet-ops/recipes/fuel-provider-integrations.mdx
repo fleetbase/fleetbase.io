@@ -1,0 +1,124 @@
+---
+title: Fuel Provider Integrations
+sidebarTitle: Fuel Providers
+description: Register custom fuel card and fuel billing providers in Fleet-Ops without modifying Fleet-Ops core.
+---
+
+# Fuel Provider Integrations
+
+Fleet-Ops fuel providers connect external fuel card, station, and billing systems to Fleet-Ops. PetroApp ships as the native provider, and extensions can register additional providers through the same framework.
+
+Fuel provider integrations are split into three records:
+
+| Record | Purpose |
+| :--- | :--- |
+| `FuelProviderConnection` | The configured provider account, credentials, sync settings, and health state |
+| `FuelProviderTransaction` | The imported provider/card transaction ledger and audit source |
+| `FuelReport` | The operational Fleet-Ops fuel event users review and report on |
+
+Imported provider transactions appear in **Fleet-Ops → Resources → Fuel Transactions**. Matched transactions can create or update linked **Fuel Reports**, while unmatched transactions remain available for review.
+
+## How Extensions Register Providers
+
+An extension registers a provider descriptor from its Laravel service provider. The descriptor tells Fleet-Ops how to display the provider, which credentials to collect, and which adapter class handles API calls.
+
+```php
+namespace Vendor\FuelProvider\Providers;
+
+use Fleetbase\FleetOps\Support\FuelProviders\FuelProviderDescriptor;
+use Fleetbase\FleetOps\Support\FuelProviders\FuelProviderRegistry;
+use Fleetbase\Providers\CoreServiceProvider;
+use Vendor\FuelProvider\Support\AcmeFuelProvider;
+
+class AcmeFuelProviderServiceProvider extends CoreServiceProvider
+{
+    public function register(): void
+    {
+        $this->callAfterResolving(FuelProviderRegistry::class, function (FuelProviderRegistry $registry) {
+            if ($registry->has('acme_fuel')) {
+                return;
+            }
+
+            $registry->register(new FuelProviderDescriptor([
+                'key' => 'acme_fuel',
+                'label' => 'Acme Fuel',
+                'type' => 'extension',
+                'driver_class' => AcmeFuelProvider::class,
+                'description' => 'Imports fuel card transactions from Acme Fuel.',
+                'docs_url' => 'https://example.com/docs',
+                'required_fields' => [
+                    [
+                        'name' => 'api_key',
+                        'label' => 'API Key',
+                        'type' => 'password',
+                        'required' => true,
+                    ],
+                ],
+                'capabilities' => ['vehicles', 'transactions', 'stations'],
+            ]));
+        });
+    }
+}
+```
+
+Once the package is installed and its service provider is loaded, the provider appears in **Fleet-Ops → Connectivity → Fuel Providers** alongside PetroApp. No Fleet-Ops core config edit is required.
+
+## Adapter Contract
+
+Provider adapters implement `Fleetbase\FleetOps\Contracts\FuelProvider`. Most adapters should extend Fleet-Ops' base fuel provider class and implement the provider-specific API calls.
+
+Required methods:
+
+```php
+public function key(): string;
+public function name(): string;
+public function authenticate(FuelProviderConnection $connection): array;
+public function testConnection(FuelProviderConnection $connection): array;
+public function listVehicles(FuelProviderConnection $connection, array $options = []): Collection;
+public function listTransactions(FuelProviderConnection $connection, Carbon $from, Carbon $to, array $options = []): Collection;
+public function listStations(FuelProviderConnection $connection, array $options = []): Collection;
+public function pushTrip(FuelProviderConnection $connection, array $trip): array;
+public function syncVehicle(FuelProviderConnection $connection, array $vehicle): array;
+public function webhookPayloadToTransaction(FuelProviderConnection $connection, array $payload): ?array;
+```
+
+If a provider does not support optional write-back behavior, return an empty array or `null` for those methods.
+
+## Transaction Normalization
+
+`listTransactions()` should return a collection of normalized arrays. Fleet-Ops handles idempotent upserts, matching, linked fuel report creation, and import events after the adapter returns normalized payloads.
+
+Important fields:
+
+| Field | Description |
+| :--- | :--- |
+| `provider` | Provider key, such as `acme_fuel` |
+| `provider_transaction_id` | Stable provider-side transaction ID |
+| `provider_vehicle_id` | Provider vehicle identity when available |
+| `vehicle_card_id` | Fuel card or vehicle-card identifier |
+| `internal_number` | Fleet/internal vehicle number |
+| `structure_number` | Provider or fleet structure number |
+| `plate_number` | Vehicle plate number |
+| `trip_number` | Linked trip or order reference when available |
+| `station_name` | Fuel station name |
+| `transaction_at` | Transaction timestamp |
+| `volume` | Fuel volume |
+| `metric_unit` | Unit such as `l` |
+| `amount` | Transaction amount in minor currency units |
+| `currency` | ISO currency code |
+| `odometer` | Odometer reading when provided |
+| `normalized_payload` | Provider-specific normalized metadata |
+| `raw_payload` | Original provider response |
+
+When a provider does not expose a stable transaction ID, generate a deterministic hash from immutable transaction fields so repeated syncs update the same Fleet-Ops transaction.
+
+## Sync Flow
+
+1. Fleet-Ops syncs a provider connection by date window.
+2. The adapter returns normalized transactions.
+3. Fleet-Ops upserts each `FuelProviderTransaction`.
+4. Fleet-Ops attempts to match the transaction to vehicles, orders, and drivers.
+5. Matched transactions can create linked `FuelReport` records.
+6. Events are fired for import, match, unmatched, and fuel-report-created outcomes.
+
+Use `FuelProviderTransactionImported`, `FuelProviderTransactionMatched`, `FuelProviderTransactionUnmatched`, and `FuelReportCreatedFromProvider` if your extension needs to add client-specific review, reconciliation, or fraud workflows.

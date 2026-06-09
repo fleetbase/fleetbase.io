@@ -40,6 +40,8 @@
     "---Analytics---",
     "analytics/overview",
     "analytics/reports",
+    "---Recipes---",
+    "recipes/fuel-provider-integrations",
     "---Navigator App---",
     "navigator-app/quickstart",
     "navigator-app/configuration",
