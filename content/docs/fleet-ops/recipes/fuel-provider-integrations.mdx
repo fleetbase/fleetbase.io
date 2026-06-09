@@ -1,22 +1,22 @@
 ---
-title: Fuel Provider Integrations
-sidebarTitle: Fuel Providers
-description: Register custom fuel card and fuel billing providers in Fleet-Ops without modifying Fleet-Ops core.
+title: Fuel Integrations
+sidebarTitle: Fuel Integrations
+description: Register custom fuel card and fuel management integrations in Fleet-Ops without modifying Fleet-Ops core.
 ---
 
-# Fuel Provider Integrations
+# Fuel Integrations
 
-Fleet-Ops fuel providers connect external fuel card, station, and billing systems to Fleet-Ops. PetroApp ships as the native provider, and extensions can register additional providers through the same framework.
+Fleet-Ops fuel integrations connect external fuel card providers, station networks, onsite fuel management systems, and billing APIs to Fleet-Ops. PetroApp ships as the native example integration, and extensions can register additional providers through the same framework.
 
-Fuel provider integrations are split into three records:
+Fuel integrations are split into three records:
 
 | Record | Purpose |
 | :--- | :--- |
-| `FuelProviderConnection` | The configured provider account, credentials, sync settings, and health state |
-| `FuelProviderTransaction` | The imported provider/card transaction ledger and audit source |
-| `FuelReport` | The operational Fleet-Ops fuel event users review and report on |
+| `FuelProviderConnection` | The configured integration account, credentials, sync settings, company scope, and health state |
+| `FuelProviderTransaction` | The imported provider bill or card transaction ledger, matching state, raw payload, normalized payload, and audit source |
+| `FuelReport` | The operational Fleet-Ops fuel event users review, report on, and use in workflows after a transaction is matched to a vehicle |
 
-Imported provider transactions appear in **Fleet-Ops → Resources → Fuel Transactions**. Matched transactions can create or update linked **Fuel Reports**, while unmatched transactions remain available for review.
+Provider transactions are the import ledger. Fuel Reports are the operational records. Imported provider transactions appear in **Fleet-Ops → Management → Fuel Transactions**. Matched transactions can create or update linked **Fuel Reports**, while unmatched transactions remain available for review.
 
 ## How Extensions Register Providers
 
@@ -43,6 +43,8 @@ class AcmeFuelProviderServiceProvider extends CoreServiceProvider
                 'key' => 'acme_fuel',
                 'label' => 'Acme Fuel',
                 'type' => 'extension',
+                'category' => 'Fuel card integration',
+                'icon' => 'gas-pump',
                 'driver_class' => AcmeFuelProvider::class,
                 'description' => 'Imports fuel card transactions from Acme Fuel.',
                 'docs_url' => 'https://example.com/docs',
@@ -55,13 +57,23 @@ class AcmeFuelProviderServiceProvider extends CoreServiceProvider
                     ],
                 ],
                 'capabilities' => ['vehicles', 'transactions', 'stations'],
+                'sync_defaults' => [
+                    'window_days' => 7,
+                    'matching_order' => ['provider_vehicle_id', 'internal_number', 'plate_number', 'vehicle_card_id'],
+                    'auto_create_fuel_reports' => true,
+                ],
+                'setup_instructions' => [
+                    'Create or copy an API credential from Acme Fuel.',
+                    'Paste the credential into Fleet-Ops and test the connection.',
+                    'Choose the default sync window and matching identifiers.',
+                ],
             ]));
         });
     }
 }
 ```
 
-Once the package is installed and its service provider is loaded, the provider appears in **Fleet-Ops → Connectivity → Fuel Providers** alongside PetroApp. No Fleet-Ops core config edit is required.
+Once the package is installed and its service provider is loaded, the provider appears in **Fleet-Ops → Connectivity → Fuel Integrations** alongside PetroApp. No Fleet-Ops core config edit is required when the descriptor fits the built-in setup schema.
 
 ## Adapter Contract
 
@@ -119,6 +131,16 @@ When a provider does not expose a stable transaction ID, generate a deterministi
 3. Fleet-Ops upserts each `FuelProviderTransaction`.
 4. Fleet-Ops attempts to match the transaction to vehicles, orders, and drivers.
 5. Matched transactions can create linked `FuelReport` records.
-6. Events are fired for import, match, unmatched, and fuel-report-created outcomes.
+6. Unmatched transactions remain in **Management → Fuel Transactions** for manual matching, review, reprocessing, or ignoring.
+7. Events are fired for import, match, unmatched, and fuel-report-created outcomes.
 
 Use `FuelProviderTransactionImported`, `FuelProviderTransactionMatched`, `FuelProviderTransactionUnmatched`, and `FuelReportCreatedFromProvider` if your extension needs to add client-specific review, reconciliation, or fraud workflows.
+
+## Operator Workflow
+
+1. Open **Connectivity → Fuel Integrations**.
+2. Select a provider, enter credentials, test the connection, and save sync settings.
+3. Run a manual sync or wait for the scheduled sync window.
+4. Review imported provider bills in **Management → Fuel Transactions**.
+5. Match transactions to vehicles, orders, or trips when automatic matching cannot resolve them.
+6. Use linked **Fuel Reports** for operations, analytics, and downstream workflows.
