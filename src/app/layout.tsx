@@ -10,6 +10,7 @@ import { AhrefsAnalytics } from '@/components/analytics/AhrefsAnalytics';
 import { ConsentBanner } from '@/components/analytics/ConsentBanner';
 import { GoogleAnalyticsProvider } from '@/components/analytics/GoogleAnalyticsProvider';
 import { PostHogProvider } from '@/components/analytics/PostHogProvider';
+import { DocsEmbedThemeSync } from '@/components/docs-embed-theme-sync';
 import Footer from '@/components/layout/footer';
 import { MobileNavProvider } from '@/components/layout/mobile-nav-context';
 import Navbar from '@/components/layout/navbar';
@@ -119,6 +120,7 @@ export default async function RootLayout({
  defaultTheme="dark"
  disableTransitionOnChange
  >
+ <DocsEmbedThemeSync />
  <RootProvider
  search={{
  options: {
