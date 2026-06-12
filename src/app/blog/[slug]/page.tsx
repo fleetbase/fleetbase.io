@@ -8,7 +8,12 @@ import { BlogPostTracker } from '@/components/analytics/BlogPostTracker';
 import { BlogPostingSchema } from '@/components/seo/json-ld';
 import { Button } from '@/components/ui/button';
 import { formatBlogHtml } from '@/lib/blog-html';
-import { getAllBlogSlugs, getBlogPostBySlug } from '@/lib/ghost';
+import {
+  type BlogPost,
+  getAllBlogPosts,
+  getAllBlogSlugs,
+  getBlogPostBySlug,
+} from '@/lib/ghost';
 
 const BASE_URL = 'https://fleetbase.io';
 
@@ -18,6 +23,23 @@ function formatPublishedDate(value: string) {
     month: 'long',
     day: 'numeric',
   }).format(new Date(value));
+}
+
+// Pick related posts to link from each article. Prefer posts that share a tag
+// with the current one (same topic cluster), then fall back to the most recent
+// posts so every article links out to others — this keeps posts from becoming
+// orphan pages and strengthens internal linking. `allPosts` is already sorted
+// newest-first by the Ghost API.
+function getRelatedPosts(allPosts: BlogPost[], current: BlogPost, count = 3) {
+  const others = allPosts.filter((post) => post.id !== current.id);
+  const currentTagSlugs = new Set(current.tags.map((tag) => tag.slug));
+  const sameTag = others.filter((post) =>
+    post.tags.some((tag) => currentTagSlugs.has(tag.slug)),
+  );
+  const sameTagIds = new Set(sameTag.map((post) => post.id));
+  const rest = others.filter((post) => !sameTagIds.has(post.id));
+
+  return [...sameTag, ...rest].slice(0, count);
 }
 
 export const revalidate = 300;
@@ -92,6 +114,7 @@ export default async function BlogPostPage(props: {
 
   const canonicalUrl = `${BASE_URL}/blog/${post.slug}`;
   const contentHtml = await formatBlogHtml(post.html);
+  const relatedPosts = getRelatedPosts(await getAllBlogPosts(), post);
 
   return (
     <div className="flex flex-col">
@@ -179,6 +202,58 @@ export default async function BlogPostPage(props: {
           />
         </div>
       </section>
+
+      {relatedPosts.length > 0 && (
+        <section className="border-t py-12 md:py-16">
+          <div className="container">
+            <div className="mx-auto max-w-5xl">
+              <h2 className="mb-8 text-2xl font-bold tracking-tight">
+                Related articles
+              </h2>
+              <div className="grid gap-6 md:grid-cols-3">
+                {relatedPosts.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/blog/${related.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-all hover:border-primary/50 hover:shadow-md"
+                  >
+                    {related.featureImage && (
+                      <div className="aspect-[16/9] overflow-hidden border-b bg-muted/30">
+                        <Image
+                          src={related.featureImage}
+                          alt={related.featureImageAlt || related.title}
+                          width={1200}
+                          height={675}
+                          sizes="(min-width: 768px) 30vw, 100vw"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        {related.tags[0] && (
+                          <span className="rounded-full border bg-muted/40 px-2.5 py-0.5 text-xs text-muted-foreground">
+                            {related.tags[0].name}
+                          </span>
+                        )}
+                        <span className="text-xs text-muted-foreground">
+                          {related.readingTime}
+                        </span>
+                      </div>
+                      <h3 className="mb-3 flex-1 text-base font-semibold leading-snug group-hover:text-primary">
+                        {related.title}
+                      </h3>
+                      <span className="text-xs text-muted-foreground">
+                        {formatPublishedDate(related.publishedAt)}
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="border-t py-16 md:py-20">
         <div className="container">

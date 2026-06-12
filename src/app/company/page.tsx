@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/company' },
- title: 'Company | Fleetbase',
+ title: 'Company',
  description:
  'Fleetbase is the open-source logistics platform built to democratize logistics technology. Learn about our mission, team, open-source commitment, and how to get involved.',
  openGraph: {

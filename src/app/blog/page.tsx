@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { getBlogPosts } from '@/lib/ghost';
+import { getAllBlogPosts } from '@/lib/ghost';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/blog' },
@@ -40,9 +40,16 @@ function formatPublishedDate(value: string) {
 }
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts({ limit: 7 });
+  // Fetch every post (not just the latest 7) so the index links to the full
+  // archive. Without this, older posts have no internal inlinks and become
+  // orphan pages — discoverable only via the sitemap.
+  const posts = await getAllBlogPosts();
   const featuredPost = posts.find((post) => post.isFeatured) || posts[0];
-  const latestPosts = posts.filter((post) => post.id !== featuredPost?.id);
+  const remainingPosts = posts.filter((post) => post.id !== featuredPost?.id);
+  // Keep the existing card grid focused on the 6 most recent for visual
+  // balance; every older post is linked from the "More articles" archive below.
+  const latestPosts = remainingPosts.slice(0, 6);
+  const archivePosts = remainingPosts.slice(6);
 
   return (
     <div className="flex flex-col">
@@ -195,6 +202,37 @@ export default async function BlogPage() {
           )}
         </div>
       </section>
+
+      {archivePosts.length > 0 && (
+        <section className="border-t py-12 md:py-16">
+          <div className="container">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold tracking-tight">More articles</h2>
+              <p className="mt-2 text-muted-foreground">
+                Browse the full Fleetbase archive.
+              </p>
+            </div>
+
+            <ul className="grid gap-x-8 gap-y-1 sm:grid-cols-2">
+              {archivePosts.map((post) => (
+                <li key={post.id}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="group flex items-baseline justify-between gap-4 border-b py-4 outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                  >
+                    <span className="font-medium leading-snug transition-colors group-hover:text-primary">
+                      {post.title}
+                    </span>
+                    <span className="shrink-0 text-xs text-muted-foreground">
+                      {formatPublishedDate(post.publishedAt)}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
 
       <section className="border-t py-16 md:py-20">
         <div className="container">
