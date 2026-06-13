@@ -1,7 +1,10 @@
+import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+
+import { ONFLEET_ALTERNATIVE_PAGES } from './onfleet-alternative-pages';
 
 export const metadata: Metadata = {
  title: 'Fleetbase Comparisons | Open-Source Alternative to Onfleet, Tookan, Route4Me',
@@ -91,6 +94,39 @@ export default function ComparePage() {
  </div>
  <p className="text-sm font-medium text-primary mb-2">{item.tagline}</p>
  <p className="text-sm text-muted-foreground leading-relaxed">{item.description}</p>
+ </Link>
+ ))}
+ </div>
+ </div>
+ </section>
+
+ {/* Onfleet Alternative Landing Pages */}
+ <section className="py-16 md:py-20 border-t bg-muted/20">
+ <div className="container max-w-5xl">
+ <div className="mb-10 max-w-2xl">
+ <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-primary">Onfleet alternatives</p>
+ <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+ Win the specific comparison your buyer is already making
+ </h2>
+ <p className="mt-4 text-muted-foreground">
+ Focused pages for teams searching for a lower-cost, more controllable alternative to individual Onfleet capabilities.
+ </p>
+ </div>
+ <div className="grid gap-4 md:grid-cols-2">
+ {ONFLEET_ALTERNATIVE_PAGES.map((item) => (
+ <Link
+ key={item.slug}
+ href={`/compare/${item.slug}`}
+ className="group rounded-xl border bg-card p-5 transition-all hover:border-primary/50 hover:shadow-md"
+ >
+ <div className="mb-2 flex items-start justify-between gap-4">
+ <div>
+ <p className="text-xs font-medium text-primary">{item.eyebrow}</p>
+ <h3 className="mt-1 text-lg font-semibold tracking-tight">{item.title}</h3>
+ </div>
+ <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground transition-all group-hover:translate-x-1 group-hover:text-primary" />
+ </div>
+ <p className="text-sm leading-relaxed text-muted-foreground">{item.description}</p>
  </Link>
  ))}
  </div>

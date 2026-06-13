@@ -35,7 +35,14 @@ const SOCIAL_LINKS = [
  },
 ];
 
-const FOOTER_LINKS = [
+type FooterLink = { label: string; href: string; external?: boolean } | { subheading: string };
+
+type FooterSection = {
+ title: string;
+ links: FooterLink[];
+};
+
+const FOOTER_LINKS: FooterSection[] = [
  {
  title: 'Platform',
  links: [
@@ -70,6 +77,13 @@ const FOOTER_LINKS = [
  links: [
  { label: 'All Comparisons', href: '/compare' },
  { label: 'Fleetbase vs Onfleet', href: '/compare/vs-onfleet' },
+ { subheading: 'Onfleet Alternatives' },
+ { label: 'Route Optimization', href: '/compare/onfleet-route-optimization-alternative' },
+ { label: 'Dispatch Automation', href: '/compare/onfleet-dispatch-alternative' },
+ { label: 'Tracking & Notifications', href: '/compare/onfleet-tracking-notifications-alternative' },
+ { label: 'Driver App & POD', href: '/compare/onfleet-driver-app-pod-alternative' },
+ { label: 'API & Platform', href: '/compare/onfleet-api-platform-alternative' },
+ { subheading: 'Other Comparisons' },
  { label: 'Fleetbase vs Tookan', href: '/compare/vs-tookan' },
  { label: 'Fleetbase vs Route4Me', href: '/compare/vs-route4me' },
  { subheading: 'Powered by Fleetbase' },
