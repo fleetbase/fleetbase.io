@@ -54,9 +54,9 @@ jobs:
       ANTHROPIC_MODEL: ${{ vars.ANTHROPIC_MODEL || secrets.ANTHROPIC_MODEL }}
       ANTHROPIC_TIMEOUT_MS: ${{ vars.ANTHROPIC_TIMEOUT_MS || '600000' }}
       ANTHROPIC_HEARTBEAT_MS: ${{ vars.ANTHROPIC_HEARTBEAT_MS || '60000' }}
-      GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+      GHOST_ADMIN_API_URL: ${{ vars.GHOST_ADMIN_API_URL || 'https://blog.fleetbase.io' }}
       GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
-      GHOST_API_VERSION: ${{ vars.GHOST_API_VERSION || 'v5.0' }}
+      GHOST_API_VERSION: ${{ vars.GHOST_API_VERSION || 'v6.0' }}
       GHOST_POST_SLUG: ${{ inputs.slug || '' }}
       GHOST_POST_ID: ${{ inputs.post_id || '' }}
       REVISION_PROMPT: ${{ inputs.revision_prompt }}
@@ -84,6 +84,18 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Verify Ghost target
+        run: |
+          set -euo pipefail
+          expected_url="https://blog.fleetbase.io"
+
+          if [ "${GHOST_ADMIN_API_URL}" != "${expected_url}" ]; then
+            echo "::error::GHOST_ADMIN_API_URL must target ${expected_url}."
+            exit 1
+          fi
+
+          echo "Ghost target verified: ${expected_url}"
 
       - name: Run content agent self-tests
         run: pnpm content-agent:test

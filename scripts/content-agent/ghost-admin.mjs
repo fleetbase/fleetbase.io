@@ -66,7 +66,7 @@ async function ghostAdminFetch(pathname, options = {}) {
       Authorization: `Ghost ${token}`,
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      'Accept-Version': process.env.GHOST_API_VERSION || options.apiVersion || 'v5.0',
+      'Accept-Version': process.env.GHOST_API_VERSION || options.apiVersion || 'v6.0',
       ...(options.headers || {}),
     },
     body: options.body ? JSON.stringify(options.body) : undefined,
