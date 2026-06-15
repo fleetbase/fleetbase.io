@@ -4,8 +4,37 @@ import { join } from 'node:path';
 import type { MetadataRoute } from 'next';
 
 import { getAllBlogPosts } from '@/lib/ghost';
+import {
+  apiSource,
+  cliSource,
+  contributingSource,
+  extensionDevelopmentSource,
+  fleetOpsSource,
+  ledgerSource,
+  palletSource,
+  source,
+  storefrontSource,
+  uiSource,
+} from '@/lib/source';
 
 const BASE_URL = 'https://fleetbase.io';
+
+// Every Fumadocs docs source. Their pages are enumerated into the sitemap so
+// the full documentation (the bulk of the site's indexable content) is
+// discoverable by search engines — previously the sitemap only listed
+// marketing routes and blog posts.
+const DOCS_SOURCES = [
+  source,
+  fleetOpsSource,
+  storefrontSource,
+  palletSource,
+  ledgerSource,
+  cliSource,
+  uiSource,
+  extensionDevelopmentSource,
+  apiSource,
+  contributingSource,
+];
 
 // Conservative fallback when a route can't be mapped to a single page file
 // (or when fs reads fail in a sandboxed build). Update on major content
@@ -125,6 +154,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: entry.priority,
   }));
 
+  const docsRoutes: MetadataRoute.Sitemap = DOCS_SOURCES.flatMap((docSource) =>
+    docSource.getPages().map((page) => ({
+      url: `${BASE_URL}${page.url}`,
+      lastModified: FALLBACK_DATE,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+  );
+
   let blogRoutes: MetadataRoute.Sitemap = [];
   try {
     const blogPosts = await getAllBlogPosts();
@@ -138,5 +176,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.error('[sitemap] Failed to fetch blog posts from Ghost:', error);
   }
 
-  return [...staticRoutes, ...blogRoutes];
+  return [...staticRoutes, ...docsRoutes, ...blogRoutes];
 }
