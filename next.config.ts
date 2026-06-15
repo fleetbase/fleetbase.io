@@ -78,6 +78,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'fleetbase-web-media.s3.ap-southeast-1.amazonaws.com',
+      },
+      {
+        protocol: 'https',
         hostname: '*.manus.computer',
       },
       ...(ghostImageHostname
