@@ -3,8 +3,6 @@ title: Orchestrator Overview
 description: A multi-phase planner that turns a pool of unassigned orders into a committable plan — stack vehicle allocation, driver allocation, and route optimization phases in sequence.
 ---
 
-# Orchestrator Overview
-
 The **Orchestrator** is the automated planner Fleet-Ops uses to turn a pool of unassigned orders into a committable assignment plan. Rather than running a single fixed pipeline, you compose **phases** in the Orchestrator Workbench and stack them in sequence — for example *Assign Vehicles → Optimize Routes → Assign Drivers*. Each phase runs one mode against the order pool using a configurable engine. The result is a proposed plan you can preview, adjust, and commit when ready.
 
 ![Orchestrator Workbench — multi-phase plan with three phases stacked: Assign Vehicles → Optimize Routes → Assign Vehicles](/images/screenshots/fleet-ops/orchestrator-multiple-phases.webp)

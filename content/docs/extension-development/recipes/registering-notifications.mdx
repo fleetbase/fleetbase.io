@@ -3,8 +3,6 @@ title: Registering Notifications
 description: Define notification classes that show up in user notification preferences and dispatch via mail, SMS, push, broadcast, and database channels.
 ---
 
-# Registering Notifications
-
 The platform's `NotificationRegistry` is the **directory of opt-in notifications** users see in their settings. Each registered notification class can fire across mail, SMS, broadcast (real-time UI), database (in-app feed), FCM (Android push), and APN (iOS push) — and users pick which channels to receive each notification on.
 
 Without registration, your notification will still send (it's just a Laravel notification), but users won't see it in their preferences UI and won't be able to opt in or out.

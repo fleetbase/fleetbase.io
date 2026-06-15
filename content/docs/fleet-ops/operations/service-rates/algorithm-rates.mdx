@@ -4,8 +4,6 @@ sidebarTitle: Algorithm Rates
 description: Use a math expression to compute service rates dynamically — combine distance, time, stops, parcels, and other variables into a single formula evaluated at quote time.
 ---
 
-# Algorithm-Based Service Rates
-
 When `rate_calculation_method` is set to **`algo`** (or `algorithm`), the rate is computed by evaluating a math expression you supply. This unlocks pricing models that fixed brackets or per-meter rates can't express — for example "$3 base + $1.20/km, capped at $50" or "$0.05 per parcel-meter, plus $2 per extra stop".
 
 The expression is stored on the rate's `algorithm` field as a string. At quote time, Fleet-Ops substitutes the live values for placeholders like `{distance_km}` and `{stops}`, evaluates the math, and uses the result as the service fee.

@@ -3,8 +3,6 @@ title: RegistryYield
 description: "<RegistryYield> renders contributions from other extensions — components or menu items — into a named slot. Drives extension-to-extension UI integration."
 ---
 
-# `<RegistryYield>`
-
 `<RegistryYield>` is the primary mechanism for letting one extension contribute UI into another. It iterates over items in a named registry (components or menu items) and yields each one for you to render.
 
 This is what makes Fleetbase extensible: a payment-gateway extension can register a button in Ledger's gateway settings; an analytics extension can register a chart in the FleetOps dashboard; etc. — without either side knowing the other exists at compile time.

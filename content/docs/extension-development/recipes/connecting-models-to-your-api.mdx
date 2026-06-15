@@ -3,8 +3,6 @@ title: Connecting Models to Your Extension API
 description: Wire Ember Data models to your extension's API by extending ApplicationAdapter with the right namespace, then point each model at the right adapter.
 ---
 
-# Connecting Models to Your Extension API
-
 Ember Data drives most CRUD interactions in the console — `store.findRecord`, `store.query`, `record.save()`. When you load records from your **own** API instead of the console's default namespace, you do it once at the **adapter** layer rather than passing options on every call.
 
 ## Why an Adapter?

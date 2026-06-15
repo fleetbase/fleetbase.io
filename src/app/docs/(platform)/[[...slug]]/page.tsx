@@ -18,9 +18,6 @@ export default async function Page(props: {
 
  const MDX = page.data.body;
 
- // Check if this is the overview page (index)
- const isOverviewPage = !params.slug || params.slug.length === 0;
-
  return (
  <DocsPage
  toc={page.data.toc}
@@ -30,12 +27,8 @@ export default async function Page(props: {
  }}
  article={{ className: 'pt-4 md:pt-6' }}
  >
- {!isOverviewPage && (
- <>
  <DocsTitle>{page.data.title}</DocsTitle>
  <DocsDescription>{page.data.description}</DocsDescription>
- </>
- )}
  <DocsBody>
  <MDX components={getMDXComponents()} />
  </DocsBody>

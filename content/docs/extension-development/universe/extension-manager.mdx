@@ -3,8 +3,6 @@ title: Extension Manager
 description: Lazy-load engines on demand, react to engine load events, share host services and components into engines, and inspect installed-extension state.
 ---
 
-# Extension Manager
-
 The **extension manager** (`universe/extension-manager`) is the engine-aware sub-service. While the menu, registry, widget, and hook services manage data, the extension manager manages **engines themselves** — when they boot, when their setup callbacks fire, and what state they're in.
 
 You'll mostly reach it through the [`UniverseService` façade](/docs/extension-development/universe/overview) (`universe.whenEngineLoaded(…)`) — but the underlying service has more surface for advanced cases like cross-engine service sharing.

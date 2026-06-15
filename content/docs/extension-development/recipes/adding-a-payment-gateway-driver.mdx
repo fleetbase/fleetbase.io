@@ -3,8 +3,6 @@ title: Adding a Payment Gateway Driver
 description: Plug a new payment gateway (PayPal, Razorpay, etc.) into Ledger by extending AbstractGatewayDriver and registering it with the PaymentGatewayManager.
 ---
 
-# Adding a Payment Gateway Driver
-
 The [Ledger](https://github.com/fleetbase/ledger) extension uses a Laravel [`Manager`](https://laravel.com/api/11.x/Illuminate/Support/Manager.html)-based driver pattern for payment gateways. Stripe, QPay, and Cash drivers ship by default — third-party drivers register via `PaymentGatewayManager::extend()`.
 
 ## What a Driver Implements

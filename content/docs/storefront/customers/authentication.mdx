@@ -3,8 +3,6 @@ title: Customer Authentication
 description: Configure customer authentication — SMS code, email/password, Apple, Google, and Facebook sign-in. The full registration, verification, and login flow with API examples.
 ---
 
-# Customer Authentication
-
 Storefront provides a complete authentication system for your customers. On successful authentication, the API returns a **Sanctum personal access token**. Your customer-facing app stores this token and includes it on every authenticated request via the **`Customer-Token`** header (the storefront key still goes in `Authorization: Bearer`).
 
 ```http

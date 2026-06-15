@@ -3,8 +3,6 @@ title: Virtual Routes
 description: How Fleetbase resolves dynamically-registered URLs against menu-item registries to render extension components without hardcoded routes.
 ---
 
-# Virtual Routes
-
 Fleetbase ships with a fixed set of console routes — `/console`, `/console/settings`, `/console/admin`, `/console/account`, etc. Extensions can't add to that route table at runtime. **Virtual routes** are how extensions register pages anyway: a menu item declares a `slug` plus a component, and a built-in `virtual` route on the host renders that component when the URL matches.
 
 There is no `_virtual: true` flag. Virtual is a property of the *route* the menu item targets, not the menu item itself.

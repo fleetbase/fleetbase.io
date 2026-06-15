@@ -3,8 +3,6 @@ title: Ember Services
 description: Reference for the host services your extension consumes — fetch, store, current-user, session, abilities, intl, notifications, socket, crud, chat, theme, modalsManager, events, app-cache, language, hostRouter, and more.
 ---
 
-# Ember Services
-
 Your engine inherits a tree of Ember services from [`@fleetbase/ember-core/exports`](https://github.com/fleetbase/ember-core/blob/main/addon/exports/services.js). Each is built on Ember's <EmberApi path="classes/Service">Service</EmberApi> base class and is injectable via Ember's <EmberApi path="classes/Service/methods/inject?anchor=inject">@service</EmberApi> decorator from any route, controller, component, or service in your engine:
 
 ```js

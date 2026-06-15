@@ -4,8 +4,6 @@ sidebarTitle: Parcel Rate
 description: Charge per parcel based on its size and weight — define tier thresholds (small, medium, large, x-large), and Fleet-Ops sums the right fee for every parcel in the order.
 ---
 
-# Parcel Rate
-
 **Parcel Rate** scales the service fee with the **number and physical characteristics of the parcels** in the order. You define a tier table by size category — each tier has length, width, height, and weight thresholds, plus a fee — and every parcel on the order is matched against the table and charged the matching tier's fee. (In the API this method is identified as `parcel`.)
 
 Use this for parcel and e-commerce delivery where pricing depends on physical attributes, not route distance. If you want to combine parcel pricing with distance, use [Algorithm](/docs/fleet-ops/operations/service-rates/algorithm-rates) with `{parcels}`, or place a parcel rate alongside a distance rate on different services.

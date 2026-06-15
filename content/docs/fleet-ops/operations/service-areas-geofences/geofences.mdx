@@ -3,8 +3,6 @@ title: Geofences
 description: How service areas and zones become live geofences — entry, exit, dwell, and speed-limit events, the detection engine, and the reports that surface them.
 ---
 
-# Geofences
-
 A **geofence** in Fleet-Ops is any [Service Area](/docs/fleet-ops/operations/service-areas-geofences/service-areas) or [Zone](/docs/fleet-ops/operations/service-areas-geofences/zones) that has at least one trigger enabled. Geofences detect when a driver or vehicle crosses a boundary and emit events that downstream features react to: auto-arrival, dwell-time SLAs, restricted-area alerts, and speed-limit reporting.
 
 Geofences are **not a separate object** in Fleet-Ops — they're the operational behavior of service areas and zones. Toggle the trigger fields and you have a geofence; clear them and the same polygon still defines pricing scope but doesn't emit events.

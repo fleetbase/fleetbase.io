@@ -3,8 +3,6 @@ title: Hook Service
 description: Tap into platform lifecycle events using hooks to run logic at key points in the application — login, route transitions, console boot, and custom events you fire yourself.
 ---
 
-# Hook Service
-
 The **hook service** (`universe/hook-service`) is a typed event bus shared across all engines. Extensions register handlers for named events; the platform (and other extensions) execute them at the right moment.
 
 Hooks live in a singleton registry on the root application, so a hook registered in one engine fires for events emitted in another. That's how the customer portal redirects authenticated customers from the main console (`console:before-model`) without either engine knowing about the other.
