@@ -107,6 +107,7 @@ const FOOTER_LINKS = [
  {
  title: 'Company',
  links: [
+ { label: 'Company Overview', href: '/company' },
  { label: 'About Us', href: '/company/about' },
  { label: 'Open Source Mission', href: '/company/open-source' },
  { label: 'Partners', href: '/partners' },
