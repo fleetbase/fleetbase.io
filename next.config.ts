@@ -50,6 +50,154 @@ const nextConfig: NextConfig = {
         destination: '/docs/contributing',
         permanent: true,
       },
+
+      // ── Broken inbound links (marketing) ──────────────────────────────────
+      // Legacy/blog links that point at paths the App Router never served.
+      {
+        source: '/contact',
+        destination: '/contact/sales',
+        permanent: true,
+      },
+      {
+        source: '/company/contact',
+        destination: '/contact/sales',
+        permanent: true,
+      },
+      {
+        source: '/products/fleet-ops',
+        destination: '/platform/fleetops',
+        permanent: true,
+      },
+      {
+        source: '/products/developers-console',
+        destination: '/platform/developer-console',
+        permanent: true,
+      },
+      {
+        source: '/platform/fleet-ops',
+        destination: '/platform/fleetops',
+        permanent: true,
+      },
+      {
+        // No Bringg comparison page exists yet — send to the compare index.
+        source: '/compare/vs-bringg',
+        destination: '/compare',
+        permanent: true,
+      },
+
+      // ── Broken inbound links (docs) ───────────────────────────────────────
+      // Section roots and renamed slugs land on the canonical Fumadocs page.
+      {
+        source: '/docs/fleetops',
+        destination: '/docs/fleet-ops',
+        permanent: true,
+      },
+      {
+        source: '/docs/extending-fleetbase',
+        destination: '/docs/extension-development',
+        permanent: true,
+      },
+      {
+        source: '/docs/fleet-ops/drivers',
+        destination: '/docs/fleet-ops/resources/drivers/overview',
+        permanent: true,
+      },
+      {
+        // No dedicated driver-import doc — send to the drivers overview.
+        source: '/docs/fleet-ops/drivers/importing',
+        destination: '/docs/fleet-ops/resources/drivers/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/fleet-ops/orders',
+        destination: '/docs/fleet-ops/operations/orders/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/fleet-ops/orders/importing',
+        destination: '/docs/fleet-ops/operations/orders/importing-orders',
+        permanent: true,
+      },
+      {
+        source: '/docs/fleet-ops/orders/order-config',
+        destination: '/docs/fleet-ops/operations/order-configurations/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/fleet-ops/service-areas',
+        destination: '/docs/fleet-ops/operations/service-areas-geofences/service-areas',
+        permanent: true,
+      },
+      {
+        source: '/docs/platform/identity-and-access',
+        destination: '/docs/platform/identity-and-access/users',
+        permanent: true,
+      },
+      {
+        source: '/docs/platform/identity-and-access/permissions',
+        destination: '/docs/platform/identity-and-access/roles-and-permissions',
+        permanent: true,
+      },
+      {
+        source: '/docs/platform/identity-and-access/roles',
+        destination: '/docs/platform/identity-and-access/roles-and-permissions',
+        permanent: true,
+      },
+      {
+        source: '/docs/platform/system-setup',
+        destination: '/docs/platform/system-setup/branding',
+        permanent: true,
+      },
+      {
+        source: '/docs/platform/quickstart',
+        destination: '/docs/platform/quickstart/cloud-quickstart',
+        permanent: true,
+      },
+      {
+        source: '/docs/storefront/catalog',
+        destination: '/docs/storefront/catalog/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/pallet/audits',
+        destination: '/docs/pallet/audits/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/pallet/warehouses',
+        destination: '/docs/pallet/warehouses/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/pallet/fulfillment',
+        destination: '/docs/pallet/fulfillment/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/pallet/inventory',
+        destination: '/docs/pallet/inventory/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/pallet/suppliers',
+        destination: '/docs/pallet/suppliers/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/extension-development/getting-started',
+        destination: '/docs/extension-development/getting-started/quickstart',
+        permanent: true,
+      },
+      {
+        source: '/docs/extension-development/universe',
+        destination: '/docs/extension-development/universe/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/api/storefront',
+        destination: '/docs/api/storefront/store',
+        permanent: true,
+      },
     ];
   },
   allowedDevOrigins: [
