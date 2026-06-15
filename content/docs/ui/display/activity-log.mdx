@@ -1,11 +1,13 @@
 ---
 title: ActivityLog
-description: "<ActivityLog> renders a feed of activity records — auto-fetches from the `activity` model, groups by day, supports date-range filtering."
+description: "<ActivityLog> renders a compact activity timeline — auto-fetches from the `activity` model, supports date-range filtering, and previews changed attributes."
 ---
 
 # `<ActivityLog>`
 
-`<ActivityLog>` renders a feed of activity records (user and system actions). It auto-fetches activities from the `activity` Ember Data model, groups them by day, and includes a built-in date-range filter and refresh button.
+`<ActivityLog>` renders a compact timeline of activity records (user and system actions). It auto-fetches activities from the `activity` Ember Data model, displays relative timestamps, and summarizes creates, deletes, and changed attributes in a sentence-style feed.
+
+When an activity changes more than one attribute, the attribute count opens a hover popover with the changed fields and their previous/new values.
 
 ## Basic Usage
 
@@ -13,7 +15,7 @@ description: "<ActivityLog> renders a feed of activity records — auto-fetches 
 <ActivityLog @subjectId={{this.order.id}} />
 ```
 
-This loads activities where `subject_id = order.id` and renders them grouped by day.
+This loads activities where `subject_id = order.id` and renders them as a compact timeline.
 
 ## Filtering
 
@@ -25,6 +27,24 @@ This loads activities where `subject_id = order.id` and renders them grouped by 
 ```
 
 Activities are loaded from the API with `subject_id` and/or `causer_id` query params plus the date-range filter the user picks.
+
+## Dashboard Preview
+
+```handlebars
+<ActivityLog
+  @subjectId={{this.order.id}}
+  @maxVisibleActivities={{3}}
+  @showControls={{false}}
+>
+  <:viewAll>
+    <LinkTo @route="orders.order.activity" @model={{this.order}}>
+      View all
+    </LinkTo>
+  </:viewAll>
+</ActivityLog>
+```
+
+Use `@maxVisibleActivities` for small panels or dashboard cards. The `:viewAll` block renders in the header next to the component controls.
 
 ## Arguments
 
@@ -41,7 +61,11 @@ Activities are loaded from the API with `subject_id` and/or `causer_id` query pa
 | :--- | :--- | :--- | :--- |
 | `@density` | string | `compact` | `compact` or `cozy` |
 | `@showAvatars` | boolean | `true` | Show user avatars |
-| `@showBadges` | boolean | `true` | Show activity-type badges |
+| `@showBadges` | boolean | `false` | Show activity-type badges |
+| `@showHeader` | boolean | `true` | Render the Activity header row |
+| `@showControls` | boolean | `true` | Render the date filter and refresh button |
+| `@showAttributePreviousValues` | boolean | `true` | Include previous values in the changed-attributes popover |
+| `@maxVisibleActivities` | number | — | Limit the number of activities shown |
 | `@dateFilterButtons` | array | — | Quick-pick buttons for the date filter (e.g. "Last 7 days") |
 | `@autoClose` | boolean | — | Close the date picker after selection |
 | `@toggleSelected` | boolean | — | Toggle behavior on the date picker |
@@ -51,9 +75,12 @@ Activities are loaded from the API with `subject_id` and/or `causer_id` query pa
 | Argument | Description |
 | :--- | :--- |
 | `@headerWrapperClass` | Header row |
-| `@groupClass` | Each day group |
-| `@groupLabelClass` | Day label |
+| `@groupClass` | Timeline list |
 | `@itemClass` | Each activity item |
+| `@itemDetailsClass` | Row content wrapper |
+| `@itemSentenceClass` | Activity sentence text |
+| `@itemRelativeTimestampClass` | Relative timestamp |
+| `@itemBadgeClass` | Activity badge when `@showBadges={{true}}` |
 
 ### Callbacks
 
@@ -67,6 +94,8 @@ Activities are loaded from the API with `subject_id` and/or `causer_id` query pa
 | Block | Purpose |
 | :--- | :--- |
 | `:filters` | Render extra filter controls in the header |
+| `:viewAll` | Render a link or action on the right side of the header |
+| default | Render additional content after the activity log |
 
 ## Real-World Example
 
@@ -76,6 +105,7 @@ Activities are loaded from the API with `subject_id` and/or `causer_id` query pa
   <ActivityLog
     @subjectId={{this.order.id}}
     @density="compact"
+    @showAttributePreviousValues={{true}}
     @onCauserClick={{this.openUser}}
   />
 </ContentPanel>
