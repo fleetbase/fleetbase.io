@@ -46,9 +46,9 @@ Copy `.env.local.example` to `.env.local` and fill in the required values:
 | :------------------------- | :---------------------------------------------------- |
 | `NEXT_PUBLIC_POSTHOG_KEY`  | PostHog project key (frontend)                        |
 | `NEXT_PUBLIC_POSTHOG_HOST` | PostHog ingest host (e.g. `https://us.i.posthog.com`) |
-| `GHOST_API_URL`            | Ghost CMS base URL for the blog                       |
+| `GHOST_API_URL`            | Ghost CMS base URL for the blog (e.g. `https://blog.fleetbase.io`) |
 | `GHOST_CONTENT_API_KEY`    | Ghost Content API key                                 |
-| `GHOST_API_VERSION`        | Ghost API version (e.g. `v5.0`)                       |
+| `GHOST_API_VERSION`        | Ghost API version (e.g. `v6.0`)                       |
 
 Without the Ghost variables, blog routes fall back to an empty state. Without the PostHog variables, analytics calls no-op locally.
 

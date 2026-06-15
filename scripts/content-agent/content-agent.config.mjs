@@ -373,7 +373,7 @@ export const contentAgentConfig = {
     },
   ],
   ghost: {
-    apiVersion: 'v5.0',
+    apiVersion: 'v6.0',
     internalTags: ['#ai-generated', '#needs-review', '#seo-content-agent'],
   },
 };

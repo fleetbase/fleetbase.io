@@ -84,11 +84,11 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_CONTENT_MODEL: ${{ vars.OPENAI_CONTENT_MODEL || 'gpt-4.1' }}
       OPENAI_IMAGE_MODEL: ${{ vars.OPENAI_IMAGE_MODEL || 'gpt-image-1.5' }}
-      GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+      GHOST_ADMIN_API_URL: ${{ vars.GHOST_ADMIN_API_URL || 'https://blog.fleetbase.io' }}
       GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
-      GHOST_API_URL: ${{ secrets.GHOST_API_URL }}
+      GHOST_API_URL: ${{ vars.GHOST_API_URL || 'https://blog.fleetbase.io' }}
       GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
-      GHOST_API_VERSION: ${{ vars.GHOST_API_VERSION || 'v5.0' }}
+      GHOST_API_VERSION: ${{ vars.GHOST_API_VERSION || 'v6.0' }}
       CONTENT_AGENT_NOTIFY_WEBHOOK_URL: ${{ secrets.CONTENT_AGENT_NOTIFY_WEBHOOK_URL }}
       CONTENT_AGENT_TOPIC: ${{ inputs.topic || '' }}
       CONTENT_AGENT_KEYWORD: ${{ inputs.keyword || '' }}
@@ -179,6 +179,23 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Verify Ghost target
+        run: |
+          set -euo pipefail
+          expected_url="https://blog.fleetbase.io"
+
+          if [ "${GHOST_ADMIN_API_URL}" != "${expected_url}" ]; then
+            echo "::error::GHOST_ADMIN_API_URL must target ${expected_url}."
+            exit 1
+          fi
+
+          if [ "${GHOST_API_URL}" != "${expected_url}" ]; then
+            echo "::error::GHOST_API_URL must target ${expected_url}."
+            exit 1
+          fi
+
+          echo "Ghost target verified: ${expected_url}"
 
       - name: Run content agent self-tests
         run: pnpm content-agent:test
