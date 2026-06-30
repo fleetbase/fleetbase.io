@@ -129,6 +129,7 @@ const STATIC_ROUTES: StaticEntry[] = [
   // Compare
   { path: '/compare', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-onfleet', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/compare/vs-detrack', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-route4me', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-tookan', changeFrequency: 'monthly', priority: 0.9 },
 

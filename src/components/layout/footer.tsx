@@ -70,6 +70,7 @@ const FOOTER_LINKS = [
  links: [
  { label: 'All Comparisons', href: '/compare' },
  { label: 'Fleetbase vs Onfleet', href: '/compare/vs-onfleet' },
+ { label: 'Fleetbase vs Detrack', href: '/compare/vs-detrack' },
  { label: 'Fleetbase vs Tookan', href: '/compare/vs-tookan' },
  { label: 'Fleetbase vs Route4Me', href: '/compare/vs-route4me' },
  { subheading: 'Powered by Fleetbase' },

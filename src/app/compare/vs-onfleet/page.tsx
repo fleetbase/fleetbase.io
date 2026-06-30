@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { CheckCircle2, XCircle, ArrowRight, Minus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Breadcrumbs } from '@/components/ui/breadcrumbs';
-import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
+import { FAQSchema, SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = {
- title: 'Fleetbase vs Onfleet | Open-Source Onfleet Alternative',
+ title: { absolute: 'Fleetbase vs Onfleet | Open-Source Onfleet Alternative' },
  description:
  'Compare Fleetbase vs Onfleet. Fleetbase is the open-source Onfleet alternative with no per-task pricing, self-hosting, full API access, and a free tier. See the full feature comparison.',
  keywords: [
@@ -76,6 +76,29 @@ const COMPARISON: FeatureRow[] = [
  { feature: 'Enterprise SLA Support', fleetbase: true, onfleet: true },
 ];
 
+const FAQS = [
+ {
+ q: 'Is there an open-source alternative to Onfleet?',
+ a: 'Yes. Fleetbase is a fully open-source alternative to Onfleet, licensed under AGPL. You can self-host the entire platform on your own infrastructure or run it on Fleetbase Cloud — with access to the source code, a full REST API, and no per-task fees.',
+ },
+ {
+ q: 'What is the best Onfleet alternative for last-mile delivery?',
+ a: 'For teams that want to avoid per-task pricing and vendor lock-in, Fleetbase is the strongest Onfleet alternative — it covers dispatch, route optimization, live tracking, and proof of delivery like Onfleet, but adds self-hosting, full data ownership, an open API, and a bundled driver app, WMS, storefront, and accounting.',
+ },
+ {
+ q: 'Is Fleetbase cheaper than Onfleet?',
+ a: 'In most cases, yes. Onfleet charges per task, so costs rise as you grow. Fleetbase uses predictable usage-based pricing from $25/month with no per-task or per-seat fees — and is free to run if you self-host the open-source edition.',
+ },
+ {
+ q: 'Can I self-host an Onfleet alternative?',
+ a: 'Onfleet is cloud-only. Fleetbase can be self-hosted on AWS, GCP, Azure, or bare metal, so your delivery data stays on infrastructure you control — or you can use the managed cloud and migrate later.',
+ },
+ {
+ q: 'Can I migrate from Onfleet to Fleetbase?',
+ a: 'Yes. Fleetbase supports importing your orders, drivers, and delivery data via API and CSV, and the team offers free migration support for teams switching from Onfleet.',
+ },
+];
+
 function Cell({ value }: { value: string | boolean }) {
  if (value === true) return <CheckCircle2 className="h-5 w-5 text-green-500 mx-auto" />;
  if (value === false) return <XCircle className="h-5 w-5 text-red-400 mx-auto" />;
@@ -90,6 +113,7 @@ export default function VsOnfleetPage() {
  url="https://onfleet.com"
  description="Last-mile delivery management software for dispatch, routing, and proof of delivery — closed-source, per-task pricing."
  />
+ <FAQSchema faqs={FAQS.map((f) => ({ question: f.q, answer: f.a }))} />
 
  {/* Hero */}
  <section className="section-padding border-b bg-gradient-to-b from-muted/30 to-background">
@@ -102,7 +126,7 @@ export default function VsOnfleetPage() {
  ]}
  />
  <div className="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium text-muted-foreground">
- Comparison
+ Open-Source Onfleet Alternative
  </div>
  <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl text-balance">
  Fleetbase vs Onfleet
@@ -222,6 +246,24 @@ export default function VsOnfleetPage() {
  ))}
  </ul>
  </div>
+ </div>
+ </div>
+ </section>
+
+ {/* FAQ */}
+ <section className="py-16 md:py-20 border-t">
+ <div className="container max-w-3xl">
+ <h2 className="text-2xl font-bold mb-8 text-center">Onfleet alternative — FAQs</h2>
+ <div className="divide-y rounded-xl border bg-card px-6">
+ {FAQS.map((faq) => (
+ <details key={faq.q} className="group py-5">
+ <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-medium">
+ {faq.q}
+ <ArrowRight className="size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-90" />
+ </summary>
+ <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{faq.a}</p>
+ </details>
+ ))}
  </div>
  </div>
  </section>
