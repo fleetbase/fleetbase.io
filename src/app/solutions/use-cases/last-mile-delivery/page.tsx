@@ -204,13 +204,6 @@ export default function LastMileDeliveryPage() {
           { icon: Shield, label: 'Role-based access' },
           { icon: Smartphone, label: 'Driver mobile app' },
         ]}
-        testimonial={{
-          quote:
-            'Our first-attempt delivery rate went from 78% to 94% after switching to Fleetbase. The combination of optimized routes and live customer tracking made the difference — fewer missed deliveries, fewer support calls, happier customers. And with no per-driver fees, it actually got cheaper as we scaled.',
-          author: 'Rachel T.',
-          role: 'VP of Operations',
-          company: 'Urban Delivery Co.',
-        }}
         faqs={faqs}
         ctaHeading="Make your last mile your competitive advantage"
         ctaBody="Open-source last mile delivery software with faster dispatch, smarter routes, and higher first-attempt rates — and no per-driver fees. Start your free trial and see what Fleetbase does for your last-mile operation in the first 30 days."
