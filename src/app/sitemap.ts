@@ -79,6 +79,9 @@ const STATIC_ROUTES: StaticEntry[] = [
   { path: '/true-vegan', changeFrequency: 'monthly', priority: 0.7 },
   { path: '/community', changeFrequency: 'monthly', priority: 0.6 },
 
+  // Product / category landing pages
+  { path: '/delivery-management-software', changeFrequency: 'monthly', priority: 0.9 },
+
   // Platform
   { path: '/platform', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/platform/fleetops', changeFrequency: 'monthly', priority: 0.9 },
