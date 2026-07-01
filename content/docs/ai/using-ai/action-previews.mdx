@@ -1,0 +1,35 @@
+---
+title: Action Previews
+description: Understand how Fleetbase AI previews actions before applying changes.
+---
+
+Action previews are how Fleetbase AI handles meaningful changes safely. Instead of silently mutating Fleetbase data, an action capability returns a preview card for the user to review.
+
+## Preview-confirm-apply
+
+The action flow is:
+
+<Steps>
+  <Step>The user asks for an action.</Step>
+  <Step>A module action capability detects the intent.</Step>
+  <Step>The capability returns a structured preview.</Step>
+  <Step>The prompt renders a preview card.</Step>
+  <Step>The user applies or cancels the action.</Step>
+  <Step>Fleetbase records the result as task steps.</Step>
+</Steps>
+
+## Dedicated preview components
+
+Modules can register custom preview components for specific action keys. These components can show compact forms, maps, validation messages, and action controls inside the AI prompt.
+
+## Terminal states
+
+Completed, cancelled, and failed previews should be terminal. Once a preview is terminal, the UI should stop showing editable controls for that action.
+
+## Current example
+
+Fleet-Ops registers a create-order preview component for `fleet-ops.create_order`.
+
+<Callout type="warn">
+Action preview copy should never say an action was completed until Fleetbase has a confirmed apply result.
+</Callout>

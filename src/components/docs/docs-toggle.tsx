@@ -1,7 +1,7 @@
 'use client';
 
-import { useSidebar } from 'fumadocs-ui/contexts/sidebar';
 import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle';
+import { useSidebar } from 'fumadocs-ui/contexts/sidebar';
 import {
   ArrowRight,
   BookMarked,
@@ -12,6 +12,7 @@ import {
   Menu,
   Puzzle,
   ShoppingBag,
+  Sparkles,
   Terminal,
   Truck,
 } from 'lucide-react';
@@ -45,6 +46,12 @@ const sections = [
     description: 'Finance & billing',
     url: '/docs/ledger',
     icon: <BookMarked className="size-4" />,
+  },
+  {
+    title: 'Fleetbase AI',
+    description: 'Operations copilot & AI capabilities',
+    url: '/docs/ai',
+    icon: <Sparkles className="size-4" />,
   },
   {
     title: 'Fleetbase CLI',

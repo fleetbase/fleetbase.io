@@ -1,0 +1,72 @@
+---
+title: Queryable Resources
+description: Expose operational data to Fleetbase AI through allowlisted resources instead of raw SQL.
+---
+
+Queryable resources let modules answer flexible operational questions safely.
+
+## Why they exist
+
+Users ask questions like:
+
+- "How many drivers are online?"
+- "Which active orders have no driver?"
+- "Where are most vehicles located?"
+- "How many orders were created last week?"
+
+Fleetbase AI should support these questions without executing model-generated SQL.
+
+<Callout type="info">
+The model may help interpret the user's intent, but Fleetbase validates and executes the query through registered resources. Raw SQL is never part of the contract.
+</Callout>
+
+## Resource registration
+
+Modules register resources with safe fields, aliases, metrics, filters, location fields, and permissions. Fleetbase executes validated query plans server-side.
+
+```php
+$registry->register(new AiQueryableResource(
+    key: 'drivers',
+    model: \Fleetbase\FleetOps\Models\Driver::class,
+    aliases: ['driver', 'drivers', 'couriers'],
+    fields: ['uuid', 'name', 'online', 'status', 'city', 'country'],
+    metrics: ['count'],
+    filters: ['online', 'status', 'fleet_uuid'],
+    locationField: 'location',
+    permissions: ['fleet-ops view driver']
+));
+```
+
+## Query examples
+
+| User asks | Query behavior |
+| :--- | :--- |
+| "How many drivers are online?" | Count `drivers` filtered by `online = true` |
+| "Show drivers without vehicles" | Query drivers where assigned vehicle is empty, return capped samples |
+| "Where are most vehicles located?" | Group valid vehicle locations by city/country or registered zones |
+| "How many orders were created last week?" | Resolve the local date window and count orders within it |
+
+## Output shape
+
+Query results should return summaries first and include only capped, sanitized samples when useful.
+
+```json
+{
+  "resource": "drivers",
+  "summary": {
+    "online": 2,
+    "offline": 18
+  },
+  "sample": [
+    { "name": "Ava Driver", "status": "online" }
+  ]
+}
+```
+
+## Spatial analysis
+
+For location-based answers, resources can expose safe coordinate fields and service-area or zone relationships. Invalid coordinates should be excluded rather than guessed.
+
+## Auditability
+
+Executed query summaries should be recorded as task steps so operators can inspect what data grounded the answer.

@@ -1,0 +1,69 @@
+---
+title: Preview Components
+description: Render dedicated action preview UI inside the Fleetbase AI prompt.
+---
+
+Preview components let modules render action-specific UI instead of relying on generic model text.
+
+<Callout type="info">
+Use a dedicated preview component when a user needs to inspect or edit structured data before applying an AI action.
+</Callout>
+
+## Registry key
+
+The AI prompt looks for renderable components using this registry pattern:
+
+```txt
+ai:action-preview:{action_key}
+```
+
+For example, Fleet-Ops registers:
+
+```txt
+ai:action-preview:fleet-ops.create_order
+```
+
+## Component contract
+
+The renderer receives:
+
+- `task`
+- `preview`
+- `onApply`
+- `onCancel`
+- `onRefresh`
+- `isApplying`
+- `isCancelling`
+- `isRefreshing`
+
+## Example component responsibilities
+
+For a create-order preview, the component can:
+
+- show a compact route map
+- display pickup and dropoff fields
+- let the user edit schedule, driver, vehicle, notes, and proof of delivery settings
+- call `onRefresh` when route-changing fields update
+- call `onApply` only when the user confirms creation
+- render completed, cancelled, and failed terminal states
+
+```hbs
+<Ai::CreateOrderPreview
+  @task={{@task}}
+  @preview={{@preview}}
+  @onRefresh={{@onRefresh}}
+  @onApply={{@onApply}}
+  @onCancel={{@onCancel}}
+  @isApplying={{@isApplying}}
+/>
+```
+
+## Design guidance
+
+Preview components should be compact and chat-native. Avoid full-page admin form layouts inside the AI prompt.
+
+Use dedicated preview UI when the action needs maps, editable drafts, validation, or a clear apply/cancel workflow.
+
+<Callout type="warn">
+Do not reuse large page-level panels inside the prompt. Build a compact preview surface optimized for chat.
+</Callout>

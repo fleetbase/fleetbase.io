@@ -1,0 +1,56 @@
+---
+title: Prompt and Sessions
+description: Use the Fleetbase AI floating prompt, persistent chat sessions, history, and markdown responses.
+---
+
+Fleetbase AI opens as a floating command prompt from the console header tray. It is designed for operational questions and guided actions without leaving the current screen.
+
+## Opening the prompt
+
+When AI is enabled, use the magic-wand tray button in the header. The global shortcut also opens the prompt from anywhere in the console.
+
+<Callout type="info">
+The prompt is global, but the data it can answer from still depends on registered module capabilities and the current user's permissions.
+</Callout>
+
+## Chat sessions
+
+The prompt uses persistent sessions:
+
+- closing the prompt hides it
+- reopening the prompt loads the latest active session
+- starting a new chat creates a fresh session
+- deleting a session removes it from history while retaining audit records server-side
+
+## Responses
+
+Responses can include:
+
+- plain text and paragraphs
+- lists
+- links
+- inline code
+- compact markdown tables
+- action preview cards from registered modules
+
+Fleetbase AI escapes raw HTML from model output before formatting it for display.
+
+<Tabs items={['Markdown', 'Tables', 'Actions']}>
+  <Tab value="Markdown">
+    Bold text, inline code, links, paragraphs, and compact lists render as formatted response content.
+  </Tab>
+  <Tab value="Tables">
+    Simple pipe tables render as readable tables for operational summaries such as orders by status or usage breakdowns.
+  </Tab>
+  <Tab value="Actions">
+    Action previews render as dedicated cards when a module registers a matching preview component.
+  </Tab>
+</Tabs>
+
+## History
+
+The history button opens a compact list of prior sessions. Selecting a session loads its turns so the user can continue from that context.
+
+## Conversation context
+
+Recent turns are sent as bounded provider context so follow-up prompts can refer to earlier messages in the same session.

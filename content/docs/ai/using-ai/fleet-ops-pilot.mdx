@@ -1,0 +1,51 @@
+---
+title: Fleet-Ops Pilot
+description: Current Fleet-Ops AI capabilities for operational questions and create-order previews.
+---
+
+Fleet-Ops is the first Fleetbase module to register AI capabilities.
+
+<Callout type="info">
+Fleet-Ops AI is a pilot for the broader capability framework. It shows how a module can expose operational queries and previewable actions without giving AI unrestricted data access.
+</Callout>
+
+## Operational questions
+
+Fleetbase AI can answer bounded Fleet-Ops questions when the matching query resources and capabilities are available, such as:
+
+- how many drivers are online
+- how many vehicles are active
+- orders by status
+- orders without assigned drivers
+- driver or vehicle location summaries
+- order counts for a relative date window
+
+The AI does not run raw SQL. Fleet-Ops registers allowlisted resources and Fleetbase executes validated queries server-side.
+
+| Prompt | Expected behavior |
+| :--- | :--- |
+| "How many drivers are online?" | Count drivers using the registered Fleet-Ops driver resource |
+| "Where are most vehicles located?" | Analyze valid vehicle locations through safe spatial context |
+| "How many orders were created last week?" | Resolve last week's local date window and count matching orders |
+| "Show active orders without drivers" | Return a bounded summary and capped sample records |
+
+## Create-order preview
+
+Fleet-Ops can preview order creation from natural language:
+
+```txt
+Create a new order with a pickup at 4202 thames ave durham nc and a dropoff at 3400 cambridge rd durham nc and schedule it for 3 days from now
+```
+
+The preview can resolve places, show a route preview, expose editable fields, and create the order only after confirmation.
+
+## Current limits
+
+The pilot is intentionally conservative:
+
+- no silent order creation
+- no arbitrary database access
+- no direct console manipulation without explicit UI support
+- no unrestricted file import execution
+
+Future Fleet-Ops capabilities can add more dedicated previews as the interaction model matures.

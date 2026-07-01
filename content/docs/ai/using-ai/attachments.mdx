@@ -1,0 +1,39 @@
+---
+title: Attachments
+description: Attach files to Fleetbase AI prompts and make them available to AI capabilities.
+---
+
+Fleetbase AI supports prompt attachments by uploading files to Fleetbase first, then sending the uploaded file identifiers with the AI task.
+
+## Upload flow
+
+<Steps>
+  <Step>
+    The user attaches or drops files into the AI prompt.
+  </Step>
+  <Step>
+    The console uploads each file through the existing Fleetbase file upload system.
+  </Step>
+  <Step>
+    The prompt submits the user message with attachment IDs.
+  </Step>
+  <Step>
+    The backend validates file ownership and stores normalized metadata on the AI task.
+  </Step>
+</Steps>
+
+## Provider context
+
+Providers receive safe attachment context such as filename, type, size, and bounded previews where supported. Raw arbitrary file bytes are not sent directly to providers by default.
+
+## Capability parsing
+
+Module capabilities can inspect attachment IDs and parse files through module-owned logic. For example, a Fleet-Ops import capability can parse an Excel or CSV file and return a structured preview before applying anything.
+
+## Design rule
+
+Attachments belong to the submitted task turn, not the whole session by default.
+
+<Callout type="info">
+Fleetbase AI should pass file references and extracted summaries to capabilities. Module-specific import logic should decide how to parse and preview structured files.
+</Callout>

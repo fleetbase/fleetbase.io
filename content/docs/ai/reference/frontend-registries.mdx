@@ -1,0 +1,41 @@
+---
+title: Frontend Registries
+description: Register Fleetbase AI prompt surfaces and module action preview components in the console.
+---
+
+Fleetbase AI uses the Fleetbase console registry system for global prompt surfaces and module-specific action previews.
+
+## AI prompt registration
+
+Fleetbase AI registers the prompt globally:
+
+```js
+registryService.registerRenderableComponent(
+    '@fleetbase/console',
+    new ExtensionComponent('@fleetbase/ai-engine', 'ai-prompt')
+);
+```
+
+## Header tray registration
+
+The header trigger is registered in the `header-tray-items` slot:
+
+```js
+registryService.registerRenderableComponent(
+    'header-tray-items',
+    new ExtensionComponent('@fleetbase/ai-engine', 'ai-header-tray-button')
+);
+```
+
+## Action preview registration
+
+Modules register preview components by action key:
+
+```js
+registryService.registerRenderableComponent(
+    'ai:action-preview:fleet-ops.create_order',
+    new ExtensionComponent('@fleetbase/fleetops-engine', 'ai/create-order-preview')
+);
+```
+
+If no custom renderer is registered, Fleetbase AI falls back to a generic action card.

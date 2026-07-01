@@ -1,0 +1,62 @@
+---
+title: Capability Overview
+description: Learn how Fleetbase modules register safe AI-readable context, executable actions, query resources, and preview components.
+---
+
+Fleetbase AI capabilities are the extension point for module-owned AI behavior.
+
+Modules register capabilities so Fleetbase AI can answer questions and preview actions without granting models arbitrary access to application data.
+
+<Callout type="info">
+Think of capabilities as a contract between Fleetbase AI and a module. The module decides what can be read, what can be previewed, what can be applied, and what permissions are required.
+</Callout>
+
+## Capability types
+
+| Type | Responsibility |
+| :--- | :--- |
+| **Context capability** | Return safe context for a prompt |
+| **Action capability** | Preview and apply a confirmed action |
+| **Queryable resource** | Declare safe data fields, filters, aggregates, and spatial access |
+| **Preview component** | Render a module-specific action card in the AI prompt |
+
+## Example capability map
+
+<Tabs items={['Fleet-Ops', 'Ledger', 'Storefront']}>
+  <Tab value="Fleet-Ops">
+    Fleet-Ops can expose operational questions such as driver online counts, order status breakdowns, route previews, and create-order drafts. Mutating actions should use preview-confirm-apply.
+  </Tab>
+  <Tab value="Ledger">
+    Ledger could expose wallet balance context, payment gateway status, journal summaries, and draft finance record previews. Payment capture or void actions should require explicit confirmation.
+  </Tab>
+  <Tab value="Storefront">
+    Storefront could expose order volume, store availability, product catalog context, and promotion draft previews. Catalog or order mutations should stay behind action previews.
+  </Tab>
+</Tabs>
+
+## Registration pattern
+
+Register capabilities from the module service provider after Fleetbase AI is available:
+
+```php
+$this->callAfterResolving(\Fleetbase\Ai\Support\AiCapabilityRegistry::class, function ($registry) {
+    $registry->register(new MyModuleContextCapability());
+});
+```
+
+Frontend preview components are registered through the console registry service:
+
+```js
+registryService.registerRenderableComponent(
+    'ai:action-preview:my-module.create_resource',
+    new ExtensionComponent('@fleetbase/my-module-engine', 'ai/create-resource-preview')
+);
+```
+
+## Design rule
+
+Capabilities should return the smallest useful context for the prompt, not raw model records.
+
+<Callout type="warn">
+Do not register broad "database access" capabilities. Fleetbase AI should receive specific, bounded context or a validated action preview, not unrestricted records.
+</Callout>
