@@ -9,6 +9,10 @@ Fleetbase AI opens as a floating command prompt from the console header tray. It
 
 When AI is enabled, use the magic-wand tray button in the header. The global shortcut also opens the prompt from anywhere in the console.
 
+<Callout type="info">
+The prompt is global, but the data it can answer from still depends on registered module capabilities and the current user's permissions.
+</Callout>
+
 ## Chat sessions
 
 The prompt uses persistent sessions:
@@ -30,6 +34,18 @@ Responses can include:
 - action preview cards from registered modules
 
 Fleetbase AI escapes raw HTML from model output before formatting it for display.
+
+<Tabs items={['Markdown', 'Tables', 'Actions']}>
+  <Tab value="Markdown">
+    Bold text, inline code, links, paragraphs, and compact lists render as formatted response content.
+  </Tab>
+  <Tab value="Tables">
+    Simple pipe tables render as readable tables for operational summaries such as orders by status or usage breakdowns.
+  </Tab>
+  <Tab value="Actions">
+    Action previews render as dedicated cards when a module registers a matching preview component.
+  </Tab>
+</Tabs>
 
 ## History
 

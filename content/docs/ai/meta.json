@@ -25,7 +25,6 @@
     "capabilities/permissions-and-safety",
     "---Reference---",
     "reference/backend-contracts",
-    "reference/frontend-registries",
-    "reference/api-endpoints"
+    "reference/frontend-registries"
   ]
 }

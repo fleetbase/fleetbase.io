@@ -5,6 +5,8 @@ description: Register preview-confirm-apply AI actions for Fleetbase modules.
 
 Action capabilities let modules turn natural-language requests into safe, confirmed actions.
 
+Use them for operations where the user expects Fleetbase to prepare or change something: creating an order, assigning a driver, importing rows, generating a draft record, or optimizing a route.
+
 ## Contract
 
 An action capability implements `AIActionCapabilityInterface`:
@@ -33,9 +35,56 @@ Action capabilities should preview before mutating data. The preview should incl
 - validation status
 - any module-specific metadata needed by the preview UI
 
+## Example: create-order preview shape
+
+```php
+return [
+    'key' => 'fleet-ops.create_order',
+    'label' => 'Create Fleet-Ops order preview',
+    'message' => 'Review the order draft before applying.',
+    'ready' => true,
+    'draft' => [
+        'type' => 'transport',
+        'scheduled_at' => '2026-07-04T10:30:00+08:00',
+        'payload' => [
+            'pickup_query' => '16 Simon Walk Singapore',
+            'dropoff_query' => '18 Hougang Ave Singapore',
+        ],
+    ],
+    'missing_fields' => [],
+];
+```
+
+<Accordions>
+  <Accordion title="What belongs in preview data?">
+    Include the normalized draft, missing requirements, display labels, safe route/map metadata, and any IDs required for apply. Avoid including secrets or full unfiltered model payloads.
+  </Accordion>
+  <Accordion title="What belongs in apply input?">
+    Use the latest edited preview payload from the UI. Apply should not trust the original model text if the user changed the preview before confirming.
+  </Accordion>
+</Accordions>
+
 ## Apply only after confirmation
 
 The `apply()` method should use the latest confirmed preview input, run normal module validation, enforce permissions, and record the result.
+
+```php
+public function apply(AiTask $task, array $preview = [], array $input = []): array
+{
+    $draft = data_get($input, 'draft', data_get($preview, 'draft', []));
+
+    // Validate permissions and route through the module's normal creation path.
+
+    return [
+        'message' => 'Fleet-Ops order was created.',
+        'resource' => [
+            'route' => 'operations.orders.index.details',
+            'uuid' => $order->uuid,
+            'id' => $order->public_id,
+        ],
+    ];
+}
+```
 
 ## Terminal states
 

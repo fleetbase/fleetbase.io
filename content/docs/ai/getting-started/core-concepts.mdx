@@ -3,6 +3,29 @@ title: Core Concepts
 description: Understand Fleetbase AI sessions, tasks, steps, providers, capabilities, action previews, and queryable resources.
 ---
 
+Fleetbase AI is built around a few durable objects and extension contracts. These terms show up in the prompt UI, admin audit logs, and capability code.
+
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 not-prose">
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Conversation</CardTitle>
+      <CardDescription className="text-xs">Sessions, user turns, AI responses, history, and deletion.</CardDescription>
+    </CardHeader>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Execution</CardTitle>
+      <CardDescription className="text-xs">Tasks, steps, provider calls, context resolution, and action results.</CardDescription>
+    </CardHeader>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Extensibility</CardTitle>
+      <CardDescription className="text-xs">Capabilities, queryable resources, and module preview components.</CardDescription>
+    </CardHeader>
+  </Card>
+</div>
+
 ## Session
 
 An AI session is a durable chat thread. Closing the floating prompt only hides the UI; the latest active session can be reopened and continued later.
@@ -37,3 +60,7 @@ An action preview is a confirmation card rendered before Fleetbase data changes.
 ## Queryable Resource
 
 A queryable resource is a safe data contract for operational questions. Instead of raw SQL, modules register resources, fields, metrics, filters, and permissions.
+
+<Callout type="info">
+The model can help phrase the answer, but Fleetbase decides what context, queries, and actions are allowed.
+</Callout>

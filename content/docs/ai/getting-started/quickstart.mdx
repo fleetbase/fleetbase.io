@@ -1,27 +1,30 @@
 ---
 title: Fleetbase AI Quickstart
-description: Install Fleetbase AI, enable it in the console, configure a provider, and send the first prompt.
+description: Enable Fleetbase AI, configure a provider, and send the first prompt.
 ---
 
-## Install the extension
+Fleetbase AI is included as a core module in Fleetbase `v0.7.49` and later. There is no separate installation step for supported Fleetbase versions.
 
-Install Fleetbase AI with the Fleetbase CLI:
-
-```bash
-flb install fleetbase/ai --path /path/to/fleetbase
-```
-
-The `--path` value should point to the Fleetbase instance directory containing both `console/` and `api/`.
-
-After installation, restart the Fleetbase services and run any pending migrations for the API.
+<Callout type="info">
+If you are upgrading an existing Fleetbase instance, deploy Fleetbase `v0.7.49` or newer, rebuild the console assets, restart the API workers, and run pending migrations as part of your normal release process.
+</Callout>
 
 ## Enable Fleetbase AI
 
-1. Open the Fleetbase console as an administrator.
-2. Go to **Admin > AI > Provider Settings**.
-3. Toggle **Enable Fleetbase AI**.
-4. Select a provider and model.
-5. Save the configuration.
+<Steps>
+  <Step>
+    Open the Fleetbase console as an administrator.
+  </Step>
+  <Step>
+    Go to **Admin > AI > Provider Settings**.
+  </Step>
+  <Step>
+    Toggle **Enable Fleetbase AI**.
+  </Step>
+  <Step>
+    Select a provider and model, then save the configuration.
+  </Step>
+</Steps>
 
 When AI is enabled, a compact magic-wand button appears in the header tray. The prompt can also be opened with the global shortcut configured by the module.
 
@@ -50,3 +53,26 @@ If Fleet-Ops is installed and its AI capabilities are registered, Fleetbase AI w
 <Callout type="info">
 The first answer depends on the capabilities registered by installed modules. Fleetbase AI only sees data that modules explicitly expose.
 </Callout>
+
+## Next steps
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6 not-prose">
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Prompt and sessions</CardTitle>
+      <CardDescription className="text-xs">Learn how persistent AI chat sessions work in the console.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <a href="/docs/ai/using-ai/prompt-and-sessions" className="text-sm text-primary hover:underline">Read the guide -></a>
+    </CardContent>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Capability framework</CardTitle>
+      <CardDescription className="text-xs">Expose safe module data and previewable actions to Fleetbase AI.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <a href="/docs/ai/capabilities/overview" className="text-sm text-primary hover:underline">Build capabilities -></a>
+    </CardContent>
+  </Card>
+</div>

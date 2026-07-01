@@ -5,6 +5,8 @@ description: Register read-only AI context resolvers for module data.
 
 Context capabilities let modules provide bounded data for model responses.
 
+Use them when the answer needs Fleetbase data but does not need to mutate anything.
+
 ## Contract
 
 A context capability implements `AIContextCapabilityInterface`:
@@ -27,10 +29,56 @@ Use context capabilities for read-only workflows:
 - retrieve help or documentation references
 - prepare data for an action preview
 
+## Example: route-aware context
+
+```php
+use Fleetbase\Ai\Contracts\AIContextCapabilityInterface;
+use Fleetbase\Ai\Models\AiTask;
+
+class CurrentRouteContextCapability implements AIContextCapabilityInterface
+{
+    public function key(): string
+    {
+        return 'my-module.current_route';
+    }
+
+    public function shouldResolve(AiTask $task): bool
+    {
+        return str_contains(strtolower($task->prompt), 'this page');
+    }
+
+    public function resolve(AiTask $task): array
+    {
+        return [
+            'label' => 'Current page',
+            'data' => [
+                'route' => data_get($task->metadata, 'route.name'),
+                'url' => data_get($task->metadata, 'route.url'),
+            ],
+        ];
+    }
+}
+```
+
 ## Output
 
 Return structured context with a clear label, bounded data, and enough metadata to audit how the answer was grounded.
 
+```php
+return [
+    'label' => 'Online drivers',
+    'summary' => '2 drivers are online.',
+    'data' => [
+        'online_count' => 2,
+        'offline_count' => 18,
+    ],
+];
+```
+
 ## Safety
 
 Context capabilities must enforce company scope and permission checks before returning data.
+
+<Callout type="info">
+Provider prompts should answer from resolved context when it exists. If the capability returns no data, the AI should say what was unavailable instead of guessing.
+</Callout>

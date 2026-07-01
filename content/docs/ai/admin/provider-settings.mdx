@@ -5,6 +5,10 @@ description: Enable Fleetbase AI and configure system-wide provider credentials 
 
 Provider settings are managed by admins in **Admin > AI > Provider Settings**.
 
+<Callout type="info">
+Provider settings control whether the AI prompt appears in the console. If Fleetbase AI is disabled, the tray button and shortcut remain inactive.
+</Callout>
+
 ## Enable Fleetbase AI
 
 Fleetbase AI is disabled until an admin enables it. When disabled, the header tray button and global shortcut do not open the prompt.
@@ -30,3 +34,12 @@ The model dropdown is backend-driven. Changing providers updates the available m
 ## Testing
 
 Use **Test provider** after saving configuration to confirm the selected provider is reachable.
+
+## Recommended setup flow
+
+<Steps>
+  <Step>Enable Fleetbase AI.</Step>
+  <Step>Select Local Preview and verify the prompt UI.</Step>
+  <Step>Switch to OpenAI or Claude and save provider credentials.</Step>
+  <Step>Run **Test provider** before inviting operators to use the prompt.</Step>
+</Steps>

@@ -5,6 +5,10 @@ description: Understand Fleetbase AI redaction, access logs, task retention, and
 
 Fleetbase AI is designed around explicit access, auditability, and redaction.
 
+<Callout type="info">
+The default admin experience should answer "what happened?" before exposing "what exactly was said?"
+</Callout>
+
 ## Default privacy posture
 
 Admin audit views should show metadata first. Raw prompt and response content should be redacted unless the viewer has permission to reveal it.
@@ -24,3 +28,12 @@ Fleetbase AI sends only the prompt, bounded session context, temporal context, a
 ## Module boundaries
 
 Modules control what Fleetbase AI can access by registering capabilities and queryable resources. Providers do not receive unrestricted database payloads.
+
+## Audit checklist
+
+| Area | Expected behavior |
+| :--- | :--- |
+| **Session list** | Shows metadata and status without raw content by default |
+| **Task detail** | Shows provider, model, usage, steps, errors, and redacted content |
+| **Reveal content** | Requires permission and records an access event |
+| **Deleted sessions** | Hidden from user history while audit data remains retained |
