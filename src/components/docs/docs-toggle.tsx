@@ -33,12 +33,6 @@ const sections = [
     icon: <Truck className="size-4" />,
   },
   {
-    title: 'Fleetbase AI',
-    description: 'Operations copilot & AI capabilities',
-    url: '/docs/ai',
-    icon: <Sparkles className="size-4" />,
-  },
-  {
     title: 'Storefront',
     description: 'E-commerce & marketplace',
     url: '/docs/storefront',
@@ -52,6 +46,12 @@ const sections = [
     description: 'Finance & billing',
     url: '/docs/ledger',
     icon: <BookMarked className="size-4" />,
+  },
+  {
+    title: 'Fleetbase AI',
+    description: 'Operations copilot & AI capabilities',
+    url: '/docs/ai',
+    icon: <Sparkles className="size-4" />,
   },
   {
     title: 'Fleetbase CLI',
