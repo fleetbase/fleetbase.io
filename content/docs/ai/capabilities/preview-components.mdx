@@ -1,0 +1,39 @@
+---
+title: Preview Components
+description: Render dedicated action preview UI inside the Fleetbase AI prompt.
+---
+
+Preview components let modules render action-specific UI instead of relying on generic model text.
+
+## Registry key
+
+The AI prompt looks for renderable components using this registry pattern:
+
+```txt
+ai:action-preview:{action_key}
+```
+
+For example, Fleet-Ops registers:
+
+```txt
+ai:action-preview:fleet-ops.create_order
+```
+
+## Component contract
+
+The renderer receives:
+
+- `task`
+- `preview`
+- `onApply`
+- `onCancel`
+- `onRefresh`
+- `isApplying`
+- `isCancelling`
+- `isRefreshing`
+
+## Design guidance
+
+Preview components should be compact and chat-native. Avoid full-page admin form layouts inside the AI prompt.
+
+Use dedicated preview UI when the action needs maps, editable drafts, validation, or a clear apply/cancel workflow.

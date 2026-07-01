@@ -1,0 +1,42 @@
+---
+title: Action Capabilities
+description: Register preview-confirm-apply AI actions for Fleetbase modules.
+---
+
+Action capabilities let modules turn natural-language requests into safe, confirmed actions.
+
+## Contract
+
+An action capability implements `AIActionCapabilityInterface`:
+
+```php
+interface AIActionCapabilityInterface extends AICapabilityInterface
+{
+    public function shouldPreview(AiTask $task): bool;
+
+    public function inputSchema(): array;
+
+    public function preview(AiTask $task, array $input = []): array;
+
+    public function apply(AiTask $task, array $preview = [], array $input = []): array;
+}
+```
+
+## Preview first
+
+Action capabilities should preview before mutating data. The preview should include:
+
+- the action key
+- a human label and message
+- draft input
+- missing requirements
+- validation status
+- any module-specific metadata needed by the preview UI
+
+## Apply only after confirmation
+
+The `apply()` method should use the latest confirmed preview input, run normal module validation, enforce permissions, and record the result.
+
+## Terminal states
+
+Completed, cancelled, and failed actions should stop accepting edits or repeat apply attempts.

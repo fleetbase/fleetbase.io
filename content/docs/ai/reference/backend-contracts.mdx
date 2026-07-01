@@ -1,0 +1,48 @@
+---
+title: Backend Contracts
+description: Reference the core backend contracts used by Fleetbase AI providers and capabilities.
+---
+
+## `AICapabilityInterface`
+
+Base metadata contract for every AI capability:
+
+```php
+interface AICapabilityInterface
+{
+    public function key(): string;
+    public function label(): string;
+    public function description(): string;
+    public function module(): string;
+    public function type(): string;
+    public function mode(): string;
+    public function permissions(): array;
+    public function previewOnly(): bool;
+    public function executable(): bool;
+    public function toArray(): array;
+}
+```
+
+## `AIContextCapabilityInterface`
+
+Read/context contract:
+
+```php
+public function shouldResolve(AiTask $task): bool;
+public function resolve(AiTask $task): array;
+```
+
+## `AIActionCapabilityInterface`
+
+Preview/apply contract:
+
+```php
+public function shouldPreview(AiTask $task): bool;
+public function inputSchema(): array;
+public function preview(AiTask $task, array $input = []): array;
+public function apply(AiTask $task, array $preview = [], array $input = []): array;
+```
+
+## Provider contract
+
+Providers implement `AIProviderInterface` and return normalized response, usage, metadata, and error fields for task recording.

@@ -1,0 +1,37 @@
+---
+title: Provider Setup
+description: Configure Local Preview, OpenAI, or Claude providers for Fleetbase AI.
+---
+
+Fleetbase AI provider settings are configured in **Admin > AI > Provider Settings**.
+
+## Local Preview
+
+Local Preview is useful for development and UI testing. It records AI tasks and returns a placeholder response without calling an external provider.
+
+Use Local Preview when you want to verify:
+
+- prompt opening and session history
+- task and step recording
+- action preview rendering
+- admin audit and usage views
+
+## OpenAI
+
+Select **OpenAI**, choose a supported model from the model dropdown, and enter the OpenAI API key.
+
+The base URL defaults to the canonical OpenAI API endpoint and is available only in advanced settings.
+
+## Claude
+
+Select **Claude**, choose a supported Claude model, and enter the Anthropic API key.
+
+The base URL defaults to the canonical Anthropic API endpoint and is available only in advanced settings.
+
+## Model dropdowns
+
+Provider and model options are returned by the Fleetbase AI backend. This keeps the admin UI aligned with the models Fleetbase intentionally supports.
+
+## Testing provider config
+
+After saving credentials, use **Test provider**. A successful test confirms that Fleetbase can reach the selected provider with the saved configuration.

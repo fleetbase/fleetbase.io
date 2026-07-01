@@ -1,4 +1,4 @@
-import { defineDocs, defineConfig, frontmatterSchema } from 'fumadocs-mdx/config';
+import { defineConfig, defineDocs, frontmatterSchema } from 'fumadocs-mdx/config';
 import { z } from 'zod';
 
 // Frontmatter schema extended with `sidebarTitle` — overrides the sidebar label
@@ -38,6 +38,13 @@ export const palletDocs = defineDocs({
 // Ledger — finance & billing extension
 export const ledgerDocs = defineDocs({
   dir: 'content/docs/ledger',
+  docs: { files: ['**/*.mdx'], schema: docFrontmatter },
+  meta: { files: ['meta.json', '**/meta.json'] },
+});
+
+// Fleetbase AI — operations copilot and AI capability framework
+export const aiDocs = defineDocs({
+  dir: 'content/docs/ai',
   docs: { files: ['**/*.mdx'], schema: docFrontmatter },
   meta: { files: ['meta.json', '**/meta.json'] },
 });

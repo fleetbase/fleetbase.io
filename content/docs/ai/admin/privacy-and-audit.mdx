@@ -1,0 +1,26 @@
+---
+title: Privacy and Audit
+description: Understand Fleetbase AI redaction, access logs, task retention, and safe admin review.
+---
+
+Fleetbase AI is designed around explicit access, auditability, and redaction.
+
+## Default privacy posture
+
+Admin audit views should show metadata first. Raw prompt and response content should be redacted unless the viewer has permission to reveal it.
+
+## Access logs
+
+When raw task content is revealed, Fleetbase records an admin access event. This creates an audit trail for sensitive review actions.
+
+## Retention
+
+Session deletion is user-facing soft delete. Task and step records remain available for audit retention unless a separate retention policy removes them.
+
+## Provider data
+
+Fleetbase AI sends only the prompt, bounded session context, temporal context, attachments metadata, and capability context required for a provider response.
+
+## Module boundaries
+
+Modules control what Fleetbase AI can access by registering capabilities and queryable resources. Providers do not receive unrestricted database payloads.

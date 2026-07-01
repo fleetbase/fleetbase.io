@@ -1,0 +1,33 @@
+---
+title: Queryable Resources
+description: Expose operational data to Fleetbase AI through allowlisted resources instead of raw SQL.
+---
+
+Queryable resources let modules answer flexible operational questions safely.
+
+## Why they exist
+
+Users ask questions like:
+
+- "How many drivers are online?"
+- "Which active orders have no driver?"
+- "Where are most vehicles located?"
+- "How many orders were created last week?"
+
+Fleetbase AI should support these questions without executing model-generated SQL.
+
+## Resource registration
+
+Modules register resources with safe fields, aliases, metrics, filters, location fields, and permissions. Fleetbase executes validated query plans server-side.
+
+## Output shape
+
+Query results should return summaries first and include only capped, sanitized samples when useful.
+
+## Spatial analysis
+
+For location-based answers, resources can expose safe coordinate fields and service-area or zone relationships. Invalid coordinates should be excluded rather than guessed.
+
+## Auditability
+
+Executed query summaries should be recorded as task steps so operators can inspect what data grounded the answer.

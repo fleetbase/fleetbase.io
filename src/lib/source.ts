@@ -1,16 +1,18 @@
-import { loader } from 'fumadocs-core/source';
 import type { InferPageType, LoaderPlugin } from 'fumadocs-core/source';
+import { loader } from 'fumadocs-core/source';
+
 import {
-  docs,
-  fleetOpsDocs,
-  storefrontDocs,
-  palletDocs,
-  ledgerDocs,
-  cliDocs,
-  uiDocs,
-  extensionDevelopmentDocs,
+  aiDocs,
   apiDocs,
+  cliDocs,
   contributingDocs,
+  docs,
+  extensionDevelopmentDocs,
+  fleetOpsDocs,
+  ledgerDocs,
+  palletDocs,
+  storefrontDocs,
+  uiDocs,
 } from '@/.source';
 
 // Plugin: when a page declares `sidebarTitle` in frontmatter, use it as the
@@ -65,6 +67,13 @@ export const palletSource = loader({
 export const ledgerSource = loader({
   baseUrl: '/docs/ledger',
   source: { files: ledgerDocs.toFumadocsSource().files() },
+  plugins: [sidebarTitlePlugin],
+});
+
+// Fleetbase AI — operations copilot and AI capability framework
+export const aiSource = loader({
+  baseUrl: '/docs/ai',
+  source: { files: aiDocs.toFumadocsSource().files() },
   plugins: [sidebarTitlePlugin],
 });
 

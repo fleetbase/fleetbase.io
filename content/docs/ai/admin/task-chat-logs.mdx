@@ -1,0 +1,26 @@
+---
+title: Task and Chat Logs
+description: Review AI sessions, task history, provider metadata, token telemetry, and redacted content.
+---
+
+The Task and Chat Logs panel gives admins an operational audit view of Fleetbase AI activity.
+
+## What admins can review
+
+- sessions by organization and user
+- tasks within a selected session
+- provider and model used for each task
+- status, timestamps, errors, and token usage
+- task steps such as context resolution, previews, apply actions, and failures
+
+## Filters
+
+Audit logs support filters for organization, user, provider, model, status, and date range.
+
+## Redaction by default
+
+Prompt text, response text, capability context, attachment details, and tool input/output should be redacted unless an admin has content-view permission.
+
+## Reveal content
+
+When raw content is revealed, Fleetbase records an admin access log with the viewer, task/session, action, IP address, user agent, and timestamp.

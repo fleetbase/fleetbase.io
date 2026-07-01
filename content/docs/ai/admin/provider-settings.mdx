@@ -1,0 +1,32 @@
+---
+title: Provider Settings
+description: Enable Fleetbase AI and configure system-wide provider credentials and default models.
+---
+
+Provider settings are managed by admins in **Admin > AI > Provider Settings**.
+
+## Enable Fleetbase AI
+
+Fleetbase AI is disabled until an admin enables it. When disabled, the header tray button and global shortcut do not open the prompt.
+
+## System-wide credentials
+
+Provider keys are system-wide. They are not stored per organization.
+
+## Provider-specific fields
+
+The settings panel shows credential fields only for the selected provider:
+
+| Provider | Fields |
+| :--- | :--- |
+| **Local Preview** | No provider credentials |
+| **OpenAI** | OpenAI API key and advanced base URL |
+| **Claude** | Anthropic API key and advanced base URL |
+
+## Models
+
+The model dropdown is backend-driven. Changing providers updates the available model options.
+
+## Testing
+
+Use **Test provider** after saving configuration to confirm the selected provider is reachable.

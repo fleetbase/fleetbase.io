@@ -1,0 +1,36 @@
+---
+title: Context Capabilities
+description: Register read-only AI context resolvers for module data.
+---
+
+Context capabilities let modules provide bounded data for model responses.
+
+## Contract
+
+A context capability implements `AIContextCapabilityInterface`:
+
+```php
+interface AIContextCapabilityInterface extends AICapabilityInterface
+{
+    public function shouldResolve(AiTask $task): bool;
+
+    public function resolve(AiTask $task): array;
+}
+```
+
+## When to use
+
+Use context capabilities for read-only workflows:
+
+- summarize current page context
+- answer questions about scoped operational records
+- retrieve help or documentation references
+- prepare data for an action preview
+
+## Output
+
+Return structured context with a clear label, bounded data, and enough metadata to audit how the answer was grounded.
+
+## Safety
+
+Context capabilities must enforce company scope and permission checks before returning data.

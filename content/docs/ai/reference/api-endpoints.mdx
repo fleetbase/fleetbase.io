@@ -1,0 +1,38 @@
+---
+title: API Endpoints
+description: Internal Fleetbase AI endpoints for configuration, sessions, tasks, tools, admin audit, and usage analytics.
+---
+
+Fleetbase AI exposes internal console APIs under:
+
+```txt
+ai/int/v1
+```
+
+## User-facing endpoints
+
+| Endpoint | Purpose |
+| :--- | :--- |
+| `GET /config` | Load AI enabled state, provider config, and metadata |
+| `POST /test-provider` | Test the selected provider config |
+| `GET /sessions` | List the current user's AI sessions |
+| `POST /sessions` | Start a new session |
+| `GET /sessions/{id}` | Load a session and its tasks |
+| `DELETE /sessions/{id}` | Soft-delete a session from user history |
+| `POST /tasks` | Submit a prompt |
+| `POST /tasks/{id}/preview` | Refresh an action preview |
+| `POST /tasks/{id}/apply` | Apply a confirmed action |
+| `POST /tasks/{id}/cancel` | Cancel an action preview |
+| `GET /tools` | List registered AI capabilities |
+
+## Admin endpoints
+
+Admin endpoints live under:
+
+```txt
+ai/int/v1/admin
+```
+
+They provide session/task audit views, user and organization pickers, usage analytics, and guarded raw-content reveal actions.
+
+These endpoints should remain internal to the Fleetbase console.

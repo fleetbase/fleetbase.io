@@ -1,0 +1,31 @@
+{
+  "title": "Fleetbase AI",
+  "pages": [
+    "index",
+    "---Getting Started---",
+    "getting-started/quickstart",
+    "getting-started/core-concepts",
+    "getting-started/provider-setup",
+    "---Using Fleetbase AI---",
+    "using-ai/prompt-and-sessions",
+    "using-ai/attachments",
+    "using-ai/action-previews",
+    "using-ai/fleet-ops-pilot",
+    "---Admin---",
+    "admin/provider-settings",
+    "admin/task-chat-logs",
+    "admin/usage-analytics",
+    "admin/privacy-and-audit",
+    "---Capabilities---",
+    "capabilities/overview",
+    "capabilities/context-capabilities",
+    "capabilities/action-capabilities",
+    "capabilities/queryable-resources",
+    "capabilities/preview-components",
+    "capabilities/permissions-and-safety",
+    "---Reference---",
+    "reference/backend-contracts",
+    "reference/frontend-registries",
+    "reference/api-endpoints"
+  ]
+}

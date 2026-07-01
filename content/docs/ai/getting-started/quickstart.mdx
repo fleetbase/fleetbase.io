@@ -1,0 +1,52 @@
+---
+title: Fleetbase AI Quickstart
+description: Install Fleetbase AI, enable it in the console, configure a provider, and send the first prompt.
+---
+
+## Install the extension
+
+Install Fleetbase AI with the Fleetbase CLI:
+
+```bash
+flb install fleetbase/ai --path /path/to/fleetbase
+```
+
+The `--path` value should point to the Fleetbase instance directory containing both `console/` and `api/`.
+
+After installation, restart the Fleetbase services and run any pending migrations for the API.
+
+## Enable Fleetbase AI
+
+1. Open the Fleetbase console as an administrator.
+2. Go to **Admin > AI > Provider Settings**.
+3. Toggle **Enable Fleetbase AI**.
+4. Select a provider and model.
+5. Save the configuration.
+
+When AI is enabled, a compact magic-wand button appears in the header tray. The prompt can also be opened with the global shortcut configured by the module.
+
+## Configure a provider
+
+Fleetbase AI supports:
+
+| Provider | Use case |
+| :--- | :--- |
+| **Local Preview** | UI testing without external provider calls |
+| **OpenAI** | Model-backed responses through the OpenAI Responses API |
+| **Claude** | Model-backed responses through the Anthropic Messages API |
+
+Provider credentials are system-wide. They are configured by admins and are not stored per organization.
+
+## Send the first prompt
+
+Open the prompt and try:
+
+```txt
+How many active orders do we have today?
+```
+
+If Fleet-Ops is installed and its AI capabilities are registered, Fleetbase AI will resolve safe operational context before answering.
+
+<Callout type="info">
+The first answer depends on the capabilities registered by installed modules. Fleetbase AI only sees data that modules explicitly expose.
+</Callout>

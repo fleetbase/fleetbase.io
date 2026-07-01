@@ -1,0 +1,74 @@
+---
+title: Fleetbase AI
+description: Fleetbase AI is the operations copilot and AI capability framework for Fleetbase, combining chat sessions, auditable tasks, provider integrations, and module-registered capabilities.
+---
+
+# Fleetbase AI
+
+Fleetbase AI adds an operations copilot to the Fleetbase console. It gives users a global prompt for asking operational questions, reviewing AI-assisted actions, and working with Fleetbase data through explicit module capabilities.
+
+Unlike a generic chatbot, Fleetbase AI is grounded in Fleetbase runtime context. Each prompt becomes an auditable task, each conversation is stored as a session, and modules such as Fleet-Ops decide exactly what AI may read, summarize, preview, or apply.
+
+## What Fleetbase AI Does
+
+| Capability | What it covers |
+| :--- | :--- |
+| **Global AI Prompt** | Floating Spotlight-style prompt available from the console header |
+| **Persistent Sessions** | Chat sessions with user turns, AI responses, history, and soft delete |
+| **Auditable Tasks** | Every prompt, response, tool context, preview, and apply action is recorded |
+| **Provider Integrations** | System-wide Local Preview, OpenAI, and Claude provider support |
+| **Capability Registry** | Modules register safe read/context capabilities and preview/apply actions |
+| **Action Previews** | Dedicated preview UI for high-value actions such as Fleet-Ops order creation |
+| **Operational Queries** | Allowlisted query resources for answering data questions without raw SQL |
+| **Admin Visibility** | Provider settings, task/chat logs, token usage, and guarded content reveal |
+
+## How It Stays Safe
+
+Fleetbase AI does not give model providers unrestricted database access. Modules expose AI access through explicit capabilities:
+
+- **Context capabilities** return bounded, sanitized data for answers.
+- **Action capabilities** produce previews before anything mutates Fleetbase data.
+- **Queryable resources** define allowlisted fields, metrics, filters, and permissions.
+- **Preview components** let modules render confirmation UI inside the AI prompt.
+
+<Callout type="info">
+Fleetbase AI records token usage and task telemetry for operations and debugging. Usage data is treated as operational telemetry for administrators.
+</Callout>
+
+## Where To Start
+
+<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 not-prose">
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Enable Fleetbase AI</CardTitle>
+      <CardDescription className="text-xs">Install the extension, enable AI, and configure the first provider.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <a href="/docs/ai/getting-started/quickstart" className="text-sm text-primary hover:underline">Quickstart -></a>
+    </CardContent>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Use the AI Prompt</CardTitle>
+      <CardDescription className="text-xs">Learn chat sessions, history, attachments, markdown responses, and action previews.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <a href="/docs/ai/using-ai/prompt-and-sessions" className="text-sm text-primary hover:underline">Prompt & sessions -></a>
+    </CardContent>
+  </Card>
+  <Card>
+    <CardHeader>
+      <CardTitle className="text-sm font-semibold">Register Capabilities</CardTitle>
+      <CardDescription className="text-xs">Expose safe data access and AI-assisted actions from your own modules.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <a href="/docs/ai/capabilities/overview" className="text-sm text-primary hover:underline">Capabilities -></a>
+    </CardContent>
+  </Card>
+</div>
+
+## Current Pilot
+
+Fleet-Ops is the first module using Fleetbase AI capabilities. It can answer bounded operational questions, provide Fleet-Ops help context, and preview order creation from natural language before the user confirms the action.
+
+See [Fleet-Ops Pilot](/docs/ai/using-ai/fleet-ops-pilot) for the current scope.

@@ -1,0 +1,39 @@
+---
+title: Core Concepts
+description: Understand Fleetbase AI sessions, tasks, steps, providers, capabilities, action previews, and queryable resources.
+---
+
+## Session
+
+An AI session is a durable chat thread. Closing the floating prompt only hides the UI; the latest active session can be reopened and continued later.
+
+## Task
+
+An AI task is one user prompt and its resulting AI work. Tasks store the prompt, provider, model, response, token usage, status, attachments, action previews, and metadata.
+
+## Step
+
+Task steps record what happened while a task ran: context resolution, provider calls, preview creation, apply actions, errors, and cancellation.
+
+## Provider
+
+A provider is the model backend used for responses. Fleetbase AI currently supports Local Preview, OpenAI, and Claude. Admins configure provider credentials system-wide.
+
+## Capability
+
+A capability is a module-declared AI ability. Capabilities tell Fleetbase AI what a module can safely expose or do.
+
+| Type | Purpose |
+| :--- | :--- |
+| **Context capability** | Resolves bounded data for the model to answer from |
+| **Action capability** | Creates a preview and optionally applies a confirmed action |
+| **Queryable resource** | Defines safe fields, metrics, filters, and aggregates |
+| **Preview component** | Renders module-specific action UI inside the prompt |
+
+## Action Preview
+
+An action preview is a confirmation card rendered before Fleetbase data changes. The Fleet-Ops create-order preview is the first pilot example.
+
+## Queryable Resource
+
+A queryable resource is a safe data contract for operational questions. Instead of raw SQL, modules register resources, fields, metrics, filters, and permissions.

@@ -1,0 +1,29 @@
+---
+title: Permissions and Safety
+description: Apply company scope, permissions, redaction, and confirmation rules to Fleetbase AI capabilities.
+---
+
+Fleetbase AI capabilities must respect normal Fleetbase boundaries.
+
+## Required checks
+
+Capabilities should enforce:
+
+- company scope
+- user permissions
+- resource ownership
+- safe output fields
+- result limits
+- action confirmation
+
+## Provider boundaries
+
+Providers should receive only the context needed to answer the prompt or render the preview. They should not receive unrestricted model payloads or secrets.
+
+## Action boundaries
+
+Actions should not mutate data until the user explicitly confirms the preview. Apply methods should use the same validation path the module uses outside AI.
+
+## Redaction
+
+Admin views should redact raw prompt and response content by default. Reveal actions require permission and should be logged.

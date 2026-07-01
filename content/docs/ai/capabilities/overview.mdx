@@ -1,0 +1,40 @@
+---
+title: Capability Overview
+description: Learn how Fleetbase modules register safe AI-readable context, executable actions, query resources, and preview components.
+---
+
+Fleetbase AI capabilities are the extension point for module-owned AI behavior.
+
+Modules register capabilities so Fleetbase AI can answer questions and preview actions without granting models arbitrary access to application data.
+
+## Capability types
+
+| Type | Responsibility |
+| :--- | :--- |
+| **Context capability** | Return safe context for a prompt |
+| **Action capability** | Preview and apply a confirmed action |
+| **Queryable resource** | Declare safe data fields, filters, aggregates, and spatial access |
+| **Preview component** | Render a module-specific action card in the AI prompt |
+
+## Registration pattern
+
+Register capabilities from the module service provider after Fleetbase AI is available:
+
+```php
+$this->callAfterResolving(\Fleetbase\Ai\Support\AiCapabilityRegistry::class, function ($registry) {
+    $registry->register(new MyModuleContextCapability());
+});
+```
+
+Frontend preview components are registered through the console registry service:
+
+```js
+registryService.registerRenderableComponent(
+    'ai:action-preview:my-module.create_resource',
+    new ExtensionComponent('@fleetbase/my-module-engine', 'ai/create-resource-preview')
+);
+```
+
+## Design rule
+
+Capabilities should return the smallest useful context for the prompt, not raw model records.
