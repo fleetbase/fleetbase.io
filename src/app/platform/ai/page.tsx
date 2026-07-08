@@ -226,7 +226,7 @@ export default function LogisticsAIPage() {
  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
  <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
  </span>
- <span className="text-primary font-medium">Fleetbase AI is live</span>
+ <span className="text-primary font-medium">The first open-source logistics AI — now live</span>
  </div>
 
  <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-balance leading-tight">
@@ -236,7 +236,7 @@ export default function LogisticsAIPage() {
  </h1>
 
  <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto text-balance">
- Fleetbase AI doesn&apos;t just surface insights — it <strong>acts</strong>. Ask your operation anything, create orders in plain English, and let AI take action inside your workflow. All on infrastructure you own.
+ The <strong className="text-foreground">first open-source AI copilot for logistics</strong> — and it doesn&apos;t just surface insights, it <strong>acts</strong>. Ask your operation anything, create orders in plain English, and let AI take action inside your workflow.
  </p>
 
  <p className="text-base text-muted-foreground mb-10 max-w-2xl mx-auto">
@@ -258,6 +258,29 @@ export default function LogisticsAIPage() {
 
  <p className="text-xs text-muted-foreground mt-4">
  Live on Fleetbase Cloud and self-hosted — enable Fleetbase AI in your console. Shipped in v0.7.49.
+ </p>
+ </div>
+ </section>
+
+ {/* ── Demo ── */}
+ <section className="pb-4 md:pb-8 -mt-6">
+ <div className="container max-w-4xl mx-auto">
+ <div className="rounded-2xl border bg-card overflow-hidden shadow-2xl shadow-primary/10">
+ {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+ <video
+ className="w-full h-auto block"
+ src="/ai-demo.mp4"
+ poster="/ai-demo-poster.jpg"
+ autoPlay
+ muted
+ loop
+ playsInline
+ preload="metadata"
+ aria-label="Fleetbase AI copilot creating an order from a plain-English prompt inside the console"
+ />
+ </div>
+ <p className="text-center text-sm text-muted-foreground mt-3">
+ Fleetbase AI in the console — ask, preview, and create, in plain English. No other logistics platform ships an open-source AI copilot like this.
  </p>
  </div>
  </section>
