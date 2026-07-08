@@ -13,7 +13,7 @@ const AI_REPO = 'https://github.com/fleetbase/ai';
 export const metadata: Metadata = {
  title: 'Open Source Logistics AI | AI-Powered Fleet & Delivery Management',
  description:
- 'Fleetbase AI is the open-source AI copilot for logistics — live now. Natural-language order creation, order insights, AI route optimization, and operational queries, powered by OpenAI or Claude, on infrastructure you control.',
+ 'Fleetbase AI is the open-source AI for logistics — live now. Natural-language order creation, order insights, AI route optimization, and operational queries, powered by OpenAI or Claude, on infrastructure you control.',
  keywords: [
  'logistics AI',
  'AI fleet management',
@@ -27,20 +27,20 @@ export const metadata: Metadata = {
  'AI supply chain platform',
  'open source AI logistics platform',
  'AI last mile delivery',
- 'AI copilot logistics',
+ 'logistics AI assistant',
  'fleet AI software',
  ],
  alternates: { canonical: 'https://fleetbase.io/platform/ai' },
  openGraph: {
  title: 'Open Source Logistics AI | Fleetbase',
  description:
- 'The open-source AI copilot for logistics — live now. Natural-language order creation, order insights, route AI, and operational queries, on infrastructure you own.',
+ 'The open-source AI for logistics — live now. Natural-language order creation, order insights, route AI, and operational queries, on infrastructure you own.',
  images: [{ url: '/images/og-ai.png', width: 1200, height: 630 }],
  },
  twitter: {
    card: 'summary_large_image',
    title: `Open Source Logistics AI | Fleetbase`,
-   description: `The open-source AI copilot for logistics — live now. Natural-language order creation, order insights, and route AI, on infrastructure you own.`,
+   description: `The open-source AI for logistics — live now. Natural-language order creation, order insights, and route AI, on infrastructure you own.`,
  },
 };
 
@@ -48,10 +48,10 @@ export const metadata: Metadata = {
 const AI_CAPABILITIES = [
  {
  icon: Bot,
- title: 'AI Operations Copilot',
+ title: 'Global AI Prompt',
  description:
  'A global AI prompt in your console header — or a keyboard shortcut away. Ask about your operation, get answers, and take action in plain English, with persistent chat history you can revisit.',
- keywords: ['AI copilot logistics', 'conversational AI fleet', 'natural language logistics'],
+ keywords: ['logistics AI assistant', 'conversational AI fleet', 'natural language logistics'],
  },
  {
  icon: MessageSquare,
@@ -111,7 +111,7 @@ const HOW_IT_WORKS = [
  icon: Eye,
  title: 'AI Sees Your Operation',
  description:
- 'Modules register AI-readable context — orders, drivers, vehicles, routes, and help docs — so the copilot works from your live operational data, not generic guesses.',
+ 'Modules register AI-readable context — orders, drivers, vehicles, routes, and help docs — so Fleetbase AI works from your live operational data, not generic guesses.',
  },
  {
  step: '02',
@@ -125,7 +125,7 @@ const HOW_IT_WORKS = [
  icon: Zap,
  title: 'AI Acts in the Platform',
  description:
- 'The copilot doesn\'t just reply — it can draft orders, run queries, and trigger actions directly inside Fleetbase. Every action previews first and applies only on your confirm.',
+ 'Fleetbase AI doesn\'t just reply — it can draft orders, run queries, and trigger actions directly inside Fleetbase. Every action previews first and applies only on your confirm.',
  },
  {
  step: '04',
@@ -169,7 +169,7 @@ const USE_CASES = [
  {
  role: 'Operations Manager',
  pain: 'Jumping between screens to answer "where\'s order #4021?" or "who\'s free right now?"',
- solution: 'Ask the AI copilot in plain English and get the answer — with full order context — in seconds.',
+ solution: 'Ask Fleetbase AI in plain English and get the answer — with full order context — in seconds.',
  },
  {
  role: 'Dispatcher',
@@ -202,7 +202,7 @@ export default function LogisticsAIPage() {
  applicationCategory: 'BusinessApplication',
  operatingSystem: 'Web, Cloud, Self-Hosted',
  description:
- 'Open-source AI copilot for logistics operations. AI operations copilot, natural-language order creation, order insights, route optimization, and operational queries — powered by OpenAI or Claude.',
+ 'Open-source AI for logistics operations. Natural-language order creation, order insights, route optimization, and operational queries — powered by OpenAI or Claude.',
  url: 'https://fleetbase.io/platform/ai',
  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
  creator: {
@@ -231,12 +231,12 @@ export default function LogisticsAIPage() {
 
  <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-balance leading-tight">
  The Open-Source{' '}
- <span className="text-primary">AI Copilot</span>{' '}
+ <span className="text-primary">AI</span>{' '}
  for Logistics
  </h1>
 
  <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto text-balance">
- The <strong className="text-foreground">first open-source AI copilot for logistics</strong> — and it doesn&apos;t just surface insights, it <strong>acts</strong>. Ask your operation anything, create orders in plain English, and let AI take action inside your workflow.
+ Fleetbase AI is the <strong className="text-foreground">first open-source AI for logistics</strong> — and it doesn&apos;t just surface insights, it <strong>acts</strong>. Ask your operation anything, create orders in plain English, and let AI take action inside your workflow.
  </p>
 
  <p className="text-base text-muted-foreground mb-10 max-w-2xl mx-auto">
@@ -276,11 +276,11 @@ export default function LogisticsAIPage() {
  loop
  playsInline
  preload="metadata"
- aria-label="Fleetbase AI copilot creating an order from a plain-English prompt inside the console"
+ aria-label="Fleetbase AI creating an order from a plain-English prompt inside the console"
  />
  </div>
  <p className="text-center text-sm text-muted-foreground mt-3">
- Fleetbase AI in the console — ask, preview, and create, in plain English. No other logistics platform ships an open-source AI copilot like this.
+ Fleetbase AI in the console — ask, preview, and create, in plain English. No other logistics platform ships open-source AI built in like this.
  </p>
  </div>
  </section>
@@ -372,7 +372,7 @@ export default function LogisticsAIPage() {
  What Fleetbase AI does today
  </h2>
  <p className="text-muted-foreground max-w-2xl mx-auto">
- Live capabilities, built into the platform and shipping in the open — from the AI copilot to the framework that lets every extension plug in.
+ Live capabilities, built into the platform and shipping in the open — from the in-console AI prompt to the framework that lets every extension plug in.
  </p>
  </div>
 
