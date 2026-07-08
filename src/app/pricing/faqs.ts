@@ -1,4 +1,25 @@
 export const PRICING_FAQS = [
+  // Top 3 are framed around real buyer fears: predictability, growth, licensing.
+  {
+    question: 'Will my bill be predictable?',
+    answer:
+      "Yes. Your monthly plan price is fixed, and it includes a set allocation of resource units that covers your normal activity. You only pay more if you exceed that allocation — and even then you're in control: buy a one-time top-up pack when you need it, or move up a plan for a lower per-unit rate. There are no per-seat charges and no surprise invoices. Add unlimited users and drivers without changing your price.",
+  },
+  {
+    question: 'What happens if I outgrow my plan?',
+    answer:
+      'Upgrading is instant and self-serve — move to a higher plan any time from the console and it takes effect immediately, with a lower cost per unit as you scale. Need a little more room this month but not a full upgrade? Buy a top-up pack (from 100 units) mid-cycle and keep going. You never get locked out or throttled mid-operation.',
+  },
+  {
+    question: 'Do I need a Commercial License?',
+    answer:
+      "Almost certainly not. Standard use of Fleetbase — running your operation on Cloud or self-hosting the open-source platform — needs no commercial license. You'd only need one if you plan to build proprietary, closed-source extensions and keep that custom code private (the core platform is AGPL). If that's you, see the commercial licensing page; if not, you can ignore it entirely.",
+  },
+  {
+    question: 'Is there a free trial?',
+    answer:
+      'Yes — every Cloud plan includes a free trial that runs for 7 days or 50 resource units, whichever comes first, so you can evaluate the platform against real operational usage before committing to a paid plan.',
+  },
   {
     question: 'What is a Resource Unit?',
     answer:
@@ -13,16 +34,6 @@ export const PRICING_FAQS = [
     question: 'What is the difference between Cloud and Self-Hosted?',
     answer:
       'Fleetbase Cloud is fully managed by us — we handle infrastructure, security patches, and uptime. Self-Hosted means you deploy Fleetbase on your own servers or cloud account. The one-time $2,500 implementation fee covers deployment, CI/CD setup, configuration, and branding.',
-  },
-  {
-    question: 'Do I need a Commercial License?',
-    answer:
-      'Only if you plan to build proprietary (closed-source) extensions or integrations on top of Fleetbase. The core platform is AGPL-licensed, which requires open-sourcing modifications. A Commercial License waives this obligation and keeps your custom code private. See /licensing/commercial for full details, pricing tiers, and the FAQ.',
-  },
-  {
-    question: 'Is there a free trial?',
-    answer:
-      'Yes — every Cloud plan includes a 7-day free trial capped at 50 resource units. Billing begins when either limit is reached first, so you can evaluate the platform against real operational usage.',
   },
   {
     question: 'What does the Self-Hosted implementation fee include?',
