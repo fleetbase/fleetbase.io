@@ -1,17 +1,19 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
- Brain, Zap, Route, MessageSquare, AlertTriangle, BarChart3,
- Truck, Package, Clock, Shield, ArrowRight, Sparkles, Bot,
- Eye, Layers, GitBranch, Cpu, ChevronRight, Star, Check, X,
+ Brain, Zap, Route, MessageSquare, BarChart3,
+ Clock, Shield, ArrowRight, Sparkles, Bot,
+ Eye, Layers, GitBranch, Cpu, Star, Check, X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
+const AI_REPO = 'https://github.com/fleetbase/ai';
+
 export const metadata: Metadata = {
  title: 'Open Source Logistics AI | AI-Powered Fleet & Delivery Management',
  description:
- 'Fleetbase is building the open-source AI layer for logistics. AI-powered route optimisation, predictive dispatch, anomaly detection, and natural language operations — all on infrastructure you control.',
+ 'Fleetbase AI is the open-source AI for logistics — live now. Natural-language order creation, order insights, AI route optimization, and operational queries, powered by OpenAI or Claude, on infrastructure you control.',
  keywords: [
  'logistics AI',
  'AI fleet management',
@@ -25,88 +27,80 @@ export const metadata: Metadata = {
  'AI supply chain platform',
  'open source AI logistics platform',
  'AI last mile delivery',
- 'predictive logistics AI',
+ 'logistics AI assistant',
  'fleet AI software',
  ],
  alternates: { canonical: 'https://fleetbase.io/platform/ai' },
  openGraph: {
  title: 'Open Source Logistics AI | Fleetbase',
  description:
- 'The open-source AI layer for logistics operations. Route AI, dispatch AI, anomaly detection, and natural language control — on infrastructure you own.',
+ 'The open-source AI for logistics — live now. Natural-language order creation, order insights, route AI, and operational queries, on infrastructure you own.',
  images: [{ url: '/images/og-ai.png', width: 1200, height: 630 }],
  },
  twitter: {
    card: 'summary_large_image',
    title: `Open Source Logistics AI | Fleetbase`,
-   description: `The open-source AI layer for logistics operations. Route AI, dispatch AI, anomaly detection, and natural language control — on infrastructure you own.`,
+   description: `The open-source AI for logistics — live now. Natural-language order creation, order insights, and route AI, on infrastructure you own.`,
  },
 };
 
-// ─── AI Capabilities ──────────────────────────────────────────────────────────
+// ─── AI Capabilities (live — shipped in Fleetbase v0.7.49 / v0.7.51) ───────────
 const AI_CAPABILITIES = [
  {
- icon: Route,
- title: 'AI Route Optimisation',
- tag: 'Coming Soon',
+ icon: Bot,
+ title: 'Global AI Prompt',
  description:
- 'Go beyond static routing. Fleetbase AI will continuously re-optimise routes in real time using live traffic, weather, driver availability, vehicle capacity, and historical delivery patterns — cutting fuel costs by up to 30%.',
- keywords: ['AI route optimization', 'dynamic routing AI', 'last-mile AI'],
+ 'A global AI prompt in your console header — or a keyboard shortcut away. Ask about your operation, get answers, and take action in plain English, with persistent chat history you can revisit.',
+ keywords: ['logistics AI assistant', 'conversational AI fleet', 'natural language logistics'],
  },
  {
  icon: MessageSquare,
- title: 'Natural Language Dispatch',
- tag: 'Coming Soon',
+ title: 'Natural-Language Order Creation',
  description:
- 'Dispatch orders, reassign drivers, and query your fleet using plain English. Tell Fleetbase AI "find the nearest available driver for this order in Zone 4" and it executes — no clicks required.',
- keywords: ['AI dispatch', 'natural language logistics', 'conversational AI fleet'],
+ 'Describe an order in plain English and Fleetbase AI drafts it — then shows a preview to confirm before anything is created. No forms, no clicks through five screens.',
+ keywords: ['AI order creation', 'natural language dispatch', 'AI automation logistics'],
  },
  {
- icon: AlertTriangle,
- title: 'Predictive Anomaly Detection',
- tag: 'Coming Soon',
+ icon: Eye,
+ title: 'Order Insights & Context',
  description:
- 'AI monitors every order, driver, and vehicle in real time. It flags late deliveries before they happen, detects unusual driver behaviour, and alerts you to vehicle faults before they cause breakdowns.',
- keywords: ['predictive logistics', 'anomaly detection fleet', 'AI monitoring logistics'],
+ 'Ask about any order and get instant context — status, route, assignments, and what needs attention — pulled live from your operation and rendered right in the chat.',
+ keywords: ['AI order insights', 'logistics analytics AI', 'AI monitoring logistics'],
  },
  {
  icon: BarChart3,
- title: 'AI-Powered Analytics',
- tag: 'Coming Soon',
+ title: 'Operational Queries & Reports',
  description:
- 'Stop reading dashboards. Ask your data questions. Fleetbase AI will surface insights automatically — "Why did on-time delivery drop last Tuesday?" — and recommend corrective actions.',
+ 'Query your live data conversationally — resource search, operational questions, and reports — without building a dashboard first. Just ask.',
  keywords: ['logistics analytics AI', 'AI insights fleet management'],
  },
  {
- icon: Bot,
- title: 'Autonomous Order Processing',
- tag: 'Coming Soon',
+ icon: Route,
+ title: 'AI Route Optimization',
  description:
- 'AI reads incoming orders from any source — email, API, EDI, WhatsApp — extracts structured data, validates it, and creates dispatch-ready jobs in Fleetbase without human intervention.',
- keywords: ['AI order processing', 'autonomous logistics', 'AI automation logistics'],
+ 'AI-assisted routing and dispatch that accounts for your constraints, surfaced directly inside Fleet-Ops rather than in a separate tool.',
+ keywords: ['AI route optimization', 'dynamic routing AI', 'last-mile AI'],
  },
  {
- icon: Truck,
- title: 'Predictive Maintenance',
- tag: 'Coming Soon',
+ icon: Cpu,
+ title: 'Bring Your Own Model',
  description:
- 'Fleetbase AI analyses vehicle telemetry to predict component failures before they occur. Schedule maintenance proactively, reduce unplanned downtime, and extend vehicle lifespan.',
- keywords: ['predictive maintenance fleet', 'AI vehicle management', 'fleet AI maintenance'],
- },
- {
- icon: Package,
- title: 'Demand Forecasting',
- tag: 'Coming Soon',
- description:
- 'AI analyses your historical order volumes, seasonality, and external signals to forecast future demand. Pre-position drivers and vehicles before the surge hits.',
- keywords: ['demand forecasting logistics', 'AI supply chain forecasting'],
+ 'Model-agnostic by design. Connect OpenAI, Claude (Anthropic), or a local provider for development and testing — and swap providers whenever you like.',
+ keywords: ['model agnostic AI', 'self-hosted AI logistics', 'OpenAI Claude logistics'],
  },
  {
  icon: Shield,
- title: 'AI Compliance & Risk',
- tag: 'Coming Soon',
+ title: 'Preview & Full Audit Trail',
  description:
- 'Automatically flag compliance risks — driver hours violations, vehicle inspection overdue, hazmat route restrictions. AI keeps your operation compliant without manual checking.',
- keywords: ['AI compliance logistics', 'fleet risk management AI'],
+ 'Every AI action previews before it applies, and every task, step, and session is recorded — so AI activity is auditable and reversible, never a black box.',
+ keywords: ['auditable AI', 'AI compliance logistics', 'explainable AI logistics'],
+ },
+ {
+ icon: Layers,
+ title: 'Extensible Capability Framework',
+ description:
+ 'Any Fleetbase extension can register AI-readable context plus preview-only and confirmed-apply actions — so AI reaches across the entire platform, not just one module.',
+ keywords: ['AI extensions', 'open source AI framework', 'AI automation platform'],
  },
 ];
 
@@ -115,30 +109,30 @@ const HOW_IT_WORKS = [
  {
  step: '01',
  icon: Eye,
- title: 'AI Observes Everything',
+ title: 'AI Sees Your Operation',
  description:
- 'Every order, driver location, vehicle status, and customer interaction flows into the Fleetbase AI layer in real time. Nothing is missed.',
+ 'Modules register AI-readable context — orders, drivers, vehicles, routes, and help docs — so Fleetbase AI works from your live operational data, not generic guesses.',
  },
  {
  step: '02',
  icon: Brain,
- title: 'AI Reasons & Decides',
+ title: 'You Ask in Plain English',
  description:
- 'Models trained on logistics-specific data analyse patterns, detect anomalies, and generate recommendations — or take autonomous action when configured to do so.',
+ 'Open the AI prompt from the console header and ask a question or describe an action. Multi-turn chat sessions keep the context so follow-ups just work.',
  },
  {
  step: '03',
  icon: Zap,
  title: 'AI Acts in the Platform',
  description:
- 'AI doesn\'t just surface insights in a separate dashboard. It acts directly inside Fleetbase — re-assigning drivers, updating ETAs, creating alerts, and triggering workflows.',
+ 'Fleetbase AI doesn\'t just reply — it can draft orders, run queries, and trigger actions directly inside Fleetbase. Every action previews first and applies only on your confirm.',
  },
  {
  step: '04',
  icon: Layers,
  title: 'You Stay in Control',
  description:
- 'Every AI action is logged, explainable, and reversible. You choose which capabilities run autonomously and which require human approval. Open source means you can audit the models.',
+ 'Every AI task, step, and session is recorded for audit. Admins gate providers and configuration, and disabled AI is fully blocked server-side. Open source means you can read every line.',
  },
 ];
 
@@ -148,69 +142,25 @@ const OPEN_SOURCE_ADVANTAGES = [
  icon: GitBranch,
  title: 'No AI Black Box',
  description:
- 'With closed-source logistics AI, you have no idea why a route was chosen or a driver was flagged. Fleetbase AI is open — inspect the models, understand the decisions, trust the output.',
+ 'With closed-source logistics AI, you have no idea why a route was chosen or an action was taken. Fleetbase AI is open — read the module, see the capabilities, and audit every task it runs.',
  },
  {
  icon: Cpu,
  title: 'Run Your Own Models',
  description:
- 'Connect your own LLMs, fine-tuned models, or proprietary algorithms. Fleetbase AI is model-agnostic — use OpenAI, Anthropic, Mistral, or your own self-hosted model.',
+ 'Connect your own LLM provider — Fleetbase AI is model-agnostic. Use OpenAI, Anthropic (Claude), or a local provider, and switch without re-platforming.',
  },
  {
  icon: Shield,
  title: 'Data Stays on Your Infrastructure',
  description:
- 'Your logistics data never leaves your servers. Train AI on your own historical data without sending sensitive shipment, customer, or driver data to third-party AI providers.',
+ 'Self-host Fleetbase and keep your logistics data on your own servers. Point the AI at the provider you trust instead of shipping sensitive shipment, customer, or driver data to a vendor\'s black box.',
  },
  {
  icon: Sparkles,
  title: 'Community-Driven Intelligence',
  description:
- 'AI capabilities built by the Fleetbase community — logistics operators, developers, and researchers — not just a product team. The best ideas ship fastest in open source.',
- },
-];
-
-// ─── Roadmap ──────────────────────────────────────────────────────────────────
-const ROADMAP = [
- {
- quarter: 'Q3 2025',
- status: 'In Progress',
- statusColor: 'bg-blue-500',
- items: [
- 'AI Route Optimisation Engine (beta)',
- 'Natural Language Query Interface',
- 'Anomaly Detection for Late Deliveries',
- ],
- },
- {
- quarter: 'Q4 2025',
- status: 'Planned',
- statusColor: 'bg-yellow-500',
- items: [
- 'Autonomous Order Processing',
- 'Predictive Driver ETA Engine',
- 'AI-Powered Analytics Narratives',
- ],
- },
- {
- quarter: 'Q1 2026',
- status: 'Planned',
- statusColor: 'bg-gray-400',
- items: [
- 'Predictive Maintenance Integration',
- 'Demand Forecasting Module',
- 'AI Compliance & Risk Monitor',
- ],
- },
- {
- quarter: 'Q2 2026',
- status: 'Planned',
- statusColor: 'bg-gray-400',
- items: [
- 'Custom Model Fine-Tuning UI',
- 'Multi-Modal AI (voice dispatch)',
- 'AI Extensions Marketplace',
- ],
+ 'AI capabilities built in the open with the Fleetbase community — operators, developers, and researchers. New capabilities plug into the same framework and ship fast.',
  },
 ];
 
@@ -218,23 +168,23 @@ const ROADMAP = [
 const USE_CASES = [
  {
  role: 'Operations Manager',
- pain: 'Spending hours manually re-routing drivers when traffic spikes or orders are cancelled.',
- solution: 'AI automatically re-optimises all active routes in seconds and notifies affected drivers via the Navigator app.',
- },
- {
- role: 'Fleet Manager',
- pain: 'Vehicles breaking down unexpectedly, causing missed deliveries and emergency repair costs.',
- solution: 'Predictive maintenance AI flags components approaching failure 2–3 weeks in advance, enabling planned workshop visits.',
+ pain: 'Jumping between screens to answer "where\'s order #4021?" or "who\'s free right now?"',
+ solution: 'Ask Fleetbase AI in plain English and get the answer — with full order context — in seconds.',
  },
  {
  role: 'Dispatcher',
- pain: 'Processing 200+ incoming orders per day from email, WhatsApp, and API — manually copying data into the system.',
- solution: 'Autonomous order processing AI reads every channel, extracts order data, and creates dispatch-ready jobs automatically.',
+ pain: 'Filling in long order forms for every incoming job, all day.',
+ solution: 'Describe the order in plain English — AI drafts it and you confirm a preview before it is created.',
  },
  {
- role: 'Executive / CEO',
- pain: 'No clear visibility into why KPIs dropped last month — dashboards show what happened but not why.',
- solution: 'AI analytics narratives explain performance changes in plain English and surface the root cause with supporting data.',
+ role: 'Ops Lead / Analyst',
+ pain: 'Digging through dashboards to understand how today is actually going.',
+ solution: 'Ask "show me late orders today" or "which zones are behind" and get answers straight from live data.',
+ },
+ {
+ role: 'Engineering / IT',
+ pain: 'Wary of sending sensitive logistics data to a black-box AI vendor.',
+ solution: 'Run OpenAI, Claude, or a local model; every action previews first and is fully audited; self-host the whole thing.',
  },
 ];
 
@@ -252,7 +202,7 @@ export default function LogisticsAIPage() {
  applicationCategory: 'BusinessApplication',
  operatingSystem: 'Web, Cloud, Self-Hosted',
  description:
- 'Open-source AI layer for logistics operations. AI route optimisation, predictive dispatch, anomaly detection, and natural language fleet control.',
+ 'Open-source AI for logistics operations. Natural-language order creation, order insights, route optimization, and operational queries — powered by OpenAI or Claude.',
  url: 'https://fleetbase.io/platform/ai',
  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
  creator: {
@@ -272,22 +222,25 @@ export default function LogisticsAIPage() {
 
  <div className="container max-w-5xl mx-auto relative text-center">
  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm mb-6">
- <Sparkles className="w-3.5 h-3.5 text-primary" />
- <span className="text-primary font-medium">Logistics AI — Coming to Fleetbase</span>
+ <span className="relative flex h-2 w-2">
+ <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+ <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+ </span>
+ <span className="text-primary font-medium">The first open-source logistics AI — now live</span>
  </div>
 
  <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-balance leading-tight">
  The Open-Source{' '}
- <span className="text-primary">AI Layer</span>{' '}
+ <span className="text-primary">AI</span>{' '}
  for Logistics
  </h1>
 
  <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto text-balance">
- Fleetbase is building AI that doesn&apos;t just surface insights — it <strong>acts</strong>. Route decisions, autonomous dispatch, anomaly detection, and natural language fleet control. All on infrastructure you own.
+ Fleetbase AI is the <strong className="text-foreground">first open-source AI for logistics</strong> — and it doesn&apos;t just surface insights, it <strong>acts</strong>. Ask your operation anything, create orders in plain English, and let AI take action inside your workflow.
  </p>
 
  <p className="text-base text-muted-foreground mb-10 max-w-2xl mx-auto">
- No black-box AI. No data leaving your servers. No vendor lock-in. Open source, auditable, and model-agnostic — so you stay in control of your intelligence.
+ No black-box AI. Bring your own model — OpenAI, Claude, or local. Every action previews before it applies and is fully audited. Open source and model-agnostic, so you stay in control of your intelligence.
  </p>
 
  <div className="flex gap-4 justify-center flex-wrap">
@@ -297,14 +250,37 @@ export default function LogisticsAIPage() {
  </Link>
  </Button>
  <Button size="lg" variant="outline" asChild>
- <Link href="https://github.com/fleetbase/fleetbase" target="_blank" rel="noopener noreferrer">
- Follow on GitHub <Star className="ml-2 w-4 h-4" />
+ <Link href={AI_REPO} target="_blank" rel="noopener noreferrer">
+ View the AI module <Star className="ml-2 w-4 h-4" />
  </Link>
  </Button>
  </div>
 
  <p className="text-xs text-muted-foreground mt-4">
- AI capabilities are on our immediate roadmap. Join the waitlist to get early access.
+ Live on Fleetbase Cloud and self-hosted — enable Fleetbase AI in your console. Shipped in v0.7.49.
+ </p>
+ </div>
+ </section>
+
+ {/* ── Demo ── */}
+ <section className="pb-4 md:pb-8 -mt-6">
+ <div className="container max-w-4xl mx-auto">
+ <div className="rounded-2xl border bg-card overflow-hidden shadow-2xl shadow-primary/10">
+ {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+ <video
+ className="w-full h-auto block"
+ src="/ai-demo.mp4"
+ poster="/ai-demo-poster.jpg"
+ autoPlay
+ muted
+ loop
+ playsInline
+ preload="metadata"
+ aria-label="Fleetbase AI creating an order from a plain-English prompt inside the console"
+ />
+ </div>
+ <p className="text-center text-sm text-muted-foreground mt-3">
+ Fleetbase AI in the console — ask, preview, and create, in plain English. No other logistics platform ships open-source AI built in like this.
  </p>
  </div>
  </section>
@@ -328,7 +304,7 @@ export default function LogisticsAIPage() {
  Closed-source AI also means vendor lock-in. The moment you rely on their AI, you&apos;re dependent on their pricing, their uptime, and their roadmap.
  </p>
  <p>
- Fleetbase is building a different kind of logistics AI — open, auditable, and embedded directly into the operations platform. AI that acts inside your workflow, not in a separate dashboard you have to translate back into decisions.
+ Fleetbase AI is a different kind of logistics AI — open, auditable, and embedded directly into the operations platform. AI that acts inside your workflow, not in a separate dashboard you have to translate back into decisions.
  </p>
  </div>
  </div>
@@ -358,13 +334,13 @@ export default function LogisticsAIPage() {
  <div className="container max-w-5xl mx-auto">
  <div className="text-center mb-12">
  <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">
- <span className="w-6 h-px bg-muted-foreground/40" /> Architecture
+ <span className="w-6 h-px bg-muted-foreground/40" /> How it works
  </div>
  <h2 className="text-3xl md:text-4xl font-bold mb-4">
  AI that acts inside your operations
  </h2>
  <p className="text-muted-foreground max-w-2xl mx-auto">
- Fleetbase AI is not a reporting layer. It is embedded into the platform — observing, reasoning, and acting directly within your dispatch, fleet, and order workflows.
+ Fleetbase AI is not a reporting layer. It is embedded into the platform — seeing your live data, taking your instructions, and acting directly within your dispatch, fleet, and order workflows.
  </p>
  </div>
 
@@ -393,10 +369,10 @@ export default function LogisticsAIPage() {
  <span className="w-6 h-px bg-muted-foreground/40" /> Capabilities
  </div>
  <h2 className="text-3xl md:text-4xl font-bold mb-4">
- Every dimension of logistics, made intelligent
+ What Fleetbase AI does today
  </h2>
  <p className="text-muted-foreground max-w-2xl mx-auto">
- Eight AI capabilities designed around the real problems logistics operators face every day — from the first mile to the last.
+ Live capabilities, built into the platform and shipping in the open — from the in-console AI prompt to the framework that lets every extension plug in.
  </p>
  </div>
 
@@ -408,8 +384,8 @@ export default function LogisticsAIPage() {
  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
  <cap.icon className="w-5 h-5 text-primary" />
  </div>
- <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-medium">
- {cap.tag}
+ <span className="inline-flex items-center gap-1 text-xs bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-0.5 rounded-full font-medium">
+ <Check className="w-3 h-3" /> Live
  </span>
  </div>
  <CardTitle className="text-base leading-snug">{cap.title}</CardTitle>
@@ -436,7 +412,7 @@ export default function LogisticsAIPage() {
  AI that solves real logistics problems
  </h2>
  <p className="text-muted-foreground max-w-2xl mx-auto">
- Every AI capability maps to a specific pain point your team faces today.
+ Every capability maps to a specific pain point your team faces today.
  </p>
  </div>
 
@@ -492,58 +468,8 @@ export default function LogisticsAIPage() {
  </div>
  </section>
 
- {/* ── Roadmap ── */}
- <section className="section-padding">
- <div className="container max-w-5xl mx-auto">
- <div className="text-center mb-12">
- <div className="inline-flex items-center gap-2 text-xs font-medium text-muted-foreground mb-4 uppercase tracking-widest">
- <span className="w-6 h-px bg-muted-foreground/40" /> Roadmap
- </div>
- <h2 className="text-3xl md:text-4xl font-bold mb-4">
- AI is on our immediate roadmap
- </h2>
- <p className="text-muted-foreground max-w-2xl mx-auto">
- We are building Fleetbase AI in the open. Follow our progress on GitHub and join the community to shape what gets built next.
- </p>
- </div>
-
- <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
- {ROADMAP.map((phase) => (
- <div key={phase.quarter} className="p-5 rounded-xl border bg-card">
- <div className="flex items-center gap-2 mb-4">
- <div className={`w-2.5 h-2.5 rounded-full ${phase.statusColor}`} />
- <div>
- <div className="text-xs font-semibold">{phase.quarter}</div>
- <div className="text-xs text-muted-foreground">{phase.status}</div>
- </div>
- </div>
- <ul className="space-y-2">
- {phase.items.map((item) => (
- <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
- <ChevronRight className="w-3.5 h-3.5 text-primary flex-shrink-0 mt-0.5" />
- <span>{item}</span>
- </li>
- ))}
- </ul>
- </div>
- ))}
- </div>
-
- <div className="text-center mt-8">
- <Link
- href="https://github.com/fleetbase/fleetbase"
- target="_blank"
- rel="noopener noreferrer"
- className="inline-flex items-center gap-2 text-sm text-primary hover:underline underline-offset-4"
- >
- Follow the full roadmap on GitHub <ArrowRight className="w-4 h-4" />
- </Link>
- </div>
- </div>
- </section>
-
  {/* ── Comparison vs Closed AI ── */}
- <section className="section-padding bg-muted/20">
+ <section className="section-padding">
  <div className="container max-w-4xl mx-auto">
  <div className="text-center mb-10">
  <h2 className="text-3xl font-bold mb-4">
@@ -564,11 +490,11 @@ export default function LogisticsAIPage() {
  ['Auditable AI decisions', true, false],
  ['Data stays on your infrastructure', true, false],
  ['Bring your own AI model', true, false],
+ ['Preview before AI acts', true, false],
  ['Embedded in operations workflow', true, false],
  ['Open source codebase', true, false],
  ['No vendor lock-in', true, false],
  ['Community-driven development', true, false],
- ['Custom model fine-tuning', true, false],
  ['Usage-based pricing', true, false],
  ['Works with self-hosted deployment', true, false],
  ].map(([feature, fb, closed]) => (
@@ -596,19 +522,19 @@ export default function LogisticsAIPage() {
  </div>
  </section>
 
- {/* ── Early Access CTA ── */}
- <section className="section-padding relative overflow-hidden">
+ {/* ── CTA ── */}
+ <section className="section-padding relative overflow-hidden bg-muted/20 border-t">
  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10 pointer-events-none" />
  <div className="container max-w-3xl mx-auto text-center relative">
  <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm mb-6">
  <Sparkles className="w-3.5 h-3.5 text-primary" />
- <span className="text-primary font-medium">Get Early Access</span>
+ <span className="text-primary font-medium">Available now</span>
  </div>
  <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
- Be the first to run AI on your logistics operations
+ Run AI on your logistics operation today
  </h2>
  <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
- Join the Fleetbase community today. Star us on GitHub to follow AI development, or talk to our team about your specific AI use case — we are actively shaping the roadmap with early partners.
+ Start a free trial and turn on Fleetbase AI in the console, or dig into the open-source module on GitHub. Have a specific use case? Talk to our team.
  </p>
  <div className="flex gap-4 justify-center flex-wrap">
  <Button size="lg" asChild>
@@ -622,9 +548,9 @@ export default function LogisticsAIPage() {
  </Link>
  </Button>
  </div>
- <div className="flex items-center justify-center gap-6 mt-8 text-sm text-muted-foreground">
- <Link href="https://github.com/fleetbase/fleetbase" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-1.5">
- <Star className="w-4 h-4" /> Star on GitHub
+ <div className="flex items-center justify-center gap-6 mt-8 text-sm text-muted-foreground flex-wrap">
+ <Link href={AI_REPO} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-1.5">
+ <Star className="w-4 h-4" /> Star the AI repo
  </Link>
  <Link href="https://discord.com/invite/HnTqQ6zAVn" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors flex items-center gap-1.5">
  <MessageSquare className="w-4 h-4" /> Join Discord
