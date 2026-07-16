@@ -75,7 +75,7 @@ Each operation below is a button on the wallet detail panel.
 | Action | Effect |
 | :--- | :--- |
 | **Credit** | Manual credit (no gateway) |
-| **Top-Up** | Gateway-charged top-up via Stripe or QPay |
+| **Top-Up** | Gateway-charged top-up via GNU Taler, Stripe, or QPay |
 | **Transfer** | Move funds to another wallet |
 | **Payout** (sometimes labelled "Withdraw") | Debit the wallet (e.g., driver payout) |
 | **Freeze** | Set the wallet status to `frozen` |
@@ -93,7 +93,7 @@ Journal entry: `DEBIT Cash → CREDIT Wallet Liability`. Transaction type: `depo
 
 ### Top-Up (deposit via gateway)
 
-Charges a payment method via the chosen gateway (Stripe or QPay) and credits the wallet on success.
+Charges a payment method via the chosen gateway (GNU Taler, Stripe, or QPay) and credits the wallet on success.
 
 Journal entry: `DEBIT Cash → CREDIT Wallet Liability`. Transaction type: `deposit`.
 

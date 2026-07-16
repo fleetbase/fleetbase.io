@@ -51,10 +51,10 @@ See [Settings](/docs/ledger/settings/overview) for the full reference.
     Navigate to **Ledger → Payments → Gateways**.
   </Step>
   <Step>
-    Click **New Gateway** and select **Stripe** (or **Cash** for offline / manual receipts).
+    Click **New Gateway** and select **GNU Taler**, **Stripe**, **Cash**, or **QPay**. Use Cash for offline or manual receipts.
   </Step>
   <Step>
-    Fill in the credentials shown by the form — for Stripe: **Publishable Key**, **Secret Key**, and **Webhook Signing Secret**.
+    Fill in the credentials shown by the form. GNU Taler requires a Merchant Backend URL, instance ID, API token, and supported currency; Stripe requires a publishable key, secret key, and webhook signing secret.
   </Step>
   <Step>
     Set **Environment** to `sandbox` while testing.
@@ -129,6 +129,7 @@ When the customer pays:
 ## Next Steps
 
 - [Chart of Accounts](/docs/ledger/accounting/chart-of-accounts) — review the seeded accounts and add custom ones
+- [Payment Gateways](/docs/ledger/payments/gateways/overview) — configure GNU Taler, Stripe, Cash, or QPay
 - [Wallets](/docs/ledger/payments/wallets) — manage driver, customer, company, and user wallets
 - [Reports](/docs/ledger/reports/overview) — generate balance sheets, income statements, AR aging, and the wallet summary
 - [Settings](/docs/ledger/settings/overview) — configure invoice prefixes, payment terms, default gateways, and fiscal year

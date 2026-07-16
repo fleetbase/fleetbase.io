@@ -66,7 +66,7 @@ A **Wallet** is a digital balance tracked in Ledger. Wallets are polymorphic —
 
 Wallet operations:
 - **Credit** — manual credit, no gateway charge
-- **Top-Up** — gateway-charged top-up via Stripe or QPay
+- **Top-Up** — gateway-charged top-up via GNU Taler, Stripe, or QPay
 - **Transfer** — move funds between two wallets — produces two transactions (`transfer_out` and `transfer_in`) and one journal entry between the two wallet liability accounts
 - **Payout** — debit the wallet (e.g., driver earnings payout)
 - **Freeze / Unfreeze** — toggle status. The `is_frozen` attribute is a **computed accessor** derived from `status === 'frozen'`
@@ -130,10 +130,11 @@ See [Transactions](/docs/ledger/payments/transactions).
 
 ## Payment Gateways
 
-**Gateways** are payment processors with encrypted credentials. Ledger ships with three drivers:
+**Gateways** are payment processors with encrypted credentials. Ledger ships with four drivers:
 
 | Driver | Capabilities |
 | :--- | :--- |
+| `taler` | purchase, refund, wallet payment URI, refund URI, webhooks, diagnostics, settlement checks, sandbox |
 | `stripe` | purchase, refund, tokenization, setup_intent, checkout_session, webhooks, sandbox, recurring |
 | `qpay` | purchase, refund, webhooks, sandbox |
 | `cash` | purchase, refund |
@@ -163,6 +164,6 @@ Storefront Checkout completes (order.type === 'storefront')
 
 Wallet flows:
 ```
-Customer top-up via Stripe → GatewayTransaction logged → Wallet Transaction (deposit, credit) → Journal entry (DEBIT Cash → CREDIT Wallet Liability)
+Customer top-up via GNU Taler, Stripe, or QPay → GatewayTransaction logged → Wallet Transaction (deposit, credit) → Journal entry (DEBIT Cash → CREDIT Wallet Liability)
 Driver earning payout → Wallet Transaction (payout, debit) → Journal entry (DEBIT Wallet Liability → CREDIT Cash)
 ```
