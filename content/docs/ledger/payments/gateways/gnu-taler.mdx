@@ -21,6 +21,20 @@ Use GNU Taler when you need privacy-preserving wallet payments, a deployed Taler
 
 Keep sandbox and production credentials outside the repository. Use environment variables, secret storage, or the encrypted Ledger gateway configuration.
 
+## Fleetbase Hosted Sandbox
+
+Fleetbase provides hosted GNU Taler sandbox services for Ledger testing:
+
+| Service | URL | Used For |
+| :--- | :--- | :--- |
+| **Merchant Backend** | `https://merchant.taler.fleetbase.io` | Ledger gateway API calls, order creation, refunds, webhooks, and settlement checks |
+| **Exchange** | `https://exchange.taler.fleetbase.io` | Wallet exchange visibility and sandbox exchange diagnostics |
+| **Bank** | `https://bank.taler.fleetbase.io` | Sandbox wallet funding and bank-side test operations |
+
+Ledger talks directly to the Merchant Backend. The exchange and bank endpoints support wallet funding, wallet trust/exchange visibility, sandbox testing, and operator diagnostics.
+
+When a GNU Taler gateway is in `sandbox` mode and the Merchant Backend URL is left blank, Ledger defaults to `https://merchant.taler.fleetbase.io`. Live gateways do not use this fallback and should always be configured with your production Merchant Backend URL.
+
 ## Configure The Gateway
 
 <Steps>
@@ -31,7 +45,7 @@ Keep sandbox and production credentials outside the repository. Use environment 
     Click **New Gateway** and select the `taler` driver.
   </Step>
   <Step>
-    Enter the Merchant Backend URL, instance ID, API token, and the currencies this gateway should accept.
+    Enter the Merchant Backend URL, instance ID, API token, and the currencies this gateway should accept. For Fleetbase hosted sandbox testing, you can leave the Merchant Backend URL blank or use `https://merchant.taler.fleetbase.io`.
   </Step>
   <Step>
     Set the environment to `sandbox` for test wallets or `live` for production wallets.
@@ -114,7 +128,7 @@ Live sandbox validation is opt-in and should not run in normal CI. Configure the
 
 ```bash
 TALER_E2E_ENABLED=true
-TALER_E2E_BACKEND_URL=https://merchant-backend.example
+TALER_E2E_BACKEND_URL=https://merchant.taler.fleetbase.io
 TALER_E2E_INSTANCE_ID=default
 TALER_E2E_API_TOKEN=...
 TALER_E2E_COMPANY_UUID=...
