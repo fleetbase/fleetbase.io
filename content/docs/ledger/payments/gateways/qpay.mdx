@@ -1,0 +1,24 @@
+---
+title: QPay
+description: Configure QPay for Mongolian bank invoice payments in Ledger.
+---
+
+# QPay
+
+QPay is Ledger's invoice-based gateway for Mongolian bank payments. Use it when customers pay through supported Mongolian bank applications and Ledger needs to track the invoice payment through the gateway transaction log.
+
+## Configuration
+
+| Field | Description |
+| :--- | :--- |
+| **Username** | QPay merchant username |
+| **Password** | QPay merchant password |
+| **Invoice Code** (`invoice_code`) | QPay invoice type code |
+
+## Payment Flow
+
+Ledger creates a QPay invoice, surfaces the payment details to the customer, and records gateway transactions for the payment lifecycle. When QPay confirmation is available, Ledger uses the driver response and webhook handling to update the invoice payment state.
+
+## Testing
+
+Configure QPay sandbox credentials separately from production credentials. Keep the gateway in `sandbox` until invoice creation, payment confirmation, and refund handling have been verified with the merchant account.

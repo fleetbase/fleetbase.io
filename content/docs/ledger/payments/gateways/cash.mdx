@@ -1,0 +1,21 @@
+---
+title: Cash
+description: Configure the Cash gateway for manual and offline payment collection in Ledger.
+---
+
+# Cash
+
+The Cash gateway records manual or offline payment collection without contacting an external processor. Use it when an operator collects cash, bank transfer confirmation, cheque payment, or another offline receipt and needs Ledger to record the invoice payment.
+
+## Configuration
+
+| Field | Description |
+| :--- | :--- |
+| **Label** | Optional label shown to operators |
+| **Instructions** | Optional payment instructions surfaced to customers or staff |
+
+## Behavior
+
+Cash supports purchases and refunds from Ledger's perspective, but it does not provide hosted checkout, webhooks, tokenization, or settlement verification. Operators are responsible for confirming that the money was collected before recording the payment.
+
+The resulting Ledger transaction and journal entry are still created, so reports and invoice balances remain consistent with other gateways.

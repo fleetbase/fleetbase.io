@@ -18,7 +18,7 @@ description: Ledger is the accounting and invoicing extension for Fleetbase — 
 | **Invoicing** | Create, send, and collect payment on invoices |
 | **Invoice Templates** | Customize the look of your invoices with company branding |
 | **Digital Wallets** | Track balances for drivers, customers, your company, and individual users |
-| **Payment Gateways** | Stripe, QPay, and Cash — purchases, refunds, and webhook idempotency |
+| **Payment Gateways** | GNU Taler, Stripe, Cash, and QPay - purchases, refunds, wallet payment flows, and webhook idempotency |
 | **Transactions** | Immutable audit trail for every wallet movement |
 | **Financial Reports** | Balance sheet, income statement, cash flow, trial balance, AR aging, wallet summary |
 | **Fleet-Ops Integration** | Auto-create draft invoices when a `PurchaseRate` is added to an order |
@@ -32,7 +32,7 @@ description: Ledger is the accounting and invoicing extension for Fleetbase — 
 - **Invoice** — a formal request for payment with line items, tax, and due date. Numbered `INV-` plus a 6-digit random integer (e.g. `INV-004821`). Lifecycle: draft → sent → viewed → partial / paid / overdue / cancelled / refunded / void
 - **Wallet** — a digital balance tied to a driver, customer, company, or user. Supports `credit`, `topup`, `transfer`, `payout`, `freeze`, `unfreeze`, and `recalculate` operations
 - **Transaction** — an immutable record of money moving relative to a wallet
-- **Gateway** — a payment processor (Stripe, QPay, or Cash) with encrypted credentials, sandbox/live environment, and webhook idempotency via `GatewayTransaction`
+- **Gateway** — a payment processor (GNU Taler, Stripe, Cash, or QPay) with encrypted credentials, sandbox/live environment, and webhook idempotency via `GatewayTransaction`
 
 ## Getting Started
 

@@ -13,7 +13,7 @@ Navigate to **Ledger → Payments** to access gateways, wallets, and transaction
 
 ### Payment Gateways
 
-External payment processors — **Stripe**, **QPay**, and **Cash** — integrated with encrypted credentials and `sandbox`/`live` environments. All three drivers support both `purchase` and `refund` capabilities. Stripe additionally supports tokenization, setup intents, checkout sessions, webhooks, and recurring payments. Each gateway interaction is logged as a `GatewayTransaction` for idempotency and audit. See [Payment Gateways](/docs/ledger/payments/gateways).
+External payment processors - **GNU Taler**, **Stripe**, **Cash**, and **QPay** - integrated with encrypted credentials and `sandbox`/`live` environments. All four drivers support `purchase` and `refund` capabilities. GNU Taler adds wallet payment URIs, tenant-safe webhooks, refund URIs, and settlement checks; Stripe adds tokenization, setup intents, checkout sessions, webhooks, and recurring payments. Each gateway interaction is logged as a `GatewayTransaction` for idempotency and audit. See [Payment Gateways](/docs/ledger/payments/gateways/overview).
 
 ### Wallets
 
@@ -26,7 +26,7 @@ The complete, immutable ledger of every wallet movement. Transactions are never 
 ## A Typical Payment Lifecycle
 
 ```
-Customer pays via Stripe (e.g. invoice payment or wallet top-up)
+Customer pays via GNU Taler, Stripe, Cash, or QPay
   → GatewayTransaction logged (idempotency check)
     → PaymentSucceeded event fires
       → Ledger Transaction created (credit direction)
@@ -38,7 +38,7 @@ The exact journal entries differ per source — see the per-flow examples on [Wa
 
 ## Webhook Security
 
-All payment gateways send webhooks to confirm transactions. Each driver verifies its webhook signature before processing (Stripe via `Webhook::constructEvent`, QPay via its own driver). Duplicate webhooks are deduplicated using `GatewayTransaction::isProcessed()` — a check on `(gateway_reference_id, event_type)` — so each event is processed exactly once.
+Webhook-capable gateways send callbacks to confirm transactions. Each driver verifies provider payloads before processing: Stripe validates signed events, QPay uses its driver verification, and GNU Taler requires exact tenant-safe routing with `order_id`, `company_uuid`, and a gateway identifier. Duplicate webhooks are deduplicated using `GatewayTransaction::isProcessed()` - a check on `(gateway_reference_id, event_type)` - so each event is processed exactly once.
 
 ## Multi-Currency
 

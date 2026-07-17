@@ -1,0 +1,10 @@
+{
+  "title": "Payment Gateways",
+  "pages": [
+    "overview",
+    "gnu-taler",
+    "stripe",
+    "cash",
+    "qpay"
+  ]
+}

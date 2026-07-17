@@ -1,0 +1,29 @@
+---
+title: Stripe
+description: Configure Stripe for card payments, digital wallets, webhooks, refunds, and hosted checkout in Ledger.
+---
+
+# Stripe
+
+Stripe is Ledger's card and digital-wallet gateway for global payment collection. Use it for hosted checkout, saved payment methods, card refunds, setup intents, and recurring payment workflows.
+
+## Configuration
+
+| Field | Description |
+| :--- | :--- |
+| **Publishable Key** | `pk_test_...` or `pk_live_...` |
+| **Secret Key** | `sk_test_...` or `sk_live_...` |
+| **Webhook Signing Secret** | `whsec_...` from Stripe Dashboard -> Webhooks |
+| **Show Postal Code** | Whether the card field requires a postal code |
+| **iDEAL Payment** | Enable iDEAL for supported markets |
+| **FPX Payment** | Enable FPX for supported markets |
+
+## Webhooks
+
+Register the Ledger webhook URL shown on the gateway form in the Stripe Dashboard. Stripe uses the webhook signing secret to let Ledger verify events before recording them.
+
+Ledger uses Stripe webhooks to confirm payment and refund events such as successful charges, failed charges, and refunded charges. Duplicate events are deduplicated through the gateway transaction log.
+
+## Testing
+
+Use `sandbox` while testing with Stripe test keys and switch to `live` only after webhooks have been verified. Keep test and live credentials in separate gateway records or environments so production traffic never uses sandbox keys.
