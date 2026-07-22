@@ -9,6 +9,10 @@ The Services settings panel is where you connect Fleetbase to external APIs it u
 
 ![Services settings — AWS, Google Maps, Twilio, Sentry, and IP Info configuration sections](/images/screenshots/admin/admin-services.webp)
 
+<Callout type="info">
+  For production infrastructure planning, including required external connectivity and service dependencies, see [Infrastructure Sizing](/docs/platform/quickstart/infrastructure-sizing).
+</Callout>
+
 ## AWS
 
 Fleetbase uses the AWS SDK for integrations that require direct AWS API access (such as SES for email or SQS for queue processing). These credentials are separate from the S3 credentials configured in [Filesystem](/docs/platform/system-setup/filesystem).
