@@ -1,0 +1,140 @@
+---
+title: Security Overview
+description: Security practices and implementation guidance for self-hosted and on-premise Fleetbase deployments.
+---
+
+# Security Overview
+
+Fleetbase is designed for self-hosted, private cloud, and on-premise logistics operations where teams need control over identity, infrastructure, data, integrations, and deployment policy. Security is shared between Fleetbase application controls and the environment you operate it in: Fleetbase provides identity, permissions, API credentials, request logs, webhooks, and operational controls; your infrastructure should provide hardened networking, secrets management, backups, monitoring, and vulnerability management.
+
+Use this page as a production security checklist and as a starting point for internal review with your security, infrastructure, and compliance teams.
+
+## Access Control
+
+Fleetbase access is organized around organizations, users, roles, permissions, groups, and policies.
+
+| Control | What it does | Related docs |
+| :--- | :--- | :--- |
+| Organizations | Separate company or tenant workspaces and scope users to the organization they belong to | [Organizations](/docs/platform/identity-and-access/organizations) |
+| Users | Control human access to the console and organization resources | [Users](/docs/platform/identity-and-access/users) |
+| Roles and permissions | Grant specific actions on specific resources, such as creating orders or viewing drivers | [Roles & Permissions](/docs/platform/identity-and-access/roles-and-permissions) |
+| Policies | Package sets of permissions that can be assigned consistently across teams | [Policies](/docs/platform/identity-and-access/policies) |
+| Groups | Organize users for operational access patterns | [Groups](/docs/platform/identity-and-access/groups) |
+
+Production deployments should use least-privilege roles instead of broad administrator access. Create role profiles for dispatchers, operations managers, finance users, developers, support users, and read-only auditors, then review those roles whenever installed extensions or workflows change.
+
+## Authentication and API Access
+
+Fleetbase supports console session authentication for users and API keys for integrations. API keys can be separated by environment and should be named, rotated, and monitored.
+
+Recommended practices:
+
+- Require strong passwords and enable two-factor authentication for administrators and operational users.
+- Use separate API keys for each integration instead of sharing one key across systems.
+- Set expiration windows where possible and rotate keys on a regular schedule.
+- Roll or delete keys immediately after a suspected leak.
+- Monitor API key activity through request logs and last-used metadata.
+- Keep secret keys out of browser code, mobile apps, repositories, screenshots, tickets, and chat messages.
+
+See [API Keys](/docs/platform/developer-console/api-keys), [Request Logs](/docs/platform/developer-console/request-logs), and [Two-Factor Authentication](/docs/platform/identity-and-access/two-factor-authentication).
+
+## Tenant Isolation
+
+Fleetbase is multi-tenant by organization. Users, API credentials, and operational records are scoped to the organization context they belong to. In production, tenant isolation also depends on correct role design, policy assignment, environment separation, and extension review.
+
+Recommended practices:
+
+- Keep production and test data separated by environment and credentials.
+- Review custom roles and policies before giving users access to multiple organizations.
+- Validate custom extensions for organization scoping before installing them in production.
+- Use separate staging and production instances for release testing when customer data must remain isolated.
+
+## Secrets and Credentials
+
+Fleetbase deployments rely on credentials for the database, Redis, object storage, email, SMS, maps, routing, registry access, push notifications, and monitoring tools. Treat these as production secrets.
+
+Recommended practices:
+
+- Store credentials in Kubernetes secrets, cloud secret manager, Vault, sealed secrets, or an equivalent system.
+- Use separate credentials for development, staging, and production.
+- Rotate database, object storage, mail, SMS, map, and registry credentials periodically.
+- Restrict cloud IAM users and service accounts to only the actions and buckets they require.
+- Do not commit `.env` files, cloud service account JSON, private keys, or database dumps to source control.
+- Limit who can read secrets in Kubernetes, CI/CD, and cloud consoles.
+
+## Network Security
+
+Production Fleetbase deployments should expose only the entry points users and integrations need.
+
+| Network area | Recommendation |
+| :--- | :--- |
+| Console and API | Serve over HTTPS with valid TLS certificates |
+| WebSockets | Use WSS through a WebSocket-aware ingress or load balancer |
+| MySQL | Keep TCP 3306 private to application and database networks |
+| Redis | Keep TCP 6379 private to application networks |
+| Object storage | Use private buckets where possible and signed or controlled access for files |
+| Webhook endpoints | Require HTTPS and validate inbound requests in your receiving application |
+| Socket origins | Restrict `SOCKETCLUSTER_OPTIONS` to approved console domains |
+| Admin access | Use VPN, bastion, IP allowlists, or privileged access workflows |
+
+See [Socket](/docs/platform/system-setup/socket), [Services](/docs/platform/system-setup/services), and [Infrastructure Sizing](/docs/platform/quickstart/infrastructure-sizing).
+
+## Data Protection
+
+Operational data is stored in MySQL, cache and queue data in Redis, and uploaded documents/media in object storage. Encryption at rest is normally provided by your database, storage, cloud, Kubernetes, or virtualization platform.
+
+Recommended practices:
+
+- Enable encryption at rest for database volumes, object storage, backups, and log archives.
+- Use object storage for uploads instead of local container storage in production.
+- Apply lifecycle policies for proof images, documents, imports, exports, and generated files.
+- Keep backups in an isolated account, bucket, project, or storage policy separate from the primary database.
+- Define retention periods for telemetry, orders, logs, files, webhook attempts, and backups before go-live.
+- Test restore procedures regularly, not only during incidents.
+
+See [Filesystem](/docs/platform/system-setup/filesystem) and [Infrastructure Sizing](/docs/platform/quickstart/infrastructure-sizing).
+
+## Auditability and Monitoring
+
+Fleetbase includes operational visibility through API request logs, webhook delivery logs, system events, socket events, and extension-specific activity. Production environments should centralize these signals with infrastructure logs, metrics, and alerts.
+
+Monitor and review:
+
+- API request logs and API key usage patterns.
+- Webhook delivery attempts, failures, and retry behavior.
+- System events and operational activity.
+- Authentication and privileged access changes.
+- Queue depth, failed jobs, and scheduler health.
+- SocketCluster connection counts and rejected origins.
+- MySQL, Redis, object storage, ingress, certificates, and backup status.
+
+See [Request Logs](/docs/platform/developer-console/request-logs), [Webhooks](/docs/platform/developer-console/webhooks), [System Events](/docs/platform/developer-console/system-events), and [Socket Events](/docs/platform/developer-console/socket-events).
+
+## Production Hardening
+
+Production hardening should combine Fleetbase configuration, infrastructure controls, and operational process.
+
+Recommended practices:
+
+- Run dependency, container image, and host vulnerability scans before release and on a recurring schedule.
+- Patch the operating system, Kubernetes distribution, database, Redis, reverse proxy, and Fleetbase images regularly.
+- Scan uploaded files for malware where required by customer policy or regulation.
+- Use Sentry or an equivalent error-monitoring system for application exceptions.
+- Restrict administrative access to trusted users, networks, and devices.
+- Back up database and object storage, then verify restores on a schedule.
+- Review installed extensions before production use, especially custom or third-party packages.
+- Document incident response contacts, escalation paths, and recovery procedures.
+
+Security controls should be reviewed before each production rollout and whenever the deployment model, extensions, integrations, or data-retention requirements change.
+
+## Related Pages
+
+- [Infrastructure Sizing](/docs/platform/quickstart/infrastructure-sizing)
+- [API Keys](/docs/platform/developer-console/api-keys)
+- [Webhooks](/docs/platform/developer-console/webhooks)
+- [Roles & Permissions](/docs/platform/identity-and-access/roles-and-permissions)
+- [Policies](/docs/platform/identity-and-access/policies)
+- [Two-Factor Authentication](/docs/platform/identity-and-access/two-factor-authentication)
+- [Services](/docs/platform/system-setup/services)
+- [Filesystem](/docs/platform/system-setup/filesystem)
+- [Socket](/docs/platform/system-setup/socket)
