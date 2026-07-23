@@ -1,4 +1,4 @@
 {
   "title": "Quickstart",
-  "pages": ["cloud-quickstart", "running-locally", "deploy-in-cloud", "development-setup"]
+  "pages": ["cloud-quickstart", "running-locally", "deploy-in-cloud", "infrastructure-sizing", "development-setup"]
 }
