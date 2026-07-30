@@ -55,6 +55,7 @@ const FOOTER_LINKS = [
  title: 'Solutions',
  links: [
  { label: 'All Solutions', href: '/solutions' },
+ { label: 'Delivery Management Software', href: '/delivery-management-software' },
  { label: 'Trucking & Haulage', href: '/solutions/trucking' },
  { label: 'Food & Grocery Delivery', href: '/solutions/food-delivery' },
  { label: 'Courier & Parcel Services', href: '/solutions/courier-services' },
