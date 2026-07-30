@@ -44,6 +44,14 @@ const COMPARISONS = [
  badge: null,
  },
  {
+ competitor: 'Detrack',
+ slug: 'vs-detrack',
+ tagline: 'No per-vehicle pricing. Open source. Full delivery platform.',
+ description:
+ 'Detrack focuses on tracking and proof of delivery, billed per vehicle. Fleetbase is the open-source alternative — automated dispatch, routing, e-POD, WMS, and storefront, self-hosted or cloud.',
+ badge: null,
+ },
+ {
  competitor: 'Bringg',
  slug: 'vs-bringg',
  tagline: 'Enterprise delivery management without enterprise pricing.',
