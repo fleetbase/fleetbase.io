@@ -129,6 +129,11 @@ const STATIC_ROUTES: StaticEntry[] = [
   // Compare
   { path: '/compare', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-onfleet', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/compare/onfleet-route-optimization-alternative', changeFrequency: 'monthly', priority: 0.85 },
+  { path: '/compare/onfleet-dispatch-alternative', changeFrequency: 'monthly', priority: 0.85 },
+  { path: '/compare/onfleet-tracking-notifications-alternative', changeFrequency: 'monthly', priority: 0.85 },
+  { path: '/compare/onfleet-driver-app-pod-alternative', changeFrequency: 'monthly', priority: 0.85 },
+  { path: '/compare/onfleet-api-platform-alternative', changeFrequency: 'monthly', priority: 0.85 },
   { path: '/compare/vs-route4me', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-tookan', changeFrequency: 'monthly', priority: 0.9 },
 
