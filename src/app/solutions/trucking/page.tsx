@@ -35,7 +35,7 @@ export default function TruckingPage() {
         { value: '10M+', label: 'Orders processed on platform' },
       ]}
       heroScreenshot="/images/screenshots/fleet-ops/fleet-ops-live-orders-panel.webp"
-      heroScreenshotAlt="Fleetbase FleetOps live map — trucking fleet overview"
+      heroScreenshotAlt="Fleetbase Fleet-Ops live map — trucking fleet overview"
       painPoints={{
         heading: 'Sound familiar? You\'re not alone.',
         items: [
@@ -152,7 +152,7 @@ export default function TruckingPage() {
         },
         {
           q: 'How is pricing structured?',
-          a: 'Flat monthly tiers based on platform usage — no per-driver or per-vehicle fees. Scale your team without scaling your software bill.',
+          a: 'One plan: $29 a month plus $5 for each driver and vehicle you run. Orders and deliveries are free at any volume, so growing your load count never grows your software bill.',
         },
       ]}
       ctaHeading="Ready to run a leaner, smarter fleet?"

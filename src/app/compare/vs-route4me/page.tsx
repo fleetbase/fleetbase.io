@@ -54,14 +54,14 @@ const COMPARISON: FeatureRow[] = [
  { feature: 'Self-Hosted Deployment', fleetbase: true, route4me: false },
  { feature: 'Cloud Hosting', fleetbase: true, route4me: true },
  { feature: 'Free Tier', fleetbase: 'Free trial + open source', route4me: '7-day trial only' },
- { feature: 'Pricing Model', fleetbase: 'Usage-based (from $50/mo)', route4me: 'Per-route + per-driver fees' },
+ { feature: 'Pricing Model', fleetbase: '$29/mo + $5 per driver or vehicle', route4me: 'Per-route + per-driver fees' },
  { feature: 'Route Optimization', fleetbase: true, route4me: true },
  { feature: 'Real-Time GPS Tracking', fleetbase: true, route4me: true },
  { feature: 'Automated Dispatch', fleetbase: true, route4me: 'Limited' },
  { feature: 'Driver Mobile App', fleetbase: 'Free open-source (Navigator)', route4me: 'Proprietary (extra cost)' },
  { feature: 'Proof of Delivery (POD)', fleetbase: true, route4me: true },
  { feature: 'Customer Notifications', fleetbase: true, route4me: 'Paid add-on' },
- { feature: 'Fleet Management', fleetbase: 'Full FleetOps module', route4me: 'Basic' },
+ { feature: 'Fleet Management', fleetbase: 'Full Fleet-Ops module', route4me: 'Basic' },
  { feature: 'Driver Management', fleetbase: true, route4me: 'Limited' },
  { feature: 'Vehicle Management', fleetbase: true, route4me: 'Limited' },
  { feature: 'Full REST API', fleetbase: true, route4me: 'Limited' },
@@ -142,7 +142,7 @@ export default function VsRoute4MePage() {
  {
  title: 'No per-route fees',
  description:
- "Route4Me charges per route and per driver. Fleetbase uses resource units — one predictable pool that covers everything. No surprise bills as you scale.",
+ "Route4Me charges per route and per driver. Fleetbase never charges per route or per order — $29 a month plus $5 per driver or vehicle, however much you run.",
  },
  ].map((item) => (
  <div key={item.title} className="rounded-xl border bg-card p-6">

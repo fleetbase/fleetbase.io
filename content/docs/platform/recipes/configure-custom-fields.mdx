@@ -8,7 +8,7 @@ description: Add structured custom data fields to drivers, vehicles, contacts, a
 Custom Fields let you attach additional structured data to platform resources — drivers, vehicles, contacts, and more — without writing an extension. Fields are defined in the console settings panel, rendered inline on resource detail views, and returned automatically in API responses.
 
 <Callout type="info">
-Custom fields for **orders** are configured through Order Configurations in FleetOps. This recipe uses **Driver** as the example resource — the same workflow applies to Vehicles, Contacts, and any other resource tab available in the Custom Fields Manager.
+Custom fields for **orders** are configured through Order Configurations in Fleet-Ops. This recipe uses **Driver** as the example resource — the same workflow applies to Vehicles, Contacts, and any other resource tab available in the Custom Fields Manager.
 </Callout>
 
 ## What You'll Build
@@ -17,16 +17,16 @@ A custom field group called **Emergency Contact** on the Driver resource, with t
 
 ## Prerequisites
 
-- FleetOps installed on your instance
-- IAM permissions to access FleetOps Settings
+- Fleet-Ops installed on your instance
+- IAM permissions to access Fleet-Ops Settings
 
 ## Step 1 — Open the Custom Fields Manager
 
 <Steps>
   <Step>
-    ### Navigate to FleetOps Settings
+    ### Navigate to Fleet-Ops Settings
 
-    Click **FleetOps** in the top navigation bar, then open **Settings** in the sidebar.
+    Click **Fleet-Ops** in the top navigation bar, then open **Settings** in the sidebar.
   </Step>
   <Step>
     ### Open Custom Fields
@@ -126,7 +126,7 @@ All three fields now appear inside the **Emergency Contact** group. You can drag
 
 ## Step 4 — Test the Fields on a Driver
 
-Open any driver record in **FleetOps → Resources → Drivers** (or create a new driver). Scroll to the **Emergency Contact** section in the detail view. Your three fields render inline and are fully editable.
+Open any driver record in **Fleet-Ops → Resources → Drivers** (or create a new driver). Scroll to the **Emergency Contact** section in the detail view. Your three fields render inline and are fully editable.
 
 Enter values and save. The custom field data is stored alongside the standard driver record immediately.
 
@@ -233,4 +233,4 @@ Deleting a custom field also permanently deletes all values stored for it across
 
 - The same workflow applies to **Vehicles**, **Contacts**, and other resource tabs in the Custom Fields Manager
 - See [Custom Fields](/docs/platform/console-features/custom-fields) for the full reference on field types, group settings, and grid layout
-- For order-specific custom data, see the Order Configurations section in [FleetOps](/docs/fleet-ops)
+- For order-specific custom data, see the Order Configurations section in [Fleet-Ops](/docs/fleet-ops)

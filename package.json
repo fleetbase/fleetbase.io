@@ -9,6 +9,7 @@
     "prebuild": "node scripts/generate-api-docs.mjs",
     "start": "next start",
     "lint": "next lint",
+    "test": "node --experimental-strip-types --test \"src/**/*.test.ts\"",
     "postinstall": "fumadocs-mdx && node scripts/generate-api-docs.mjs",
     "content-agent:prepare": "node scripts/content-agent/prepare.mjs",
     "content-agent:generate-artifacts": "node scripts/content-agent/generate-artifacts.mjs",

@@ -90,9 +90,9 @@ const stackParts = [
  },
  {
  icon: Truck,
- title: 'FleetOps — delivery dispatch',
+ title: 'Fleet-Ops — delivery dispatch',
  description:
- 'Every delivery order placed in the app creates a job in FleetOps. The kitchen sees orders the moment they hit; drivers handle delivery via Navigator.',
+ 'Every delivery order placed in the app creates a job in Fleet-Ops. The kitchen sees orders the moment they hit; drivers handle delivery via Navigator.',
  docs: '/docs/fleet-ops',
  },
  {
@@ -130,7 +130,7 @@ export default function TrueVeganPage() {
  <p className="text-lg md:text-xl text-[var(--tv-fg-light-muted)] leading-relaxed max-w-xl">
  Chef Rahein&apos;s Delray Beach restaurant runs its pickup and delivery operation
  on a branded Storefront app. Repeat customers order in two taps; payments clear
- through Stripe; every delivery dispatches automatically into FleetOps.
+ through Stripe; every delivery dispatches automatically into Fleet-Ops.
  </p>
  <div className="flex flex-wrap gap-4">
  <Button
@@ -324,7 +324,7 @@ export default function TrueVeganPage() {
  <ul className="space-y-3">
  {[
  'Pickup for the lunch rush — order ahead, walk in, walk out',
- 'Delivery via FleetOps — drivers dispatched to repeat customers',
+ 'Delivery via Fleet-Ops — drivers dispatched to repeat customers',
  'In-store ordering at the counter — same Storefront, staff-side',
  'Saved addresses + cards make reorder a two-tap action',
  ].map((pt) => (

@@ -26,7 +26,7 @@ export default function ExecutivesPage() {
       description="Most logistics software is sold on features and delivers on functionality — but the business outcomes are an afterthought. Fleetbase is built differently: open-source infrastructure with no per-seat pricing, no vendor lock-in, and no data held hostage by a third party. For business leaders, that means lower cost of ownership, complete data sovereignty, and a platform that scales with your operation rather than taxing it."
       stats={[
         { value: '40%', label: 'Average operational cost reduction in year one' },
-        { value: '0', label: 'Per-seat fees — flat pricing or self-hosted' },
+        { value: '0', label: 'Per-order and per-seat fees — at any volume' },
         { value: '8,000+', label: 'Active logistics operations worldwide' },
         { value: '10M+', label: 'Orders processed on Fleetbase globally' },
       ]}
@@ -48,9 +48,9 @@ export default function ExecutivesPage() {
       features={[
         {
           title: 'Total Cost of Ownership Advantage',
-          description: 'Fleetbase\'s pricing model is designed for scale — flat pricing tiers on cloud, or self-hosted with no recurring per-seat fees. As your fleet and team grow, your platform cost doesn\'t grow proportionally. That\'s a structural cost advantage that compounds over time.',
+          description: 'Fleetbase\'s pricing model is designed for scale — one cloud plan priced on the drivers and vehicles you actually operate, or self-hosted with no recurring subscription at all. Order volume never enters the calculation, so the busiest months cost you nothing extra in software. That\'s a structural cost advantage that compounds over time.',
           bullets: [
-            'Flat cloud pricing — no per-seat, per-driver, or per-order fees',
+            'One cloud plan — no per-seat or per-order fees, and no tiers to outgrow',
             'Self-hosted option eliminates vendor subscription entirely',
             'Open-source licence means your development investment stays with you',
           ],

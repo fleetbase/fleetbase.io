@@ -256,7 +256,7 @@ const faqs = [
   },
   {
     q: 'Do I really pay zero commission fees?',
-    a: 'Yes. Storefront charges no commission fees on your orders. You pay a flat monthly subscription based on your usage (resource units), not a percentage of your sales. This means you keep all your revenue minus standard payment processing fees (Stripe, PayPal, etc.).',
+    a: 'Yes. Storefront charges no commission on your orders and no per-order fee — you pay $29 a month plus $5 for each driver, vehicle and storefront beyond the first, never a percentage of your sales. Invoices settled through a connected payment gateway are charged $0.10 each. You keep the rest of your revenue, minus standard payment processing fees (Stripe, PayPal, etc.).',
   },
   {
     q: 'Can I build a multi-vendor marketplace like DoorDash?',

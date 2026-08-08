@@ -113,7 +113,7 @@ const BUILDING_BLOCKS = [
     icon: Puzzle,
     title: 'Extensions framework',
     description:
-      'The same framework FleetOps, Storefront, Pallet, and Ledger are built on. Ship full-stack extensions (Ember frontend + Laravel backend) and publish them to the marketplace.',
+      'The same framework Fleet-Ops, Storefront, Pallet, and Ledger are built on. Ship full-stack extensions (Ember frontend + Laravel backend) and publish them to the marketplace.',
     href: '/developers/extensions',
     cta: 'Build an extension',
   },
@@ -158,7 +158,7 @@ const DEVELOPER_FAQS = [
   {
     question: 'Is the Fleetbase API free to use?',
     answer:
-      'Yes — the Fleetbase REST API is available on every plan, including the free self-hosted version. Cloud customers operate under the resource-unit allocation of their plan; self-hosted customers have no API limits beyond their own infrastructure capacity.',
+      'Yes — the Fleetbase REST API is available to every customer, including the free self-hosted version. API credentials are unlimited. Cloud customers get the first 100,000 API calls each billing period free, then pay $0.25 per 100,000; self-hosted customers have no API limits beyond their own infrastructure capacity.',
   },
   {
     question: 'What authentication does the API use?',
@@ -183,7 +183,7 @@ const DEVELOPER_FAQS = [
   {
     question: 'Is there a sandbox or test environment?',
     answer:
-      'Yes — the Cloud free trial includes 50 resource units against a live test environment. For self-hosted, the development setup runs locally via Docker Compose or the CLI, with seed data for immediate experimentation.',
+      'Yes — the Cloud free trial gives you 7 days on a live environment with every module unlocked. For self-hosted, the development setup runs locally via Docker Compose or the CLI, with seed data for immediate experimentation.',
   },
   {
     question: 'How are webhook deliveries secured?',

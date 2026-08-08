@@ -35,7 +35,7 @@ export default function LastMileDeliveryPage() {
         { value: '25%', label: 'More deliveries per driver per day' },
       ]}
       heroScreenshot="/images/screenshots/fleet-ops/fleet-ops-multi-waypoint-order.webp"
-      heroScreenshotAlt="Fleetbase FleetOps live map showing last-mile delivery drivers on optimized routes"
+      heroScreenshotAlt="Fleetbase Fleet-Ops live map showing last-mile delivery drivers on optimized routes"
       painPoints={{
         heading: 'Last-mile problems that cost you money and customers',
         items: [

@@ -80,7 +80,7 @@ export default function PrivacyPolicyPage() {
 
  <h3 className="font-semibold mb-2">Usage and Platform Data</h3>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- We collect data about how you use the Service, including log data (IP addresses, browser type, pages visited, timestamps), feature usage, API calls, and Resource Unit consumption. This helps us improve the Service and detect issues.
+ We collect data about how you use the Service, including log data (IP addresses, browser type, pages visited, timestamps), feature usage, API calls, webhook sends, and billable resource counts. This helps us improve the Service, bill accurately, and detect issues.
  </p>
 
  <h3 className="font-semibold mb-2">Customer Data</h3>

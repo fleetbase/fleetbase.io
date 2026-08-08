@@ -11,6 +11,10 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    // Node's native type-stripping test runner resolves ESM specifiers
+    // literally, so `src/**/*.test.ts` must import with the .ts extension.
+    // Safe alongside noEmit — nothing here is compiled by tsc.
+    "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "incremental": true,
     "plugins": [

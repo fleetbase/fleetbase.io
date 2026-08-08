@@ -100,7 +100,7 @@ const INTEGRATIONS: { name: string; category: string; logo: string }[] = [
 const INTEGRATION_CATEGORIES = [...new Set(INTEGRATIONS.map((i) => i.category))];
 
 const featuredExtensions = [
-  { icon: Truck,         name: 'FleetOps',                 tag: 'Free',  desc: 'Core TMS and fleet management — orders, drivers, routes, and real-time tracking.', publisher: 'Fleetbase' },
+  { icon: Truck,         name: 'Fleet-Ops',                 tag: 'Free',  desc: 'Core TMS and fleet management — orders, drivers, routes, and real-time tracking.', publisher: 'Fleetbase' },
   { icon: ShoppingBag,   name: 'Storefront',               tag: 'Free',  desc: 'Headless e-commerce and on-demand ordering with native delivery integration.', publisher: 'Fleetbase' },
   { icon: Package,       name: 'Pallet WMS',               tag: 'Free',  desc: 'Warehouse management with inventory tracking, pick lists, and fulfilment.', publisher: 'Fleetbase' },
   { icon: BookOpen,      name: 'Ledger',                   tag: 'Free',  desc: 'Double-entry accounting engine for logistics finance, invoicing, and payouts.', publisher: 'Fleetbase' },

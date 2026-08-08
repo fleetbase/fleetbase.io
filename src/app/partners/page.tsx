@@ -66,7 +66,7 @@ const MAIN_TRACKS = [
 
 const WHY_PARTNER = [
   { title: 'Proven demand', description: '8,000+ active instances across six logistics industries — a platform the market already trusts.' },
-  { title: 'No per-seat economics', description: 'Cost scales with usage, not headcount — easy to package and price for your customers.' },
+  { title: 'Predictable economics', description: 'One plan priced on drivers and vehicles, never on order volume — easy to package and price for your customers.' },
   { title: 'Own the stack', description: 'Open-source core, deployable anywhere — no black box, no lock-in to explain away.' },
 ];
 

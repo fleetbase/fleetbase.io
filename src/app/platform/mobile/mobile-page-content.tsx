@@ -223,7 +223,7 @@ export default function MobileAppsPageContent() {
                 <span className="ml-2">Navigator App</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Give Your Drivers the Tools They Need to Succeed</h2>
-              <p className="text-lg text-muted-foreground">Navigator is a purpose-built driver app that integrates directly with FleetOps. From the moment a driver is dispatched to the moment a delivery is confirmed, Navigator handles the entire workflow — on iOS, Android, and even in areas with no signal.</p>
+              <p className="text-lg text-muted-foreground">Navigator is a purpose-built driver app that integrates directly with Fleet-Ops. From the moment a driver is dispatched to the moment a delivery is confirmed, Navigator handles the entire workflow — on iOS, Android, and even in areas with no signal.</p>
             </div>
             <div className="flex justify-center">
               <PhoneFrame
@@ -356,7 +356,7 @@ export default function MobileAppsPageContent() {
                 <h3 className="text-xl font-bold mb-2">True Vegan</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-4">
                   Chef Rahein&apos;s plant-based restaurant runs pickup, delivery, and in-store
-                  ordering through a branded Storefront app with Stripe checkout and FleetOps
+                  ordering through a branded Storefront app with Stripe checkout and Fleet-Ops
                   delivery dispatch.
                 </p>
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline">

@@ -134,7 +134,17 @@ export type MarketingEvent =
     }
   | {
       name: 'pricing_calculator_changed';
-      properties: { units: number; derived_price: number };
+      properties: {
+        drivers: number;
+        vehicles: number;
+        storefronts: number;
+        billing_cycle: 'monthly' | 'annual';
+        estimated_total_cents: number;
+      };
+    }
+  | {
+      name: 'pricing_calculator_usage_expanded';
+      properties: Record<string, never>;
     }
 
   // Docs

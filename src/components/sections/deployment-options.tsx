@@ -20,7 +20,7 @@ const deploymentOptions = [
  name: 'Fleetbase Cloud',
  type: 'cloud' as const,
  description: 'Fully managed platform with automatic updates and enterprise-grade reliability',
- price: 'From $25/mo',
+ price: '$29/mo + $5 per driver or vehicle',
  cta: {
  text: 'Try Fleetbase Cloud',
  href: 'https://console.fleetbase.io/onboard',

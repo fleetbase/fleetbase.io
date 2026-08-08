@@ -33,7 +33,7 @@ const EXTENSION_TYPES = [
     icon: LayoutDashboard,
     title: 'Full-Stack Extensions',
     desc: 'A complete Ember Engine frontend paired with a Laravel API backend. Adds new screens, navigation items, and data models to the console.',
-    examples: ['FleetOps', 'Storefront', 'Ledger', 'Pallet WMS'],
+    examples: ['Fleet-Ops', 'Storefront', 'Ledger', 'Pallet WMS'],
   },
   {
     icon: Server,
@@ -212,7 +212,7 @@ export default function DeveloperExtensionsPageContent() {
           </h1>
           <p className="text-xl text-muted-foreground mb-10 max-w-3xl mx-auto">
             Fleetbase is built as an extensible operating system for logistics. Every core feature —
-            FleetOps, Storefront, Ledger — is itself an extension. Build your own modules, publish
+            Fleet-Ops, Storefront, Ledger — is itself an extension. Build your own modules, publish
             them to the marketplace, or keep them private for your own deployment.
           </p>
           <div className="flex flex-wrap gap-4 justify-center mb-12">
@@ -286,7 +286,7 @@ export default function DeveloperExtensionsPageContent() {
               </h2>
               <p className="text-muted-foreground mb-4">
                 Fleetbase is not a monolith — it is an operating system for logistics built from
-                composable extensions. FleetOps, Storefront, Ledger, and Pallet are all extensions
+                composable extensions. Fleet-Ops, Storefront, Ledger, and Pallet are all extensions
                 that ship with Fleetbase. Your custom extension is a first-class citizen with exactly
                 the same capabilities.
               </p>

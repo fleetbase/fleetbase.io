@@ -13,7 +13,7 @@ This is a powerful feature that allows you to extend the functionality of core m
 
 The Universe Service maintains a registry of components mapped to specific "injection points" across the platform.
 
-When a view in Fleetbase (e.g., the Order Details panel in FleetOps) renders, it checks the Universe Service to see if any extensions have registered components for that specific injection point. If so, it renders them dynamically.
+When a view in Fleetbase (e.g., the Order Details panel in Fleet-Ops) renders, it checks the Universe Service to see if any extensions have registered components for that specific injection point. If so, it renders them dynamically.
 
 ## Registering a Component
 
@@ -46,7 +46,7 @@ In this example, we are injecting a component named `my-extension-order-tab` int
 
 While the list of injection points is constantly growing, here are some common ones you might use:
 
-### FleetOps
+### Fleet-Ops
 - **`fleetops.order.details.tabs`**: Adds a new tab to the Order Details panel.
 - **`fleetops.driver.details.tabs`**: Adds a new tab to the Driver Details panel.
 - **`fleetops.vehicle.details.tabs`**: Adds a new tab to the Vehicle Details panel.

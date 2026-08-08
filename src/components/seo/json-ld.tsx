@@ -76,7 +76,10 @@ export function SoftwareApplicationSchema({
   description = 'Open-source fleet management and TMS software. Dispatch, track, and optimize your fleet in real time. Self-hosted or cloud, no per-seat pricing.',
   applicationCategory = 'BusinessApplication',
   operatingSystem = 'Web, Android, iOS',
-  price = '25',
+  // The Cloud platform fee. Drivers, vehicles and extra storefronts are billed
+  // on top at $5 each, which is why the Offer carries a description rather than
+  // presenting $29 as the whole price.
+  price = '29',
 }: {
   name?: string;
   url?: string;
@@ -97,6 +100,8 @@ export function SoftwareApplicationSchema({
       '@type': 'Offer',
       price,
       priceCurrency: 'USD',
+      description:
+        'Platform fee, every module included. Plus $5 per month for each driver and vehicle, and each storefront beyond the first. Orders are free at any volume.',
       priceSpecification: {
         '@type': 'UnitPriceSpecification',
         price,

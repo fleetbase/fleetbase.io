@@ -23,7 +23,7 @@ export default function SeoContent() {
                 Real-Time Dispatch & Order Management
               </h2>
               <p>
-                The FleetOps module provides real-time order dispatch, live GPS tracking, route optimization, proof of delivery (POD), driver management, and a fully configurable order activity flow. Whether you are running last-mile delivery, long-haul trucking, healthcare logistics, or waste management, FleetOps adapts to your operational model without custom development.
+                The Fleet-Ops module provides real-time order dispatch, live GPS tracking, route optimization, proof of delivery (POD), driver management, and a fully configurable order activity flow. Whether you are running last-mile delivery, long-haul trucking, healthcare logistics, or waste management, Fleet-Ops adapts to your operational model without custom development.
               </p>
             </div>
             <div>
@@ -43,7 +43,7 @@ export default function SeoContent() {
                 Open-Source Alternative to Onfleet, Tookan & Route4Me
               </h2>
               <p>
-                Fleetbase is the leading open-source alternative to Onfleet, Tookan, Route4Me, and other proprietary delivery management platforms. Unlike these SaaS tools, Fleetbase has no per-driver pricing, no task limits, and no black-box algorithms. You get the full source code under AGPL-3.0, a commercial licence for proprietary deployments, and a growing ecosystem of community extensions.
+                Fleetbase is the leading open-source alternative to Onfleet, Tookan, Route4Me, and other proprietary delivery management platforms. Unlike these SaaS tools, Fleetbase never charges per task or per delivery, sets no limit on the orders you run, and uses no black-box algorithms. You get the full source code under AGPL-3.0, a commercial licence for proprietary deployments, and a growing ecosystem of community extensions.
               </p>
             </div>
             <div>

@@ -86,8 +86,8 @@ const faqs = [
   },
   {
     q: 'How does Fleet-Ops pricing work?',
-    a: 'Resource-unit-based pricing — a flat monthly fee per plan tier with included resource units (orders, vehicles, drivers, and storage). No per-seat or per-driver fees.',
-    link: { label: 'See pricing tiers', href: '/pricing' },
+    a: 'One plan: $29 a month, plus $5 a month for each driver and vehicle you operate. Orders and deliveries are free at any volume, and back-office users are unlimited. Every module is included from day one — there are no tiers to choose between.',
+    link: { label: 'See pricing', href: '/pricing' },
   },
   {
     q: 'Is Fleet-Ops open source?',
@@ -275,7 +275,7 @@ const comparisonSections: readonly CmpSection[] = [
     rows: [
       {
         feature: 'Pricing model',
-        values: ['Resource-unit', 'Per-driver', 'Per-driver', 'Per-driver', 'Per-driver', 'Per-vehicle'],
+        values: ['$29/mo + $5 per driver or vehicle', 'Per-driver', 'Per-driver', 'Per-driver', 'Per-driver', 'Per-vehicle'],
       },
     ],
   },
@@ -340,10 +340,10 @@ function ComparisonSection() {
             How Fleet-Ops compares.
           </h2>
           <p className="mt-6 text-[18px] font-[460] leading-[25px] tracking-[0.15px] text-[var(--fo-fg-muted)] lg:max-w-2xl lg:text-[22px] lg:leading-[29px] lg:tracking-[0.12px]">
-            Most last-mile and dispatch platforms run as proprietary SaaS with per-driver
-            pricing. Fleet-Ops takes a different approach — open-source, self-hostable, and
-            resource-unit priced. Here&apos;s how we line up on the features that actually
-            matter.
+            Most last-mile and dispatch platforms run as proprietary SaaS that bills you per
+            task or per delivery. Fleet-Ops takes a different approach — open-source,
+            self-hostable, and never priced per order. Here&apos;s how we line up on the
+            features that actually matter.
           </p>
         </div>
 
@@ -474,7 +474,7 @@ export default function FleetOpsPageContent() {
               </Button>
             </div>
             <p className="mt-5 text-center text-[13px] font-[460] tracking-[0.25px] text-white/70 lg:text-left">
-              7-day free trial · No per-driver fees · Self-host under AGPL-3.0
+              7-day free trial · Never a per-delivery fee · Self-host under AGPL-3.0
             </p>
           </div>
 

@@ -48,13 +48,13 @@ this.hook.trigger('my-extension.custom-event', { data: 'some payload' });
 
 ## Common Lifecycle Hooks
 
-While you can define custom hooks, Fleetbase core and its official modules (like FleetOps) emit several standard hooks that you can listen to:
+While you can define custom hooks, Fleetbase core and its official modules (like Fleet-Ops) emit several standard hooks that you can listen to:
 
 - **`user.login`**: Fired when a user successfully authenticates.
 - **`user.logout`**: Fired when a user logs out.
 - **`organization.changed`**: Fired when a user switches their active organization context.
 - **`dashboard.loaded`**: Fired when the main Fleetbase dashboard finishes loading.
-- **`fleetops.order.created`**: Fired when a new order is created in FleetOps.
+- **`fleetops.order.created`**: Fired when a new order is created in Fleet-Ops.
 - **`fleetops.order.dispatched`**: Fired when an order is assigned to a driver.
 
 ## Backend Webhooks

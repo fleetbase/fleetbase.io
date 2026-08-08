@@ -32,7 +32,7 @@ const COMPARISONS = [
  slug: 'vs-tookan',
  tagline: 'No per-agent fees. Open source. Complete logistics OS.',
  description:
- "Tookan's per-agent pricing compounds as your team grows. Fleetbase uses resource units — one predictable pool for orders, drivers, vehicles, and API calls.",
+ "Tookan's per-agent pricing compounds as your team grows. Fleetbase is $29 a month plus $5 per driver or vehicle — and orders are free at any volume.",
  badge: null,
  },
  {
@@ -48,7 +48,7 @@ const COMPARISONS = [
  slug: 'vs-bringg',
  tagline: 'Enterprise delivery management without enterprise pricing.',
  description:
- "Bringg targets large enterprises with custom pricing. Fleetbase gives you enterprise-grade fleet management and TMS from $50/month — or free if you self-host.",
+ "Bringg targets large enterprises with custom pricing. Fleetbase gives you enterprise-grade fleet management and TMS for $29 a month plus $5 per driver or vehicle — or free if you self-host.",
  badge: null,
  },
 ];

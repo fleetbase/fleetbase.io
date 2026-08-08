@@ -61,7 +61,7 @@ const softwareApplicationSchema = {
     price: '0',
     priceCurrency: 'USD',
     description:
-      'Free to self-host under AGPL-3.0. Cloud SaaS available with resource-unit-based pricing — no per-driver fees.',
+      'Free to self-host under AGPL-3.0. Cloud is $29 a month plus $5 per driver or vehicle, with unlimited orders — never a per-delivery fee.',
     url: 'https://fleetbase.io/pricing',
   },
   featureList: [
