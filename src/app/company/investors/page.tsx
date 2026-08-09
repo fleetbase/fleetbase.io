@@ -90,7 +90,7 @@ const opportunity = [
  icon: Network,
  title: 'A platform, not a product',
  description:
- 'FleetOps, Storefront, Pallet, Ledger, IAM, the Marketplace — Fleetbase is a horizontal platform with multiple verticals layered on top, each with its own monetisation surface.',
+ 'Fleet-Ops, Storefront, Pallet, Ledger, IAM, the Marketplace — Fleetbase is a horizontal platform with multiple verticals layered on top, each with its own monetisation surface.',
  },
 ];
 

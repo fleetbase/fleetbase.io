@@ -1,14 +1,19 @@
 import type { Metadata } from 'next';
 
-import { FAQSchema } from '@/components/seo/json-ld';
+import { FAQSchema, SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import { PRICING_FAQS } from './faqs';
 import PricingClient from './pricing-client';
 
+const DESCRIPTION =
+  'Fleetbase Cloud is $29/month plus $5 per driver or vehicle. Orders are free at any volume — no per-delivery fee. Every module included. Self-hosted implementation from $2,500 one-time.';
+
+const OG_IMAGE =
+  '/og?title=%2429%20a%20month%2C%20plus%20%245%20per%20driver%20or%20vehicle&eyebrow=Pricing&subtitle=One%20plan.%20Every%20module.%20Orders%20are%20free%20at%20any%20volume.';
+
 export const metadata: Metadata = {
   title: 'Pricing | Open-Source Fleet Management Software',
-  description:
-    'Fleetbase pricing starts at $25/month for cloud. Self-hosted implementation from $2,500 one-time. No per-seat fees. Usage-based pricing that scales with your operations.',
+  description: DESCRIPTION,
   keywords: [
     'fleet management software pricing',
     'logistics software pricing',
@@ -16,35 +21,39 @@ export const metadata: Metadata = {
     'TMS software pricing',
     'delivery management software pricing',
     'Onfleet pricing alternative',
+    'no per delivery fee dispatch software',
     'open source dispatch software pricing',
   ],
   alternates: { canonical: 'https://fleetbase.io/pricing' },
   openGraph: {
     title: 'Pricing | Open-Source Fleet Management Software',
-    description:
-      'Fleetbase pricing starts at $25/month for cloud. Self-hosted implementation from $2,500 one-time. No per-seat fees. Usage-based pricing that scales with your operations.',
+    description: DESCRIPTION,
     images: [
       {
-        url: '/og?title=Open-source%20pricing%20that%20scales%20with%20you&eyebrow=Pricing&subtitle=Cloud%20from%20%2425%2Fmo.%20Self-hosted%20from%20%242%2C500%20one-time.%20No%20per-seat%20fees.',
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'Fleetbase pricing — cloud from $25/mo, self-hosted from $2,500',
+        alt: 'Fleetbase pricing — $29/month plus $5 per driver or vehicle',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fleetbase Pricing | No Per-Seat Fees',
-    description: 'Cloud from $25/mo. Self-hosted from $2,500 one-time. Usage-based pricing that scales.',
-    images: [
-      '/og?title=Open-source%20pricing%20that%20scales%20with%20you&eyebrow=Pricing&subtitle=Cloud%20from%20%2425%2Fmo.%20Self-hosted%20from%20%242%2C500%20one-time.%20No%20per-seat%20fees.',
-    ],
+    title: 'Fleetbase Pricing | Never Pay Per Delivery',
+    description:
+      '$29/month plus $5 per driver or vehicle. Orders are free at any volume. Every module included.',
+    images: [OG_IMAGE],
   },
 };
 
 export default function PricingPage() {
   return (
     <>
+      <SoftwareApplicationSchema
+        url="https://fleetbase.io/pricing"
+        description={DESCRIPTION}
+        price="29"
+      />
       <FAQSchema faqs={PRICING_FAQS} />
       <PricingClient />
     </>

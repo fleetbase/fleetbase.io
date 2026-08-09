@@ -55,7 +55,7 @@ const faqs = [
  },
  {
  q: 'Do you offer a free trial?',
- a: 'Yes. Cloud plans include a 7-day free trial capped at 50 resource units. Billing begins when either limit is reached first, and you can start immediately without contacting us first.',
+ a: 'Yes. Cloud includes a 7-day free trial of the full platform, with no feature restrictions. Billing begins when the trial ends, and you can start immediately without contacting us first.',
  },
  {
  q: 'Where do I get technical support?',
@@ -238,7 +238,7 @@ export default function ContactSalesPage() {
  <div className="mt-10 rounded-xl border bg-muted/20 p-6">
  <div className="mb-2 font-semibold">Just want to try it?</div>
  <p className="mb-4 text-sm text-muted-foreground">
- Start a free 7-day trial capped at 50 resource units.
+ Start a free 7-day trial — the full platform, every module included.
  </p>
  <Button variant="outline" asChild>
  <Link

@@ -132,7 +132,7 @@ export default function VsOnfleetPage() {
  {
  title: 'No per-task pricing',
  description:
- "Onfleet's per-task model means your costs spike every time you grow. Fleetbase uses usage-based resource units — predictable, flat pricing that doesn't punish scale.",
+ "Onfleet's per-task model means your costs spike every time you grow. Fleetbase never charges per order or per delivery, at any volume — you pay $29 a month plus $5 per driver or vehicle, and that's it.",
  },
  {
  title: 'Self-host or cloud',
@@ -142,7 +142,7 @@ export default function VsOnfleetPage() {
  {
  title: 'Full platform, not just dispatch',
  description:
- 'Onfleet is a dispatch tool. Fleetbase includes dispatch, WMS (Pallet), storefront, accounting (Ledger), driver app (Navigator), and an extensions marketplace — all in one.',
+ 'Onfleet is a dispatch tool. Fleetbase includes dispatch, routing, live tracking, the driver app (Navigator), accounting (Ledger), a storefront e-commerce suite, and an extensions marketplace — all in one.',
  },
  ].map((item) => (
  <div key={item.title} className="rounded-xl border bg-card p-6">
@@ -198,10 +198,10 @@ export default function VsOnfleetPage() {
  <div className="grid md:grid-cols-2 gap-6">
  <div className="rounded-xl border bg-card p-8">
  <div className="text-primary font-semibold text-sm mb-2">Fleetbase</div>
- <div className="text-4xl font-bold mb-1">$25<span className="text-lg font-normal text-muted-foreground">/mo</span></div>
- <p className="text-sm text-muted-foreground mb-6">Micro cloud plan — 100 resource units included. Scale up as you grow. Self-hosted from $2,500 one-time.</p>
+ <div className="text-4xl font-bold mb-1">$29<span className="text-lg font-normal text-muted-foreground">/mo</span></div>
+ <p className="text-sm text-muted-foreground mb-6">Plus $5 a month per driver or vehicle. Orders are free at any volume. Self-hosted from $2,500 one-time.</p>
  <ul className="space-y-2 text-sm">
- {['Usage-based, not per-task', 'No seat fees', 'Self-hosting available', 'Full API access', 'Open source — free forever if self-hosted'].map(f => (
+ {['Never a per-delivery fee, at any volume', 'No seat fees — unlimited users', 'Self-hosting available', 'Full API access', 'Open source — free forever if self-hosted'].map(f => (
  <li key={f} className="flex items-center gap-2">
  <CheckCircle2 className="h-4 w-4 text-green-500 shrink-0" />
  {f}

@@ -37,7 +37,7 @@ export default async function Hero() {
         {/* Subheadline */}
         <p className="max-w-2xl text-lg leading-snug text-foreground/80 md:text-xl">
           Fleet management, e-commerce fulfillment, warehouse operations, and accounting — in one
-          open-source platform. No per-driver fees, no vendor lock-in. Self-host or use our cloud.
+          open-source platform. Never a per-delivery fee, no vendor lock-in. Self-host or use our cloud.
         </p>
 
         {/* CTAs */}

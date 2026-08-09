@@ -8,7 +8,7 @@ description: How extensions contribute UI into each other — registries, slots,
 Fleetbase extensions are isolated by default — each one ships its own components, services, and routes. But many features are richer when extensions can plug UI into each other:
 
 - A payment-gateway extension contributing a configuration form into Ledger's gateway settings
-- An analytics extension contributing a chart into the FleetOps dashboard
+- An analytics extension contributing a chart into the Fleet-Ops dashboard
 - A document-signing extension contributing actions into Storefront orders
 
 The **registry system** is how this happens. Extensions register components or menu items into named registries; the host extension uses [`<RegistryYield>`](/docs/ui/registry/registry-yield) to iterate and render them.

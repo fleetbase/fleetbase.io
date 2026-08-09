@@ -54,7 +54,7 @@ const COMPARISON: FeatureRow[] = [
  { feature: 'Self-Hosted Deployment', fleetbase: true, tookan: false },
  { feature: 'Cloud Hosting', fleetbase: true, tookan: true },
  { feature: 'Free Tier', fleetbase: 'Free trial + open source', tookan: 'Free plan (200 tasks/mo)' },
- { feature: 'Pricing Model', fleetbase: 'Usage-based (from $50/mo)', tookan: 'Per-agent + per-task fees' },
+ { feature: 'Pricing Model', fleetbase: '$29/mo + $5 per driver or vehicle', tookan: 'Per-agent + per-task fees' },
  { feature: 'Per-Agent Fees', fleetbase: false, tookan: true, note: 'Tookan charges per agent/driver' },
  { feature: 'Real-Time GPS Tracking', fleetbase: true, tookan: true },
  { feature: 'Route Optimization', fleetbase: true, tookan: true },
@@ -132,7 +132,7 @@ export default function VsTookanPage() {
  {
  title: 'No per-agent pricing',
  description:
- "Tookan charges per agent — the more drivers you add, the more you pay. Fleetbase uses resource units: one flat pool that covers orders, drivers, vehicles, and API calls.",
+ "Tookan charges per agent — the more drivers you add, the more you pay. Fleetbase is $29 a month plus $5 per driver or vehicle, with unlimited orders and unlimited back-office users.",
  },
  {
  title: 'Open source & self-hostable',

@@ -24,7 +24,7 @@ cd fleetbase
 git submodule update --init --recursive
 ```
 
-This populates `packages/` with the source for all first-party extensions (FleetOps, Storefront, Pallet, Ledger, and others). Each package contains two directories:
+This populates `packages/` with the source for all first-party extensions (Fleet-Ops, Storefront, Pallet, Ledger, and others). Each package contains two directories:
 
 | Directory | Contents |
 | :--- | :--- |
@@ -62,9 +62,9 @@ If you do not want to install the command globally, run it directly:
 node scripts/package-linker.mjs status
 ```
 
-### Link FleetOps for Development
+### Link Fleet-Ops for Development
 
-FleetOps development usually needs the FleetOps extension plus the shared Ember packages it depends on. From the repository root:
+Fleet-Ops development usually needs the Fleet-Ops extension plus the shared Ember packages it depends on. From the repository root:
 
 ```bash
 flb-package-linker enable fleetops --shared ember-core ember-ui fleetops-data

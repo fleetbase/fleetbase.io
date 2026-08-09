@@ -7,7 +7,7 @@ description: What Fleetbase is, how it works, and who it's built for — a compl
 
 Fleetbase is an open-source **Logistics and Supply Chain Operating System (LSOS)** — a modular, API-first platform that gives logistics operators and software developers production-ready infrastructure they can deploy on their own terms, extend without limits, and own completely.
 
-At its core, Fleetbase provides the foundation every logistics business needs: multi-tenant organisation management, identity and access control, a real-time event bus, a REST API, and a developer console for managing integrations. On top of that foundation, you install the modules you need — FleetOps for fleet management, Storefront for e-commerce, Pallet for inventory, Ledger for accounting — or you build your own.
+At its core, Fleetbase provides the foundation every logistics business needs: multi-tenant organisation management, identity and access control, a real-time event bus, a REST API, and a developer console for managing integrations. On top of that foundation, you install the modules you need — Fleet-Ops for fleet management, Storefront for e-commerce, Pallet for inventory, Ledger for accounting — or you build your own.
 
 ## Who Fleetbase Is For
 
@@ -23,7 +23,7 @@ Both groups get the same thing: full access to the source code, the ability to s
 
 The Fleetbase Console is a web-based administration interface built with **Ember.js**. It is where operators manage their organisation day-to-day — dispatching orders, managing users, configuring integrations, and installing extensions.
 
-The console is modular by design. Each extension registers its own routes, pages, and sidebar links into the console at runtime using the **Universe Service** — Fleetbase's central extensibility registry. When you install FleetOps, a fully featured fleet management interface appears in the console. When you install Storefront, a complete e-commerce management panel appears alongside it. No redeployment required.
+The console is modular by design. Each extension registers its own routes, pages, and sidebar links into the console at runtime using the **Universe Service** — Fleetbase's central extensibility registry. When you install Fleet-Ops, a fully featured fleet management interface appears in the console. When you install Storefront, a complete e-commerce management panel appears alongside it. No redeployment required.
 
 <Callout type="info">The console runs as a single Ember application, with each extension mounted as an **Ember Engine** — an isolated sub-application that shares core services (auth, data, notifications) but keeps its own routes and components completely separate.</Callout>
 
@@ -32,8 +32,8 @@ The console is modular by design. Each extension registers its own routes, pages
 Fleetbase ships with a set of officially maintained extensions that cover the most common logistics use cases.
 
 <Accordions type="single" collapsible>
-  <Accordion title="FleetOps — Fleet Management & TMS">
-    FleetOps is the primary operations module. It provides a full Transportation Management System (TMS) including:
+  <Accordion title="Fleet-Ops — Fleet Management & TMS">
+    Fleet-Ops is the primary operations module. It provides a full Transportation Management System (TMS) including:
 
     - **Order management** with configurable workflows, custom order types, and proof of delivery (photos, signatures, QR codes)
     - **Real-time fleet tracking** with live maps, driver location streams, and activity feeds
@@ -42,7 +42,7 @@ Fleetbase ships with a set of officially maintained extensions that cover the mo
     - **Route optimisation** and service zone definition
     - **Vendor and partner integrations** for multi-carrier operations
 
-    FleetOps is the right starting point for courier companies, on-demand delivery platforms, field service businesses, and any operation where drivers and vehicles are the core asset.
+    Fleet-Ops is the right starting point for courier companies, on-demand delivery platforms, field service businesses, and any operation where drivers and vehicles are the core asset.
   </Accordion>
   <Accordion title="Storefront — Headless E-Commerce & Marketplace">
     Storefront is a headless e-commerce and marketplace engine. It powers the consumer-facing side of on-demand delivery platforms:
@@ -50,7 +50,7 @@ Fleetbase ships with a set of officially maintained extensions that cover the mo
     - **Multi-vendor marketplace** support — create a Network of Stores (equivalent to how DoorDash or UberEats aggregates restaurants)
     - **Single-brand storefront** — deploy a D2C ordering app for a single merchant or franchise
     - **Product catalog management** with variants, add-ons, pricing, and categories
-    - **Order and checkout flows** integrated directly with FleetOps for fulfilment
+    - **Order and checkout flows** integrated directly with Fleet-Ops for fulfilment
     - **Customer management** with authentication and order history
     - **Promotions, reviews, and push notifications** for customer engagement
 

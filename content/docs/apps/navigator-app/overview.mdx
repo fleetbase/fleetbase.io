@@ -1,11 +1,11 @@
 ---
 title: Overview
-description: An overview of the Navigator App — features, supported platforms, and how it integrates with FleetOps.
+description: An overview of the Navigator App — features, supported platforms, and how it integrates with Fleet-Ops.
 ---
 
 # Navigator App Overview
 
-The **Navigator App** is an open-source, React Native (Expo) mobile application designed for drivers and delivery personnel. It integrates directly with the [FleetOps](/docs/fleetops/overview) extension to provide a complete end-to-end delivery management solution.
+The **Navigator App** is an open-source, React Native (Expo) mobile application designed for drivers and delivery personnel. It integrates directly with the [Fleet-Ops](/docs/fleetops/overview) extension to provide a complete end-to-end delivery management solution.
 
 ## Key Features
 
@@ -24,13 +24,13 @@ Because the Navigator App is built with React Native and Expo, a single codebase
 - **iOS**: Requires iOS 13.0 or later.
 - **Android**: Requires Android 6.0 (API level 23) or later.
 
-## Integration with FleetOps
+## Integration with Fleet-Ops
 
-The Navigator App acts as the "client" for the FleetOps "server".
+The Navigator App acts as the "client" for the Fleet-Ops "server".
 
-When a dispatcher assigns an order to a driver in the Fleetbase console, the FleetOps API sends a push notification to the driver's device. The driver can then accept the order in the Navigator App, which updates the order status in FleetOps to `driver_assigned`.
+When a dispatcher assigns an order to a driver in the Fleetbase console, the Fleet-Ops API sends a push notification to the driver's device. The driver can then accept the order in the Navigator App, which updates the order status in Fleet-Ops to `driver_assigned`.
 
-As the driver progresses through the delivery (e.g., "En Route to Pickup", "Picked Up", "En Route to Dropoff", "Completed"), the Navigator App sends API requests to FleetOps to update the order status and trigger any associated webhooks.
+As the driver progresses through the delivery (e.g., "En Route to Pickup", "Picked Up", "En Route to Dropoff", "Completed"), the Navigator App sends API requests to Fleet-Ops to update the order status and trigger any associated webhooks.
 
 ## Getting Started
 

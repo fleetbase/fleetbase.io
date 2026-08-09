@@ -33,7 +33,7 @@ const FinalCTA = dynamic(() => import('@/components/sections/final-cta'));
 export const metadata: Metadata = {
   title: 'Fleetbase | Open-Source Logistics & Supply Chain Platform',
   description:
-    'Fleetbase is the open-source logistics OS. Fleet management, e-commerce fulfillment, warehouse, and accounting — one platform, no per-driver fees, self-hosted or cloud.',
+    'Fleetbase is the open-source logistics OS. Fleet management, e-commerce fulfillment, warehouse, and accounting — one platform, never a per-delivery fee, self-hosted or cloud.',
   keywords:
     'open source logistics platform, fleet management software, TMS software, transportation management system, delivery management, supply chain software, self hosted fleet management, open source logistics, last mile delivery software, route optimization software, warehouse management',
   alternates: {
@@ -42,12 +42,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Fleetbase | Open-Source Logistics & Supply Chain Platform',
     description:
-      'Fleet management, e-commerce fulfillment, warehouse, and accounting — unified in one open-source platform. No per-driver fees. Self-hosted or cloud.',
+      'Fleet management, e-commerce fulfillment, warehouse, and accounting — unified in one open-source platform. Never a per-delivery fee. Self-hosted or cloud.',
     url: 'https://fleetbase.io',
     type: 'website',
     images: [
       {
-        url: '/og?title=Open-Source%20Logistics%20%26%20Supply%20Chain%20Platform&eyebrow=Fleetbase&subtitle=Fleet%20management%2C%20fulfillment%2C%20warehouse%2C%20and%20accounting%20%E2%80%94%20one%20platform%2C%20no%20per-driver%20fees',
+        url: '/og?title=Open-Source%20Logistics%20%26%20Supply%20Chain%20Platform&eyebrow=Fleetbase&subtitle=Fleet%20management%2C%20fulfillment%2C%20warehouse%2C%20and%20accounting%20%E2%80%94%20one%20platform%2C%20never%20a%20per-delivery%20fee',
         width: 1200,
         height: 630,
         alt: 'Fleetbase — open-source logistics and supply chain platform',
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Fleetbase | Open-Source Logistics Platform',
     description:
-      'Fleet management, e-commerce fulfillment, warehouse, and accounting — unified, open-source, no per-driver fees.',
+      'Fleet management, e-commerce fulfillment, warehouse, and accounting — unified, open-source, never a per-delivery fee.',
     images: [
-      '/og?title=Open-Source%20Logistics%20%26%20Supply%20Chain%20Platform&eyebrow=Fleetbase&subtitle=Fleet%20management%2C%20fulfillment%2C%20warehouse%2C%20and%20accounting%20%E2%80%94%20one%20platform%2C%20no%20per-driver%20fees',
+      '/og?title=Open-Source%20Logistics%20%26%20Supply%20Chain%20Platform&eyebrow=Fleetbase&subtitle=Fleet%20management%2C%20fulfillment%2C%20warehouse%2C%20and%20accounting%20%E2%80%94%20one%20platform%2C%20never%20a%20per-delivery%20fee',
     ],
   },
 };

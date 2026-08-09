@@ -92,9 +92,9 @@ const stackParts = [
  },
  {
  icon: Truck,
- title: 'FleetOps — dispatch & delivery',
+ title: 'Fleet-Ops — dispatch & delivery',
  description:
- 'Every order placed in Oli Max creates a dispatchable job in FleetOps. Drivers run Navigator on the road; dispatchers oversee the live map from the Console.',
+ 'Every order placed in Oli Max creates a dispatchable job in Fleet-Ops. Drivers run Navigator on the road; dispatchers oversee the live map from the Console.',
  docs: '/docs/fleet-ops',
  },
  {
@@ -140,7 +140,7 @@ export default function OliMaxPage() {
  Restaurants, vendors, and households across Ulaanbaatar order rice, flour,
  oil, and bulk meat directly from distributors and factories — at the best
  prices in the country. The whole operation runs on a forked Storefront app,
- dispatched through FleetOps.
+ dispatched through Fleet-Ops.
  </p>
  <div className="flex flex-wrap gap-4">
  <Button
@@ -332,7 +332,7 @@ export default function OliMaxPage() {
  </p>
  <ul className="space-y-3">
  {[
- 'Inventory tied to live vehicle position via FleetOps',
+ 'Inventory tied to live vehicle position via Fleet-Ops',
  'Customers see in-range trucks first, with stock counts',
  'Drivers update inventory from Navigator as they sell',
  'Delivery range adjusts based on the truck\'s current location',
@@ -435,7 +435,7 @@ export default function OliMaxPage() {
  <p className="text-lg leading-relaxed text-[var(--oli-fg-muted)]">
  Techbase LLC operates Oli Max as a flagship deployment of the open-source
  Fleetbase Storefront app — and contributes back. Mongolian-market payment
- drivers, the food-truck inventory model, and several FleetOps improvements
+ drivers, the food-truck inventory model, and several Fleet-Ops improvements
  originated in production at Oli Max before landing upstream.
  </p>
  <p className="text-lg leading-relaxed text-[var(--oli-fg-muted)]">

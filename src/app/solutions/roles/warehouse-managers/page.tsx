@@ -23,7 +23,7 @@ export default function WarehouseManagersPage() {
     <SolutionPageLayout
       badge="For Warehouse Managers"
       title={<>From Pick to Doorstep.<br /><span className="text-gradient">No Handoff Gaps.</span></>}
-      description="The biggest inefficiencies in fulfilment don't happen inside the warehouse or inside the delivery operation — they happen at the handoff between them. Orders that are picked but not dispatched. Inventory that's reserved but not tracked. Deliveries that leave without correct manifests. Fleetbase's Pallet WMS connects directly to FleetOps, eliminating the gap between warehouse operations and outbound delivery — so fulfilment runs as one connected process."
+      description="The biggest inefficiencies in fulfilment don't happen inside the warehouse or inside the delivery operation — they happen at the handoff between them. Orders that are picked but not dispatched. Inventory that's reserved but not tracked. Deliveries that leave without correct manifests. Fleetbase's Pallet WMS connects directly to Fleet-Ops, eliminating the gap between warehouse operations and outbound delivery — so fulfilment runs as one connected process."
       stats={[
         { value: '35%', label: 'Reduction in pick-to-dispatch time' },
         { value: '99.2%', label: 'Inventory accuracy with real-time tracking' },
@@ -69,8 +69,8 @@ export default function WarehouseManagersPage() {
           screenshot: '/images/screenshots/storefront/storefront-orders-overview.webp',
         },
         {
-          title: 'Seamless Dispatch Integration with FleetOps',
-          description: 'When an order is packed and ready, Fleetbase automatically creates the dispatch order in FleetOps — triggering driver assignment and route optimization without any manual intervention. The gap between warehouse and delivery is closed by design.',
+          title: 'Seamless Dispatch Integration with Fleet-Ops',
+          description: 'When an order is packed and ready, Fleetbase automatically creates the dispatch order in Fleet-Ops — triggering driver assignment and route optimization without any manual intervention. The gap between warehouse and delivery is closed by design.',
           bullets: [
             'Automatic dispatch order creation on pack confirmation',
             'Driver assignment and route optimization triggered at pack-out',
@@ -124,7 +124,7 @@ export default function WarehouseManagersPage() {
         { icon: ClipboardList, label: 'Batch pick lists' },
       ]}
       testimonial={{
-        quote: "The moment we connected Pallet to FleetOps, we stopped losing time at the handoff. Orders are staged and assigned to drivers before they even arrive. We've reduced pick-to-door time by over a third and our dispatch errors have nearly disappeared.",
+        quote: "The moment we connected Pallet to Fleet-Ops, we stopped losing time at the handoff. Orders are staged and assigned to drivers before they even arrive. We've reduced pick-to-door time by over a third and our dispatch errors have nearly disappeared.",
         author: 'Sam W.',
         role: 'Warehouse Operations Manager',
         company: 'Swift Fulfilment Co.',
@@ -136,7 +136,7 @@ export default function WarehouseManagersPage() {
         },
         {
           q: 'How does warehouse-to-dispatch integration work in practice?',
-          a: 'When a pack station confirms an order is complete, Fleetbase automatically creates the dispatch order in FleetOps, triggers driver assignment, and adds the order to the appropriate route — no manual intervention required.',
+          a: 'When a pack station confirms an order is complete, Fleetbase automatically creates the dispatch order in Fleet-Ops, triggers driver assignment, and adds the order to the appropriate route — no manual intervention required.',
         },
         {
           q: 'Can we manage multiple warehouse locations from one account?',
@@ -152,7 +152,7 @@ export default function WarehouseManagersPage() {
         },
       ]}
       ctaHeading="Close the gap between your warehouse and your delivery operation"
-      ctaBody="From pick list to proof of delivery — one connected platform with no manual handoffs. Start your free trial and see how Pallet WMS + FleetOps transforms your fulfilment cycle."
+      ctaBody="From pick list to proof of delivery — one connected platform with no manual handoffs. Start your free trial and see how Pallet WMS + Fleet-Ops transforms your fulfilment cycle."
       ctaPrimary="Start Free Trial"
       ctaPrimaryHref="https://console.fleetbase.io/onboard"
       ctaSecondary="Talk to Sales"
