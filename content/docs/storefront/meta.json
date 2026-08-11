@@ -38,6 +38,7 @@
     "settings/notifications",
     "---Storefront App---",
     "app/overview",
+    "app/marketplace-edition",
     "app/quickstart",
     "app/configuration",
     "app/theming",

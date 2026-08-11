@@ -57,7 +57,7 @@ APP_IDENTIFIER=com.yourcompany.storefront
 # Your Fleetbase backend
 FLEETBASE_HOST=https://your-fleetbase.example.com
 FLEETBASE_KEY=flb_live_...
-STOREFRONT_KEY=$store.your_store_key
+STOREFRONT_KEY=store_your_store_key
 
 # Real-time order updates
 SOCKETCLUSTER_HOST=socket.your-fleetbase.example.com
@@ -106,9 +106,7 @@ yarn web
 
 Webpack dev server boots and serves the app at the URL it logs. The web target uses `react-native-web` with build-time aliasing for native-only modules.
 
-<Callout type="info">
-The web build is functional for development and demos. There is no production-optimized webpack configuration in the repo — if you intend to ship the web app to customers, plan to add one.
-</Callout>
+Create a production web bundle with `yarn web:build`. The build performs Tamagui extraction and writes the deployable output to `dist/`.
 
 ## 5. Sign In and Browse
 
@@ -116,6 +114,8 @@ Once the app launches:
 1. The boot screen calls your Fleetbase backend using `STOREFRONT_KEY`.
 2. The app discovers the configured store (or network) and renders its catalog.
 3. Customer accounts are created via the **Phone + SMS** flow by default, or via Apple/Google/Facebook if you've enabled those (see [Integrations](/docs/storefront/app/integrations)).
+
+A `network_...` key automatically opens merchant discovery, marketplace search, map browsing, and the network-aware cart. See [Marketplace Edition](/docs/storefront/app/marketplace-edition) for network preparation and release verification.
 
 ## Common Issues
 
@@ -131,6 +131,7 @@ Once the app launches:
 ## Next Steps
 
 - [Configuration](/docs/storefront/app/configuration) — full env-var and config reference
+- [Marketplace Edition](/docs/storefront/app/marketplace-edition) — configure and validate a network-powered app
 - [Theming](/docs/storefront/app/theming) — colors, fonts, branding assets
 - [Integrations](/docs/storefront/app/integrations) — payment gateways, social login, push notifications
 - [Build & Release](/docs/storefront/app/build-and-release) — release builds for App Store, Play Store, and web
