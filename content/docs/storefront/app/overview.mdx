@@ -14,7 +14,7 @@ The **Storefront App** is the open-source customer-facing client for the Storefr
 | Capability | Notes |
 | :--- | :--- |
 | **iOS, Android & web** | Single codebase. Native via React Native + Hermes (New Architecture); web via `react-native-web` + Webpack |
-| **Storefront browsing** | Home, search, map view, product detail, cart, checkout, receipt — wired to the [Storefront API](/docs/storefront/settings/api) |
+| **Store and marketplace browsing** | Store home or marketplace discovery, merchant search, map/list view, product detail, cart, checkout, and receipt — selected automatically from the Storefront key |
 | **Cart & checkout** | Multi-product cart with options/variants/addons, address book, location picker, real-time service quote |
 | **Payments** | Stripe (PaymentSheet or CardField, with Apple Pay & Google Pay), QPay, PayPal scaffolding |
 | **Customer auth** | Phone + 2FA SMS, email/password, plus optional Apple, Google, and Facebook social sign-in |
@@ -42,14 +42,14 @@ You point the app at a backend by setting three environment variables in `.env`:
 ```
 FLEETBASE_HOST=https://your-fleetbase.example.com
 FLEETBASE_KEY=flb_live_...
-STOREFRONT_KEY=$store.your_store_key
+STOREFRONT_KEY=store_your_store_key
 ```
 
-See [Quickstart](/docs/storefront/app/quickstart) for the full setup.
+Use a `network_...` key instead to launch the [Marketplace Edition](/docs/storefront/app/marketplace-edition). See [Quickstart](/docs/storefront/app/quickstart) for the full setup.
 
 ## Project Status
 
-Single-store mode is production-ready and runs in real deployments today. The multi-vendor / network navigator is scaffolded in the codebase but not feature-complete — most teams currently use the app in single-store mode.
+The same app build supports both production editions. Store keys preserve the direct-to-store experience; network keys activate marketplace discovery, merchant and product search, map browsing, network-scoped carts, and multi-store checkout when enabled by the network.
 
 ## Next Steps
 

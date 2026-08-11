@@ -15,7 +15,7 @@ This split exists so the frontend can confirm payment with the gateway SDK (whic
 ## Step 1 — `/checkouts/before`
 
 ```http
-POST /storefront/v1/checkouts/before
+GET /storefront/v1/checkouts/before
 Authorization: Bearer store_your_store_key
 Customer-Token: 1|VlKK7lZ...
 
@@ -30,11 +30,15 @@ Customer-Token: 1|VlKK7lZ...
 }
 ```
 
-Required:
+Required parameters:
 - **`cart`** — the cart's public id
 - **`gateway`** — the gateway public id selected by the customer
 - **`serviceQuote`** — the [Service Quote](/docs/storefront/orders/service-quotes) id (omit for pickup orders)
-- **`customer`** — the customer's public id
+- **`customer`** — the customer's public id for guest checkout, or the same customer represented by `Customer-Token`
+
+<Callout type="warn">
+When `Customer-Token` is present, it is authoritative. Supplying another customer's public ID returns `403`; a public Storefront key cannot be used to check out as an arbitrary customer.
+</Callout>
 
 Optional:
 - **`pickup`** — `true` for in-store pickup, defaults to delivery
@@ -106,6 +110,11 @@ The `/before` step validates that:
 - The selected gateway is configured for the store/network
 - The customer is authenticated (when authentication is required by your flow)
 - The cart subtotal meets the minimum order amount (if configured)
+- Every marketplace store is still an online member of the authenticated network
+- Every product and store location still belongs to its recorded store
+- Multi-store checkout is enabled when the cart spans merchants
+- Every cart line uses the same currency
+- A submitted customer matches the authenticated `Customer-Token`
 
 The `/capture` step validates that:
 - The token is valid and not yet used

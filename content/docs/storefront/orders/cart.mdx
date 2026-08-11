@@ -57,7 +57,7 @@ Authorization: Bearer store_your_store_key
 }
 ```
 
-`store_location` is optional — if omitted, the cart picks the store's first location. Variants and addons are stored as full objects (their `additional_cost` and `price` are read by the cart subtotal calculator).
+`store_location` is optional — if omitted, the cart picks the store's first location. When supplied, it must belong to the product's store. Variants and addons are stored as full objects (their `additional_cost` and `price` are read by the cart subtotal calculator).
 
 ## Updating Items
 
@@ -114,6 +114,8 @@ When **Enable multi-cart checkout** is toggled on for a Network:
 - One checkout session is created for the combined total
 - On successful capture, Storefront produces **one Fleet-Ops order per store**, each with its own pickup location, store-specific dispatch, and proof-of-delivery
 - The customer pays once but receives multiple deliveries
+
+Before payment initialization, Storefront revalidates that every store remains an online network member, every product is published and available from the recorded store, every location belongs to that store, and all products use one currency. A failed validation does not charge the customer.
 
 Toggle this from **Storefront → Networks → [Network] → General Settings → Enable multi-cart checkout**.
 

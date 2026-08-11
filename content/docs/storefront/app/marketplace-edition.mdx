@@ -1,0 +1,91 @@
+---
+title: Marketplace Edition
+description: Run the Storefront App as a multi-vendor marketplace with a network key, merchant discovery, map browsing, scoped carts, and optional multi-store checkout.
+---
+
+# Marketplace Edition
+
+The Storefront App selects its edition from `STOREFRONT_KEY`. A `store_...` key opens the established single-store experience. A `network_...` key opens the marketplace experience without requiring a separate build or a copied application.
+
+```bash
+FLEETBASE_HOST=https://your-fleetbase.example.com
+FLEETBASE_KEY=flb_live_...
+STOREFRONT_KEY=network_your_network_key
+```
+
+At boot, the app requests `GET /storefront/v1/about`, identifies the returned owner, and builds the appropriate navigator. Changing the key and restarting is enough to switch editions; cached marketplace, selected-store, location, and cart state are namespaced by host and owner so one deployment cannot leak state into another.
+
+## Marketplace navigation
+
+The marketplace tab bar provides:
+
+| Tab | Behavior |
+| :--- | :--- |
+| **Discover** | Paginated member-store discovery, marketplace categories, tags, online filtering, and rating, age, popularity, trending, or nearest sorting |
+| **Search** | Concurrent product and merchant search with separate result types and direct navigation to either detail screen |
+| **Map** | Network store locations on a synchronized map and list; invalid coordinates are ignored safely |
+| **Cart** | Store-grouped line items, combined quantity badge, delivery-origin selection, and checkout policy feedback |
+| **Profile** | The existing customer account, locations, order history, locale, and authentication flows |
+
+Opening a merchant keeps the marketplace shell visible. Product categories and searches inside that merchant are explicitly scoped to its store ID, while the user can return to discovery without resetting their marketplace cart.
+
+## Configure the network first
+
+Before launching the app:
+
+1. Create a [Network](/docs/storefront/networks/overview) and add each merchant store.
+2. Give every visible store at least one valid Store Location and published, available products.
+3. Set store logos, backdrops, operating state, categories, and tags used by discovery.
+4. Configure network-level payment gateways, notification channels, currency, and Fleet-Ops order configuration.
+5. Decide whether to enable `options.multi_cart_enabled`.
+6. Copy the network's `network_...` key from **Storefront → Settings → API** into the app environment.
+
+Only active network members are returned through marketplace routes. Store, category, product, review, and location identifiers from another network are treated as unavailable rather than exposed across tenant boundaries.
+
+## Cart policy
+
+Every marketplace line item records both the product's `store_id` and a `store_location_id` belonging to that store.
+
+- With `multi_cart_enabled` off, adding an item from another merchant prompts the customer to replace the current cart or cancel.
+- With it on, items are grouped by merchant and checkout derives one delivery origin per store.
+- Products and locations are revalidated at checkout so removed membership, offline stores, unpublished products, or mismatched store locations fail before payment starts.
+- A cart cannot mix currencies. Keep all member stores and network gateways on the same currency.
+
+Cart decisions and recoverable errors are shown before payment, so customers can remove an invalid merchant group or choose another location without losing unrelated items.
+
+## Location and privacy
+
+Discovery works without location permission. The app asks for location only after the customer chooses a map/nearby action. Denial leaves list browsing, search, and manual address selection available; it does not create a permission loop at boot.
+
+For nearest sorting or distance filtering, the app sends latitude and longitude to `GET /storefront/v1/stores`. The backend calculates the nearest valid location per member store and applies `maximum_distance` in meters.
+
+## Customer and checkout security
+
+The Storefront key is public application configuration, not a customer credential. Authenticated requests additionally send the token returned by customer login as `Customer-Token`.
+
+During checkout, `Customer-Token` is authoritative. If the request body supplies another customer's public ID, Storefront returns `403`. Guest checkout can still submit a customer ID when no customer token is present.
+
+## Verification checklist
+
+Test both editions before release:
+
+- Boot once with a `store_...` key and confirm the original store home, cart, checkout, and profile flows.
+- Boot with a `network_...` key and confirm discovery pagination, categories, filters, search, merchant navigation, and map/list synchronization.
+- Exercise permission granted, denied, and unavailable-device location states.
+- Exercise single-store replacement and enabled multi-store cart policies.
+- Complete delivery and pickup checkout with each enabled payment gateway.
+- Remove a store from the network or take it offline and confirm stale products and cart items fail safely.
+- Run `yarn lint:marketplace`, `yarn typecheck:marketplace`, `yarn test:ci`, and `yarn web:build` before producing native release builds.
+
+## Troubleshooting
+
+| Symptom | Check |
+| :--- | :--- |
+| Empty marketplace | The key starts with `network_`, the network is online, member stores have locations, and stores are assigned to this network |
+| Merchant opens with no products | Products are published and available, and their store still belongs to the network |
+| Nearest sorting has no results | Store locations have valid coordinates and `maximum_distance` is in meters |
+| A second merchant cannot be added | Enable `options.multi_cart_enabled`, or accept the app's replace-cart prompt |
+| Checkout rejects a location | The selected location must belong to the same store as its cart product |
+| Checkout returns `403` for customer | Clear stale customer state and sign in again; the submitted customer must match `Customer-Token` |
+
+See [Cart](/docs/storefront/orders/cart), [Service Quotes](/docs/storefront/orders/service-quotes), and [Checkout](/docs/storefront/orders/checkout) for the corresponding backend contracts.

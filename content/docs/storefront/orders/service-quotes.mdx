@@ -19,21 +19,13 @@ Request a quote whenever the customer:
 ## Endpoint
 
 ```http
-POST /storefront/v1/service-quotes/from-cart
+GET /storefront/v1/service-quotes/from-cart
 Authorization: Bearer store_your_store_key
 
-{
-  "cart": "cart_abc123",
-  "delivery_address": {
-    "street": "123 Main St",
-    "city": "San Francisco",
-    "country": "US",
-    "coordinates": [-122.4194, 37.7749]
-  }
-}
+?cart=cart_abc123&destination=place_customer_address
 ```
 
-The endpoint accepts a `cart` reference plus a delivery address. Storefront looks up the cart's pickup location(s), asks Fleet-Ops for the matching Service Rate, and returns a quote.
+The endpoint accepts a `cart` reference plus a destination Place public ID or coordinate payload. Storefront looks up the cart's pickup location(s), asks Fleet-Ops for the matching Service Rate, and returns a quote. `origin` is an optional fallback store-location public ID; marketplace carts normally derive origins from each line item or the corresponding store's default location.
 
 ## Response
 
@@ -66,7 +58,7 @@ Display `amount` to the customer as the delivery fee. When they confirm and proc
 
 ## Multi-Store Carts
 
-For a multi-cart in a network, the cart spans multiple pickup locations. Storefront produces a service quote that aggregates the delivery legs — at capture time, this becomes one Fleet-Ops order per store, each with its own dispatch.
+For a multi-cart in a network, the cart spans multiple pickup locations. Storefront resolves one valid origin per member store in the cart, preserves stable cart order, and rejects missing or cross-store location IDs with `422`. The resulting quote carries those origins into store-specific fulfillment at capture time.
 
 ## Pickup Orders
 
@@ -78,5 +70,6 @@ The endpoint returns an error when:
 - The cart's pickup location cannot deliver to the given address (out of range)
 - No Service Rate is configured in Fleet-Ops for the route
 - Required address fields are missing
+- A marketplace origin is missing, belongs to another store, or is outside the authenticated network
 
 Surface the error message to the customer so they can adjust their address or switch to pickup.
