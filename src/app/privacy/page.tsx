@@ -91,12 +91,22 @@ export default function PrivacyPolicyPage() {
 
  <h3 className="font-semibold mb-2">Location Data</h3>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- Our mobile applications access and collect precise location (GPS) and approximate location from a driver&rsquo;s device, including while the app is running in the background during an active trip. Our website and web console do not collect precise location. Section 2 sets out exactly what location data we access, when we access it, how we use it, who it is shared with, and how you can control or revoke it.
+ Our mobile applications access and collect precise location (GPS) and approximate location from a driver&rsquo;s device while the driver is signed in and set to <strong>Online</strong>, including while the app is in the background or closed. Our website and web console do not collect precise location. Section 2 sets out exactly what location data we access, when we access it, how we use it, who it is shared with, and how you can control or revoke it.
  </p>
 
  <h3 className="font-semibold mb-2">Device Data</h3>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- When you use our mobile applications, we collect device identifiers, operating system and app version, device model, network connection type, battery level, and push notification tokens. We use this to deliver notifications, diagnose crashes, and support devices in the field.
+ When you use our mobile applications, we collect device identifiers, operating system and app version, device model, network connection type, device language and region, battery level and charging state, and push notification tokens. We use this to deliver notifications, diagnose crashes, and support devices in the field.
+ </p>
+
+ <h3 className="font-semibold mb-2">Camera and Photos</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ With your permission, the driver app uses your device camera to scan QR codes, capture proof-of-delivery photos, and take a profile picture, and accesses your photo library so you can upload or save those images. Signatures you draw for proof of delivery are captured as images and attached to the order record. These permissions are optional, are requested only at the point of use, and can be revoked at any time in your device settings; declining them disables only the related feature.
+ </p>
+
+ <h3 className="font-semibold mb-2">Account Authentication Data</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ The driver app supports signing in with a phone number and one-time code, or with Apple, Google, or Facebook. If you use a social sign-in, that provider confirms your identity to us and shares basic profile information such as your name and email address; your credentials are never seen by Fleetbase. We use these providers for authentication only, not for advertising. Session tokens are stored in your device&rsquo;s secure keychain or keystore.
  </p>
 
  <h3 className="font-semibold mb-2">Communications Data</h3>
@@ -113,17 +123,25 @@ export default function PrivacyPolicyPage() {
 
  <h3 className="font-semibold mb-2">What location data we access and collect</h3>
  <ul className="space-y-2 text-muted-foreground text-sm list-disc list-inside mb-4">
- <li><strong>Precise location (GPS)</strong> — latitude, longitude, accuracy, heading, speed, and timestamp, read from your device&rsquo;s location services.</li>
+ <li><strong>Precise location (GPS)</strong> — latitude, longitude, altitude, heading, speed, and timestamp, read from your device&rsquo;s location services at high accuracy.</li>
  <li><strong>Approximate location</strong> — derived from network, Wi-Fi, or cell signals where precise location is unavailable or has not been granted.</li>
- <li><strong>Background location</strong> — location collected while the app is not on screen or the device is locked, as described below.</li>
+ <li><strong>Background location</strong> — location collected while the app is not on screen, the device is locked, or the app has been closed, as described below.</li>
+ <li><strong>Motion and activity data</strong> — the device&rsquo;s detected activity type (for example still, walking, or in a vehicle) and whether the device is currently moving. This is used to decide when to record a location point and to distinguish driving from stops.</li>
+ <li><strong>Device battery status</strong> — battery level and whether the device is charging, sent alongside each location point so dispatchers can tell when a driver&rsquo;s device is about to lose power.</li>
  </ul>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ A location point is recorded when the device moves more than approximately 10 metres, and the app additionally refreshes location on a periodic background check roughly every 5 minutes while you are Online. Each point is transmitted over an encrypted connection to your organisation&rsquo;s Fleetbase instance and is also cached on the device so the app works through poor connectivity.
+ </p>
 
  <h3 className="font-semibold mb-2">When we collect it</h3>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- We collect location only while a driver is signed in to the app and on duty — that is, while they have an active assigned order, trip, or task. Collection starts when the driver goes on duty or begins a trip, and stops when the trip is completed or they go off duty. We do not collect location when the app is signed out, or when the driver is off duty with no active assignment.
+ Location collection is controlled by the <strong>Online / Offline</strong> switch in the driver app. We collect location whenever all three of the following are true: you are signed in to the app, you have set yourself to <strong>Online</strong>, and you have granted location permission. Collection is <em>not</em> limited to times when you have an assigned order — if you are Online, location is collected even when you have no active trip.
  </p>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- <strong>Background collection.</strong> During an active trip, the app continues to collect location in the background so that live tracking, navigation, ETAs, and route history remain accurate when the device is locked or the app is not in the foreground. On Android this runs as a foreground service with a persistent notification while location is being collected; on iOS the system location indicator is shown. Background collection ends when the trip ends.
+ Collection stops as soon as you set yourself to <strong>Offline</strong>, sign out, or revoke location permission in your device settings. We do not collect location while you are Offline or signed out.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ <strong>Background and closed-app collection.</strong> While you are Online, the app continues to collect location when it is in the background, when the screen is locked, and after the app has been closed or removed from the recent-apps list, so that live tracking, ETAs, and route history remain accurate. Collection also resumes automatically after your device restarts if you were Online when it shut down. On Android this runs as a foreground service, which the system displays as a persistent notification while location is being collected; on iOS the system location indicator is shown. This is why the app asks for &ldquo;Allow all the time&rdquo; (Android) and &ldquo;Always&rdquo; (iOS) location access rather than while-in-use access only.
  </p>
 
  <h3 className="font-semibold mb-2">How we use it</h3>
@@ -134,6 +152,7 @@ export default function PrivacyPolicyPage() {
  <li>Timestamp and verify operational events — arrival, pickup, boarding, drop-off, proof of delivery, and zone or geofence entry and exit.</li>
  <li>Support safety, incident investigation, and dispute resolution.</li>
  <li>Produce operational and performance reporting for the fleet operator.</li>
+ <li>Use motion and activity signals to record location efficiently and preserve device battery, and surface battery status so dispatchers know when a driver&rsquo;s device may go offline.</li>
  </ul>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
  We do <strong>not</strong> use location data for advertising, and we do not sell it.
@@ -141,7 +160,10 @@ export default function PrivacyPolicyPage() {
 
  <h3 className="font-semibold mb-2">Who it is shared with</h3>
  <p className="text-muted-foreground leading-relaxed text-sm mb-4">
- Location collected through our mobile applications is Customer Data. It is made available to the fleet operator that issued the driver&rsquo;s account — normally the driver&rsquo;s employer or contracting organisation — and to that operator&rsquo;s authorised users and integrations. We also share it with the infrastructure, mapping, and routing providers that we use to deliver these features, and with authorities where we are legally required to do so, as set out in section 5. Where an operator self-hosts Fleetbase, location data remains in that operator&rsquo;s own infrastructure.
+ Location collected through our mobile applications is Customer Data. The app transmits it directly to the Fleetbase instance operated by the organisation that issued your driver account — normally your employer or contracting organisation — where it is available to that organisation&rsquo;s authorised users and integrations. Where that organisation self-hosts Fleetbase, your location data goes to their infrastructure and is not received by Fleetbase at all.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ We do not transmit location data to any third-party advertising or analytics service, and the driver app contains no advertising SDK. Location is otherwise shared only with the infrastructure, mapping, and routing providers used to deliver these features — including Google Maps for in-app maps and directions — and with authorities where we are legally required to do so, as set out in section 5. If you choose to open a route in an external navigation app such as Google Maps or Waze, the destination is handed to that app and is then governed by that app&rsquo;s own privacy policy.
  </p>
 
  <h3 className="font-semibold mb-2">Retention</h3>
@@ -151,7 +173,10 @@ export default function PrivacyPolicyPage() {
 
  <h3 className="font-semibold mb-2">Your choices and how to revoke access</h3>
  <p className="text-muted-foreground leading-relaxed text-sm">
- Location permission is requested at runtime, and you can grant, limit, or revoke it at any time in your device settings — on Android under Settings → Apps → Fleetbase Navigator → Permissions → Location, and on iOS under Settings → Privacy &amp; Security → Location Services. Revoking location access will prevent the app from performing live tracking, navigation, and trip actualisation, and your fleet operator may require it as a condition of using the app for work. Because the fleet operator controls this data, drivers should direct access, correction, and deletion requests to their operator in the first instance; see section 9 for your rights and our contact details.
+ <strong>Going Offline is the primary control.</strong> Setting yourself to Offline in the app stops location collection immediately, including background collection, without changing any device permission. Signing out has the same effect.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm">
+ Location permission is requested at runtime, and you can grant, limit, or revoke it at any time in your device settings — on Android under Settings → Apps → Fleetbase Navigator → Permissions → Location, and on iOS under Settings → Privacy &amp; Security → Location Services → Fleetbase Navigator. The app checks your permission each time it returns to the foreground and stops tracking if the permission has been withdrawn. Revoking location access will prevent the app from performing live tracking, navigation, and trip updates, and your fleet operator may require it as a condition of using the app for work. Because your fleet operator controls this data, please direct access, correction, and deletion requests to them in the first instance; see section 9 for your rights and our contact details.
  </p>
  </section>
 
