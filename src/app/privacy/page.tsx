@@ -16,8 +16,8 @@ export const metadata: Metadata = {
  },
 };
 
-const LAST_UPDATED = 'April 2025';
-const EFFECTIVE_DATE = '1 April 2025';
+const LAST_UPDATED = 'September 2026';
+const EFFECTIVE_DATE = '1 September 2026';
 
 export default function PrivacyPolicyPage() {
  return (
@@ -34,7 +34,7 @@ export default function PrivacyPolicyPage() {
  Last updated: {LAST_UPDATED} &nbsp;·&nbsp; Effective date: {EFFECTIVE_DATE}
  </p>
  <p className="text-muted-foreground mt-2 text-sm">
- This Privacy Policy describes how <strong>Fleetbase Pte. Ltd.</strong> (&ldquo;Fleetbase&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, uses, and shares information about you when you use our website at <strong>fleetbase.io</strong> and our cloud platform at <strong>console.fleetbase.io</strong> (collectively, the &ldquo;Service&rdquo;). We are committed to protecting your privacy and handling your data with transparency.
+ This Privacy Policy describes how <strong>Fleetbase Pte. Ltd.</strong> (&ldquo;Fleetbase&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;) collects, uses, and shares information about you when you use our website at <strong>fleetbase.io</strong> our cloud platform at <strong>console.fleetbase.io</strong>, and our mobile applications, including the <strong>Fleetbase Navigator</strong> driver app for iOS and Android (collectively, the &ldquo;Service&rdquo;). We are committed to protecting your privacy and handling your data with transparency. If you are a driver using Navigator, section 2 explains our collection and use of location data in full.
  </p>
  </div>
 
@@ -44,6 +44,7 @@ export default function PrivacyPolicyPage() {
  <ol className="space-y-1.5 text-sm text-muted-foreground list-decimal list-inside">
  {[
  'Information We Collect',
+ 'Location Data and Mobile Applications',
  'How We Use Your Information',
  'Legal Basis for Processing (GDPR)',
  'How We Share Your Information',
@@ -88,6 +89,26 @@ export default function PrivacyPolicyPage() {
  We process data that you submit to the Service in the course of your operations — including order details, driver information, vehicle data, customer contacts, and delivery records. This data belongs to you and is processed on your behalf.
  </p>
 
+ <h3 className="font-semibold mb-2">Location Data</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ Our mobile applications access and collect precise location (GPS) and approximate location from a driver&rsquo;s device while the driver is signed in and set to <strong>Online</strong>, including while the app is in the background or closed. Our website and web console do not collect precise location. Section 2 sets out exactly what location data we access, when we access it, how we use it, who it is shared with, and how you can control or revoke it.
+ </p>
+
+ <h3 className="font-semibold mb-2">Device Data</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ When you use our mobile applications, we collect device identifiers, operating system and app version, device model, network connection type, device language and region, battery level and charging state, and push notification tokens. We use this to deliver notifications, diagnose crashes, and support devices in the field.
+ </p>
+
+ <h3 className="font-semibold mb-2">Camera and Photos</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ With your permission, the driver app uses your device camera to scan QR codes, capture proof-of-delivery photos, and take a profile picture, and accesses your photo library so you can upload or save those images. Signatures you draw for proof of delivery are captured as images and attached to the order record. These permissions are optional, are requested only at the point of use, and can be revoked at any time in your device settings; declining them disables only the related feature.
+ </p>
+
+ <h3 className="font-semibold mb-2">Account Authentication Data</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ The driver app supports signing in with a phone number and one-time code, or with Apple, Google, or Facebook. If you use a social sign-in, that provider confirms your identity to us and shares basic profile information such as your name and email address; your credentials are never seen by Fleetbase. We use these providers for authentication only, not for advertising. Session tokens are stored in your device&rsquo;s secure keychain or keystore.
+ </p>
+
  <h3 className="font-semibold mb-2">Communications Data</h3>
  <p className="text-muted-foreground leading-relaxed text-sm">
  If you contact us via email, chat, or our support system, we retain records of those communications to help resolve your enquiries and improve our support.
@@ -95,10 +116,76 @@ export default function PrivacyPolicyPage() {
  </section>
 
  <section id="privacy-2">
- <h2 className="text-2xl font-bold mb-4">2. How We Use Your Information</h2>
+ <h2 className="text-2xl font-bold mb-4">2. Location Data and Mobile Applications</h2>
+ <p className="text-muted-foreground leading-relaxed mb-4">
+ Our mobile applications — including <strong>Fleetbase Navigator</strong>, our driver application for iOS and Android — access and collect location data. This section explains what we collect, when we collect it, why we collect it, and how you can control it.
+ </p>
+
+ <h3 className="font-semibold mb-2">What location data we access and collect</h3>
+ <ul className="space-y-2 text-muted-foreground text-sm list-disc list-inside mb-4">
+ <li><strong>Precise location (GPS)</strong> — latitude, longitude, altitude, heading, speed, and timestamp, read from your device&rsquo;s location services at high accuracy.</li>
+ <li><strong>Approximate location</strong> — derived from network, Wi-Fi, or cell signals where precise location is unavailable or has not been granted.</li>
+ <li><strong>Background location</strong> — location collected while the app is not on screen, the device is locked, or the app has been closed, as described below.</li>
+ <li><strong>Motion and activity data</strong> — the device&rsquo;s detected activity type (for example still, walking, or in a vehicle) and whether the device is currently moving. This is used to decide when to record a location point and to distinguish driving from stops.</li>
+ <li><strong>Device battery status</strong> — battery level and whether the device is charging, sent alongside each location point so dispatchers can tell when a driver&rsquo;s device is about to lose power.</li>
+ </ul>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ A location point is recorded when the device moves more than approximately 10 metres, and the app additionally refreshes location on a periodic background check roughly every 5 minutes while you are Online. Each point is transmitted over an encrypted connection to your organisation&rsquo;s Fleetbase instance and is also cached on the device so the app works through poor connectivity.
+ </p>
+
+ <h3 className="font-semibold mb-2">When we collect it</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ Location collection is controlled by the <strong>Online / Offline</strong> switch in the driver app. We collect location whenever all three of the following are true: you are signed in to the app, you have set yourself to <strong>Online</strong>, and you have granted location permission. Collection is <em>not</em> limited to times when you have an assigned order — if you are Online, location is collected even when you have no active trip.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ Collection stops as soon as you set yourself to <strong>Offline</strong>, sign out, or revoke location permission in your device settings. We do not collect location while you are Offline or signed out.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ <strong>Background and closed-app collection.</strong> While you are Online, the app continues to collect location when it is in the background, when the screen is locked, and after the app has been closed or removed from the recent-apps list, so that live tracking, ETAs, and route history remain accurate. Collection also resumes automatically after your device restarts if you were Online when it shut down. On Android this runs as a foreground service, which the system displays as a persistent notification while location is being collected; on iOS the system location indicator is shown. This is why the app asks for &ldquo;Allow all the time&rdquo; (Android) and &ldquo;Always&rdquo; (iOS) location access rather than while-in-use access only.
+ </p>
+
+ <h3 className="font-semibold mb-2">How we use it</h3>
+ <ul className="space-y-2 text-muted-foreground text-sm list-disc list-inside mb-4">
+ <li>Show the driver&rsquo;s live position to their dispatcher and fleet operator in the operational console.</li>
+ <li>Provide navigation and routing to pickup and drop-off locations.</li>
+ <li>Calculate ETAs, distance travelled, route history, and trip actualisation.</li>
+ <li>Timestamp and verify operational events — arrival, pickup, boarding, drop-off, proof of delivery, and zone or geofence entry and exit.</li>
+ <li>Support safety, incident investigation, and dispute resolution.</li>
+ <li>Produce operational and performance reporting for the fleet operator.</li>
+ <li>Use motion and activity signals to record location efficiently and preserve device battery, and surface battery status so dispatchers know when a driver&rsquo;s device may go offline.</li>
+ </ul>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ We do <strong>not</strong> use location data for advertising, and we do not sell it.
+ </p>
+
+ <h3 className="font-semibold mb-2">Who it is shared with</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ Location collected through our mobile applications is Customer Data. The app transmits it directly to the Fleetbase instance operated by the organisation that issued your driver account — normally your employer or contracting organisation — where it is available to that organisation&rsquo;s authorised users and integrations. Where that organisation self-hosts Fleetbase, your location data goes to their infrastructure and is not received by Fleetbase at all.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ We do not transmit location data to any third-party advertising or analytics service, and the driver app contains no advertising SDK. Location is otherwise shared only with the infrastructure, mapping, and routing providers used to deliver these features — including Google Maps for in-app maps and directions — and with authorities where we are legally required to do so, as set out in section 5. If you choose to open a route in an external navigation app such as Google Maps or Waze, the destination is handed to that app and is then governed by that app&rsquo;s own privacy policy.
+ </p>
+
+ <h3 className="font-semibold mb-2">Retention</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+ Location points and trip history are retained for as long as the fleet operator&rsquo;s account is active, subject to any retention period that operator configures, and are then deleted in accordance with section 6.
+ </p>
+
+ <h3 className="font-semibold mb-2">Your choices and how to revoke access</h3>
+ <p className="text-muted-foreground leading-relaxed text-sm">
+ <strong>Going Offline is the primary control.</strong> Setting yourself to Offline in the app stops location collection immediately, including background collection, without changing any device permission. Signing out has the same effect.
+ </p>
+ <p className="text-muted-foreground leading-relaxed text-sm">
+ Location permission is requested at runtime, and you can grant, limit, or revoke it at any time in your device settings — on Android under Settings → Apps → Fleetbase Navigator → Permissions → Location, and on iOS under Settings → Privacy &amp; Security → Location Services → Fleetbase Navigator. The app checks your permission each time it returns to the foreground and stops tracking if the permission has been withdrawn. Revoking location access will prevent the app from performing live tracking, navigation, and trip updates, and your fleet operator may require it as a condition of using the app for work. Because your fleet operator controls this data, please direct access, correction, and deletion requests to them in the first instance; see section 9 for your rights and our contact details.
+ </p>
+ </section>
+
+ <section id="privacy-3">
+ <h2 className="text-2xl font-bold mb-4">3. How We Use Your Information</h2>
  <p className="text-muted-foreground leading-relaxed mb-3">We use the information we collect to:</p>
  <ul className="space-y-2 text-muted-foreground text-sm list-disc list-inside">
  <li>Provide, operate, and maintain the Service.</li>
+ <li>Track trips in real time, navigate drivers, calculate ETAs, and record route history using location data collected by our mobile applications (see section 2).</li>
  <li>Process transactions and send billing-related communications.</li>
  <li>Respond to your enquiries and provide customer support.</li>
  <li>Send product updates, security notices, and administrative messages.</li>
@@ -109,8 +196,8 @@ export default function PrivacyPolicyPage() {
  </ul>
  </section>
 
- <section id="privacy-3">
- <h2 className="text-2xl font-bold mb-4">3. Legal Basis for Processing (GDPR)</h2>
+ <section id="privacy-4">
+ <h2 className="text-2xl font-bold mb-4">4. Legal Basis for Processing (GDPR)</h2>
  <p className="text-muted-foreground leading-relaxed mb-3">
  If you are located in the European Economic Area (EEA) or the United Kingdom, our legal bases for processing your personal data are:
  </p>
@@ -122,27 +209,28 @@ export default function PrivacyPolicyPage() {
  </ul>
  </section>
 
- <section id="privacy-4">
- <h2 className="text-2xl font-bold mb-4">4. How We Share Your Information</h2>
+ <section id="privacy-5">
+ <h2 className="text-2xl font-bold mb-4">5. How We Share Your Information</h2>
  <p className="text-muted-foreground leading-relaxed mb-3">
- We do not sell your personal data. We may share your information with:
+ We do not sell your personal data, and we do not share it for advertising purposes. We may share your information with:
  </p>
  <ul className="space-y-2 text-muted-foreground text-sm list-disc list-inside">
  <li><strong>Service providers</strong> — trusted third parties who assist us in operating the Service (e.g. cloud infrastructure providers, payment processors, email service providers). These parties are contractually bound to protect your data.</li>
  <li><strong>Business transfers</strong> — in the event of a merger, acquisition, or sale of assets, your data may be transferred as part of that transaction. We will notify you before your data is transferred and becomes subject to a different privacy policy.</li>
  <li><strong>Legal requirements</strong> — when required by law, court order, or government authority, or to protect the rights, property, or safety of Fleetbase, our customers, or the public.</li>
+ <li><strong>Your fleet operator</strong> — if you use our mobile applications as a driver, the operational data you generate, including location and trip history, is made available to the organisation that issued your account and its authorised users and integrations (see section 2).</li>
  </ul>
  </section>
 
- <section id="privacy-5">
- <h2 className="text-2xl font-bold mb-4">5. Data Retention</h2>
+ <section id="privacy-6">
+ <h2 className="text-2xl font-bold mb-4">6. Data Retention</h2>
  <p className="text-muted-foreground leading-relaxed">
- We retain your account data for as long as your account is active or as needed to provide the Service. After account termination, we retain Customer Data for up to 30 days to allow you to export it, after which it is securely deleted. We may retain certain data for longer periods where required by law or for legitimate business purposes (e.g. billing records for 7 years as required by Singapore accounting regulations).
+ We retain your account data for as long as your account is active or as needed to provide the Service. After account termination, we retain Customer Data for up to 30 days to allow you to export it, after which it is securely deleted. We may retain certain data for longer periods where required by law or for legitimate business purposes (e.g. billing records for 7 years as required by Singapore accounting regulations). Location and trip history collected through our mobile applications is retained on the same basis, subject to any shorter retention period configured by the fleet operator.
  </p>
  </section>
 
- <section id="privacy-6">
- <h2 className="text-2xl font-bold mb-4">6. Data Security</h2>
+ <section id="privacy-7">
+ <h2 className="text-2xl font-bold mb-4">7. Data Security</h2>
  <p className="text-muted-foreground leading-relaxed">
  We implement industry-standard security measures to protect your data, including:
  </p>
@@ -158,15 +246,15 @@ export default function PrivacyPolicyPage() {
  </p>
  </section>
 
- <section id="privacy-7">
- <h2 className="text-2xl font-bold mb-4">7. International Data Transfers</h2>
+ <section id="privacy-8">
+ <h2 className="text-2xl font-bold mb-4">8. International Data Transfers</h2>
  <p className="text-muted-foreground leading-relaxed">
  Fleetbase is headquartered in Singapore. Your data may be processed in Singapore and in other countries where our service providers operate. When transferring data from the EEA or UK, we rely on appropriate safeguards such as Standard Contractual Clauses (SCCs) approved by the European Commission to ensure your data receives an adequate level of protection.
  </p>
  </section>
 
- <section id="privacy-8">
- <h2 className="text-2xl font-bold mb-4">8. Your Rights and Choices</h2>
+ <section id="privacy-9">
+ <h2 className="text-2xl font-bold mb-4">9. Your Rights and Choices</h2>
  <p className="text-muted-foreground leading-relaxed mb-3">
  Depending on your location, you may have the following rights regarding your personal data:
  </p>
@@ -184,8 +272,8 @@ export default function PrivacyPolicyPage() {
  </p>
  </section>
 
- <section id="privacy-9">
- <h2 className="text-2xl font-bold mb-4">9. Cookies and Tracking Technologies</h2>
+ <section id="privacy-10">
+ <h2 className="text-2xl font-bold mb-4">10. Cookies and Tracking Technologies</h2>
  <p className="text-muted-foreground leading-relaxed">
  We use cookies and similar tracking technologies on our website to improve your experience, analyse traffic, and personalise content. You can control cookie preferences through your browser settings. Disabling certain cookies may affect the functionality of our website. We do not use cookies to track you across third-party websites for advertising purposes.
  </p>
@@ -200,29 +288,29 @@ export default function PrivacyPolicyPage() {
  </p>
  </section>
 
- <section id="privacy-10">
- <h2 className="text-2xl font-bold mb-4">10. Children&apos;s Privacy</h2>
+ <section id="privacy-11">
+ <h2 className="text-2xl font-bold mb-4">11. Children&apos;s Privacy</h2>
  <p className="text-muted-foreground leading-relaxed">
  The Service is not directed to individuals under the age of 18. We do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately at <a href="mailto:hello@fleetbase.io" className="text-primary underline underline-offset-4">hello@fleetbase.io</a> and we will take steps to delete it.
  </p>
  </section>
 
- <section id="privacy-11">
- <h2 className="text-2xl font-bold mb-4">11. Third-Party Services</h2>
+ <section id="privacy-12">
+ <h2 className="text-2xl font-bold mb-4">12. Third-Party Services</h2>
  <p className="text-muted-foreground leading-relaxed">
  The Service may contain links to or integrations with third-party websites and services. This Privacy Policy does not apply to those third parties. We encourage you to review the privacy policies of any third-party services you use in connection with Fleetbase.
  </p>
  </section>
 
- <section id="privacy-12">
- <h2 className="text-2xl font-bold mb-4">12. Changes to This Policy</h2>
+ <section id="privacy-13">
+ <h2 className="text-2xl font-bold mb-4">13. Changes to This Policy</h2>
  <p className="text-muted-foreground leading-relaxed">
  We may update this Privacy Policy from time to time. We will notify you of material changes by email or by posting a notice on our website at least 30 days before the changes take effect. Your continued use of the Service after the effective date constitutes acceptance of the updated Policy.
  </p>
  </section>
 
- <section id="privacy-13">
- <h2 className="text-2xl font-bold mb-4">13. Contact Us</h2>
+ <section id="privacy-14">
+ <h2 className="text-2xl font-bold mb-4">14. Contact Us</h2>
  <p className="text-muted-foreground leading-relaxed">
  If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact our Data Protection Officer:
  </p>
