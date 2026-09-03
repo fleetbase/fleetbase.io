@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import SecurityCompliancePageContent from './security-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/security' },
@@ -47,6 +48,7 @@ export default function SecurityCompliancePage() {
         applicationCategory="SecurityApplication"
       />
       <SecurityCompliancePageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

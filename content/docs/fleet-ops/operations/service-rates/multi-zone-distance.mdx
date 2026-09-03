@@ -4,8 +4,6 @@ sidebarTitle: Multi-zone Distance
 description: Charge different per-distance rates in different geographies — define a rate per zone or service area, set a fallback for unmatched segments, and Fleet-Ops splits the route across them at quote time.
 ---
 
-# Multi-zone Distance
-
 **Multi-zone Distance** splits the route's distance across **geographic rules** — each rule covers a Zone or Service Area and has its own per-distance rate. The portion of the route inside each rule's geography is priced with that rule's rate; an optional **fallback rule** picks up any distance that falls outside every defined geography. (In the API this method is identified as `multi_zone_distance`.)
 
 This unlocks pricing models like:

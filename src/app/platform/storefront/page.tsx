@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import StorefrontPageContent from './storefront-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/storefront' },
@@ -43,6 +44,7 @@ export default function StorefrontPage() {
         description="Open-source headless commerce and multi-vendor marketplace platform with white-label mobile apps, zero commission fees, and native Fleet-Ops delivery integration."
       />
       <StorefrontPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

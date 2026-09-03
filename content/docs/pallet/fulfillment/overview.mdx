@@ -3,9 +3,7 @@ title: Order Fulfillment
 description: Manage the full inbound and outbound order fulfillment lifecycle within Pallet.
 ---
 
-# Order Fulfillment
-
-The **Fulfillment** module in Pallet handles the movement of goods into and out of your [Warehouses](/docs/pallet/warehouses).
+The **Fulfillment** module in Pallet handles the movement of goods into and out of your [Warehouses](/docs/pallet/warehouses/overview).
 
 It provides the tools necessary to manage both inbound stock (receiving goods from suppliers) and outbound stock (picking and packing orders for customers).
 
@@ -15,10 +13,10 @@ Inbound fulfillment is the process of receiving new inventory into a warehouse.
 
 This process is typically driven by a **[Purchase Order](/docs/pallet/fulfillment/purchase-orders)**.
 
-1. You create a Purchase Order to request goods from a [Supplier](/docs/pallet/suppliers).
+1. You create a Purchase Order to request goods from a [Supplier](/docs/pallet/suppliers/overview).
 2. When the goods arrive at the warehouse, a worker uses Pallet to "Receive" the Purchase Order.
 3. The worker verifies the quantities received against the quantities ordered.
-4. Pallet automatically updates the [Inventory](/docs/pallet/inventory) levels, adding the new stock to the designated receiving [Bin](/docs/pallet/warehouses/zones-aisles-racks-bins).
+4. Pallet automatically updates the [Inventory](/docs/pallet/inventory/overview) levels, adding the new stock to the designated receiving [Bin](/docs/pallet/warehouses/zones-aisles-racks-bins).
 5. The stock can then be transferred from the receiving dock to its final storage location.
 
 ## Outbound Fulfillment (Shipping)
@@ -32,7 +30,7 @@ If you are using [Storefront](/docs/storefront), a Sales Order is automatically 
 The outbound fulfillment process involves several steps:
 
 ### 1. Order Allocation
-When a Sales Order is created, Pallet checks the current [Inventory](/docs/pallet/inventory) levels. If sufficient stock is available, Pallet "allocates" the stock to the order. This prevents the same item from being sold twice.
+When a Sales Order is created, Pallet checks the current [Inventory](/docs/pallet/inventory/overview) levels. If sufficient stock is available, Pallet "allocates" the stock to the order. This prevents the same item from being sold twice.
 
 ### 2. [Pick Lists](/docs/pallet/fulfillment/pick-lists)
 Pallet generates a Pick List for the warehouse workers. The Pick List details exactly which items need to be picked, and crucially, *where* they are located (Zone, Aisle, Rack, Bin).

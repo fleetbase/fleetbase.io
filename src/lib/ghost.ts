@@ -1,6 +1,12 @@
 import 'server-only';
 
-const BLOG_REVALIDATE_SECONDS = 300;
+// One hour, matching the s-maxage set on /blog routes in next.config.ts.
+// The blog was already on ISR — the plan's "rendered on every request"
+// diagnosis was wrong — but a 5-minute window meant frequent regeneration
+// and a cold render for whoever arrived first after each expiry, which is the
+// likeliest source of the ~390ms TTFB. Ghost content does not change often
+// enough to need a 5-minute window.
+const BLOG_REVALIDATE_SECONDS = 3600;
 const GHOST_API_VERSION = process.env.GHOST_API_VERSION?.trim() || 'v6.0';
 
 export type BlogAuthor = {

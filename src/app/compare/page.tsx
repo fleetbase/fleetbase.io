@@ -62,14 +62,10 @@ const COMPARISONS = [
  'Route4Me plans routes. Fleetbase does that and more — dispatch, driver management, real-time tracking, POD, WMS, storefront, and accounting in one open-source platform.',
  badge: null,
  },
- {
- competitor: 'Bringg',
- slug: 'vs-bringg',
- tagline: 'Enterprise delivery management without enterprise pricing.',
- description:
- "Bringg targets large enterprises with custom pricing. Fleetbase gives you enterprise-grade fleet management and TMS for $29 a month plus $5 per driver or vehicle — or free if you self-host.",
- badge: null,
- },
+ // Bringg intentionally omitted: /compare/vs-bringg currently redirects to
+ // this page, so the card linked visitors back to where they already were and
+ // cost a redirect hop in the crawl. The growth plan restores the page
+ // (GP-05), at which point this entry comes back.
 ];
 
 export default function ComparePage() {

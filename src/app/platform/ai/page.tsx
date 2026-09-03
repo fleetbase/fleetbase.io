@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import RelatedPages from '@/components/seo/related-pages';
 
 const AI_REPO = 'https://github.com/fleetbase/ai';
 
@@ -561,6 +562,7 @@ export default function LogisticsAIPage() {
  </div>
  </div>
  </section>
+ <RelatedPages heading="Explore related" />
  </div>
  );
 }

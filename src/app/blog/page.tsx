@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/blog' },
   title: 'Blog',
   description:
-    'Product updates, engineering deep-dives, logistics industry insights, and open-source news from the Fleetbase team. Stay up to date with the latest from the platform.',
+    'Product updates, engineering deep-dives, logistics industry insight and open-source news from the team building Fleetbase.',
   keywords: [
     'fleetbase blog',
     'logistics technology blog',

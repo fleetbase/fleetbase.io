@@ -6,6 +6,7 @@ import { OrganizationSchema, SoftwareApplicationSchema, WebSiteSchema } from '@/
 import Hero from '@/components/sections/hero';
 import PlatformModules from '@/components/sections/platform-modules';
 import StatsBar from '@/components/sections/stats-bar';
+import SwitchingCallout from '@/components/sections/switching-callout';
 
 // Below-the-fold sections — split into separate client bundles so the
 // initial homepage JS payload stays small. SSR remains on (default) so
@@ -81,6 +82,7 @@ export default async function Home() {
       <IndustryUseCases />
       <IntegrationsEcosystem />
       <DeploymentOptions />
+      <SwitchingCallout />
       <FinalCTA />
     </>
   );

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import DeveloperConsolePageContent from './console-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/developer-console' },
@@ -42,6 +43,7 @@ export default function DeveloperConsolePage() {
         applicationCategory="DeveloperApplication"
       />
       <DeveloperConsolePageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

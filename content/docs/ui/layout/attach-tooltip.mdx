@@ -3,8 +3,6 @@ title: Attach::Tooltip
 description: "<Attach::Tooltip> renders a tooltip attached to its parent element. Wraps <Attach::Popover> with tooltip-friendly defaults — hover/focus triggers, top placement, fade animation."
 ---
 
-# `<Attach::Tooltip>`
-
 `<Attach::Tooltip>` renders a tooltip floating layer attached to its parent element. It is a thin wrapper around [`<Attach::Popover>`](/docs/ui/layout/attach-popover) with sensible tooltip defaults — shows on `mouseenter focus`, hides on `mouseleave blur escapekey`, with `top` placement.
 
 This is the canonical tooltip primitive used throughout `@fleetbase/ember-ui`. Most other components (`<Button>`, `<ContentPanel>`, `<Toggle>`, etc.) have built-in tooltip behavior driven by their `@helpText` arg — under the hood they're rendering `<Attach::Tooltip>`.

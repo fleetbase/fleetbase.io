@@ -3,8 +3,6 @@ title: Migrations
 description: Define database migrations for your extension. They live under server/migrations/, follow Fleetbase's UUID + public_id conventions, and load automatically via the service provider.
 ---
 
-# Migrations
-
 Migrations define the schema your extension owns. Fleetbase auto-loads them via your [service provider](/docs/extension-development/backend/service-provider) (`$this->loadMigrationsFrom(__DIR__ . '/../../migrations')`), so they run alongside core migrations whenever someone runs `php artisan migrate`.
 
 ## Where Migrations Live

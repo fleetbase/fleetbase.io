@@ -4,8 +4,6 @@ sidebarTitle: Fixed Rate
 description: Charge a flat fee per distance band — define the maximum distance you serve and Fleet-Ops generates one fee tier per unit, so you can price 0–1, 1–2, 2–3 km independently.
 ---
 
-# Fixed Rate
-
 **Fixed Rate** prices an order from a table of **distance bands** — each band covers a 1-unit slice of distance and has its own flat fee. The band the order's distance falls into determines the service fee. (In the API this method is identified as `fixed_meter`; the legacy value `fixed_rate` also works.)
 
 Use this when your pricing is **banded by distance** but doesn't scale linearly — for example "any delivery under 5 km is $5, anything under 10 km is $8, anything further is $12". The bands are whole-unit distance steps capped at the maximum distance you set.

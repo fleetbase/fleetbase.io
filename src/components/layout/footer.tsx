@@ -66,6 +66,26 @@ const FOOTER_LINKS = [
  ],
  },
  {
+ // Role and use-case pages previously had exactly one inbound internal link
+ // each — they existed only in the nav dropdown and on the /solutions hub, so
+ // none of the homepage's authority reached the pages built for buyer intent.
+ title: 'By Role & Use Case',
+ links: [
+ { label: 'Fleet Managers', href: '/solutions/roles/fleet-managers' },
+ { label: 'Operations Managers', href: '/solutions/roles/operations-managers' },
+ { label: 'Warehouse Managers', href: '/solutions/roles/warehouse-managers' },
+ { label: 'Executives', href: '/solutions/roles/executives' },
+ { label: 'Developers', href: '/solutions/roles/developers' },
+ { label: 'Customer Success', href: '/solutions/roles/customer-success' },
+ { label: 'Last-Mile Delivery', href: '/solutions/use-cases/last-mile-delivery' },
+ { label: 'Route Optimization', href: '/solutions/use-cases/route-optimization' },
+ { label: 'Fleet Management', href: '/solutions/use-cases/fleet-management' },
+ { label: 'Order Management', href: '/solutions/use-cases/order-management' },
+ { label: 'Analytics & Reporting', href: '/solutions/use-cases/analytics' },
+ { label: 'API & Integrations', href: '/solutions/use-cases/integrations' },
+ ],
+ },
+ {
  title: 'Compare',
  links: [
  { label: 'All Comparisons', href: '/compare' },
@@ -177,7 +197,7 @@ const Footer = () => {
 
  {/* Footer Navigation Links */}
  <div className="container mt-20 lg:mt-30">
- <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6 text-left">
+ <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 text-left">
  {FOOTER_LINKS.map((section, index) => (
  <div key={index}>
  <h3 className="font-semibold text-sm mb-4 text-foreground">

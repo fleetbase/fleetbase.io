@@ -3,8 +3,6 @@ title: Service Quotes
 description: Storefront calls Fleet-Ops to compute the delivery fee for a cart — the result is a Service Quote that's passed into checkout.
 ---
 
-# Service Quotes
-
 A **Service Quote** is the calculated delivery fee for a cart. Before a customer can check out, your frontend asks Storefront to produce a quote based on the cart contents, the customer's delivery address, and the applicable Fleet-Ops Service Rate.
 
 The quote is then passed into [`/checkouts/before`](/docs/storefront/orders/checkout) so the order is created with the correct delivery fee.

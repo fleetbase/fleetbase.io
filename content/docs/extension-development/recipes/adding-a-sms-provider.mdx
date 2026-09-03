@@ -3,8 +3,6 @@ title: Adding a SMS Provider
 description: Plug a new SMS gateway into the platform's SmsService — implement a sender class, wire it through configuration, and route specific phone-number prefixes to it.
 ---
 
-# Adding a SMS Provider
-
 The platform's `Fleetbase\Services\SmsService` ships with Twilio (default) and CallPro. Both implement the same minimal contract: a constructor that reads config, plus a `send($to, $text, $options?)` method. Adding a third provider is a matter of writing the sender class, exposing it via config, and (if you want auto-routing) updating the routing rules.
 
 ## 1. Implement the Provider Class

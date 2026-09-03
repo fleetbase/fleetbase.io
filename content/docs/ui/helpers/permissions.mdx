@@ -3,8 +3,6 @@ title: Permission Helpers
 description: Helpers for conditional rendering based on IAM permissions — can-action, cannot-action, can-delete, can-write, and friends.
 ---
 
-# Permission Helpers
-
 These helpers wrap [`ember-can`](https://github.com/minutebase/ember-can) abilities to make permission gating concise in templates. They are pure functions — passing them stale arguments returns stale answers, so write the ability string inline rather than computing it externally.
 
 For declarative gating on individual components, prefer the built-in `@permission` arg on `<Button>`, `<ContentPanel>`, `<Toggle>`, etc. Use these helpers when the component itself doesn't accept `@permission` or when you need to gate arbitrary markup.

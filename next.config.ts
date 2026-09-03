@@ -247,6 +247,32 @@ const nextConfig: NextConfig = {
         : []),
     ],
   },
+  async headers() {
+    return [
+      {
+        // Let the CDN serve blog pages the way it already serves docs. Next's
+        // ISR handles regeneration; this makes the shared cache hold the
+        // rendered page for an hour and keep serving it while it revalidates,
+        // so a reader never waits on a cold render.
+        source: '/blog/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      {
+        source: '/blog',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

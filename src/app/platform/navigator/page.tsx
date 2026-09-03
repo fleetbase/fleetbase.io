@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import NavigatorPageContent from './navigator-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/navigator' },
@@ -44,6 +45,7 @@ export default function NavigatorPage() {
         operatingSystem="iOS, Android"
       />
       <NavigatorPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import MobileAppsPageContent from './mobile-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/mobile' },
@@ -47,6 +48,7 @@ export default function MobileAppsPage() {
         operatingSystem="iOS, Android"
       />
       <MobileAppsPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

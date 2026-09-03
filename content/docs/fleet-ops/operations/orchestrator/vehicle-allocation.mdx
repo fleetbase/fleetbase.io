@@ -3,8 +3,6 @@ title: Vehicle Allocation
 description: How the Orchestrator matches vehicles to orders — availability, location proximity, and driver assignment.
 ---
 
-# Vehicle Allocation
-
 Vehicle allocation is what happens during a phase running in `assign_vehicles` mode (or the legacy `allocate` mode) in the Orchestrator. The active engine — `greedy`, `vroom`, or any extension-registered engine — evaluates each available vehicle against the orders in the pool and produces a vehicle-to-order assignment as part of the phase's output.
 
 ## How Vehicle Allocation Works

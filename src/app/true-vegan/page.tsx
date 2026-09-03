@@ -100,7 +100,7 @@ const stackParts = [
  title: 'Stripe — in-app checkout',
  description:
  'Stripe is wired through the Fleetbase Ledger payment gateway driver. Customers pay in-app with saved cards; tips and order totals flow into the kitchen\'s Stripe dashboard.',
- docs: '/docs/ledger/payments/gateways',
+ docs: '/docs/ledger/payments/gateways/overview',
  },
  {
  icon: Navigation,

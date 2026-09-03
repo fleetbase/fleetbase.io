@@ -102,7 +102,7 @@ const stackParts = [
  title: 'QPay — local payment rails',
  description:
  'Native QPay integration via the Fleetbase payment gateway driver — Mongolia\'s most-used mobile-first checkout, no Western card friction.',
- docs: '/docs/ledger/payments/gateways',
+ docs: '/docs/ledger/payments/gateways/overview',
  },
  {
  icon: Compass,

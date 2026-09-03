@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import LedgerPageContent from './ledger-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/ledger' },
@@ -31,6 +32,7 @@ export default function LedgerPage() {
         applicationCategory="FinanceApplication"
       />
       <LedgerPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

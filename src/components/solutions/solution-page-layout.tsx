@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { ArrowRight, Check, ChevronDown, X } from 'lucide-react';
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
+import RelatedPages from '@/components/seo/related-pages';
 import { relForHref } from '@/lib/external-link';
 import { cn } from '@/lib/utils';
 
@@ -324,6 +325,9 @@ export default function SolutionPageLayout({
           </div>
         </section>
       )}
+
+      {/* Cross-links into the platform modules and sibling solutions. */}
+      <RelatedPages heading="Explore related" />
 
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
       <section className="section-padding">

@@ -303,7 +303,7 @@ export default function SecurityCompliancePageContent() {
                   </div>
                 ))}
               </div>
-              <Link href="/docs/platform/system-setup">
+              <Link href="/docs/platform/system-setup/branding">
                 <Button variant="outline">Self-Hosting Guide</Button>
               </Link>
             </div>
