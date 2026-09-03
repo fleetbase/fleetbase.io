@@ -74,10 +74,14 @@ const storefrontStores = {
 };
 
 /**
- * Core API resources. Most are not yet wrapped by the public SDK; folders not
- * in this map fall back to raw HTTP for JS/PHP samples.
+ * Core API resources exposed by the main Fleetbase SDK clients. JavaScript
+ * remains limited to its implemented stores; PHP mappings are enforced by the
+ * generated SDK example catalog.
  */
 const coreStores = {
+  'Chat Channels': 'chatChannels',
+  Comments: 'comments',
+  Files: 'files',
   Organizations: 'organizations',
 };
 
@@ -108,11 +112,15 @@ export const apis = {
     sidebarGroup: 'Core API',
     type: 'api',
     sdk: {
-      // Core resources currently fall back to raw HTTP — no first-class SDK
-      // wrappers for Files / Comments / Chat Channels yet. Organizations is
-      // mapped through the main `@fleetbase/sdk`.
+      // JavaScript currently maps organizations through the main SDK. PHP has
+      // first-class services for every Core collection listed below.
       js: {
         pkg: '@fleetbase/sdk',
+        client: 'fleetbase',
+        stores: coreStores,
+      },
+      php: {
+        pkg: 'fleetbase/fleetbase-php',
         client: 'fleetbase',
         stores: coreStores,
       },

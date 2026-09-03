@@ -87,12 +87,23 @@ const COLLECTIONS_DIR = process.env.POSTMAN_COLLECTIONS_DIR
 
 const OUT_BASE = path.join(ROOT, 'content/docs/api');
 const NAV_OUT = path.join(ROOT, 'src/lib/api-nav.generated.ts');
+const PHP_SDK_EXAMPLES_PATH = path.join(
+  ROOT,
+  'scripts/php-sdk-examples.generated.json',
+);
+let phpSdkExamples = {};
+const usedPhpSdkExampleIds = new Set();
 
 // ---------------------------------------------------------------------------
 // Entry
 // ---------------------------------------------------------------------------
 
 async function main() {
+  const phpSdkCatalog = JSON.parse(
+    await fs.readFile(PHP_SDK_EXAMPLES_PATH, 'utf8'),
+  );
+  phpSdkExamples = phpSdkCatalog.examples ?? {};
+
   if (!(await collectionsAvailable())) {
     console.warn(
       `\n⚠️  Postman collections not found at ${path.relative(ROOT, COLLECTIONS_DIR)}.\n` +
@@ -137,6 +148,14 @@ async function main() {
   }
 
   await writeNavConfig(navGroups);
+
+  const catalogIds = Object.keys(phpSdkExamples);
+  if (usedPhpSdkExampleIds.size !== catalogIds.length) {
+    const unused = catalogIds.filter((id) => !usedPhpSdkExampleIds.has(id));
+    throw new Error(
+      `PHP SDK catalog coverage is ${usedPhpSdkExampleIds.size}/${catalogIds.length}; unused IDs: ${unused.join(', ')}`,
+    );
+  }
 
   console.log('\n✅ API docs generated.');
 }
@@ -272,6 +291,14 @@ async function buildEndpointSection(
     method: req.method,
     pathSegments,
   });
+  const sdkExampleId = slugify(`${folder}-${resourceFolder}-${req.name}`);
+  const sdkExample = phpSdkExamples[sdkExampleId];
+  if (sdkConfig?.php) {
+    if (!sdkExample) {
+      throw new Error(`No PHP SDK example is mapped for ${sdkExampleId}.`);
+    }
+    usedPhpSdkExampleIds.add(sdkExampleId);
+  }
 
   const rawSamples = {
     curl: emitCurl({
@@ -297,8 +324,11 @@ async function buildEndpointSection(
       queryParams: req.structuredQueryParams,
       endpointKind: kind,
       endpointAction: action,
+      endpointName: req.name,
+      rawUrl: req.url,
       resourceFolder,
       sdkConfig,
+      sdkExample,
     }),
     python: emitPython({
       method: req.method,
@@ -337,8 +367,11 @@ async function buildEndpointSection(
             queryParams: req.structuredQueryParams,
             endpointKind: kind,
             endpointAction: action,
+            endpointName: req.name,
+            rawUrl: req.url,
             resourceFolder,
             sdkConfig,
+            sdkExample,
           }),
           python: emitPython({
             method: req.method,
