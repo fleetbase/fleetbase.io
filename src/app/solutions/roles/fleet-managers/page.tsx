@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/roles/fleet-managers' },
-  title: 'Fleet Management Software for Fleet Managers | Fleetbase',
-  description: 'Complete visibility over vehicle health, compliance, driver performance, and real-time locations — all from one open-source fleet management platform built for fleet managers.',
+  title: 'Fleet Management Software for Fleet Managers',
+  description: 'Open-source fleet management for fleet managers: vehicle health, compliance, driver performance and real-time locations in one platform.',
   keywords: ['fleet management software', 'fleet manager tools', 'vehicle compliance tracking', 'fleet maintenance platform', 'driver performance management', 'vehicle tracking fleet manager'],
   openGraph: {
     title: 'Fleet Management Software for Fleet Managers | Fleetbase',

@@ -47,9 +47,9 @@ const TERMS_DOC =
   'https://docs.google.com/document/d/1EweHYp1gkXobOWsNRALW3jE97mR1avMaKpFWsMGM1Io/edit?usp=sharing';
 
 export const metadata: Metadata = {
-  title: 'Navigator App Publishing Service | Fleetbase',
+  title: 'Navigator App Publishing Service',
   description:
-    'White-label, build, and ship your own branded Navigator driver app on the App Store and Google Play. We handle scaffolding, branding, store configuration, and submission. Fixed fee, fixed timeline.',
+    'Ship your own branded Navigator driver app on the App Store and Google Play. We handle scaffolding, branding, store setup and submission.',
   keywords: [
     'navigator app publishing',
     'white label driver app',

@@ -11,9 +11,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 const AI_REPO = 'https://github.com/fleetbase/ai';
 
 export const metadata: Metadata = {
- title: 'Open Source Logistics AI | AI-Powered Fleet & Delivery Management',
+ title: 'Open-Source Logistics AI for Fleet & Delivery',
  description:
- 'Fleetbase AI is the open-source AI for logistics — live now. Natural-language order creation, order insights, AI route optimization, and operational queries, powered by OpenAI or Claude, on infrastructure you control.',
+ 'Open-source AI for logistics: natural-language ordering, order insights and AI route optimization, powered by OpenAI or Claude.',
  keywords: [
  'logistics AI',
  'AI fleet management',
@@ -245,7 +245,7 @@ export default function LogisticsAIPage() {
 
  <div className="flex gap-4 justify-center flex-wrap">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io/register">
+ <Link href="https://console.fleetbase.io/register" rel="nofollow">
  Try Fleetbase Free <ArrowRight className="ml-2 w-4 h-4" />
  </Link>
  </Button>
@@ -538,7 +538,7 @@ export default function LogisticsAIPage() {
  </p>
  <div className="flex gap-4 justify-center flex-wrap">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io/register">
+ <Link href="https://console.fleetbase.io/register" rel="nofollow">
  Start Free — Try Fleetbase Now <ArrowRight className="ml-2 w-4 h-4" />
  </Link>
  </Button>

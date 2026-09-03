@@ -5,9 +5,9 @@ import { ArrowRight, Globe, Heart, Zap, Shield, Code2, MapPin, Linkedin, Puzzle 
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
- title: 'About Fleetbase | Open-Source Logistics Platform — Singapore',
+ title: 'About — Open-Source Logistics from Singapore',
  description:
- 'Fleetbase is an open-source logistics and fleet management platform founded in 2018 in Singapore by Shiv Thakker and Ronald Richardson. Learn our story, mission, and the team behind the platform.',
+ 'Fleetbase is an open-source logistics platform founded in Singapore in 2018 by Shiv Thakker and Ronald Richardson. Our story, mission and team.',
  keywords: ['about fleetbase', 'fleetbase team', 'open source logistics company', 'fleetbase singapore', 'logistics startup singapore', 'shiv thakker', 'ronald richardson'],
  alternates: { canonical: 'https://fleetbase.io/company/about' },
  openGraph: {
@@ -414,7 +414,7 @@ export default function AboutPage() {
  </p>
  <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io">
+ <Link href="https://console.fleetbase.io" rel="nofollow">
  Start free trial <ArrowRight className="ml-2 size-4" />
  </Link>
  </Button>

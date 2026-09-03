@@ -47,9 +47,9 @@ const TERMS_DOC =
   'https://docs.google.com/document/d/17NPti5SXTAMpFHqy7DlF6z73rp5iqYBkSebGk7nzfn8/edit?usp=sharing';
 
 export const metadata: Metadata = {
-  title: 'Storefront App Publishing Service | Fleetbase',
+  title: 'Storefront App Publishing Service',
   description:
-    'White-label, build, and ship your own branded Storefront customer app on the App Store and Google Play. We handle scaffolding, branding, payment integration, store configuration, and submission. Fixed fee, fixed timeline.',
+    'Ship your own branded Storefront customer app on the App Store and Google Play. Scaffolding, branding, payments, store setup and submission.',
   keywords: [
     'storefront app publishing',
     'white label customer app',

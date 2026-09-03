@@ -6,9 +6,9 @@ import ExtensionsMarketplacePageContent from './extensions-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/extensions' },
-  title: 'Extensions Marketplace — Build, Install & Monetize | Fleetbase',
+  title: 'Extensions Marketplace — Build & Monetize',
   description:
-    'Browse and install extensions from Fleetbase and the open-source community, or publish your own and monetize it to reach thousands of logistics operators worldwide.',
+    'Browse and install extensions from Fleetbase and the open-source community, or publish your own and monetise it to operators worldwide.',
   keywords: [
     'Fleetbase extensions',
     'logistics platform extensions',

@@ -6,7 +6,7 @@ import MobileAppsPageContent from './mobile-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/mobile' },
-  title: 'Mobile Apps — Navigator & Storefront for iOS & Android | Fleetbase',
+  title: 'Mobile Apps — Navigator & Storefront',
   description:
     'Fleetbase ships two open-source mobile apps — Navigator for drivers and Storefront for customers. White-label them or build your own on the Fleetbase API.',
   keywords: [

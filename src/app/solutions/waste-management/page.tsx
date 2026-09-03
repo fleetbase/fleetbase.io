@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/waste-management' },
-  title: 'Waste & Recycling Fleet Management Software | Fleetbase',
-  description: 'Optimize waste collection routes, reduce fuel costs, track containers, and generate compliance reports automatically. Open-source fleet management built for waste and recycling operations.',
+  title: 'Waste & Recycling Fleet Management Software',
+  description: 'Open-source fleet management for waste and recycling. Optimise collection routes, cut fuel costs, track containers and report on compliance.',
   keywords: ['waste management software', 'recycling fleet management', 'waste collection routing', 'bin tracking software', 'refuse logistics platform'],
   openGraph: {
     title: 'Waste & Recycling Operations Software | Fleetbase',

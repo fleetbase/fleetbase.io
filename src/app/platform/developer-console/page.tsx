@@ -6,7 +6,7 @@ import DeveloperConsolePageContent from './console-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/developer-console' },
-  title: 'Developer Console — API Keys, Webhooks & Monitoring | Fleetbase',
+  title: 'Developer Console — API Keys & Webhooks',
   description:
     'Manage API keys, configure webhooks, inspect request logs, and monitor real-time socket channels from the Fleetbase Developer Console.',
   keywords: [

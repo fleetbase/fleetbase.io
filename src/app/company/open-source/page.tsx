@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/company/open-source' },
- title: 'Open Source Mission | Fleetbase',
+ title: 'Open Source Mission',
  description:
- 'Fleetbase is fully open-source under AGPL-3.0. Learn why we chose open source, what it means for your deployment, how to self-host, and how to contribute to the project.',
+ 'Fleetbase is fully open-source under AGPL-3.0. Why we chose it, what it means for your deployment, how to self-host and how to contribute.',
  keywords: ['fleetbase open source', 'open source logistics platform', 'AGPL logistics software', 'self-hosted fleet management'],
  openGraph: {
  title: 'Open Source Mission | Fleetbase',

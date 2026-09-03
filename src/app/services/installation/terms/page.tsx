@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-    title: 'Implementation Terms & Conditions | Fleetbase',
+    title: 'Implementation Terms & Conditions',
     description: 'Terms and Conditions governing the Fleetbase Console & Core Implementation service — scope, payment, responsibilities, and legal terms.',
     alternates: { canonical: 'https://fleetbase.io/services/installation/terms' },
     openGraph: {

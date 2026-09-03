@@ -33,9 +33,9 @@ import {
 import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Commercial License | Fleetbase',
+  title: 'Commercial License',
   description:
-    'The Fleetbase Commercial License removes AGPL-3.0 copyleft obligations so you can build proprietary modifications, ship SaaS products, white-label deployments, and protect your custom code. Annual, monthly, and perpetual options available.',
+    'The Fleetbase Commercial License removes AGPL-3.0 copyleft so you can ship proprietary modifications, SaaS products and white-label deployments.',
   keywords: [
     'fleetbase commercial license',
     'AGPL commercial alternative',

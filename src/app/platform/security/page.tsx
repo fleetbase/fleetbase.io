@@ -6,9 +6,9 @@ import SecurityCompliancePageContent from './security-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/security' },
-  title: 'Security & Compliance — RBAC, Encryption & Audit Logs | Fleetbase',
+  title: 'Security & Compliance — RBAC & Audit Logs',
   description:
-    'Enterprise-grade security for logistics operations. End-to-end encryption, granular RBAC, MFA, comprehensive audit logs, GDPR compliance, and full self-hosting for data sovereignty.',
+    'End-to-end encryption, granular RBAC, MFA, audit logs and GDPR compliance, with full self-hosting for complete data sovereignty.',
   keywords: [
     'Fleetbase security',
     'logistics platform security',

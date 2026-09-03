@@ -4,7 +4,7 @@ import FleetOpsPageContent from './fleetops-page-content';
 
 const TITLE = 'Fleet-Ops — Fleet Management & Dispatch Software | Fleetbase';
 const DESCRIPTION =
-  'Fleet-Ops by Fleetbase is open-source fleet management and dispatch software. Real-time GPS tracking, route optimization, configurable workflows, and automated dispatch — self-hosted or cloud.';
+  'Open-source fleet management and dispatch software. Real-time GPS tracking, route optimization, configurable workflows and automated dispatch.';
 const CANONICAL = 'https://fleetbase.io/platform/fleetops';
 
 export const metadata: Metadata = {

@@ -29,7 +29,7 @@ export default function PlaceholderPage({
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io">
+ <Link href="https://console.fleetbase.io" rel="nofollow">
  Start Free Trial
  <ArrowRight className="ml-2 size-4" />
  </Link>

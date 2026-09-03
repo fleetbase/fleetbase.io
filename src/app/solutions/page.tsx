@@ -23,8 +23,8 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions' },
-  title: 'Logistics Solutions by Industry, Use Case & Role | Fleetbase',
-  description: 'Open-source logistics platform for every operation — trucking, food delivery, healthcare, container logistics, government, and more. Explore solutions by industry, use case, and role.',
+  title: 'Logistics Solutions by Industry, Use Case & Role',
+  description: 'Open-source logistics for trucking, food delivery, healthcare, container operations, government and more. Browse by industry, use case or role.',
   keywords: ['logistics software solutions', 'fleet management platform', 'delivery management software', 'open source logistics', 'logistics by industry'],
   openGraph: {
     title: 'Logistics Solutions by Industry, Use Case & Role | Fleetbase',
@@ -310,7 +310,7 @@ export default function SolutionsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="https://console.fleetbase.io/onboard"
+                href="https://console.fleetbase.io/onboard" rel="nofollow"
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 Start Free Trial <ArrowRight className="size-4" />

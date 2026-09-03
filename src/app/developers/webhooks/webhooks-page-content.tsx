@@ -154,7 +154,7 @@ export default function WebhooksPageContent() {
               <Link href="/docs/platform/developer-console/webhooks">
                 <Button size="lg">Read the Docs</Button>
               </Link>
-              <Link href="https://console.fleetbase.io/onboard">
+              <Link href="https://console.fleetbase.io/onboard" rel="nofollow">
                 <Button size="lg" variant="outline">Set Up a Webhook</Button>
               </Link>
               <Link href="/developers/api">
@@ -443,7 +443,7 @@ export default function WebhooksPageContent() {
             Set up your first webhook endpoint in under two minutes from the Fleetbase Developer Console.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="https://console.fleetbase.io/onboard">
+            <Link href="https://console.fleetbase.io/onboard" rel="nofollow">
               <Button size="lg">Get Started Free</Button>
             </Link>
             <Link href="/docs/platform/developer-console/webhooks">

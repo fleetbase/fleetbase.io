@@ -3,9 +3,9 @@ import ApiIntegrationsPageContent from './api-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/developers/api' },
-  title: 'API & Integrations — REST, WebSocket & Webhooks | Fleetbase',
+  title: 'API & Integrations — REST, WebSocket & Webhooks',
   description:
-    'A complete REST API, real-time SocketCluster channels, and event-driven webhooks to integrate Fleetbase with your systems or build new logistics-powered applications.',
+    'A complete REST API, real-time SocketCluster channels and event-driven webhooks to integrate Fleetbase with your existing systems.',
   keywords: [
     'Fleetbase API',
     'logistics REST API',

@@ -16,8 +16,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: 'Managed Installation Service | Fleetbase',
-  description: 'Get Fleetbase fully deployed on your own infrastructure in 7 days. Our team handles everything — server deployment, CI/CD, custom branding, DNS, and handover. $2,500 one-time.',
+  title: 'Managed Installation Service',
+  description: 'Get Fleetbase deployed on your own infrastructure in 7 days. Server deployment, CI/CD, custom branding, DNS and handover. $2,500 one-time.',
   keywords: [
     'fleetbase installation service',
     'fleetbase deployment',

@@ -232,7 +232,7 @@ export default function PlatformPageContent({ stars }: { stars: string }) {
             </p>
             <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Button size="lg" asChild>
-                <a href="https://console.fleetbase.io/onboard" target="_blank" rel="noopener noreferrer">
+                <a href="https://console.fleetbase.io/onboard" target="_blank" rel="noopener noreferrer nofollow">
                   Try Fleetbase Cloud <ArrowRight className="ml-2 size-4" />
                 </a>
               </Button>
@@ -470,7 +470,7 @@ export default function PlatformPageContent({ stars }: { stars: string }) {
               </p>
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button size="lg" asChild>
-                  <a href="https://console.fleetbase.io/onboard" target="_blank" rel="noopener noreferrer">
+                  <a href="https://console.fleetbase.io/onboard" target="_blank" rel="noopener noreferrer nofollow">
                     Start Free Trial <ArrowRight className="ml-2 size-4" />
                   </a>
                 </Button>

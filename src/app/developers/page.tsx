@@ -31,9 +31,9 @@ const CANONICAL = 'https://fleetbase.io/developers';
 
 export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
-  title: 'Developer Platform — Logistics API, SDKs, Webhooks & Extensions',
+  title: 'Developer Platform — Logistics API & SDKs',
   description:
-    'Build on the open-source logistics platform. REST API, real-time WebSocket channels, JavaScript and PHP SDKs, webhooks, and a full extension framework — all on the same codebase Fleetbase itself runs on.',
+    'Build on the open-source logistics platform: REST API, WebSocket channels, JavaScript and PHP SDKs, webhooks and a full extension framework.',
   keywords: [
     'logistics API',
     'fleet management API',

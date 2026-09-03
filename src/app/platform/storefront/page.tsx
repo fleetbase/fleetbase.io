@@ -6,9 +6,9 @@ import StorefrontPageContent from './storefront-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/storefront' },
-  title: 'Storefront — Headless Commerce & Marketplace Platform | Fleetbase',
+  title: 'Storefront — Headless Commerce Platform',
   description:
-    'Storefront by Fleetbase is open-source headless commerce built for on-demand businesses. Zero commission fees, white-label mobile apps, multi-vendor marketplace, and native Fleet-Ops delivery integration.',
+    'Open-source headless commerce for on-demand business. Zero commission, white-label mobile apps, multi-vendor marketplace and native delivery.',
   keywords: [
     'headless commerce platform',
     'online ordering software',

@@ -24,9 +24,9 @@ import { Button } from '@/components/ui/button';
 import './oli-max.css';
 
 export const metadata: Metadata = {
- title: 'Oli Max × Fleetbase — Bulk Supply Across Mongolia, Powered by Storefront',
+ title: 'Oli Max — Bulk Supply Across Mongolia',
  description:
- 'Oli Max is the open-source Storefront app deployed at scale by Techbase LLC in Ulaanbaatar — connecting Mongolian restaurants, vendors, and households to bulk meat, flour, rice, oil, and household goods directly from distributors and factories.',
+ 'Oli Max is an open-source Storefront app deployed at scale in Ulaanbaatar, connecting Mongolian households to bulk goods direct from distributors.',
  keywords: [
  'Oli Max',
  'Techbase LLC',

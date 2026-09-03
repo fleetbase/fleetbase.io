@@ -62,6 +62,7 @@ import {
  NavigationMenuTrigger,
  navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
+import { relForHref } from '@/lib/external-link';
 import { cn } from '@/lib/utils';
 
 // Type definitions
@@ -691,7 +692,11 @@ const Navbar = () => {
  data-cta-id={button.ctaId}
  data-cta-location="navbar_mobile"
  data-cta-variant="primary"
- {...(button.external && { target: "_blank", rel: "noopener noreferrer" })}
+ {...(button.external && { target: "_blank" })}
+ rel={relForHref(
+ button.href,
+ button.external ? 'noopener noreferrer' : undefined,
+ )}
  >
  {button.icon && <button.icon className="size-4 mr-2" />}
  {button.label}
@@ -861,7 +866,11 @@ const Navbar = () => {
  data-cta-id={button.ctaId}
  data-cta-location="navbar"
  data-cta-variant="primary"
- {...(button.external && { target: "_blank", rel: "noopener noreferrer" })}
+ {...(button.external && { target: "_blank" })}
+ rel={relForHref(
+ button.href,
+ button.external ? 'noopener noreferrer' : undefined,
+ )}
  >
  {button.icon && <button.icon className="size-4 mr-2" />}
  {button.label}

@@ -11,8 +11,8 @@ import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/services' },
- title: 'Services | Fleetbase',
- description: 'Explore Fleetbase professional services — implementation, custom development, training, and support. Get expert help to deploy, scale, and customise your logistics platform.',
+ title: 'Services',
+ description: 'Fleetbase professional services: implementation, custom development, training and support. Expert help to deploy, scale and customise.',
  keywords: ['Fleetbase services', 'logistics platform implementation', 'custom development', 'support plans', 'professional services'],
  openGraph: {
  title: 'Services | Fleetbase',

@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/roles/executives' },
-  title: 'Logistics Platform for Executives & Business Leaders | Fleetbase',
-  description: 'Give leadership real-time visibility into logistics performance, cost efficiency, and growth metrics. Open-source logistics infrastructure that scales without vendor lock-in.',
+  title: 'Logistics Platform for Executives',
+  description: 'Real-time visibility into logistics performance, cost efficiency and growth. Open-source infrastructure that scales without vendor lock-in.',
   keywords: ['logistics software for executives', 'logistics ROI platform', 'logistics cost reduction', 'supply chain executive dashboard', 'logistics business intelligence', 'fleet cost management'],
   openGraph: {
     title: 'Logistics Platform for Executives | Fleetbase',

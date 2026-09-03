@@ -5,9 +5,9 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/community' },
- title: 'Community | Fleetbase',
+ title: 'Community',
  description:
- 'Join the Fleetbase community — thousands of logistics operators, developers, and contributors on Discord, GitHub, and our developer forums. Get help, share ideas, and shape the platform.',
+ 'Join thousands of logistics operators, developers and contributors on Discord, GitHub and our forums. Get help, share ideas, shape the platform.',
  keywords: ['fleetbase community', 'logistics software community', 'fleetbase discord', 'open source logistics community'],
  openGraph: {
  title: 'Community | Fleetbase',

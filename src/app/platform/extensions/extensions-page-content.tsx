@@ -157,7 +157,7 @@ export default function ExtensionsMarketplacePageContent() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                 <Button size="lg">Browse Extensions</Button>
               </Link>
               <Link href="/developers/extensions">
@@ -295,7 +295,7 @@ export default function ExtensionsMarketplacePageContent() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+            <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
               <Button size="lg" variant="outline">
                 Browse all extensions <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -653,7 +653,7 @@ export default function ExtensionsMarketplacePageContent() {
                 reach thousands of logistics operators.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                   <Button size="lg">Browse marketplace</Button>
                 </Link>
                 <Link href="/developers/extensions">

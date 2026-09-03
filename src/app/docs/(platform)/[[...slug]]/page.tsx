@@ -7,6 +7,7 @@ import {
 import { notFound } from 'next/navigation';
 
 import { getMDXComponents } from '@/components/mdx-components';
+import { buildDocsMetadata } from '@/lib/docs-metadata';
 import { source } from '@/lib/source';
 
 export default async function Page(props: {
@@ -54,8 +55,9 @@ export async function generateMetadata(props: {
  const page = source.getPage(params.slug);
  if (!page) notFound();
 
- return {
- title: page.data.title,
- description: page.data.description,
- };
+ return buildDocsMetadata({
+    data: page.data,
+    baseUrl: '/docs',
+    slug: params.slug,
+  });
 }

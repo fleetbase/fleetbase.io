@@ -3,10 +3,15 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+const COMPARE_DESCRIPTION =
+ 'See how Fleetbase compares to Onfleet, Tookan and Route4Me. Open-source fleet management with no per-task or per-agent pricing.';
+
+const COMPARE_OG_IMAGE =
+ '/og?title=Fleetbase%20vs%20Onfleet%2C%20Tookan%20%26%20Route4Me&eyebrow=Compare&subtitle=Open-source%20fleet%20management%20with%20no%20per-task%20pricing.';
+
 export const metadata: Metadata = {
- title: 'Fleetbase Comparisons | Open-Source Alternative to Onfleet, Tookan, Route4Me',
- description:
- 'See how Fleetbase compares to Onfleet, Tookan, Route4Me, and Bringg. Open-source fleet management and TMS software with no per-task or per-agent pricing.',
+ title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me',
+ description: COMPARE_DESCRIPTION,
  keywords: [
  'Onfleet alternative',
  'Tookan alternative',
@@ -16,6 +21,20 @@ export const metadata: Metadata = {
  'delivery management software comparison',
  ],
  alternates: { canonical: 'https://fleetbase.io/compare' },
+ openGraph: {
+ type: 'website',
+ url: 'https://fleetbase.io/compare',
+ title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me | Fleetbase',
+ description: COMPARE_DESCRIPTION,
+ siteName: 'Fleetbase',
+ images: [{ url: COMPARE_OG_IMAGE, width: 1200, height: 630, alt: 'Fleetbase compared with Onfleet, Tookan and Route4Me' }],
+ },
+ twitter: {
+ card: 'summary_large_image',
+ title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me | Fleetbase',
+ description: COMPARE_DESCRIPTION,
+ images: [COMPARE_OG_IMAGE],
+ },
 };
 
 const COMPARISONS = [
@@ -106,7 +125,7 @@ export default function ComparePage() {
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io">
+ <Link href="https://console.fleetbase.io" rel="nofollow">
  Start Free Trial <ArrowRight className="ml-2 h-4 w-4" />
  </Link>
  </Button>

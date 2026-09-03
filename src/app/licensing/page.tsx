@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/licensing' },
- title: 'Licensing | Fleetbase',
+ title: 'Licensing',
  description:
- 'Fleetbase is released under AGPL-3.0. If you deploy on a network and make changes, those changes must remain AGPL — or you need a commercial licence to keep them proprietary.',
+ 'Fleetbase is released under AGPL-3.0. Deploy on a network with changes and they stay AGPL — or take a commercial licence to keep them private.',
  keywords: ['fleetbase licensing', 'AGPL logistics software', 'open source logistics licence', 'commercial logistics software licence', 'AGPL network copyleft'],
  openGraph: {
  title: 'Licensing | Fleetbase',

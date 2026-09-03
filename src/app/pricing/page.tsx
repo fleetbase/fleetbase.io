@@ -6,7 +6,7 @@ import { PRICING_FAQS } from './faqs';
 import PricingClient from './pricing-client';
 
 const DESCRIPTION =
-  'Fleetbase Cloud is $29/month plus $5 per driver or vehicle. Orders are free at any volume — no per-delivery fee. Every module included. Self-hosted implementation from $2,500 one-time.';
+  '$29/month plus $5 per driver or vehicle. Orders are free at any volume — no per-delivery fee. Every module included. Self-hosting from $2,500.';
 
 const OG_IMAGE =
   '/og?title=%2429%20a%20month%2C%20plus%20%245%20per%20driver%20or%20vehicle&eyebrow=Pricing&subtitle=One%20plan.%20Every%20module.%20Orders%20are%20free%20at%20any%20volume.';

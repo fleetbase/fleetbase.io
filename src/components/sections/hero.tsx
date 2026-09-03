@@ -46,7 +46,7 @@ export default async function Hero() {
             <Link
               href="https://console.fleetbase.io/onboard"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               data-cta-id="start_free_trial"
               data-cta-location="hero"
               data-cta-variant="primary"

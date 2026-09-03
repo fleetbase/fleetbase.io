@@ -88,7 +88,7 @@ export default function DeveloperConsolePageContent() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                 <Button size="lg">Open Developer Console</Button>
               </Link>
               <Link href="/developers/api">
@@ -475,7 +475,7 @@ export default function DeveloperConsolePageContent() {
                 Fleetbase into your systems today.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                   <Button size="lg">Open Developer Console</Button>
                 </Link>
                 <Link href="/developers/api">

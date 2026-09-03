@@ -22,9 +22,9 @@ import { Button } from '@/components/ui/button';
 import './true-vegan.css';
 
 export const metadata: Metadata = {
- title: 'True Vegan × Fleetbase — Plant-Based Dining, Delivered on Storefront',
+ title: 'True Vegan — Plant-Based Dining, Delivered',
  description:
- 'True Vegan, by Chef Rahein, brings plant-based dining to Delray Beach with a branded Storefront customer app — pickup, delivery, and Stripe checkout, all powered by Fleetbase.',
+ 'True Vegan brings plant-based dining to Delray Beach with a branded Storefront app — pickup, delivery and Stripe checkout, powered by Fleetbase.',
  keywords: [
  'True Vegan',
  'Chef Rahein',

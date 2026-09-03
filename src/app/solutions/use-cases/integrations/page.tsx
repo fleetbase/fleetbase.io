@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/use-cases/integrations' },
-  title: 'Logistics API & Integrations | Fleetbase',
-  description: 'Connect Fleetbase to your entire tech stack with a full REST API, real-time webhooks, and pre-built integrations. Open-source logistics platform built to fit your existing workflows.',
+  title: 'Logistics API & Integrations',
+  description: 'Connect Fleetbase to your stack with a full REST API, real-time webhooks and pre-built integrations that fit your existing workflows.',
   keywords: ['logistics API', 'fleet management API', 'logistics integration platform', 'delivery API', 'logistics webhook integration', 'headless logistics platform'],
   openGraph: {
     title: 'Logistics API & Integrations | Fleetbase',
