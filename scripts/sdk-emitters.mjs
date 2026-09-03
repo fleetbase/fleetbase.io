@@ -7,7 +7,7 @@
  * Languages:
  *   - curl   (always emitted, raw HTTP)
  *   - js     (uses the SDK if mapped, else raw fetch)
- *   - php    (uses the SDK if mapped, else raw Guzzle)
+ *   - php    (uses the generated PHP SDK catalog when mapped, else raw Guzzle)
  *   - python (always raw `requests` — no Python SDK exists)
  */
 
@@ -229,11 +229,21 @@ export function emitPhp({
   queryParams,
   endpointKind,
   endpointAction,
+  endpointName,
+  rawUrl,
   resourceFolder,
   sdkConfig,
+  sdkExample,
 }) {
   const php = sdkConfig?.php;
   if (!php) return emitPhpRaw({ method, fullUrl, body });
+
+  if (
+    typeof sdkExample?.code === 'string' &&
+    !isCanonicalPhpCrud({ endpointKind, endpointName, rawUrl })
+  ) {
+    return sdkExample.code;
+  }
 
   const store = php.stores?.[resourceFolder] ?? camelCase(resourceFolder);
 
@@ -292,6 +302,24 @@ export function emitPhp({
     default:
       return emitPhpRaw({ method, fullUrl, body });
   }
+}
+
+function isCanonicalPhpCrud({ endpointKind, endpointName, rawUrl }) {
+  const path = String(rawUrl ?? '')
+    .replace(/^\{\{base_url\}\}\/\{\{namespace\}\}\/?/i, '')
+    .split('?', 1)[0]
+    .replace(/^\/+|\/+$/g, '');
+  const segments = path === '' ? [] : path.split('/');
+  const itemPath = segments.length === 2 && isIdParam(segments[1]);
+
+  if (endpointKind === 'create') {
+    return segments.length === 1 && /^Create\b/i.test(endpointName ?? '');
+  }
+  if (endpointKind === 'query') return segments.length === 1;
+  if (endpointKind === 'find') return itemPath;
+  if (endpointKind === 'update') return itemPath;
+  if (endpointKind === 'delete') return itemPath;
+  return false;
 }
 
 function emitPhpRaw({ method, fullUrl, body }) {
