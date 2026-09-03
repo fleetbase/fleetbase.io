@@ -1,0 +1,41 @@
+---
+title: Connections and equipment
+description: Connect trailers to vehicles, preserve towing history, and manage equipment attached to vehicles or trailers.
+---
+
+# Trailer connections and equipment
+
+Fleet-Ops treats a towing relationship as an effective-dated **connection**, not as a permanent field on either asset. Each connection records the Vehicle, Trailer, towing position, start time, optional end time, source, notes, and audit data.
+
+## Connection rules
+
+- A Trailer can have only one active Vehicle connection at a time.
+- A towing position on a Vehicle can contain only one active Trailer.
+- Repeating the same attach or detach request is safe and does not create duplicate active connections.
+- Moving a Trailer to another Vehicle requires detaching the current connection first.
+- Detaching closes the active record; it does not erase it.
+- Tenant boundaries are enforced for both assets.
+
+These rules also allow multi-trailer combinations: connect each Trailer to the same Vehicle with a distinct towing position.
+
+## From a Vehicle
+
+Open a Vehicle and choose **Trailers** to see its active Trailer connections. Use **Attach Trailer** to select an unattached Trailer, or **Detach** to end a connection. The Vehicle's **Equipment** tab separately lists auxiliary equipment assigned directly to that Vehicle.
+
+## From a Trailer
+
+Open a Trailer and use:
+
+- **Connection history** to review current and completed towing relationships;
+- **Equipment** to attach, open, or detach auxiliary equipment;
+- **Devices** to review trackers and sensors attached directly to the Trailer.
+
+## Equipment assignment
+
+Equipment has a polymorphic assignment. It can be attached directly to a Vehicle or Trailer and reassigned atomically. Examples include a liftgate fixed to a Trailer, a pallet jack carried on a Vehicle, or a refrigeration unit mounted on a reefer.
+
+The Equipment create and edit forms let you choose the asset type and asset. The public API also exposes explicit attach and detach operations. Assignment responses include the asset type, public ID, and display name; private UUIDs are not accepted by public endpoints.
+
+## Operational guidance
+
+Record the physical relationship that exists in the yard or on the road. Equipment mounted on a Trailer should remain attached to that Trailer when the Trailer moves between Vehicles. Only attach it to the Vehicle when the equipment belongs operationally to the powered unit.

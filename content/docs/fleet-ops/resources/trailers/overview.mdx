@@ -1,0 +1,51 @@
+---
+title: Trailers
+description: Register and operate trailers as first-class towed fleet assets with connections, equipment, maintenance, and telematics.
+---
+
+# Trailers
+
+Fleet-Ops models a **Trailer** as a first-class fleet resource. A trailer has its own identity, lifecycle, dimensions, maintenance history, equipment, devices, and location even though it cannot move under its own power. This keeps semitrailers, flatbeds, tankers, chassis, reefers, dollies, and other towed assets separate from both powered **Vehicles** and auxiliary **Equipment**.
+
+Choose **Resources → Trailers**, directly below Vehicles, to create and manage trailers.
+
+## When to use each resource
+
+| Resource | Use it for | Examples |
+| :--- | :--- | :--- |
+| **Vehicle** | A powered road unit that can perform transport work | tractor head, truck, van |
+| **Trailer** | A towable asset with an independent identity and operational lifecycle | dry van, reefer, flatbed, tanker, chassis |
+| **Equipment** | Auxiliary gear that can be mounted, carried, or reassigned | liftgate, pallet jack, refrigeration unit, tool kit |
+
+Do not create a tractor head as a Trailer. A head or tractor is a Vehicle, and its current towing relationship points to one or more Trailer records.
+
+## Trailer data
+
+Trailer records support:
+
+- identity and registration: name, code, VIN, plate and serial number;
+- classification: dry van, reefer, flatbed, step deck, lowboy, tanker, bulk, dump, chassis, curtain side, car carrier, livestock, logging, dolly, specialty, or other;
+- physical specifications: length, width, height, tare, gross vehicle weight rating, payload, volume, axles, tires, doors, brakes, ABS/EBS, and coupling;
+- reefer details: temperature range and engine hours;
+- ownership, acquisition, lease, valuation, vendor, warranty, photo, notes, and custom fields;
+- current vehicle connection and complete connection history;
+- attached devices and equipment;
+- location, connectivity, maintenance schedules, work orders, and maintenance history.
+
+## Lifecycle
+
+1. Create or import the Trailer.
+2. Attach equipment and a telematics device when applicable.
+3. Connect the Trailer to a Vehicle when a towing movement starts.
+4. Track it directly through its device or the Trailer tracking API.
+5. Detach it when the movement ends. Fleet-Ops preserves the completed connection in history.
+6. Schedule inspections and maintenance against the Trailer itself.
+
+A Trailer cannot be deleted while it has an active vehicle connection. Detach it first so the operational history remains accurate.
+
+## Related pages
+
+- [Connections and equipment](/docs/fleet-ops/resources/trailers/connections-and-equipment)
+- [Trailer telematics](/docs/fleet-ops/resources/trailers/telematics)
+- [Vehicles](/docs/fleet-ops/resources/vehicles/overview)
+- [Maintenance](/docs/fleet-ops/maintenance/overview)
