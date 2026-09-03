@@ -50,8 +50,29 @@ test('uses the exact positional dispatchOrder signature for the custom endpoint'
     sdkExample: catalog.examples['fleetbase-api-orders-dispatch-an-order'],
   });
 
-  assert.match(code, /\$fleetbase->orders->dispatchOrder\('order_id-fixture'\);/);
+  assert.match(code, /\$orderId = 'order_id-fixture';/);
+  assert.match(code, /\$fleetbase->orders->dispatchOrder\(\$orderId\);/);
   assert.doesNotMatch(code, /findRecord/);
+});
+
+test('uses positional identifiers and direct data for PHP SDK actions', () => {
+  const code = emitPhp({
+    method: 'POST',
+    fullUrl: 'https://api.fleetbase.io/v1/drivers/:id/change-password',
+    body: '{"password":"new-password"}',
+    queryParams: {},
+    endpointKind: 'custom-action',
+    endpointName: 'Change Driver Password',
+    rawUrl: '{{base_url}}/{{namespace}}/drivers/:id/change-password',
+    resourceFolder: 'Drivers',
+    sdkConfig,
+    sdkExample:
+      catalog.examples['fleetbase-api-drivers-change-driver-password'],
+  });
+
+  assert.match(code, /changeDriverPassword\(\n    \$driverId,\n    \[/);
+  assert.doesNotMatch(code, /'id'\s*=>/);
+  assert.doesNotMatch(code, /'body'\s*=>/);
 });
 
 test('uses first-class PHP SDK methods for Core API custom endpoints', () => {
