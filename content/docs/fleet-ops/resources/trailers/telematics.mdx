@@ -1,0 +1,28 @@
+---
+title: Trailer telematics
+description: Attach IoT devices to trailers and ingest current and historical telemetry independently of the towing vehicle.
+---
+
+# Trailer telematics
+
+A Trailer can have one or more directly attached Devices. This is useful for battery-powered GPS trackers, reefer controllers, door and cargo sensors, tire-pressure systems, and other IoT hardware that continues reporting when the Trailer is detached from a Vehicle.
+
+## Attach a device
+
+From a Trailer, choose **Attach Device** and select an unattached device. From Connectivity, the same device attachment workspace can target either a Vehicle or a Trailer. Reassigning a device closes its previous installation record and creates a new one; detaching preserves that history.
+
+## Ingested state
+
+Location events from an attached device update the Trailer's current projection and position history, including available speed, heading, altitude, odometer, reefer engine hours, online state, provider, and observation time. Older out-of-order events remain in event history but do not overwrite a newer current position.
+
+Trailer updates broadcast `trailer.location_changed` on company, public Trailer ID, and internal Trailer channels. Public tracking endpoints use Trailer public IDs and reject private UUID fields.
+
+## Direct API tracking
+
+Use the Trailer tracking endpoint when the source does not arrive through a configured telematics provider. Supply latitude and longitude plus an optional observation time and motion values. Fleet-Ops stores a historical position and updates the Trailer snapshot only when the observation is not stale.
+
+## Vehicle versus Trailer telemetry
+
+Attach each device to the asset it physically measures. A tracker installed on a Trailer belongs to the Trailer even while it is being towed. The current connection tells you which Vehicle is moving it; it should not be used to rewrite device ownership or duplicate positions onto the Vehicle.
+
+See [Devices](/docs/fleet-ops/connectivity/devices/overview) and [Telematics](/docs/fleet-ops/connectivity/telematics/overview) for provider setup and event ingestion.

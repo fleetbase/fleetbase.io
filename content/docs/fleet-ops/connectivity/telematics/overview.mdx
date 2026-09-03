@@ -1,11 +1,11 @@
 ---
 title: Telematics
-description: Connect telematics providers to Fleet-Ops — enter API credentials, discover devices, link them to vehicles, and start receiving live telemetry data.
+description: Connect telematics providers to Fleet-Ops, map devices to Vehicles or Trailers, and receive live telemetry data.
 ---
 
 # Telematics
 
-**Telematics** devices are modems installed in vehicles that continuously transmit GPS position, engine diagnostics, and sensor data to a telematics provider's cloud platform. Fleet-Ops connects to supported providers via API to ingest this data in real time.
+**Telematics** devices are modems or asset trackers that transmit GPS position, diagnostics, and sensor data to a provider's cloud platform. Fleet-Ops connects to supported providers via API and maps each device to the Vehicle or Trailer it physically measures.
 
 Navigate to **Fleet-Ops → Connectivity → Telematics**.
 
@@ -58,10 +58,10 @@ Once the telematics integration is connected, Fleet-Ops can discover the devices
     Click **Discover Devices** — Fleet-Ops fetches the list of registered devices from the provider.
   </Step>
   <Step>
-    For each discovered device, click **Link to Vehicle** and select the vehicle it is installed in.
+    For each discovered device, choose **Attach to Asset**, select Vehicle or Trailer, and then select the asset where it is installed.
   </Step>
   <Step>
-    Save. Fleet-Ops now associates telemetry data from this device with the selected vehicle.
+    Save. Fleet-Ops now associates telemetry data from this device with the selected asset.
   </Step>
 </Steps>
 
@@ -82,10 +82,10 @@ Each telematics integration includes device records:
 
 ## Live Data Flow
 
-Once a device is linked to a vehicle:
+Once a device is linked to a Vehicle or Trailer:
 
 1. The provider sends position updates to Fleet-Ops (via webhook or API polling)
-2. Fleet-Ops stores the position as a `Position` record for the vehicle
+2. Fleet-Ops stores the position as a `Position` record for the attached asset
 3. The position is broadcast to the live map via SocketCluster
 4. OBD-II and sensor data is stored as `DeviceEvent` records
 5. Alerts (engine fault codes, geofence crossings) can trigger Issues or notifications

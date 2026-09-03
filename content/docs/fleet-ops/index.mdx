@@ -5,7 +5,7 @@ description: Fleet-Ops is the flagship fleet and transport management extension 
 
 # Fleet-Ops
 
-Fleet-Ops is the core logistics and fleet management extension for the Fleetbase platform. It gives operations teams a full dispatch console for managing orders, drivers, vehicles, and routes — plus a mobile driver app (Navigator) that handles real-time GPS tracking, turn-by-turn navigation, and proof of delivery capture.
+Fleet-Ops is the core logistics and fleet management extension for the Fleetbase platform. It gives operations teams a full dispatch console for managing orders, drivers, Vehicles, first-class Trailers, and routes — plus a mobile driver app (Navigator) that handles real-time GPS tracking, turn-by-turn navigation, and proof of delivery capture.
 
 ![Fleet-Ops multi-waypoint order showing optimized route across multiple stops with driver assignment and live status timeline](/images/screenshots/fleet-ops/fleet-ops-multi-waypoint-order.webp)
 
@@ -19,6 +19,7 @@ Fleet-Ops covers the full delivery and fleet operations lifecycle in one place:
 | **Live Map** | Real-time driver and vehicle positions with route overlays |
 | **Driver App (Navigator)** | Mobile app for drivers — navigation, status updates, POD capture |
 | **Fleet & Driver Management** | Organize drivers and vehicles into fleets, track availability and status |
+| **Trailer Management** | Manage towed assets, Vehicle connections, equipment, maintenance, devices, and telemetry |
 | **Orchestrator** | Multi-phase planner — stack vehicle allocation, driver allocation, and route optimization phases in sequence |
 | **Scheduler** | Driver shift scheduling and order timeline management |
 | **Order Configurations** | Custom order types with configurable workflows and entity fields |
@@ -34,6 +35,7 @@ Fleet-Ops is organized around a few core entities:
 - **Order** — a delivery or service task with a pickup location, a destination, and items (entities). Orders move through a configurable status lifecycle and are captured with proof of delivery.
 - **Driver** — a person who executes orders using the Navigator app. Drivers have real-time location, shift schedules, and skill constraints that the Orchestrator uses for assignment.
 - **Vehicle** — a fleet asset with capacity, location tracking, and maintenance history.
+- **Trailer** — an independently managed towed asset with effective-dated Vehicle connections, equipment, maintenance, and telematics.
 - **Fleet** — a logical group of drivers and vehicles, typically scoped to a route, region, or service type.
 - **Order Configuration** — a template that defines a custom order type: its activity flow, the entity fields required, and the proof of delivery method.
 
