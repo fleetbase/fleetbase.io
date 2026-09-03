@@ -78,12 +78,6 @@ const nextConfig: NextConfig = {
         destination: '/platform/fleetops',
         permanent: true,
       },
-      {
-        // No Bringg comparison page exists yet — send to the compare index.
-        source: '/compare/vs-bringg',
-        destination: '/compare',
-        permanent: true,
-      },
 
       // ── Broken inbound links (docs) ───────────────────────────────────────
       // Section roots and renamed slugs land on the canonical Fumadocs page.

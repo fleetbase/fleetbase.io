@@ -131,6 +131,16 @@ const STATIC_ROUTES: StaticEntry[] = [
   { path: '/compare/vs-onfleet', changeFrequency: 'monthly', priority: 0.9 },
   { path: '/compare/vs-route4me', changeFrequency: 'monthly', priority: 0.8 },
   { path: '/compare/vs-tookan', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/compare/vs-bringg', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/compare/vs-fleetio', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/compare/vs-samsara', changeFrequency: 'monthly', priority: 0.9 },
+  // Buyer's guides. Refreshed quarterly alongside the verified pricing data,
+  // hence the monthly change frequency and high priority — these are the pages
+  // built to win category search.
+  { path: '/guides', changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/guides/best-last-mile-delivery-software', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/guides/best-route-optimization-software', changeFrequency: 'monthly', priority: 0.9 },
+  { path: '/guides/best-dispatch-software', changeFrequency: 'monthly', priority: 0.9 },
 
   // Company
   { path: '/company', changeFrequency: 'monthly', priority: 0.6 },

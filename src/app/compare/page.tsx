@@ -4,19 +4,21 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const COMPARE_DESCRIPTION =
- 'See how Fleetbase compares to Onfleet, Tookan and Route4Me. Open-source fleet management with no per-task or per-agent pricing.';
+ 'See how Fleetbase compares to Onfleet, Tookan, Route4Me, Bringg, Fleetio and Samsara. Open-source, with no per-task or per-agent pricing.';
 
 const COMPARE_OG_IMAGE =
  '/og?title=Fleetbase%20vs%20Onfleet%2C%20Tookan%20%26%20Route4Me&eyebrow=Compare&subtitle=Open-source%20fleet%20management%20with%20no%20per-task%20pricing.';
 
 export const metadata: Metadata = {
- title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me',
+ title: 'Compare Fleetbase: Onfleet, Bringg, Fleetio & More',
  description: COMPARE_DESCRIPTION,
  keywords: [
  'Onfleet alternative',
  'Tookan alternative',
  'Route4Me alternative',
  'Bringg alternative',
+ 'Fleetio alternative',
+ 'Samsara alternative',
  'open source fleet management alternative',
  'delivery management software comparison',
  ],
@@ -24,14 +26,14 @@ export const metadata: Metadata = {
  openGraph: {
  type: 'website',
  url: 'https://fleetbase.io/compare',
- title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me | Fleetbase',
+ title: 'Compare Fleetbase: Onfleet, Bringg, Fleetio & More | Fleetbase',
  description: COMPARE_DESCRIPTION,
  siteName: 'Fleetbase',
  images: [{ url: COMPARE_OG_IMAGE, width: 1200, height: 630, alt: 'Fleetbase compared with Onfleet, Tookan and Route4Me' }],
  },
  twitter: {
  card: 'summary_large_image',
- title: 'Compare Fleetbase: Onfleet, Tookan & Route4Me | Fleetbase',
+ title: 'Compare Fleetbase: Onfleet, Bringg, Fleetio & More | Fleetbase',
  description: COMPARE_DESCRIPTION,
  images: [COMPARE_OG_IMAGE],
  },
@@ -62,10 +64,30 @@ const COMPARISONS = [
  'Route4Me plans routes. Fleetbase does that and more — dispatch, driver management, real-time tracking, POD, WMS, storefront, and accounting in one open-source platform.',
  badge: null,
  },
- // Bringg intentionally omitted: /compare/vs-bringg currently redirects to
- // this page, so the card linked visitors back to where they already were and
- // cost a redirect hop in the crawl. The growth plan restores the page
- // (GP-05), at which point this entry comes back.
+ {
+ competitor: 'Bringg',
+ slug: 'vs-bringg',
+ tagline: 'Enterprise delivery management, without the enterprise quote.',
+ description:
+ 'Bringg publishes no pricing at all — no rate card, no trial, no self-service. Fleetbase is $29 a month plus $5 per driver or vehicle, and you can read the price before the sales call.',
+ badge: null,
+ },
+ {
+ competitor: 'Fleetio',
+ slug: 'vs-fleetio',
+ tagline: 'Maintenance and dispatch on one bill.',
+ description:
+ 'Fleetio is maintenance-first and does not do dispatch. Fleetbase covers maintenance scheduling and work orders alongside dispatch, routing and a driver app — with deliveries never metered.',
+ badge: null,
+ },
+ {
+ competitor: 'Samsara',
+ slug: 'vs-samsara',
+ tagline: 'Own the software, choose your own hardware.',
+ description:
+ 'Samsara is telematics hardware first, on a reported three-year minimum contract. Fleetbase is the open-source software layer and integrates Samsara, Geotab and Flespi devices you already own.',
+ badge: null,
+ },
 ];
 
 export default function ComparePage() {

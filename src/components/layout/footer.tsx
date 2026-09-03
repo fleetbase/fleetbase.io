@@ -92,6 +92,9 @@ const FOOTER_LINKS = [
  { label: 'Fleetbase vs Onfleet', href: '/compare/vs-onfleet' },
  { label: 'Fleetbase vs Tookan', href: '/compare/vs-tookan' },
  { label: 'Fleetbase vs Route4Me', href: '/compare/vs-route4me' },
+ { label: 'Bringg Alternatives', href: '/compare/vs-bringg' },
+ { label: 'Fleetio Alternatives', href: '/compare/vs-fleetio' },
+ { label: 'Samsara Alternatives', href: '/compare/vs-samsara' },
  { subheading: 'Powered by Fleetbase' },
  { label: 'OLI Max', href: '/oli-max' },
  { label: 'True Vegan', href: '/true-vegan' },
@@ -114,6 +117,7 @@ const FOOTER_LINKS = [
  title: 'Resources',
  links: [
  { label: 'Documentation', href: '/docs' },
+ { label: 'Buyer’s Guides', href: '/guides' },
       { label: 'Blog', href: '/blog' },
  { label: 'Changelog', href: '/changelog' },
  { label: 'Community (Discord)', href: '/community' },

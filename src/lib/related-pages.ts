@@ -136,6 +136,40 @@ export const RELATED_PAGES: Record<string, RelatedLink[]> = {
     { label: 'For Developers', href: '/solutions/roles/developers', description: 'An API-first platform you can own.' },
   ],
 
+  // ── Guides and comparison pages → the product pages they support ──
+  '/guides/best-last-mile-delivery-software': [
+    { label: 'Last-Mile Delivery', href: '/solutions/use-cases/last-mile-delivery', description: 'How Fleetbase handles the final leg.' },
+    { label: 'Fleet-Ops', href: '/platform/fleetops', description: 'Dispatch, tracking and routing in one module.' },
+    { label: 'Navigator Driver App', href: '/platform/navigator', description: 'Navigation and proof of delivery.' },
+    { label: 'Bringg Alternatives', href: '/compare/vs-bringg', description: 'Platforms that publish their prices.' },
+  ],
+  '/guides/best-route-optimization-software': [
+    { label: 'Route Optimization', href: '/solutions/use-cases/route-optimization', description: 'Multi-stop routing inside dispatch.' },
+    { label: 'Fleetbase vs Route4Me', href: '/compare/vs-route4me', description: 'Routing plus a full platform.' },
+    { label: 'Developer Hub', href: '/developers', description: 'Call the optimiser from your own stack.' },
+  ],
+  '/guides/best-dispatch-software': [
+    { label: 'Fleet-Ops', href: '/platform/fleetops', description: 'Assignment, tracking and exceptions.' },
+    { label: 'Order Management', href: '/solutions/use-cases/order-management', description: 'Configurable order types and flows.' },
+    { label: 'Fleetbase vs Onfleet', href: '/compare/vs-onfleet', description: 'The open-source dispatch alternative.' },
+  ],
+  '/compare/vs-fleetio': [
+    { label: 'Fleet Management', href: '/solutions/use-cases/fleet-management', description: 'Maintenance, compliance and utilisation.' },
+    { label: 'For Fleet Managers', href: '/solutions/roles/fleet-managers', description: 'Built around the fleet manager’s day.' },
+    { label: 'Fleet-Ops', href: '/platform/fleetops', description: 'Maintenance alongside dispatch.' },
+    { label: 'Pricing', href: '/pricing', description: '$29/mo plus $5 per driver or vehicle.' },
+  ],
+  '/compare/vs-bringg': [
+    { label: 'Pricing', href: '/pricing', description: 'Published rates, no sales call required.' },
+    { label: 'Last-Mile Delivery', href: '/solutions/use-cases/last-mile-delivery', description: 'Dispatch, tracking and POD.' },
+    { label: 'E-commerce & Retail', href: '/solutions/ecommerce', description: 'Retail delivery without enterprise procurement.' },
+  ],
+  '/compare/vs-samsara': [
+    { label: 'Fleet-Ops', href: '/platform/fleetops', description: 'The software layer over your own hardware.' },
+    { label: 'For Fleet Managers', href: '/solutions/roles/fleet-managers', description: 'Vehicle health and compliance.' },
+    { label: 'Open Source Mission', href: '/company/open-source', description: 'Why owning the software matters.' },
+  ],
+
   // ── Industries → modules ──
   '/solutions/trucking': [
     { label: 'Fleet-Ops', href: '/platform/fleetops', description: 'Dispatch, tracking and maintenance.' },
