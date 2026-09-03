@@ -1,6 +1,12 @@
 import 'server-only';
 
-const BLOG_REVALIDATE_SECONDS = 300;
+// One hour, matching the s-maxage set on /blog routes in next.config.ts.
+// The blog was already on ISR — the plan's "rendered on every request"
+// diagnosis was wrong — but a 5-minute window meant frequent regeneration
+// and a cold render for whoever arrived first after each expiry, which is the
+// likeliest source of the ~390ms TTFB. Ghost content does not change often
+// enough to need a 5-minute window.
+const BLOG_REVALIDATE_SECONDS = 3600;
 const GHOST_API_VERSION = process.env.GHOST_API_VERSION?.trim() || 'v6.0';
 
 export type BlogAuthor = {
@@ -107,8 +113,8 @@ function buildGhostUrl(pathname: string, params: Record<string, string>) {
   return `${apiUrl}/ghost/api/content/${pathname}?${searchParams.toString()}`;
 }
 
-async function fetchGhost<T>(pathname: string, params: Record<string, string>) {
-  const response = await fetch(buildGhostUrl(pathname, params), {
+async function requestGhost(pathname: string, params: Record<string, string>) {
+  return fetch(buildGhostUrl(pathname, params), {
     headers: {
       Accept: 'application/json',
       'Accept-Version': GHOST_API_VERSION,
@@ -117,6 +123,34 @@ async function fetchGhost<T>(pathname: string, params: Record<string, string>) {
       revalidate: BLOG_REVALIDATE_SECONDS,
     },
   });
+}
+
+async function fetchGhost<T>(pathname: string, params: Record<string, string>) {
+  const response = await requestGhost(pathname, params);
+
+  if (!response.ok) {
+    throw new Error(
+      `Ghost Content API request failed for ${pathname} with status ${response.status}.`,
+    );
+  }
+
+  return (await response.json()) as T;
+}
+
+// Ghost answers an unknown resource with a 404. For a lookup by slug that is a
+// normal "no such post" answer rather than a failure, so it must not throw:
+// doing so turned every bad /blog/* URL into a 500 — including
+// /blog/robots.txt, which Ahrefs flagged and which makes crawlers treat the
+// whole host as unhealthy. Any other non-OK status is still a real error.
+async function fetchGhostAllowingMissing<T>(
+  pathname: string,
+  params: Record<string, string>,
+) {
+  const response = await requestGhost(pathname, params);
+
+  if (response.status === 404) {
+    return null;
+  }
 
   if (!response.ok) {
     throw new Error(
@@ -224,7 +258,7 @@ export async function getAllBlogPosts() {
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  const response = await fetchGhost<GhostPostsResponse>(
+  const response = await fetchGhostAllowingMissing<GhostPostsResponse>(
     `posts/slug/${encodeURIComponent(slug)}/`,
     {
       include: 'authors,tags',
@@ -232,7 +266,7 @@ export async function getBlogPostBySlug(slug: string) {
     },
   );
 
-  const post = response.posts[0];
+  const post = response?.posts[0];
 
   return post ? normalizePost(post) : null;
 }

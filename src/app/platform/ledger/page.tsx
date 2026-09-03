@@ -3,10 +3,11 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import LedgerPageContent from './ledger-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/ledger' },
-  title: 'Ledger — Financial Management | Fleetbase Platform',
+  title: 'Ledger — Financial Management for Logistics',
   description: 'Fleetbase Ledger gives logistics operators full financial visibility — invoicing, revenue tracking, payment gateways, and chart of accounts.',
   keywords: 'fleetbase ledger, logistics financial management, fleet invoicing, delivery billing, logistics accounting',
   openGraph: {
@@ -31,6 +32,7 @@ export default function LedgerPage() {
         applicationCategory="FinanceApplication"
       />
       <LedgerPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

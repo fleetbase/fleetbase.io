@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 
 import FleetOpsPageContent from './fleetops-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
-const TITLE = 'Fleet-Ops — Fleet Management & Dispatch Software | Fleetbase';
+// The layout's title.template appends the brand, so the page title must not.
+// Social cards are not templated, hence the separate branded string.
+const TITLE = 'Fleet-Ops: Fleet Management & Dispatch';
+const SOCIAL_TITLE = 'Fleet-Ops: Fleet Management & Dispatch | Fleetbase';
 const DESCRIPTION =
-  'Fleet-Ops by Fleetbase is open-source fleet management and dispatch software. Real-time GPS tracking, route optimization, configurable workflows, and automated dispatch — self-hosted or cloud.';
+  'Open-source fleet management and dispatch software. Real-time GPS tracking, route optimization, configurable workflows and automated dispatch.';
 const CANONICAL = 'https://fleetbase.io/platform/fleetops';
 
 export const metadata: Metadata = {
@@ -23,14 +27,14 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: CANONICAL },
   openGraph: {
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description: DESCRIPTION,
     type: 'website',
     url: CANONICAL,
   },
   twitter: {
     card: 'summary_large_image',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description: DESCRIPTION,
   },
 };
@@ -87,6 +91,7 @@ export default function FleetOpsPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationSchema) }}
       />
       <FleetOpsPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

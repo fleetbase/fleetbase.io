@@ -8,6 +8,7 @@ import { BlogPostTracker } from '@/components/analytics/BlogPostTracker';
 import { BlogPostingSchema } from '@/components/seo/json-ld';
 import { Button } from '@/components/ui/button';
 import { formatBlogHtml } from '@/lib/blog-html';
+import { titleWithinLimit, truncateAtWord } from '@/lib/seo-text';
 import {
   type BlogPost,
   getAllBlogPosts,
@@ -58,7 +59,7 @@ export async function generateMetadata(props: {
 
   if (!post) {
     return {
-      title: 'Blog | Fleetbase',
+      title: 'Blog',
     };
   }
 
@@ -77,9 +78,15 @@ export async function generateMetadata(props: {
     },
   ];
 
+  // Ghost gives us the full excerpt (~500 characters on most posts). Google
+  // truncates well before that, and Ahrefs flags every one of them, so the meta
+  // description is cut to a word boundary while the page itself still renders
+  // the full excerpt.
+  const metaDescription = truncateAtWord(post.excerpt);
+
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: titleWithinLimit(post.title),
+    description: metaDescription,
     alternates: {
       canonical: canonicalUrl,
     },
@@ -87,7 +94,7 @@ export async function generateMetadata(props: {
       type: 'article',
       url: canonicalUrl,
       title: post.title,
-      description: post.excerpt,
+      description: metaDescription,
       publishedTime: post.publishedAt,
       images: image,
       authors: post.authors.map((author) => author.name),
@@ -96,7 +103,7 @@ export async function generateMetadata(props: {
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description: metaDescription,
       images: image.map((item) => item.url),
     },
   };

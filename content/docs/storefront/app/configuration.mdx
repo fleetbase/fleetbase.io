@@ -3,8 +3,6 @@ title: Configuration
 description: Complete reference for the Storefront App — every environment variable, every storefront.config.ts field, and what each one controls.
 ---
 
-# Configuration
-
 The Storefront App is configured by a combination of:
 1. **Environment variables** in `.env`, read at build time via `react-native-config` (and inlined into the web build by Webpack).
 2. **`storefront.config.ts`** at the project root, which delegates to `config/default.js` — the customization surface for tabs, theming, layout, and feature flags.

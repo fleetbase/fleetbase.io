@@ -3,9 +3,9 @@ import SdksPageContent from './sdks-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/developers/sdks' },
-  title: 'SDKs & Libraries — JavaScript, PHP & Storefront | Fleetbase',
+  title: 'SDKs & Libraries — JavaScript, PHP & Storefront',
   description:
-    'Official Fleetbase client libraries for JavaScript and PHP, plus a dedicated Storefront SDK. Integrate fleet management and logistics into your application in minutes.',
+    'Official Fleetbase client libraries for JavaScript and PHP, plus a dedicated Storefront SDK. Integrate logistics into your app in minutes.',
   keywords: [
     'Fleetbase JavaScript SDK',
     'Fleetbase PHP SDK',

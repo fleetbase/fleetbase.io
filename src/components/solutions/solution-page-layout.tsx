@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { ArrowRight, Check, ChevronDown, X } from 'lucide-react';
 import { Breadcrumbs, type BreadcrumbItem } from '@/components/ui/breadcrumbs';
 import { Button } from '@/components/ui/button';
+import RelatedPages from '@/components/seo/related-pages';
+import { relForHref } from '@/lib/external-link';
 import { cn } from '@/lib/utils';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -324,6 +326,9 @@ export default function SolutionPageLayout({
         </section>
       )}
 
+      {/* Cross-links into the platform modules and sibling solutions. */}
+      <RelatedPages heading="Explore related" />
+
       {/* ── Bottom CTA ────────────────────────────────────────────────── */}
       <section className="section-padding">
         <div className="container max-w-4xl mx-auto">
@@ -336,13 +341,15 @@ export default function SolutionPageLayout({
               <p className="mb-8 text-lg leading-relaxed text-muted-foreground max-w-xl mx-auto">{ctaBody}</p>
               <div className="flex flex-col items-center justify-center gap-3 sm:flex-row mb-6">
                 <Button size="lg" asChild>
-                  <Link href={ctaPrimaryHref}>
+                  <Link href={ctaPrimaryHref} rel={relForHref(ctaPrimaryHref)}>
                     {ctaPrimary} <ArrowRight className="ml-2 size-4" />
                   </Link>
                 </Button>
                 {ctaSecondary && ctaSecondaryHref && (
                   <Button size="lg" variant="outline" asChild>
-                    <Link href={ctaSecondaryHref}>{ctaSecondary}</Link>
+                    <Link href={ctaSecondaryHref} rel={relForHref(ctaSecondaryHref)}>
+                      {ctaSecondary}
+                    </Link>
                   </Button>
                 )}
               </div>

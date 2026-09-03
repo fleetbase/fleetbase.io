@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/use-cases/analytics' },
-  title: 'Logistics Analytics & Reporting | Fleetbase',
-  description: 'Turn logistics data into decisions. Live dashboards, KPI tracking, cost analysis, and exportable reports for fleet performance, delivery SLAs, driver metrics, and operational costs.',
+  title: 'Logistics Analytics & Reporting',
+  description: 'Turn logistics data into decisions. Live dashboards, KPI tracking, cost analysis and exportable reports on fleet, SLA and driver performance.',
   keywords: ['logistics analytics software', 'fleet performance dashboard', 'delivery KPI tracking', 'logistics reporting platform', 'supply chain analytics', 'fleet cost analysis'],
   openGraph: {
     title: 'Logistics Analytics & Reporting | Fleetbase',

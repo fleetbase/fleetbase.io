@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/ui/breadcrumbs';
 export const metadata: Metadata = {
  title: 'Fleetbase vs Route4Me | Open-Source Route4Me Alternative',
  description:
- 'Compare Fleetbase vs Route4Me. Fleetbase is the open-source Route4Me alternative with full dispatch, fleet management, driver app, and route optimization — no per-route fees.',
+ 'The open-source Route4Me alternative: dispatch, fleet management, a driver app and route optimization, with no per-route fees.',
  keywords: [
  'Route4Me alternative',
  'Fleetbase vs Route4Me',
@@ -112,7 +112,7 @@ export default function VsRoute4MePage() {
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io/onboard">
+ <Link href="https://console.fleetbase.io/onboard" rel="nofollow">
  Try Fleetbase Free <ArrowRight className="ml-2 h-4 w-4" />
  </Link>
  </Button>
@@ -194,7 +194,7 @@ export default function VsRoute4MePage() {
  </p>
  <div className="flex flex-col sm:flex-row gap-4 justify-center">
  <Button size="lg" asChild>
- <Link href="https://console.fleetbase.io/onboard">
+ <Link href="https://console.fleetbase.io/onboard" rel="nofollow">
  Start Free Trial <ArrowRight className="ml-2 h-4 w-4" />
  </Link>
  </Button>

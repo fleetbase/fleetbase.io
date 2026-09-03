@@ -3,12 +3,13 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import NavigatorPageContent from './navigator-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/navigator' },
-  title: 'Navigator — Open-Source Driver App | Fleetbase',
+  title: 'Navigator — Open-Source Driver App',
   description:
-    'Navigator is Fleetbase\'s open-source mobile app for drivers. Real-time dispatch, turn-by-turn navigation, proof of delivery, and offline support — available on iOS and Android.',
+    'The open-source driver app from Fleetbase. Real-time dispatch, turn-by-turn navigation, proof of delivery and offline support, iOS and Android.',
   keywords: [
     'driver app',
     'open source driver app',
@@ -44,6 +45,7 @@ export default function NavigatorPage() {
         operatingSystem="iOS, Android"
       />
       <NavigatorPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

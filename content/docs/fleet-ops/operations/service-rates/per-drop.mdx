@@ -4,8 +4,6 @@ sidebarTitle: Per Drop-off
 description: Price an order by the number of stops on the route. Define min/max ranges and a flat fee for each band — ideal for multi-stop courier and batch deliveries.
 ---
 
-# Per Drop-off
-
 **Per Drop-off** sets the service fee by the **number of stops** on the order. You define a tier table — each tier is a range of stop counts with a flat fee — and the tier the order's stop count falls into is charged. (In the API this method is identified as `per_drop`.)
 
 Use this for multi-stop courier work, batch deliveries, and any pricing model where each additional stop is what really drives cost. If you want distance-based pricing on top, layer this against an [Algorithm](/docs/fleet-ops/operations/service-rates/algorithm-rates) rate instead.

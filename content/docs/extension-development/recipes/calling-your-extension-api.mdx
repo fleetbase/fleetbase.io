@@ -3,8 +3,6 @@ title: Calling Your Extension's API
 description: Make authenticated requests from your engine to your extension's backend by passing the right namespace to the fetch service.
 ---
 
-# Calling Your Extension's API
-
 The `fetch` service knows how to call **the console's** API by default — but your extension exposes its own routes under its own prefix, and those calls need to go there instead. This recipe covers the patterns: per-call namespace, controller-level shorthand, and a dedicated wrapper service.
 
 ## The Problem

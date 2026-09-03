@@ -3,10 +3,11 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import MobileAppsPageContent from './mobile-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/mobile' },
-  title: 'Mobile Apps — Navigator & Storefront for iOS & Android | Fleetbase',
+  title: 'Mobile Apps — Navigator & Storefront',
   description:
     'Fleetbase ships two open-source mobile apps — Navigator for drivers and Storefront for customers. White-label them or build your own on the Fleetbase API.',
   keywords: [
@@ -47,6 +48,7 @@ export default function MobileAppsPage() {
         operatingSystem="iOS, Android"
       />
       <MobileAppsPageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

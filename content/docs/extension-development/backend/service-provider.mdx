@@ -3,8 +3,6 @@ title: Service Provider
 description: The Laravel service provider is the entry point for your extension's backend. It loads routes, migrations, observers, expansions, middleware, and binds services into the container.
 ---
 
-# Service Provider
-
 The backend half of an extension is a Laravel package. Your service provider is its entry point — Composer auto-discovers it via the `extra.laravel.providers` array in `composer.json`, and Laravel boots it on every request.
 
 Fleetbase ships a base service provider, **`Fleetbase\Providers\CoreServiceProvider`**, that does most of the wiring for you. Extend it (don't extend Laravel's `ServiceProvider` directly) so you inherit observer auto-registration, middleware groups, expansion loading, and the rest.

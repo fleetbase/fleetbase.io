@@ -3,8 +3,6 @@ title: Extension Registration
 description: How addon/extension.js wires your extension into the Fleetbase console boot lifecycle. The setupExtension hook, onEngineLoaded, and the contract every extension implements.
 ---
 
-# Extension Registration
-
 Every Fleetbase extension declares a single **`addon/extension.js`** at the root of its addon. The console's `ExtensionManager` finds this file at boot, dynamic-imports it, and runs its registration hooks.
 
 This is the **single canonical entry point** — registration code does **not** live in `engine.js`, instance initializers, or anywhere else.

@@ -3,9 +3,9 @@ import DeveloperExtensionsPageContent from './extensions-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/developers/extensions' },
-  title: 'Build Extensions — Custom Modules for the Fleetbase Platform | Fleetbase',
+  title: 'Build Extensions — Custom Platform Modules',
   description:
-    'Build, publish, and distribute Fleetbase extensions using Ember.js and Laravel. Scaffold full-stack modules, backend integrations, and UI components with the Fleetbase CLI.',
+    'Build, publish and distribute Fleetbase extensions with Ember.js and Laravel. Scaffold full-stack modules and UI components with the CLI.',
   keywords: [
     'Fleetbase extensions',
     'build Fleetbase extension',

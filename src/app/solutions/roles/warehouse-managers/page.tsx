@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/roles/warehouse-managers' },
-  title: 'Warehouse Management Software | Fleetbase',
-  description: 'Connect your warehouse to your delivery operation with Fleetbase Pallet WMS. Manage inventory, pick-and-pack workflows, and outbound dispatch from one integrated platform.',
+  title: 'Warehouse Management Software',
+  description: 'Connect your warehouse to your delivery operation with Pallet WMS. Inventory, pick-and-pack workflows and outbound dispatch in one platform.',
   keywords: ['warehouse management software', 'WMS for logistics', 'inventory management platform', 'pick and pack software', 'warehouse to delivery integration', 'pallet WMS'],
   openGraph: {
     title: 'Warehouse Management Software | Fleetbase',

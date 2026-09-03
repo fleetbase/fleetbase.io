@@ -3,10 +3,11 @@ import type { Metadata } from 'next';
 import { SoftwareApplicationSchema } from '@/components/seo/json-ld';
 
 import DeveloperConsolePageContent from './console-page-content';
+import RelatedPages from '@/components/seo/related-pages';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform/developer-console' },
-  title: 'Developer Console — API Keys, Webhooks & Monitoring | Fleetbase',
+  title: 'Developer Console — API Keys & Webhooks',
   description:
     'Manage API keys, configure webhooks, inspect request logs, and monitor real-time socket channels from the Fleetbase Developer Console.',
   keywords: [
@@ -42,6 +43,7 @@ export default function DeveloperConsolePage() {
         applicationCategory="DeveloperApplication"
       />
       <DeveloperConsolePageContent />
+      <RelatedPages heading="Explore related" />
     </>
   );
 }

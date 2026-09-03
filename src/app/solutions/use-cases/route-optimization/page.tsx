@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/use-cases/route-optimization' },
-  title: 'Route Optimization Software | Fleetbase',
-  description: 'Cut fuel costs by 28% and improve on-time rates with intelligent multi-stop route optimization. Real-time traffic, time windows, vehicle capacity — all factored in automatically.',
+  title: 'Route Optimization Software',
+  description: 'Open-source route optimization software. Intelligent multi-stop routing that factors in live traffic, time windows and vehicle capacity.',
   keywords: ['route optimization software', 'delivery route planner', 'multi-stop route optimization', 'fleet route planning', 'dynamic route optimization', 'last mile routing'],
   openGraph: {
     title: 'Route Optimization Software | Fleetbase',

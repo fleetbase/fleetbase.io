@@ -6,9 +6,9 @@ import PlatformPageContent from './platform-page-content';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/platform' },
-  title: 'Platform Overview — Open-Source Logistics OS | Fleetbase',
+  title: 'Platform Overview — Open-Source Logistics OS',
   description:
-    'Explore the full Fleetbase platform — Fleet-Ops, Storefront, Ledger, Pallet, Navigator, and more. One modular, open-source logistics OS. Self-host or cloud.',
+    'Explore the Fleetbase platform — Fleet-Ops, Storefront, Ledger, Pallet and Navigator. One modular, open-source logistics OS. Self-host or cloud.',
   keywords: [
     'fleetbase platform',
     'open source logistics platform',

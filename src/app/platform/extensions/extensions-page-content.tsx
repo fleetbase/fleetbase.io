@@ -49,12 +49,15 @@ const categories = [
 ];
 
 // First-party + community-built integrations available natively or through
-// extensions. Logos: simpleicons CDN where available, otherwise self-hosted
+// extensions. Logos are all self-hosted under /images/integrations: four of
+// them (sendgrid, microsoftazure, amazonaws, twilio) 404'd after Simple Icons
+// renamed or dropped the slugs, and a sales page should not depend on a CDN
+// for anything visible.
 // under /public/images/integrations/.
 const INTEGRATIONS: { name: string; category: string; logo: string }[] = [
   // Maps & Location
-  { name: 'Google Maps',     category: 'Maps & Location',          logo: 'https://cdn.simpleicons.org/googlemaps/4285F4' },
-  { name: 'OpenStreetMap',   category: 'Maps & Location',          logo: 'https://cdn.simpleicons.org/openstreetmap/7EBC6F' },
+  { name: 'Google Maps',     category: 'Maps & Location',          logo: '/images/integrations/googlemaps.svg' },
+  { name: 'OpenStreetMap',   category: 'Maps & Location',          logo: '/images/integrations/openstreetmap.svg' },
   // Routing & Optimization
   { name: 'OSRM',            category: 'Routing & Optimization',   logo: '/images/integrations/osrm.svg' },
   { name: 'Valhalla',        category: 'Routing & Optimization',   logo: '/images/integrations/valhalla.svg' },
@@ -64,38 +67,38 @@ const INTEGRATIONS: { name: string; category: string; logo: string }[] = [
   { name: 'Samsara',         category: 'Telematics & Fleet Hardware', logo: '/images/integrations/samsara.svg' },
   { name: 'Geotab',          category: 'Telematics & Fleet Hardware', logo: '/images/integrations/geotab.svg' },
   // Payments
-  { name: 'Stripe',          category: 'Payments',                 logo: 'https://cdn.simpleicons.org/stripe/635BFF' },
+  { name: 'Stripe',          category: 'Payments',                 logo: '/images/integrations/stripe.svg' },
   // Communication
-  { name: 'Twilio',          category: 'Communication',            logo: 'https://cdn.simpleicons.org/twilio/F22F46' },
-  { name: 'SendGrid',        category: 'Communication',            logo: 'https://cdn.simpleicons.org/sendgrid/51A9E3' },
-  { name: 'Mailgun',         category: 'Communication',            logo: 'https://cdn.simpleicons.org/mailgun/F06B66' },
+  { name: 'Twilio',          category: 'Communication',            logo: '/images/integrations/twilio.svg' },
+  { name: 'SendGrid',        category: 'Communication',            logo: '/images/integrations/sendgrid.svg' },
+  { name: 'Mailgun',         category: 'Communication',            logo: '/images/integrations/mailgun.svg' },
   // Cloud & Infrastructure
-  { name: 'AWS',             category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/amazonaws/FF9900' },
-  { name: 'Google Cloud',    category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/googlecloud/4285F4' },
-  { name: 'Microsoft Azure', category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/microsoftazure/0078D4' },
-  { name: 'DigitalOcean',    category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/digitalocean/0080FF' },
-  { name: 'Docker',          category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/docker/2496ED' },
-  { name: 'Kubernetes',      category: 'Cloud & Infrastructure',   logo: 'https://cdn.simpleicons.org/kubernetes/326CE5' },
+  { name: 'AWS',             category: 'Cloud & Infrastructure',   logo: '/images/integrations/amazonaws.svg' },
+  { name: 'Google Cloud',    category: 'Cloud & Infrastructure',   logo: '/images/integrations/googlecloud.svg' },
+  { name: 'Microsoft Azure', category: 'Cloud & Infrastructure',   logo: '/images/integrations/microsoftazure.svg' },
+  { name: 'DigitalOcean',    category: 'Cloud & Infrastructure',   logo: '/images/integrations/digitalocean.svg' },
+  { name: 'Docker',          category: 'Cloud & Infrastructure',   logo: '/images/integrations/docker.svg' },
+  { name: 'Kubernetes',      category: 'Cloud & Infrastructure',   logo: '/images/integrations/kubernetes.svg' },
   // Databases
-  { name: 'MySQL',           category: 'Databases',                logo: 'https://cdn.simpleicons.org/mysql/4479A1' },
-  { name: 'Redis',           category: 'Databases',                logo: 'https://cdn.simpleicons.org/redis/DC382D' },
+  { name: 'MySQL',           category: 'Databases',                logo: '/images/integrations/mysql.svg' },
+  { name: 'Redis',           category: 'Databases',                logo: '/images/integrations/redis.svg' },
   // Developer Tools
-  { name: 'GitHub',          category: 'Developer Tools',          logo: 'https://cdn.simpleicons.org/github/181717' },
-  { name: 'Postman',         category: 'Developer Tools',          logo: 'https://cdn.simpleicons.org/postman/FF6C37' },
+  { name: 'GitHub',          category: 'Developer Tools',          logo: '/images/integrations/github.svg' },
+  { name: 'Postman',         category: 'Developer Tools',          logo: '/images/integrations/postman.svg' },
   // Monitoring
-  { name: 'Sentry',          category: 'Monitoring',               logo: 'https://cdn.simpleicons.org/sentry/362D59' },
+  { name: 'Sentry',          category: 'Monitoring',               logo: '/images/integrations/sentry.svg' },
   // E-commerce
-  { name: 'Shopify',         category: 'E-commerce',               logo: 'https://cdn.simpleicons.org/shopify/96BF48' },
-  { name: 'WooCommerce',     category: 'E-commerce',               logo: 'https://cdn.simpleicons.org/woocommerce/96588A' },
+  { name: 'Shopify',         category: 'E-commerce',               logo: '/images/integrations/shopify.svg' },
+  { name: 'WooCommerce',     category: 'E-commerce',               logo: '/images/integrations/woocommerce.svg' },
   // Mobile
-  { name: 'Android',         category: 'Mobile',                   logo: 'https://cdn.simpleicons.org/android/3DDC84' },
-  { name: 'React Native',    category: 'Mobile',                   logo: 'https://cdn.simpleicons.org/react/61DAFB' },
-  { name: 'Expo',            category: 'Mobile',                   logo: 'https://cdn.simpleicons.org/expo/000020' },
+  { name: 'Android',         category: 'Mobile',                   logo: '/images/integrations/android.svg' },
+  { name: 'React Native',    category: 'Mobile',                   logo: '/images/integrations/react.svg' },
+  { name: 'Expo',            category: 'Mobile',                   logo: '/images/integrations/expo.svg' },
   // Backend & Framework
-  { name: 'Laravel',         category: 'Backend & Framework',      logo: 'https://cdn.simpleicons.org/laravel/FF2D20' },
-  { name: 'Node.js',         category: 'Backend & Framework',      logo: 'https://cdn.simpleicons.org/nodedotjs/339933' },
-  { name: 'Next.js',         category: 'Backend & Framework',      logo: 'https://cdn.simpleicons.org/nextdotjs/000000' },
-  { name: 'PHP',             category: 'Backend & Framework',      logo: 'https://cdn.simpleicons.org/php/777BB4' },
+  { name: 'Laravel',         category: 'Backend & Framework',      logo: '/images/integrations/laravel.svg' },
+  { name: 'Node.js',         category: 'Backend & Framework',      logo: '/images/integrations/nodedotjs.svg' },
+  { name: 'Next.js',         category: 'Backend & Framework',      logo: '/images/integrations/nextdotjs.svg' },
+  { name: 'PHP',             category: 'Backend & Framework',      logo: '/images/integrations/php.svg' },
 ];
 const INTEGRATION_CATEGORIES = [...new Set(INTEGRATIONS.map((i) => i.category))];
 
@@ -157,7 +160,7 @@ export default function ExtensionsMarketplacePageContent() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+              <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                 <Button size="lg">Browse Extensions</Button>
               </Link>
               <Link href="/developers/extensions">
@@ -295,7 +298,7 @@ export default function ExtensionsMarketplacePageContent() {
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+            <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
               <Button size="lg" variant="outline">
                 Browse all extensions <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -653,7 +656,7 @@ export default function ExtensionsMarketplacePageContent() {
                 reach thousands of logistics operators.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                   <Button size="lg">Browse marketplace</Button>
                 </Link>
                 <Link href="/developers/extensions">

@@ -6,6 +6,7 @@ import { OrganizationSchema, SoftwareApplicationSchema, WebSiteSchema } from '@/
 import Hero from '@/components/sections/hero';
 import PlatformModules from '@/components/sections/platform-modules';
 import StatsBar from '@/components/sections/stats-bar';
+import SwitchingCallout from '@/components/sections/switching-callout';
 
 // Below-the-fold sections — split into separate client bundles so the
 // initial homepage JS payload stays small. SSR remains on (default) so
@@ -31,9 +32,9 @@ const DeploymentOptions = dynamic(
 const FinalCTA = dynamic(() => import('@/components/sections/final-cta'));
 
 export const metadata: Metadata = {
-  title: 'Fleetbase | Open-Source Logistics & Supply Chain Platform',
+  title: 'Open-Source Logistics & Supply Chain Platform',
   description:
-    'Fleetbase is the open-source logistics OS. Fleet management, e-commerce fulfillment, warehouse, and accounting — one platform, never a per-delivery fee, self-hosted or cloud.',
+    'The open-source logistics OS: fleet management, e-commerce fulfilment, warehouse and accounting in one platform. Self-hosted or cloud.',
   keywords:
     'open source logistics platform, fleet management software, TMS software, transportation management system, delivery management, supply chain software, self hosted fleet management, open source logistics, last mile delivery software, route optimization software, warehouse management',
   alternates: {
@@ -81,6 +82,7 @@ export default async function Home() {
       <IndustryUseCases />
       <IntegrationsEcosystem />
       <DeploymentOptions />
+      <SwitchingCallout />
       <FinalCTA />
     </>
   );

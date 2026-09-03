@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/government' },
-  title: 'Military & Government Logistics Software | Fleetbase',
-  description: 'Open-source logistics platform for military and government operations. Self-hosted, air-gap capable, role-based access, full audit trails, and data sovereignty by design.',
+  title: 'Military & Government Logistics Software',
+  description: 'Open-source logistics for military and government operations. Self-hosted, air-gap capable, role-based access and data sovereignty by design.',
   keywords: ['government logistics software', 'military fleet management', 'secure logistics platform', 'defense logistics software', 'air-gap logistics', 'government transport management'],
   openGraph: {
     title: 'Military & Government Logistics | Fleetbase',

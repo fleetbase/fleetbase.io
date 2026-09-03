@@ -6,7 +6,7 @@ import ProductLogs from '@/components/sections/product-logs';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/product' },
-  title: 'Product Overview | Fleetbase Logistics Platform',
+  title: 'Product Overview — The Logistics Platform',
   description: 'Discover what Fleetbase can do — real-time fleet tracking, order management, storefront, financial management, and a full developer API.',
   keywords: 'fleetbase product, logistics platform features, fleet management software, open source logistics',
   openGraph: {

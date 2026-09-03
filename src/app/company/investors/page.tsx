@@ -20,9 +20,9 @@ import { Button } from '@/components/ui/button';
 import { getGitHubStars } from '@/lib/github-stars';
 
 export const metadata: Metadata = {
- title: 'Investors | Fleetbase',
+ title: 'Investors',
  description:
- 'Fleetbase is a bootstrapped, profitable open-source logistics platform powering 8,000+ active instances and 10M+ orders globally. Learn about the opportunity, our model, and what we look for in long-term partners.',
+ 'A bootstrapped, profitable open-source logistics platform powering 8,000+ active instances and 10M+ orders. The opportunity and our model.',
  keywords: [
  'fleetbase investors',
  'open source logistics investment',

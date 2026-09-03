@@ -4,8 +4,6 @@ sidebarTitle: Per Meter
 description: Charge a flat rate per unit of distance — meters, kilometers, feet, yards, or miles. The simplest linear distance-based pricing model.
 ---
 
-# Per Meter
-
 **Per Meter** scales the service fee **linearly with distance**. You set a fee per unit of distance (e.g. $0.80 per km), pick the unit, and Fleet-Ops multiplies it by the actual route distance at quote time. (In the API this method is identified as `per_meter`.)
 
 Use this for taxi-style or urban-delivery pricing where every additional unit of distance adds a predictable, constant amount. If your pricing curve changes at certain distances, use [Fixed Rate](/docs/fleet-ops/operations/service-rates/fixed-rate) instead; if it needs to vary by region, use [Multi-zone Distance](/docs/fleet-ops/operations/service-rates/multi-zone-distance).

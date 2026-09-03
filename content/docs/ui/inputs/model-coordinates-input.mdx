@@ -3,8 +3,6 @@ title: ModelCoordinatesInput
 description: "<ModelCoordinatesInput> wraps <CoordinatesInput> for binding directly to a Fleetbase Ember Data model — auto-updates the record's `location` property and reverse-geocodes the address into the model."
 ---
 
-# `<ModelCoordinatesInput>`
-
 `<ModelCoordinatesInput>` is a thin wrapper around [`<CoordinatesInput>`](/docs/ui/inputs/coordinates-input) that binds directly to an Ember Data record. When the user moves the map marker, the record's `location` property is updated and Fleetbase's reverse-geocoder fills in `street1`, `city`, `country`, etc. on the same record.
 
 Use this when you have a model with a GeoJSON `location` field — `Place`, `StoreLocation`, `Driver`, `FuelReport`, etc. — and want a single component to handle both the coordinate picker and the address auto-fill.

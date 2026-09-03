@@ -527,7 +527,7 @@ export default function ApiIntegrationsPageContent() {
                 Fleetbase into your systems today.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer">
+                <Link href="https://console.fleetbase.io" target="_blank" rel="noopener noreferrer nofollow">
                   <Button size="lg">Get Your API Key</Button>
                 </Link>
                 <Link href="/docs/api">

@@ -3,8 +3,6 @@ title: Checkout
 description: The Storefront checkout is a two-step API flow — `/checkouts/before` to initialize and produce a token, then `/checkouts/capture` to finalize the order after payment is confirmed.
 ---
 
-# Checkout
-
 **Checkout** converts a cart into a paid order. Storefront uses a **two-step** flow:
 
 1. **`/checkouts/before`** — submit the cart, service quote, gateway, tip, and pickup/delivery flag. Storefront returns a **token** (and a Stripe `clientSecret` if the gateway is Stripe).

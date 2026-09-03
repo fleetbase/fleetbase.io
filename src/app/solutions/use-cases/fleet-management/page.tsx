@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/use-cases/fleet-management' },
-  title: 'Fleet Management Software | Fleetbase',
-  description: 'Monitor vehicle health, driver performance, and fleet utilization from one dashboard. Open-source fleet management with real-time tracking, maintenance scheduling, and compliance tools.',
+  title: 'Fleet Management Software',
+  description: 'Open-source fleet management: vehicle health, driver performance and utilisation in one dashboard, with maintenance scheduling and compliance.',
   keywords: ['fleet management software', 'vehicle tracking system', 'fleet maintenance software', 'driver management platform', 'fleet compliance software', 'vehicle health monitoring'],
   openGraph: {
     title: 'Fleet Management Software | Fleetbase',

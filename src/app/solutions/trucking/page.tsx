@@ -4,8 +4,8 @@ import SolutionPageLayout from '@/components/solutions/solution-page-layout';
 
 export const metadata: Metadata = {
   alternates: { canonical: 'https://fleetbase.io/solutions/trucking' },
-  title: 'Fleet Management Software for Trucking & Haulage | Fleetbase',
-  description: 'Replace your legacy TMS with open-source fleet management built for trucking and haulage. Real-time tracking, route optimization, digital POD, and compliance tools — on infrastructure you own.',
+  title: 'Fleet Management Software for Trucking & Haulage',
+  description: 'Replace your legacy TMS with open-source fleet management for trucking and haulage. Live tracking, route optimization, digital POD and compliance.',
   keywords: ['trucking software', 'haulage management', 'fleet management TMS', 'freight tracking', 'route optimization trucking', 'open source TMS'],
   openGraph: {
     title: 'Trucking & Haulage Fleet Management | Fleetbase',

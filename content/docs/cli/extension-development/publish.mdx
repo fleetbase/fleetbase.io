@@ -3,8 +3,6 @@ title: Publish
 description: "Publish your extension to the Fleetbase Extension Registry using `flb publish` — runs `npm publish` against the configured registry."
 ---
 
-# `flb publish`
-
 Publish your extension to the Fleetbase Extension Registry. Under the hood this runs `npm publish` against the registry. Both an npm package (`package.json`) and a Composer package (`composer.json`) are typically published — but `flb publish` handles them via the same npm publish mechanism (the CLI auto-converts `composer.json` into a temporary `package.json` for the API side).
 
 ```bash

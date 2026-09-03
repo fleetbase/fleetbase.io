@@ -70,6 +70,16 @@ export function WebSiteSchema() {
   );
 }
 
+// Ahrefs reports "Google rich results validation error" on the 25 pages that
+// carry this schema. The missing property is aggregateRating (or review) —
+// every other required field (name, applicationCategory, operatingSystem and an
+// offers block with price and priceCurrency) is present and correct below.
+//
+// We are deliberately not satisfying it. Google requires aggregateRating to be
+// backed by real, user-visible reviews on the page; inventing a rating to clear
+// a validation warning would be fabricating data and is a manual-action risk.
+// The warning stays until Fleetbase publishes genuine review data, at which
+// point add an aggregateRating sourced from it.
 export function SoftwareApplicationSchema({
   name = 'Fleetbase',
   url = 'https://fleetbase.io',

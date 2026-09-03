@@ -10,9 +10,9 @@ import { Button } from '@/components/ui/button';
 const APPLY_URL = 'https://cal.com/shivthakker/enquiry';
 
 export const metadata: Metadata = {
-  title: 'Partner Program | Fleetbase',
+  title: 'Partner Program',
   description:
-    'Join the Fleetbase Partner Program — resell and implement, white-label the platform, or build integrations. A flat 20% partner margin on the open-source logistics operating system.',
+    'Resell and implement, white-label the platform, or build integrations. A flat 20% partner margin on the open-source logistics operating system.',
   keywords: [
     'Fleetbase partners',
     'fleetbase partner program',
