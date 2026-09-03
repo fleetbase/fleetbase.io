@@ -23,6 +23,27 @@ const COMPARISONS = [
     href: '/compare/vs-route4me',
     blurb: 'Routing plus dispatch, WMS and storefront in one platform.',
   },
+  {
+    label: 'Bringg alternatives',
+    href: '/compare/vs-bringg',
+    blurb: 'Bringg publishes no pricing. Six platforms that do.',
+  },
+  {
+    label: 'Fleetio alternatives',
+    href: '/compare/vs-fleetio',
+    blurb: 'Maintenance and dispatch on one bill, not two systems.',
+  },
+  {
+    label: 'Samsara alternatives',
+    href: '/compare/vs-samsara',
+    blurb: 'Own the software, choose your own hardware.',
+  },
+];
+
+const GUIDES = [
+  { label: 'Best last mile delivery software', href: '/guides/best-last-mile-delivery-software' },
+  { label: 'Best route optimization software', href: '/guides/best-route-optimization-software' },
+  { label: 'Best dispatch software', href: '/guides/best-dispatch-software' },
 ];
 
 const BY_ROLE = [
@@ -107,16 +128,10 @@ export default function SwitchingCallout() {
           <LinkList heading="By role" links={BY_ROLE} />
           <LinkList heading="By use case" links={BY_USE_CASE} />
           <div>
-            <h3 className="text-muted-foreground mb-4 text-sm font-medium tracking-wide uppercase">
-              Still deciding?
-            </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Every comparison is written honestly — including where the other
-              tool is the better fit.
-            </p>
+            <LinkList heading="Buyer’s guides" links={GUIDES} />
             <Link
               href="/compare"
-              className="text-primary mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
+              className="text-primary mt-6 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
             >
               See all comparisons
               <ArrowRight className="size-4" />
