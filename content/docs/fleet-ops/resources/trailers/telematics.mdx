@@ -9,17 +9,56 @@ A Trailer can have one or more directly attached Devices. This is useful for bat
 
 ## Attach a device
 
-From a Trailer, choose **Attach Device** and select an unattached device. From Connectivity, the same device attachment workspace can target either a Vehicle or a Trailer. Reassigning a device closes its previous installation record and creates a new one; detaching preserves that history.
+From a Trailer, choose **Attach device** (from the Overview actions or the Devices tab) and select an unattached device. From Connectivity, the same device attachment workspace can target either a Vehicle or a Trailer. Reassigning a device closes its previous installation record and creates a new one; detaching preserves that history.
+
+Through the API, attach a device with the polymorphic attachment contract:
+
+```bash
+curl -X POST https://api.fleetbase.io/v1/devices/device_4Hn8rTq2Lx/attach \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "attachable_type": "fleet-ops:trailer", "attachable": "trailer_7YqM3KpL2n" }'
+```
+
+The device response reports `attachable_type: "fleet-ops:trailer"`, `attachable_id`, and `attachable_name`. `POST /v1/devices/{id}/detach` removes the attachment. Devices cannot be attached across companies.
 
 ## Ingested state
 
 Location events from an attached device update the Trailer's current projection and position history, including available speed, heading, altitude, odometer, reefer engine hours, online state, provider, and observation time. Older out-of-order events remain in event history but do not overwrite a newer current position.
 
-Trailer updates broadcast `trailer.location_changed` on company, public Trailer ID, and internal Trailer channels. Public tracking endpoints use Trailer public IDs and reject private UUID fields.
+Trailer updates broadcast `trailer.location_changed` on the `company.{uuid}`, `trailer.{public_id}`, and internal trailer channels with the trailer's public ID, location, altitude, heading, and speed. Public Trailer responses expose the telemetry snapshot under `telematics` (`last_event_at`, `last_provider`, `last_event_type`, `last_telemetry_data`) without device or event UUIDs.
 
 ## Direct API tracking
 
-Use the Trailer tracking endpoint when the source does not arrive through a configured telematics provider. Supply latitude and longitude plus an optional observation time and motion values. Fleet-Ops stores a historical position and updates the Trailer snapshot only when the observation is not stale.
+Use the Trailer tracking endpoint when the source does not arrive through a configured telematics provider. Supply latitude and longitude plus an optional observation time and motion values.
+
+```bash
+curl -X PATCH https://api.fleetbase.io/v1/trailers/trailer_7YqM3KpL2n/track \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "latitude": 40.7484, "longitude": -73.9857, "speed": 35, "heading": 90, "observed_at": "2026-09-07T11:44:31Z" }'
+```
+
+The response is the updated Trailer:
+
+```json
+{
+  "id": "trailer_7YqM3KpL2n",
+  "connectivity_status": "online",
+  "online": true,
+  "last_online_at": "2026-09-07T11:44:31.000000Z",
+  "location": { "type": "Point", "coordinates": [-73.9857, 40.7484] },
+  "speed": 35,
+  "heading": 90,
+  "telematics": {
+    "last_event_at": "2026-09-07T11:44:31.336303Z",
+    "last_provider": "public_api",
+    "last_telemetry_data": { "speed": 35, "heading": 90 }
+  }
+}
+```
+
+Fleet-Ops stores a historical position and updates the Trailer snapshot only when the observation is not older than the last recorded event. Observations at `0, 0` are acknowledged but ignored. `GET /v1/trailers/{id}?with=positions` returns the stored position history.
 
 ## Vehicle versus Trailer telemetry
 

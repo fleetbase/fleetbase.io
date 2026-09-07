@@ -1,6 +1,6 @@
 ---
 title: Trailers
-description: Register and operate trailers as first-class towed fleet assets with connections, equipment, maintenance, and telematics.
+description: Register and operate trailers as first-class towed fleet assets with towing connections, equipment, maintenance, and telematics.
 ---
 
 # Trailers
@@ -23,25 +23,117 @@ Do not create a tractor head as a Trailer. A head or tractor is a Vehicle, and i
 
 Trailer records support:
 
-- identity and registration: name, code, VIN, plate and serial number;
-- classification: dry van, reefer, flatbed, step deck, lowboy, tanker, bulk, dump, chassis, curtain side, car carrier, livestock, logging, dolly, specialty, or other;
-- physical specifications: length, width, height, tare, gross vehicle weight rating, payload, volume, axles, tires, doors, brakes, ABS/EBS, and coupling;
-- reefer details: temperature range and engine hours;
-- ownership, acquisition, lease, valuation, vendor, warranty, photo, notes, and custom fields;
-- current vehicle connection and complete connection history;
+- identity and registration: name, code, VIN, plate and serial number, make, model, and year;
+- classification: `dry_van`, `reefer`, `flatbed`, `step_deck`, `lowboy`, `tanker`, `bulk`, `dump`, `chassis`, `curtain_side`, `car_carrier`, `livestock`, `logging`, `dolly`, `specialty`, or `other`;
+- lifecycle status: `available`, `in_use`, `maintenance`, `out_of_service`, or `retired` — attachment state and connectivity are derived separately and never overwrite the lifecycle status;
+- physical specifications in the trailer's measurement system (metric or imperial): length, width, height, tare weight, gross vehicle weight rating, payload capacity, cargo volume, axles, tires, doors, coupling type, brake type, ABS and EBS;
+- reefer details: refrigerated flag, temperature range, and reefer engine hours;
+- ownership and finance: ownership type, financing status, purchase and lease dates, currency, acquisition cost, current value, insured value, depreciation rate, vendor, warranty, photo, notes, and custom fields;
+- the current towing vehicle and the complete towing history;
 - attached devices and equipment;
 - location, connectivity, maintenance schedules, work orders, and maintenance history.
+
+The console form only shows the reefer section for refrigerated trailers and the lease expiry for leased, rented, or financed trailers, and it labels every dimensional field with the unit implied by the measurement system.
 
 ## Lifecycle
 
 1. Create or import the Trailer.
 2. Attach equipment and a telematics device when applicable.
-3. Connect the Trailer to a Vehicle when a towing movement starts.
+3. Attach the Trailer to a Vehicle when a towing movement starts.
 4. Track it directly through its device or the Trailer tracking API.
-5. Detach it when the movement ends. Fleet-Ops preserves the completed connection in history.
+5. Detach it when the movement ends. Fleet-Ops preserves the completed connection in the towing history.
 6. Schedule inspections and maintenance against the Trailer itself.
 
-A Trailer cannot be deleted while it has an active vehicle connection. Detach it first so the operational history remains accurate.
+A Trailer cannot be deleted while it is attached to a vehicle. Detach it first so the operational history remains accurate; the API answers `409 Conflict` until you do, and bulk deletion in the console skips attached trailers.
+
+## API
+
+Trailers are exposed at `/v1/trailers` and use the `trailer_` public identifier. Responses never include private UUIDs.
+
+### Create a trailer
+
+```bash
+curl -X POST https://api.fleetbase.io/v1/trailers \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Reefer 12",
+    "code": "TRL-0012",
+    "type": "reefer",
+    "status": "available",
+    "plate_number": "TR-1200",
+    "measurement_system": "metric",
+    "payload_capacity": 20000,
+    "axle_count": 2,
+    "refrigerated": true,
+    "temperature_min": -20,
+    "temperature_max": 4
+  }'
+```
+
+```json
+{
+  "id": "trailer_7YqM3KpL2n",
+  "asset_class": "trailer",
+  "name": "Reefer 12",
+  "display_name": "Reefer 12",
+  "code": "TRL-0012",
+  "type": "reefer",
+  "status": "available",
+  "attachment_state": "detached",
+  "connectivity_status": "never_connected",
+  "online": null,
+  "plate_number": "TR-1200",
+  "category_id": null,
+  "vendor_id": null,
+  "warranty_id": null,
+  "photo_id": null,
+  "vehicle_id": null,
+  "current_vehicle": null,
+  "current_connection": null,
+  "connections": [],
+  "devices": [],
+  "equipment": [],
+  "devices_count": 0,
+  "equipment_count": 0,
+  "measurement_system": "metric",
+  "payload_capacity": "20000.000",
+  "axle_count": 2,
+  "refrigerated": true,
+  "temperature_min": "-20.000",
+  "temperature_max": "4.000",
+  "location": { "type": "Point", "coordinates": [0, 0] },
+  "telematics": null,
+  "created_at": "2026-09-07T11:35:32.000000Z",
+  "updated_at": "2026-09-07T11:35:32.000000Z"
+}
+```
+
+Relationship identifiers (`category_id`, `vendor_id`, `warranty_id`, `photo_id`, and `vehicle_id`) are always present so a write can be read back. Pass the related public ID under `category`, `vendor`, `warranty`, or `photo` when creating or updating; send `null` to clear one.
+
+### Expand related objects
+
+Use `with` (or `expand`) to include the related object beside its identifier. Supported expansions are `category`, `vendor`, `warranty`, `photo`, and `positions`; unknown names are ignored.
+
+```bash
+curl "https://api.fleetbase.io/v1/trailers/trailer_7YqM3KpL2n?with=vendor,category" \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY"
+```
+
+The towing state (`current_vehicle`, `current_connection`, `connections`), attached `devices`, and attached `equipment` are part of the base representation and are always included.
+
+### List and filter
+
+```bash
+curl "https://api.fleetbase.io/v1/trailers?type=reefer&attachment_state=detached&connectivity_status=online&limit=25&sort=-created_at" \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY"
+```
+
+Supported filters include `query`, `type`, `status`, `attachment_state` (`attached` or `detached`), `connectivity_status` (`online`, `recently_offline`, `offline`, `never_connected`), `vehicle` (the towing vehicle's public ID), `vendor`, `category`, `plate_number`, `vin`, `refrigerated`, `ownership_type`, `created_at`, `updated_at`, and `last_online_at`.
+
+### Update and delete
+
+`PUT /v1/trailers/{id}` accepts the same fields as create. `DELETE /v1/trailers/{id}` soft-deletes a detached trailer and returns `409 Conflict` for an attached one.
 
 ## Related pages
 
