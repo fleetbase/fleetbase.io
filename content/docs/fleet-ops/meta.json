@@ -21,6 +21,7 @@
     "resources/overview",
     "resources/drivers",
     "resources/vehicles",
+    "resources/trailers",
     "resources/fleets",
     "resources/vendors",
     "resources/contacts",

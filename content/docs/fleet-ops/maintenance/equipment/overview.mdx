@@ -1,11 +1,11 @@
 ---
 title: Equipment
-description: Track fleet equipment assets — tools, trailers, containers — with maintenance schedules, work orders, and warranty coverage.
+description: Track auxiliary equipment attached to Vehicles or Trailers, with maintenance schedules, work orders, and warranty coverage.
 ---
 
 # Equipment
 
-**Equipment** tracks fleet assets beyond vehicles — tools, trailers, containers, attachments, and other hardware that require their own maintenance schedules and work orders. Equipment records are linked to vehicles or drivers and participate in the same maintenance workflow as vehicles.
+**Equipment** tracks auxiliary tools, mounted components, and issued hardware that require their own maintenance schedules and work orders. Equipment can be linked to a Vehicle, Trailer, or Driver and participates in the same maintenance workflow as those resources. Towable units such as dry vans, reefers, flatbeds, tankers, and chassis are first-class [Trailers](/docs/fleet-ops/resources/trailers/overview), not Equipment.
 
 ![Equipment list — name, category, assigned vehicle, status, next maintenance date](/images/screenshots/fleet-ops/fleet-ops-equipment-list.webp)
 
@@ -13,9 +13,7 @@ description: Track fleet equipment assets — tools, trailers, containers — wi
 
 Equipment in Fleet-Ops includes:
 
-- **Trailers** — flatbed, refrigerated, curtainsider, tanker
-- **Containers** — shipping containers, ISO containers
-- **Attachments** — forklifts, tail lifts, cranes
+- **Attachments** — tail lifts, liftgates, cranes, pumps, and ramps
 - **Tools** — delivery trolleys, pallet jacks, scanners
 - **Powered equipment** — generators, refrigeration units
 
@@ -28,12 +26,12 @@ Anything that:
 
 | Field | Description |
 | :--- | :--- |
-| **Name** | Equipment identifier (e.g., "Trailer 003", "Pallet Jack 12") |
+| **Name** | Equipment identifier (e.g., "Pallet Jack 12") |
 | **Category** | Type of equipment |
 | **Description** | Detailed description |
 | **Serial Number** | Manufacturer serial number |
 | **Status** | active, inactive, maintenance, retired |
-| **Assigned Vehicle** | Vehicle this equipment is currently assigned to |
+| **Attached Resource** | Vehicle, Trailer, or Driver this equipment is currently attached or issued to |
 
 ## Creating Equipment
 
@@ -51,7 +49,7 @@ Anything that:
     Set the **Serial Number** for identification.
   </Step>
   <Step>
-    Assign to a **Vehicle** if this equipment is currently attached.
+    Assign to a **Vehicle**, **Trailer**, or **Driver** if this equipment is currently attached or issued.
   </Step>
   <Step>
     Click **Save**.

@@ -1,0 +1,101 @@
+---
+title: Connections and equipment
+description: Attach trailers to vehicles, preserve towing history, and manage equipment attached to vehicles or trailers.
+---
+
+# Trailer connections and equipment
+
+Fleet-Ops treats a towing relationship as an effective-dated **connection**, not as a permanent field on either asset. Each connection records the Vehicle, Trailer, towing position, start time, optional end time, source, notes, and audit data.
+
+## Connection rules
+
+- A Trailer can have only one active Vehicle connection at a time.
+- A towing position on a Vehicle can contain only one active Trailer.
+- Repeating the same attach or detach request is safe and does not create duplicate active connections.
+- Moving a Trailer to another Vehicle requires detaching the current connection first.
+- Detaching closes the active record; it does not erase it.
+- Tenant boundaries are enforced for both assets.
+
+These rules also allow multi-trailer combinations: attach each Trailer to the same Vehicle with a distinct towing position (position 1 is directly behind the tractor).
+
+## From a Vehicle
+
+Open a Vehicle and choose **Trailers** to see the trailers currently coupled to it. Use **Attach trailer** to select a detached Trailer and its towing position, or **Detach** to end a connection. The Vehicle's **Equipment** tab separately lists auxiliary equipment equipped to that Vehicle and lets you attach or detach it.
+
+## From a Trailer
+
+Open a Trailer and use:
+
+- the **Overview** to see the current towing vehicle and attach or detach it;
+- **Towing history** to review current and completed towing connections, newest first;
+- **Equipment** to attach, open, or detach auxiliary equipment;
+- **Devices** to attach and review trackers and sensors installed on the Trailer.
+
+Attaching, detaching, and equipment changes update the open panel immediately; no page reload is required.
+
+## Towing API
+
+### Attach a trailer to a vehicle
+
+```bash
+curl -X POST https://api.fleetbase.io/v1/trailers/trailer_7YqM3KpL2n/attach \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "vehicle": "vehicle_58gPloyQb9", "position": 1, "source": "dispatcher" }'
+```
+
+```json
+{
+  "id": "connection_mvcfqwn6rn",
+  "relationship_type": "towing",
+  "position": 1,
+  "vehicle_id": "vehicle_58gPloyQb9",
+  "trailer_id": "trailer_7YqM3KpL2n",
+  "vehicle": { "id": "vehicle_58gPloyQb9", "name": "CEN-01", "plate_number": "GBB-1001" },
+  "trailer": { "id": "trailer_7YqM3KpL2n", "name": "Reefer 12", "type": "reefer", "plate_number": "TR-1200" },
+  "connected_at": "2026-09-07T11:42:39.000000Z",
+  "disconnected_at": null,
+  "active": true,
+  "source": "dispatcher",
+  "notes": null
+}
+```
+
+`vehicle` accepts the vehicle's public ID or internal ID. Attaching an already-attached trailer to the same vehicle returns the existing connection. Attaching it to a different vehicle, or to a towing position that is already occupied, returns `409 Conflict` with an `error` message.
+
+### Detach a trailer
+
+```bash
+curl -X POST https://api.fleetbase.io/v1/trailers/trailer_7YqM3KpL2n/detach \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "notes": "Arrived at depot" }'
+```
+
+The response is `{ "status": "ok", "connection": { ... } }` with `active: false` and a `disconnected_at` timestamp. Detaching a trailer that is not attached returns `{ "status": "ok", "connection": null }`.
+
+### Read towing state
+
+- `GET /v1/trailers/{id}` exposes `vehicle_id`, `current_vehicle`, and `current_connection`.
+- `GET /v1/trailers/{id}/connections` lists the complete towing history, newest first.
+- `GET /v1/vehicles/{id}/trailers` lists the trailers currently attached to a vehicle.
+- `GET /v1/vehicles/{id}?with=trailers` adds the same list to a vehicle response.
+
+## Equipment assignment
+
+Equipment has a polymorphic assignment. It can be attached directly to a Vehicle or Trailer and reassigned atomically. Examples include a liftgate fixed to a Trailer, a pallet jack carried on a Vehicle, or a refrigeration unit mounted on a reefer.
+
+The Equipment create and edit forms let you choose the asset type and asset. The public API exposes explicit attach and detach operations:
+
+```bash
+curl -X POST https://api.fleetbase.io/v1/equipment/equipment_9kQ2mR4xTz/attach \
+  -H "Authorization: Bearer $FLEETBASE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "attachable_type": "fleet-ops:trailer", "attachable": "trailer_7YqM3KpL2n" }'
+```
+
+`attachable_type` accepts `fleet-ops:vehicle` or `fleet-ops:trailer` (the short forms `vehicle` and `trailer` are also accepted). Responses include `equipable_type`, `equipable_id`, and `equipable_name`; private UUIDs are not accepted by public endpoints. `POST /v1/equipment/{id}/detach` clears the assignment.
+
+## Operational guidance
+
+Record the physical relationship that exists in the yard or on the road. Equipment mounted on a Trailer should remain attached to that Trailer when the Trailer moves between Vehicles. Only attach it to the Vehicle when the equipment belongs operationally to the powered unit.
