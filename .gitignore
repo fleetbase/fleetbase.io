@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/.php-sdk-source/
 /.pnp
 .pnp.*
 .yarn/*
@@ -56,5 +57,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-
 

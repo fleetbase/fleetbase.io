@@ -75,6 +75,22 @@ test('uses positional identifiers and direct data for PHP SDK actions', () => {
   assert.doesNotMatch(code, /'body'\s*=>/);
 });
 
+test('uses the correct services for trailer and equipment actions', () => {
+  const cases = [
+    ['fleetbase-api-trailers-attach-trailer-to-vehicle', 'POST', '/trailers/:id/attach', 'Attach Trailer to Vehicle', 'Trailers', /\$fleetbase->trailers->attachTrailerToVehicle\(/],
+    ['fleetbase-api-trailers-list-vehicle-trailers', 'GET', '/vehicles/:id/trailers', 'List Vehicle Trailers', 'Trailers', /\$fleetbase->vehicles->listVehicleTrailers\(\$vehicleId\)/],
+    ['fleetbase-api-trailers-attach-device-to-trailer', 'POST', '/devices/:id/attach', 'Attach Device to Trailer', 'Trailers', /\$fleetbase->devices->attachDevice\(/],
+    ['fleetbase-api-equipment-attach-equipment', 'POST', '/equipment/:id/attach', 'Attach Equipment', 'Equipment', /\$fleetbase->equipment->attachEquipment\(/],
+  ];
+  for (const [id, method, url, endpointName, resourceFolder, expected] of cases) {
+    const code = emitPhp({ method, fullUrl: `https://api.fleetbase.io/v1${url}`, body: null, queryParams: {},
+      endpointKind: 'custom-action', endpointName, rawUrl: `{{base_url}}/{{namespace}}${url}`,
+      resourceFolder, sdkConfig, sdkExample: catalog.examples[id] });
+    assert.match(code, expected);
+    assert.doesNotMatch(code, /GuzzleHttp|'body'\s*=>/);
+  }
+});
+
 test('uses first-class PHP SDK methods for Core API custom endpoints', () => {
   const code = emitPhp({
     method: 'GET',

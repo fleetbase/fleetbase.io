@@ -1,0 +1,35 @@
+name: API documentation contract
+
+on:
+  pull_request:
+    paths:
+      - 'vendor/postman'
+      - 'scripts/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/api-docs.yml'
+      - '.github/workflows/bump-postman.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Verify complete PHP catalog before postinstall
+        run: node scripts/sync-php-sdk-examples.mjs
+      - run: pnpm install --frozen-lockfile
+      - run: node --test scripts/sdk-emitters.test.mjs scripts/sync-php-sdk-examples.test.mjs
+      - run: pnpm generate:api-docs
