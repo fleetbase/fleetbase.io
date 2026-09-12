@@ -12,9 +12,6 @@ on:
   repository_dispatch:
     types: [postman-updated]
   workflow_dispatch:
-  schedule:
-    # Retry after an SDK contract update is merged, even without a Postman push.
-    - cron: '17 5 * * *'
 
 concurrency:
   group: bump-postman
@@ -47,57 +44,56 @@ jobs:
           new_sha=$(git rev-parse HEAD)
           cd "$GITHUB_WORKSPACE"
 
-          echo "old_sha=$old_sha" >> "$GITHUB_OUTPUT"
-          echo "new_sha=$new_sha" >> "$GITHUB_OUTPUT"
-          echo "old_short=${old_sha:0:7}" >> "$GITHUB_OUTPUT"
-          echo "new_short=${new_sha:0:7}" >> "$GITHUB_OUTPUT"
+          {
+            echo "old_sha=$old_sha"
+            echo "new_sha=$new_sha"
+            echo "old_short=${old_sha:0:7}"
+            echo "new_short=${new_sha:0:7}"
+            if [ "$old_sha" = "$new_sha" ]; then
+              echo "no_change=true"
+            else
+              echo "no_change=false"
+            fi
+          } >> "$GITHUB_OUTPUT"
+          echo "Postman: $old_sha → $new_sha"
 
-          echo "Postman: $old_sha → $new_sha; checking the PHP catalog as well."
+      - name: Stop early if nothing changed
+        if: steps.bump.outputs.no_change == 'true'
+        run: echo "Postman is already current; skipping installation, generation, and PR creation."
 
       - name: Setup pnpm
+        if: steps.bump.outputs.no_change != 'true'
         uses: pnpm/action-setup@v3
         with:
           version: 10
 
       - name: Setup Node.js
+        if: steps.bump.outputs.no_change != 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
 
-      - name: Checkout the reviewed PHP SDK catalog
-        uses: actions/checkout@v4
-        with:
-          repository: fleetbase/fleetbase-php
-          ref: main
-          path: .php-sdk-source
-          persist-credentials: false
-          sparse-checkout: contracts
-
-      - name: Synchronize PHP examples before postinstall generates docs
-        id: sdk
-        run: |
-          echo "sha=$(git -C .php-sdk-source rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          node scripts/sync-php-sdk-examples.mjs --source .php-sdk-source/contracts/php-sdk-examples.json
-
       - name: Install dependencies
+        if: steps.bump.outputs.no_change != 'true'
         run: pnpm install --frozen-lockfile
 
       - name: Regenerate API docs
+        if: steps.bump.outputs.no_change != 'true'
         run: |
           node --test scripts/sdk-emitters.test.mjs scripts/sync-php-sdk-examples.test.mjs
           pnpm generate:api-docs
 
       - name: Create Pull Request
+        if: steps.bump.outputs.no_change != 'true'
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: bump postman submodule (${{ steps.bump.outputs.old_short }} → ${{ steps.bump.outputs.new_short }})"
           title: "chore: bump postman submodule"
           body: |
-            Automated bump of the `vendor/postman` submodule and matching PHP SDK examples.
-
-            PHP SDK catalog source: `fleetbase/fleetbase-php@${{ steps.sdk.outputs.sha }}`.
+            Automated bump of the `vendor/postman` submodule for the API reference.
+            SDK example coverage is independent and does not block new API documentation.
 
             **Diff:** [`${{ steps.bump.outputs.old_short }}...${{ steps.bump.outputs.new_short }}`](https://github.com/fleetbase/postman/compare/${{ steps.bump.outputs.old_sha }}...${{ steps.bump.outputs.new_sha }})
 
@@ -112,7 +108,6 @@ jobs:
           base: main
           add-paths: |
             vendor/postman
-            scripts/php-sdk-examples.generated.json
           labels: |
             automated
             api-docs

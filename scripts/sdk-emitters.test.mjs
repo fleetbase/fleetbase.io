@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { emitPhp } from './sdk-emitters.mjs';
+import { emitJs, emitPhp } from './sdk-emitters.mjs';
 
 const catalog = JSON.parse(
   await readFile(new URL('./php-sdk-examples.generated.json', import.meta.url)),
@@ -17,6 +17,25 @@ const sdkConfig = {
     },
   },
 };
+
+test('new API endpoints do not invent PHP SDK methods when no example exists', () => {
+  for (const endpointKind of ['create', 'find', 'query', 'custom-action']) {
+    assert.equal(emitPhp({
+      method: 'GET', fullUrl: 'https://api.fleetbase.io/v1/inspection-forms',
+      endpointKind, resourceFolder: 'Inspections', sdkConfig,
+    }), null);
+  }
+});
+
+test('unknown JavaScript SDK resources use raw HTTP rather than guessed stores', () => {
+  const code = emitJs({
+    method: 'GET', fullUrl: 'https://api.fleetbase.io/v1/inspection-forms',
+    endpointKind: 'query', resourceFolder: 'Inspections',
+    sdkConfig: { js: { pkg: '@fleetbase/sdk', client: 'fleetbase', stores: {} } },
+  });
+  assert.match(code, /fetch\(/);
+  assert.doesNotMatch(code, /fleetbase\.inspections|import Fleetbase/);
+});
 
 test('uses concise PHP SDK calls for canonical CRUD endpoints', () => {
   const code = emitPhp({

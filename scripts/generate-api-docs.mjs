@@ -30,6 +30,7 @@ import { createHighlighter } from 'shiki';
 import YAML from 'yaml';
 
 import { apis as apisConfig, defaultConfig } from './api-docs.config.mjs';
+import { validateCatalog } from './sync-php-sdk-examples.mjs';
 import {
   classifyEndpoint,
   emitCurl,
@@ -93,6 +94,7 @@ const PHP_SDK_EXAMPLES_PATH = path.join(
 );
 let phpSdkExamples = {};
 const usedPhpSdkExampleIds = new Set();
+const missingPhpSdkExampleIds = new Set();
 
 // ---------------------------------------------------------------------------
 // Entry
@@ -102,6 +104,7 @@ async function main() {
   const phpSdkCatalog = JSON.parse(
     await fs.readFile(PHP_SDK_EXAMPLES_PATH, 'utf8'),
   );
+  validateCatalog(phpSdkCatalog, []);
   phpSdkExamples = phpSdkCatalog.examples ?? {};
 
   if (!(await collectionsAvailable())) {
@@ -152,9 +155,10 @@ async function main() {
   const catalogIds = Object.keys(phpSdkExamples);
   if (usedPhpSdkExampleIds.size !== catalogIds.length) {
     const unused = catalogIds.filter((id) => !usedPhpSdkExampleIds.has(id));
-    throw new Error(
-      `PHP SDK catalog coverage is ${usedPhpSdkExampleIds.size}/${catalogIds.length}; unused IDs: ${unused.join(', ')}`,
-    );
+    console.warn(`PHP SDK catalog has ${unused.length} unused entries; these are not rendered.`);
+  }
+  if (missingPhpSdkExampleIds.size) {
+    console.warn(`PHP SDK examples unavailable for ${missingPhpSdkExampleIds.size} endpoints; API reference generated without those SDK samples: ${[...missingPhpSdkExampleIds].join(', ')}`);
   }
 
   console.log('\n✅ API docs generated.');
@@ -295,9 +299,10 @@ async function buildEndpointSection(
   const sdkExample = phpSdkExamples[sdkExampleId];
   if (sdkConfig?.php) {
     if (!sdkExample) {
-      throw new Error(`No PHP SDK example is mapped for ${sdkExampleId}.`);
+      missingPhpSdkExampleIds.add(sdkExampleId);
+    } else {
+      usedPhpSdkExampleIds.add(sdkExampleId);
     }
-    usedPhpSdkExampleIds.add(sdkExampleId);
   }
 
   const rawSamples = {
@@ -413,6 +418,7 @@ async function buildEndpointSection(
 async function highlightSampleSet(samples) {
   const out = {};
   for (const [lang, code] of Object.entries(samples)) {
+    if (!code) continue;
     out[lang] = { code, html: await highlightCode(code, lang) };
   }
   return out;

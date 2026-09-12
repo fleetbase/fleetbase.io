@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 20
           cache: pnpm
-      - name: Verify complete PHP catalog before postinstall
+      - name: Validate supplied SDK examples before postinstall
         run: node scripts/sync-php-sdk-examples.mjs
       - run: pnpm install --frozen-lockfile
       - run: node --test scripts/sdk-emitters.test.mjs scripts/sync-php-sdk-examples.test.mjs
