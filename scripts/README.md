@@ -215,4 +215,4 @@ pnpm test:sdk-emitters
 pnpm generate:api-docs
 ```
 
-Review and commit that catalog change independently. The current catalog comes from the published PHP SDK [1.4.0 tag](https://github.com/fleetbase/fleetbase-php/releases/tag/1.4.0), commit `f8237cc6bb918061e6aae7ff676393b8b723d6ad`, and includes all six inspection endpoints. Keep future SDK catalog updates separate from the Postman bump.
+Review and commit that catalog change independently. The current catalog comes from the published PHP SDK [1.4.1 tag](https://github.com/fleetbase/fleetbase-php/releases/tag/1.4.1), commit `6ca0c2530907d1b669379b326b0e976855dff3ee`, and includes all six inspection endpoints. 1.4.1 tracks the inspection API's renamed submission answers: an inspection is submitted with `answers`, each entry naming its `field`, where 1.4.0 sent `custom_field_values` with `custom_field`. Keep future SDK catalog updates separate from the Postman bump.
