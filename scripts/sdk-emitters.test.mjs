@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { emitJs, emitPhp } from './sdk-emitters.mjs';
+import { classifyEndpoint, emitJs, emitPhp } from './sdk-emitters.mjs';
 
 const catalog = JSON.parse(
   await readFile(new URL('./php-sdk-examples.generated.json', import.meta.url)),
@@ -129,4 +129,38 @@ test('uses first-class PHP SDK methods for Core API custom endpoints', () => {
 
   assert.match(code, /\$fleetbase->organizations->getCurrentOrganization\(/);
   assert.doesNotMatch(code, /GuzzleHttp/);
+});
+
+test('renders all released inspection examples on their correct SDK services', () => {
+  const cases = [
+    ['list-inspection-forms', 'GET', '/inspection-forms', /\$fleetbase->inspectionForms->listInspectionForms\(/],
+    ['retrieve-an-inspection-form', 'GET', '/inspection-forms/:id', /\$fleetbase->inspectionForms->retrieveInspectionForm\(\$inspectionFormId\)/],
+    ['submit-an-inspection', 'POST', '/inspections', /\$fleetbase->inspections->submitInspection\(/],
+    ['list-inspections', 'GET', '/inspections', /\$fleetbase->inspections->query\(/],
+    ['retrieve-an-inspection', 'GET', '/inspections/:id', /\$fleetbase->inspections->findRecord\(\$id\)/],
+    ['list-vehicle-inspections', 'GET', '/vehicles/:id/inspections', /\$fleetbase->vehicles->listVehicleInspections\(\$vehicleId\)/],
+  ];
+  for (const [suffix, method, url, expected] of cases) {
+    const sdkExample = catalog.examples[`fleetbase-api-inspections-${suffix}`];
+    assert.ok(sdkExample, `Missing released inspection example: ${suffix}`);
+    const endpoint = classifyEndpoint({ name: sdkExample.name, method, pathSegments: url.slice(1).split('/') });
+    const code = emitPhp({
+      method, fullUrl: `https://api.fleetbase.io/v1${url}`, body: null,
+      queryParams: suffix === 'list-inspections' ? { driver: 'driver_id-fixture' } : {},
+      endpointKind: endpoint.kind, endpointAction: endpoint.action,
+      endpointName: sdkExample.name, rawUrl: `{{base_url}}/{{namespace}}${url}`,
+      resourceFolder: 'Inspections', sdkConfig, sdkExample,
+    });
+    assert.match(code, expected, suffix);
+    assert.doesNotMatch(code, /GuzzleHttp|'body'\s*=>/, suffix);
+    if (suffix.includes('inspection-form')) {
+      assert.doesNotMatch(code, /\$fleetbase->inspections->/, suffix);
+    }
+    if (suffix === 'submit-an-inspection') {
+      assert.match(code, /'item_results'\s*=>/);
+    }
+    if (suffix === 'list-inspections') {
+      assert.match(code, /'driver'\s*=>/);
+    }
+  }
 });
