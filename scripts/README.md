@@ -215,4 +215,4 @@ pnpm test:sdk-emitters
 pnpm generate:api-docs
 ```
 
-Review and commit that catalog change independently. The inspections documentation can ship with the existing published PHP catalog; its PHP samples become available when the released inspection-capable SDK catalog is synchronized.
+Review and commit that catalog change independently. The current catalog comes from the published PHP SDK [1.4.0 tag](https://github.com/fleetbase/fleetbase-php/releases/tag/1.4.0), commit `f8237cc6bb918061e6aae7ff676393b8b723d6ad`, and includes all six inspection endpoints. Keep future SDK catalog updates separate from the Postman bump.

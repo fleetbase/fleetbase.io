@@ -241,14 +241,18 @@ export function emitPhp({
   // Do not invent SDK methods for APIs added ahead of this SDK's catalog.
   if (!sdkExample) return null;
 
+  const store = php.stores?.[resourceFolder] ?? camelCase(resourceFolder);
+  const catalogStore = sdkExample.call?.match(/\$fleetbase->([A-Za-z_][A-Za-z0-9_]*)->/)?.[1];
+
   if (
     typeof sdkExample?.code === 'string' &&
-    !isCanonicalPhpCrud({ endpointKind, endpointName, rawUrl })
+    (!isCanonicalPhpCrud({ endpointKind, endpointName, rawUrl }) ||
+      (catalogStore && catalogStore !== store))
   ) {
+    // A docs folder can contain multiple SDK services (e.g. inspection forms
+    // and submissions). Only shorten CRUD calls when the service also matches.
     return sdkExample.code;
   }
-
-  const store = php.stores?.[resourceFolder] ?? camelCase(resourceFolder);
 
   switch (endpointKind) {
     case 'create':
