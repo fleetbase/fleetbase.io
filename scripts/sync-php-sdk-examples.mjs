@@ -25,7 +25,7 @@ export async function requestIds(collectionsDirectory) {
   return ids.sort();
 }
 
-export function validateCatalog(catalog, expectedIds) {
+export function validateCatalog(catalog, expectedIds, { requireComplete = false } = {}) {
   if (catalog?.schema_version !== 1 || catalog?.package !== 'fleetbase/fleetbase-php' ||
       !catalog.examples || typeof catalog.examples !== 'object' || Array.isArray(catalog.examples)) {
     throw new Error('Invalid Fleetbase PHP SDK example catalog.');
@@ -38,20 +38,21 @@ export function validateCatalog(catalog, expectedIds) {
     const entry = catalog.examples[id];
     return !entry || !['implementation', 'call', 'code'].every((key) => typeof entry[key] === 'string' && entry[key].trim());
   });
-  if (missing.length || stale.length || invalid.length) {
+  if (invalid.length || (requireComplete && (missing.length || stale.length))) {
     throw new Error(
       `PHP SDK catalog does not match Postman. Missing: ${missing.join(', ') || 'none'}. ` +
       `Stale: ${stale.join(', ') || 'none'}. Invalid: ${invalid.join(', ') || 'none'}. ` +
-      'Merge the matching fleetbase/fleetbase-php contract update, then rerun Bump Postman Submodule.',
+      'Correct invalid examples; SDK coverage gaps must not block API reference updates.',
     );
   }
-  return actual.length;
+  return actual.filter((id) => expected.has(id)).length;
 }
 
 export async function syncCatalog({ source, destination, collectionsDirectory }) {
   const contents = await readFile(source, 'utf8');
   const count = validateCatalog(JSON.parse(contents), await requestIds(collectionsDirectory));
-  // Validate the complete candidate before replacing the checked-in catalog.
+  // Validate supplied examples before replacing the checked-in catalog.
+  // SDKs evolve independently of Postman; partial coverage is allowed.
   if (path.resolve(source) !== path.resolve(destination)) {
     const temporary = `${destination}.${process.pid}.tmp`;
     await writeFile(temporary, contents);
@@ -72,7 +73,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
       destination,
       collectionsDirectory: values.collections ?? path.join(root, 'vendor/postman/postman/collections'),
     });
-    console.log(`PHP SDK catalog verified: ${count}/${count} Postman request IDs.`);
+    const ids = await requestIds(values.collections ?? path.join(root, 'vendor/postman/postman/collections'));
+    console.log(`PHP SDK catalog verified: ${count}/${ids.length} current Postman requests have examples. Missing examples do not block API docs.`);
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

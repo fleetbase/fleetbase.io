@@ -104,7 +104,8 @@ export function emitJs({
   const js = sdkConfig?.js;
   if (!js) return emitJsRaw({ method, fullUrl, body });
 
-  const store = js.stores?.[resourceFolder] ?? camelCase(resourceFolder);
+  const store = js.stores?.[resourceFolder];
+  if (!store) return emitJsRaw({ method, fullUrl, body });
   const isOrderAction =
     endpointKind === 'custom-action' && resourceFolder === 'Orders';
   const sdkMethod = orderActionMethod(js, endpointAction);
@@ -237,6 +238,8 @@ export function emitPhp({
 }) {
   const php = sdkConfig?.php;
   if (!php) return emitPhpRaw({ method, fullUrl, body });
+  // Do not invent SDK methods for APIs added ahead of this SDK's catalog.
+  if (!sdkExample) return null;
 
   if (
     typeof sdkExample?.code === 'string' &&

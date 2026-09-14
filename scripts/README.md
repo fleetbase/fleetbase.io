@@ -200,3 +200,19 @@ Only for **new kinds** of behavior, not new instances:
 - Postman invents a new YAML shape → adapt the parser in `loadRequests` / `loadExamples`
 
 Day-to-day collection changes (resources added, examples updated, descriptions reworded) need zero code changes — just bump the submodule.
+
+### SDK examples are independent of the API reference
+
+`Bump Postman Submodule` only updates Postman and verifies documentation generation. When its SHA is unchanged, installation, generation, and PR creation are skipped. It does not check out an SDK or wait for an SDK release.
+
+Missing PHP catalog entries omit the PHP sample for that endpoint; stale entries are not rendered. Supplied malformed examples still fail validation. Unknown JavaScript SDK stores use raw `fetch` examples rather than guessed SDK methods. Other languages and the HTTP reference remain available regardless of one SDK's coverage.
+
+Refresh examples separately after the corresponding SDK version is published:
+
+```sh
+node scripts/sync-php-sdk-examples.mjs --source /path/to/released-sdk/contracts/php-sdk-examples.json
+pnpm test:sdk-emitters
+pnpm generate:api-docs
+```
+
+Review and commit that catalog change independently. The inspections documentation can ship with the existing published PHP catalog; its PHP samples become available when the released inspection-capable SDK catalog is synchronized.
