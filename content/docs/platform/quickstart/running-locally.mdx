@@ -69,8 +69,10 @@ Once running, the stack exposes the following services:
 | **Console** | http://localhost:4200 | Ember.js admin interface |
 | **API** | http://localhost:8000 | Laravel REST API |
 | **MySQL** | localhost:3306 | Primary database |
-| **Redis** | localhost:6379 | Cache and job queue |
+| **Redis** | `cache:6379` (internal only) | Cache and job queue |
 | **SocketCluster** | ws://localhost:38000 | Real-time WebSocket server |
+
+Redis is not published to the host. Other containers reach it at `cache:6379` over the Compose network. To inspect it, run `redis-cli` inside the container with `docker compose exec cache redis-cli`.
 
 The `httpd` container acts as a reverse proxy in front of the API and console containers. The `scheduler` and `queue` containers handle cron jobs and background job processing respectively.
 
