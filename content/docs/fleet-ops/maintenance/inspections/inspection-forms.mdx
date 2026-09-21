@@ -1,0 +1,186 @@
+---
+title: Inspection Forms
+description: Build inspection checklists from field groups and typed fields, decide what counts as a failure, and publish forms for use in the console and through inspection links.
+---
+
+# Inspection Forms
+
+An **Inspection Form** is the checklist an inspection is filled in from. You build it from **field groups**, such as *Exterior*, *Cab*, or *Brakes*, and each group holds the fields to answer. **Pass / Fail** fields are the checks that decide whether an inspection passes or fails. Other field types collect supporting details such as readings, notes, photos, and signatures.
+
+Manage forms under **Fleet-Ops → Maintenance → Inspection Forms**.
+
+## Creating a Form
+
+<Steps>
+  <Step>
+    Navigate to **Fleet-Ops → Maintenance → Inspection Forms** and click **New**.
+  </Step>
+  <Step>
+    Under **Form Details**, enter a **Name** (for example *Daily vehicle inspection*), choose a **Type**, and add a **Description** of what the inspection covers.
+  </Step>
+  <Step>
+    Leave **Status** as **Draft** while you build the form.
+  </Step>
+  <Step>
+    Review the **Settings** checkboxes (see [Form Settings](#form-settings) below).
+  </Step>
+  <Step>
+    In the **Form Builder**, click **New field group**, then add fields to it with **New field**. Repeat for each group.
+  </Step>
+  <Step>
+    Click **Save**.
+  </Step>
+</Steps>
+
+When the form is ready, [publish it](#publishing-a-form) so it can be used.
+
+## Form Details
+
+| Field | Description |
+| :--- | :--- |
+| **Name** | The form's name, shown wherever inspections are listed |
+| **Type** | The kind of inspection (see below) |
+| **Status** | **Draft**, **Published**, or **Archived** |
+| **Description** | What the inspection covers. It's shown at the top of the page someone opens from an inspection link. |
+
+### Form Types
+
+The **Type** labels a form so you can sort and filter your forms. It doesn't change how the form behaves.
+
+| Type | Use it for |
+| :--- | :--- |
+| **DVIR** | The driver vehicle inspection report — the daily walk-round a driver signs |
+| **Pre-Trip** | Checks completed before the vehicle leaves |
+| **Post-Trip** | Checks completed when the vehicle returns |
+| **Pre-Operational** | Checks performed before operation begins |
+| **Post-Operational** | Checks performed after operation ends |
+| **Safety Inspection** | A comprehensive safety and compliance inspection |
+| **Maintenance Inspection** | A scheduled maintenance check and service inspection |
+| **Damage Assessment** | Assessing damage or the vehicle's condition |
+| **Annual Inspection** | A yearly comprehensive vehicle inspection |
+| **Safety** | A general safety checklist |
+| **Compliance** | A regulatory or audit checklist |
+| **Maintenance** | A workshop or technician checklist |
+
+### Form Statuses
+
+| Status | Meaning |
+| :--- | :--- |
+| **Draft** | Still being written. It can't be chosen for a new inspection or shared through a link. |
+| **Published** | Available for new inspections in the console and through inspection links. |
+| **Archived** | Retired. Kept for the inspections already filed against it. |
+
+## Form Settings
+
+The **Settings** section has three checkboxes. On a new form, they start as shown:
+
+| Setting | Default | What it does |
+| :--- | :--- | :--- |
+| **Open a defect record when an item fails** | On | When an inspection submitted through an inspection link has a failed check, an issue is raised against the vehicle automatically. |
+| **Open a work order when an item fails** | Off | When an inspection submitted through an inspection link has a failed check, a work order is opened automatically, with the failed checks as its checklist. |
+| **Require the driver to sign** | On | Not enforced for inspections filed in the console or through an inspection link. To collect a signature there, add a required **Signature** field (see below). |
+
+<Callout type="info">
+The automatic issue and work order are only raised for inspections submitted through an inspection link. For an inspection filed in the console, raise them yourself with **Create Issue** or **Create Work Order**. See [Reviewing & Follow-up](/docs/fleet-ops/maintenance/inspections/reviewing-and-follow-up#following-up-failed-checks).
+</Callout>
+
+To make sure every inspection carries a signature, add a **Signature** field to the form and mark it as required.
+
+## Building the Form
+
+The **Form Builder** lays the form out as a list of field groups. Each group is a section of the inspection, and its fields are shown in a grid.
+
+### Field Groups
+
+Click **New field group** to add a group, then set:
+
+- **Group name** — the section heading, for example *Exterior*.
+- **Group description** — what the group covers.
+- **Columns** — lay the group's fields out in **1**, **2**, or **3** columns.
+
+Use the arrow buttons to **Move up** or **Move down** a group, and the trash button to delete it. Deleting a group also deletes every field inside it.
+
+### Adding a Field
+
+Click **New field** inside a group, fill in the field's settings, and click **Save field**. Every field has:
+
+| Setting | Description |
+| :--- | :--- |
+| **Field label** | The question or check, for example *Brake lights* |
+| **Field name** | An internal name for the field. It fills in from the label automatically, so you don't normally need to change it. |
+| **Field type** | What kind of answer the field takes (see below) |
+| **Field description** | What to check, and what a pass looks like. It's shown with the field while the inspection is filled in. |
+| **Field is required** | The field must be answered before an inspection link can be submitted. Required fields show a red asterisk. **Pass / Fail** and **Yes / No** fields always have an answer, so this matters most for the other types. |
+| **Column span** | How many of the group's columns the field takes up: **1**, **2**, or **3** |
+
+In the builder, use the arrow buttons to reorder fields within a group, the pencil to edit a field, and the trash button to delete it.
+
+### Field Types
+
+| Field type | Answer | When to use it |
+| :--- | :--- | :--- |
+| **Pass / Fail** | **Pass**, **Fail**, or **N/A**. Starts on **Pass**. | Each item the inspector checks. These are the only fields that decide the inspection's result. |
+| **Text** | A short line of text | Short free-form details, such as a trailer number or seal number |
+| **Long text** | A multi-line note | General remarks or observations |
+| **Number** | A number, with an optional unit | Readings such as tyre pressure, fuel level, or the odometer |
+| **Select** | One choice from a dropdown | Picking from a longer list you define, such as tyre condition grades |
+| **Radio buttons** | One choice from buttons shown side by side | Picking from a short list you define |
+| **Yes / No** | A toggle | Simple yes-or-no questions that don't count as a pass or fail, such as *Fire extinguisher on board* |
+| **Date** | A date | Dates such as a permit or certificate expiry |
+| **Date and time** | A date and time | When something was checked or happened |
+| **Photo or file** | An uploaded image | A photo of the vehicle, of damage, or of a dashboard reading |
+| **Signature** | An uploaded image of a signature | The inspector's or driver's sign-off |
+
+**Select** and **Radio buttons** fields need **Field options**: type each option and click **Add**.
+
+**Number** fields have two extra settings:
+
+- **Unit** — shown beside the number, for example *km* or *hours*.
+- **This is the odometer reading** — when you fill in an inspection in the console, the answer is copied into the inspection's own **Odometer**.
+
+## How Failures Are Determined
+
+Only **Pass / Fail** fields decide the result:
+
+- An inspection **Failed** if any **Pass / Fail** field was answered **Fail**.
+- Otherwise it **Passed**.
+- **N/A** isn't counted as a failure. Use it for checks that don't apply to the vehicle being inspected, such as a tail lift on a vehicle that doesn't have one.
+
+Each **Pass / Fail** field has an **On fail** section that sets what a failure means and what the inspector has to provide before it's accepted:
+
+| Setting | What it does |
+| :--- | :--- |
+| **Default severity** | The severity a failure starts with: **Low**, **Medium**, **High**, or **Critical**. The inspector can change it. |
+| **Require a photo on fail** | A failed answer isn't accepted without at least one photo. |
+| **Require a comment on fail** | A failed answer isn't accepted without a comment saying what's wrong. |
+| **Mark the vehicle unsafe on fail** | A failed answer is marked **Unsafe to operate** by default, which is what an out-of-service defect is. The inspector can change it. |
+| **Instructions** | How to carry out the check, shown to the inspector beside the field. |
+
+Severity matters later: an issue or work order raised from the inspection takes the highest severity among its failed checks as its priority, and a **Critical** failure makes the work order due sooner. See [Reviewing & Follow-up](/docs/fleet-ops/maintenance/inspections/reviewing-and-follow-up#what-gets-created).
+
+## Publishing a Form
+
+A form must be **Published** before you can choose it for a new inspection or generate an inspection link for it.
+
+To publish a draft, open the form and click **Publish** in the header, or choose **Publish** from the form's row menu in the list. Once the form is published, the **Publish** button is replaced by **Generate Link**, and the form's **Published** date is set.
+
+To retire a form you no longer use, choose **Archive** from its row menu. Archived forms can't be used for new inspections or links, and the inspections already filed against them are kept.
+
+## Viewing a Form
+
+Click a form in the list to open it. The form has two tabs:
+
+- **Overview** — the form's **Name**, **Status**, **Type**, number of **Fields**, **Published** date, and **Description**; the form's **Public Links**; and the **Form Structure**, listing each group and its fields with their type and default severity.
+- **Submissions** — every inspection filed against this form, newest first, showing the vehicle, result, status, driver, submitted time, and failed count. Click one to open it.
+
+The forms list shows each form's **Name**, **Type**, **Status**, number of **Items**, and creation date. Its row menu offers **View form**, **Edit form**, **Publish**, **Archive**, **Generate inspection link**, and **Delete form**.
+
+## Editing a Form
+
+Open the form and click the edit button, or choose **Edit form** from its row menu. You can edit a form at any time, including after it's published and has inspections filed against it. Changes take effect as soon as you save.
+
+Inspections that were already filed are displayed using the form as it is now. Renaming a field or group, or adding a field, changes how existing inspections read.
+
+<Callout type="warn">
+Deleting a field also deletes every answer already filed against it, and deleting a group deletes all of its fields. This can't be undone once the form is saved. To stop using a form without losing its history, archive it and build a new one instead.
+</Callout>

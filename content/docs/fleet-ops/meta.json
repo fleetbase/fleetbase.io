@@ -30,6 +30,7 @@
     "resources/fuel-reports",
     "---Maintenance---",
     "maintenance/overview",
+    "maintenance/inspections",
     "maintenance/schedules",
     "maintenance/work-orders",
     "maintenance/equipment",
