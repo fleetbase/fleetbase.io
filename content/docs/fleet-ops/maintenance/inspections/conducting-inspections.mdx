@@ -1,0 +1,188 @@
+---
+title: Conducting Inspections
+description: Fill in and submit inspections from the console, attach photos and signatures, and send single-use inspection links with a PIN to people who don't use the console.
+---
+
+# Conducting Inspections
+
+There are two ways to carry out an inspection against a published [Inspection Form](/docs/fleet-ops/maintenance/inspections/inspection-forms):
+
+- **In the console** — you, or a colleague with console access, fill in the inspection under **Maintenance → Inspections**.
+- **Through an inspection link** — you generate a single-use link and a PIN, and send them to whoever is doing the check. They fill in the form in a browser, on a phone or a computer, without signing in to the console.
+
+## Filling In an Inspection in the Console
+
+<Steps>
+  <Step>
+    Navigate to **Fleet-Ops → Maintenance → Inspections** and click **New**.
+  </Step>
+  <Step>
+    Under **Inspection Details**, choose the **Form**. Only published forms are listed.
+  </Step>
+  <Step>
+    Choose the **Vehicle** being inspected and the **Driver**, and enter the **Odometer** and **Engine Hours** readings if you have them.
+  </Step>
+  <Step>
+    Work through each group of the form. Every **Pass / Fail** check starts on **Pass**, so change the ones that fail to **Fail**, and the ones that don't apply to **N/A**. Fill in the other fields as needed.
+  </Step>
+  <Step>
+    For each failed check, record the defect details (see [Recording a Failed Check](#recording-a-failed-check)).
+  </Step>
+  <Step>
+    Click **Save**. This files the inspection (see [Drafts and Submitting](#drafts-and-submitting)).
+  </Step>
+</Steps>
+
+<Callout type="warn">
+Because every **Pass / Fail** check starts on **Pass**, any check you leave untouched is recorded as a pass. Go through every check before you save.
+</Callout>
+
+While you work, the bottom of the form keeps a running tally of **Pass**, **Fail**, and **N/A** answers, and of items **still to answer** — required fields left blank, and failed checks still missing a comment or photo they need. A **Defects** list collects every failed check. Click **Review** on a defect to jump back to it. While anything is still to answer, a banner names the next item, with **Jump to →** to take you there.
+
+### Recording a Failed Check
+
+When you choose **Fail**, a defect panel opens beside the check, titled **Defect:** followed by the check's name. In it you can:
+
+- Set the severity: **Low**, **Medium**, **High**, or **Critical**. It starts at the check's default severity.
+- Switch **Unsafe to operate** on or off. Checks set up to mark the vehicle unsafe on fail start with it on.
+- Add a comment saying what's wrong and what it needs.
+- Add photos with the **+** button.
+
+Click **Done** to close the panel. The check then shows a summary of the defect — its severity, whether it's unsafe, and how many photos and comments it has. Click it to edit the defect again.
+
+If the check requires a comment or a photo on fail, the panel says so (for example **Comment + photo mandatory on fail**), and the defect is marked **Needs a comment**, **Needs a photo**, or **Needs a comment and a photo** until it has them.
+
+<Callout type="info">
+In the console, required fields are flagged but don't stop you saving. A failed check that's missing the comment or photo it requires does: Fleet-Ops won't accept the answers until you add it.
+</Callout>
+
+### Photos and Signatures
+
+- **Failed checks** — add photos in the defect panel, as described above.
+- **Photo or file** fields — click **Upload photo** to attach an image.
+- **Signature** fields — click **Upload signature** to attach an image of the signature.
+
+After an inspection is saved, its **Photos** tab shows the photos attached to it, and you can drop more photos there. See [Reviewing & Follow-up](/docs/fleet-ops/maintenance/inspections/reviewing-and-follow-up#the-photos-tab).
+
+## Drafts and Submitting
+
+An inspection is either a **Draft** — started but not filed — or filed. Filing an inspection sets its status to **Submitted**, records the time it was submitted, counts its passed and failed checks, and works out its **Result**.
+
+A new inspection's **Status** field shows **Draft** while you fill it in. When you click **Save** with a form chosen, the answers are saved and the inspection is filed straight away.
+
+<Callout type="warn">
+In the console, saving an inspection files it, even though its **Status** showed **Draft** while you were filling it in. You can still edit the answers afterwards, but a filed inspection can't go back to being a draft.
+</Callout>
+
+An inspection that's still a **Draft** shows **Submit** in its row menu in the **Inspections** list. **Submit** asks you to confirm first:
+
+> **Submit this inspection?** This files the inspection, stamps the time it was submitted and recounts its pass and fail totals. It cannot be unsubmitted.
+
+Click **Submit inspection** to file it. **Submit** only appears for inspections in **Draft**.
+
+To change an inspection after it's filed, open it and click the edit button, or choose **Edit inspection** from its row menu.
+
+## Inspection Links
+
+An **inspection link** lets someone fill in a published form without a console login — a driver doing a walk-round before a shift, a subcontractor, or a workshop checking a vehicle. Each link:
+
+- Works **once**. After the inspection is submitted, the link closes.
+- Is protected by a **6-digit PIN**. The person needs both the link and the PIN.
+- **Expires** — after 72 hours unless you choose a different time.
+- Can be **revoked** at any time.
+
+### Generating a Link
+
+<Steps>
+  <Step>
+    Open a published form under **Maintenance → Inspection Forms** and click **Generate Link** in the header. You can also choose **Generate inspection link** from the form's row menu.
+  </Step>
+  <Step>
+    Optionally, choose who the link is for under **Assign to**. Anyone in your organisation can complete an inspection, and the inspection is credited to them.
+  </Step>
+  <Step>
+    Optionally, choose the **Driver** and **Vehicle** being inspected. The inspection is recorded against them.
+  </Step>
+  <Step>
+    Check **Expires at**. It's filled in with a time 72 hours from now. Change it if you need the link for a longer or shorter time.
+  </Step>
+  <Step>
+    Under **Send the link and PIN**, choose how the person receives them (see below).
+  </Step>
+  <Step>
+    Click **Generate Link**.
+  </Step>
+</Steps>
+
+The dialog then shows **Link generated**, with the link and its PIN, each with a **Copy** button. The link is also copied to your clipboard.
+
+If you choose **Generate inspection link** for a form that isn't published, Fleet-Ops reminds you to **Publish this inspection form before generating a public link.**
+
+### Sending the Link and PIN
+
+**Send the link and PIN** has three options:
+
+| Option | What happens |
+| :--- | :--- |
+| **Do not send it, I will share it myself** | Nothing is sent. Copy the link and PIN from the dialog and share them yourself. |
+| **By email** | An email with the link and PIN is sent to the person the link is for. |
+| **By text message** | A text message with the link and PIN is sent to the person the link is for. |
+
+The person the link is for is the user you chose under **Assign to** or, if you didn't choose anyone, the chosen driver's account. **By email** and **By text message** are only available once you've chosen one of them. If that person has no email address or phone number for the option you picked, the link isn't generated and Fleet-Ops tells you why. When the message is sent, a confirmation such as **Link and PIN emailed to** a partly hidden address appears. If sending fails for another reason, the link is still created, and you can share the link and PIN yourself.
+
+The email is titled **Complete the** *[form name]* **inspection**. It names who asked for the inspection and, if you chose one, the vehicle, and contains an **Open the inspection** button and the PIN. It also warns that the link locks after too many wrong PINs, and gives the expiry time.
+
+<Callout type="warn">
+Anyone who has both the link and the PIN can fill in the inspection. When you share them yourself, prefer sending the PIN by a different route from the link, for example the link by email and the PIN by phone.
+</Callout>
+
+### Managing Links
+
+Every link generated for a form is listed under **Generated Links** in the **Generate Inspection Link** dialog, and under **Public Links** on the form's **Overview** tab. Each link shows:
+
+- Its state (see below), who it's for (or **Anyone with the link and its PIN**), and when it was generated.
+- The link, with **Copy**.
+- For active links: the PIN with **Copy**, plus **Email link** and **Text link** to send the link and PIN again, when the recipient has an email address or phone number.
+- When it expires, and when it was **Used** or **Last opened** (or **Never opened**).
+- When the link and PIN were last **Emailed** or **Texted**, and how many wrong PINs have been entered.
+- **Revoke**, for active links. Revoking takes effect immediately.
+
+| State | Meaning |
+| :--- | :--- |
+| **Active** | The link can be opened and the inspection submitted. |
+| **Used** | The inspection has been submitted through this link, so it's closed. |
+| **Expired** | The expiry time has passed without the link being used. |
+| **Revoked** | You revoked the link. |
+| **Locked** | Too many wrong PINs were entered. Generate a new link. |
+
+### What the Recipient Sees
+
+<Steps>
+  <Step>
+    They open the link and see **Enter your PIN**. They enter the 6-digit PIN and click **Continue**.
+  </Step>
+  <Step>
+    The form opens with its name and description, and shows who the inspection is **For**, the **Vehicle**, the **Driver**, and when the link **Expires**, where these were set.
+  </Step>
+  <Step>
+    They can enter the **Odometer** and **Engine Hours**. Then they answer the form's fields, changing any **Pass / Fail** check that fails from **Pass** to **Fail**, and adding photos from their phone or computer where needed.
+  </Step>
+  <Step>
+    Under **Sign off**, they can type **Your name**, which is recorded against the inspection as who filled it in.
+  </Step>
+  <Step>
+    They click **Submit inspection**.
+  </Step>
+</Steps>
+
+**Submit inspection** stays unavailable until every required field is answered and every failed check has the comment or photo it requires. A note beside the button says what's missing, for example **2 required answers are missing**.
+
+After submitting, they see **Inspection submitted** and a message that the link is now closed.
+
+A wrong PIN shows **That PIN is not right**, with the number of attempts left. After 5 wrong PINs the link locks, and the person needs to ask you for a new link. A link that has expired, been revoked, or already been used — or whose form is no longer published — shows **This inspection is not available**.
+
+### What Gets Recorded
+
+An inspection submitted through a link is filed straight away with the status **Submitted**. It's recorded against the link's driver and vehicle, and credited to the person the link is for. Its **Submitted By** shows **Through a public link, PIN verified**. If the name typed under **Sign off** differs from that person's name, it's shown too, as **Signed as** followed by the typed name. If the link wasn't for anyone, **Submitted By** shows the typed name, marked **Name as typed, not a signed-in account**.
+
+If the form has **Open a defect record when an item fails** or **Open a work order when an item fails** switched on and the inspection has failures, the issue or work order is created at the same time. See [Reviewing & Follow-up](/docs/fleet-ops/maintenance/inspections/reviewing-and-follow-up) for what they contain.

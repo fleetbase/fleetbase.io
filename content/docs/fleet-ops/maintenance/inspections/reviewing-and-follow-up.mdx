@@ -1,0 +1,143 @@
+---
+title: Reviewing & Follow-up
+description: Read inspection results, turn failed checks into issues and work orders, resolve inspections, and find inspections from vehicles, issues, and work orders.
+---
+
+# Reviewing & Follow-up
+
+Every filed inspection records its result, its answers, and who submitted it. From a failed inspection you can raise an issue or open a work order in one step, and the inspection stays linked to both so you can follow the fix through.
+
+## The Inspections List
+
+Navigate to **Fleet-Ops → Maintenance → Inspections**. The list shows every inspection, newest first:
+
+| Column | Description |
+| :--- | :--- |
+| **Inspection** | The inspection's ID. Click it to open the inspection. |
+| **Form** | The inspection form it was filled in from |
+| **Vehicle** | The vehicle inspected |
+| **Driver** | The driver recorded on the inspection |
+| **Result** | **Passed** or **Failed** |
+| **Failed** | How many checks failed |
+| **Submitted** | When the inspection was filed |
+
+Use the search box, or filter by **Inspection** ID, **Result**, or **Submitted** date. Each row's menu offers **View inspection**, **Edit inspection**, **Delete inspection**, and — when they apply — **Submit**, **Create issue**, **Create work order**, and **Resolve**. To delete several inspections at once, select them and choose **Delete selected...**.
+
+## Reading an Inspection
+
+Click an inspection to open it. The page is titled after the form, for example *Daily Walk-round Submission*, and has three tabs: **Overview**, **Photos**, and **Audit**.
+
+### Overview
+
+The top of the **Overview** tab summarises the inspection:
+
+| Field | Description |
+| :--- | :--- |
+| **Inspection** | The inspection's ID. Click it to copy it. |
+| **Result** | **Passed** or **Failed** |
+| **Form** | The form it was filled in from. Click it to open the form. |
+| **Status** | Where the inspection is in its lifecycle (see below) |
+| **Vehicle** / **Driver** | Who and what was inspected. Click either to open it. |
+| **Submitted By** | The person the inspection is credited to. For an inspection submitted through a link, this also says it came **Through a public link, PIN verified**. |
+| **Odometer** / **Engine Hours** | The readings recorded with the inspection |
+| **Submitted** | When the inspection was filed |
+| **Resolved** | When the inspection was resolved |
+
+Below the summary, the answers are laid out group by group, the way the form reads, with each **Pass / Fail** check marked **Pass**, **Fail**, or **N/A**. Failed checks show their severity, whether they were marked **Unsafe to operate**, and their comment and photos. The tally at the bottom counts passes, failures, and N/A answers, and the **Defects** list collects the failed checks.
+
+The **Follow Up** section at the bottom shows the **Linked Issue** and **Linked Work Order**, if any. Each is a card with the record's ID, title, status, and priority — plus the due date for a work order. Click a card to open the issue or work order.
+
+### Results
+
+| Result | Meaning |
+| :--- | :--- |
+| **Passed** | No **Pass / Fail** check was answered **Fail**. Checks answered **N/A** don't count as failures. |
+| **Failed** | At least one **Pass / Fail** check was answered **Fail**. |
+
+### Statuses
+
+| Status | Meaning |
+| :--- | :--- |
+| **Draft** | Started but not filed |
+| **Submitted** | Filed from the console or through an inspection link |
+| **Needs Review** | Flagged for a supervisor to look at. Set it yourself by editing the inspection and changing its **Status**. |
+| **Resolved** | Follow-up is complete. Set by the **Resolve** action. |
+
+### The Photos Tab
+
+The **Photos** tab gathers the photos filed with the inspection, including those attached to failed checks. You can upload more there, such as close-ups taken after the inspection. JPEG, PNG, GIF, and WebP images are accepted.
+
+Signatures aren't shown on the **Photos** tab. They're shown in their **Signature** field on the **Overview** tab.
+
+### The Audit Tab
+
+The **Audit** tab lists the changes made to the inspection record, and when.
+
+## Following Up Failed Checks
+
+When an inspection fails, open its actions menu (the **⋯** button in the header) or its row menu in the list. The follow-up actions are:
+
+| Action | What it does | When it's offered |
+| :--- | :--- | :--- |
+| **Create Issue** | Raises an issue for the failed checks against the vehicle and driver | The inspection failed and has no linked issue yet |
+| **Create Work Order** | Opens a work order for the vehicle with a checklist of the failed checks. If the inspection has no issue yet, it raises the issue first. | The inspection failed and has no linked work order yet |
+| **Resolve** | Marks the inspection **Resolved** and records the time | The inspection isn't resolved yet |
+
+Each inspection can have one linked issue and one linked work order. Once one exists, its action disappears from the menu, so you can't create a duplicate. Open the existing one from the **Follow Up** section instead.
+
+### Creating an Issue or Work Order
+
+<Steps>
+  <Step>
+    Open the failed inspection and choose **Create Issue** or **Create Work Order** from the actions menu.
+  </Step>
+  <Step>
+    Review the confirmation. It explains what will be created and lists the failed checks it's created from, with their severity. It also notes how many checks were marked unsafe to operate and, for a work order, when it will be due.
+  </Step>
+  <Step>
+    Click **Create Issue** or **Create Work Order** to confirm.
+  </Step>
+</Steps>
+
+The new issue or work order appears straight away in the inspection's **Follow Up** section. If nothing on the inspection failed, the confirmation says **Nothing failed on this inspection, so there is nothing to raise.** and the confirm button is unavailable.
+
+### What Gets Created
+
+The **priority** of both records is the highest severity among the failed checks. If none of the failed checks has a severity, the priority is **High**.
+
+**The issue:**
+
+- Is raised against the inspection's vehicle and driver, reported by the person the inspection is credited to.
+- Is titled **Failed inspection:** followed by the vehicle's name, or the inspection's ID if no vehicle was recorded.
+- Lists the failed checks in its report.
+- Starts with the status **Pending**.
+
+**The work order:**
+
+- Is opened against the inspection's vehicle, with the status **Open**.
+- Is titled **Inspection repair:** followed by the vehicle's name, or the inspection's ID if no vehicle was recorded.
+- Has a checklist item for each failed check, each one required.
+- Is due in **1 day** if any failed check is **Critical**, and in **7 days** otherwise.
+- Asks the workshop to resolve the failed inspection items and record completion details.
+
+Work through the issue and the work order as you normally would. See [Issues](/docs/fleet-ops/resources/issues/overview) and [Work Orders](/docs/fleet-ops/maintenance/work-orders/overview).
+
+### Resolving an Inspection
+
+Choose **Resolve** from the actions menu and confirm with **Resolve Inspection**. The inspection's status becomes **Resolved** and its **Resolved** time is set.
+
+<Callout type="info">
+Resolving the inspection doesn't close its issue or work order. They stay open until you close them yourself. Resolve the inspection once follow-up is in hand, and track the repair itself on the work order.
+</Callout>
+
+## Finding Inspections Across Fleet-Ops
+
+| Where | What you see |
+| :--- | :--- |
+| **Vehicles → [Vehicle] → Inspections** | The vehicle's inspection history as cards: the form, result, status, submitted time, number of failed checks, odometer reading, and ID. Click a card to open the inspection. |
+| **Inspection Forms → [Form] → Submissions** | Every inspection filed against the form, with the vehicle, driver, result, status, submitted time, and number of failed checks |
+| **Issues → [Issue]** | A **Linked Inspection** section listing the inspections linked to the issue. It only appears when there is one. |
+| **Work Orders → [Work Order]** | A **Linked Inspection** section listing the inspections linked to the work order. It only appears when there is one. |
+| **Maintenance Hub** | A **Failed Inspections** count. Click it to go to the inspections list. |
+
+Under **Linked Inspection**, each inspection is shown as a pill. Hover over it to see a summary, and click it to open the inspection.

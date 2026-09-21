@@ -1,0 +1,61 @@
+---
+title: Inspections
+description: Build inspection checklists, have them filled in from the console or through a secure link, and turn failed checks into issues and work orders.
+---
+
+# Inspections
+
+**Inspections** let you check vehicles against a standard checklist and keep a record of every result. Use them for daily walk-rounds, pre-trip and post-trip checks, safety and compliance audits, or damage assessments.
+
+A consistent inspection record helps you:
+
+- **Stay compliant** — every inspection is stored with who filed it, when, the answers given, and any photos or signatures.
+- **Keep vehicles safe** — a failed check can be marked **Unsafe to operate**, so problems are flagged before the next trip.
+- **Catch defects early** — failed checks become issues and work orders with one click, so nothing is noted and then forgotten.
+
+You'll find inspections under **Fleet-Ops → Maintenance**, in two menu items: **Inspection Forms** and **Inspections**.
+
+## Key Terms
+
+| Term | What it means |
+| :--- | :--- |
+| **Inspection Form** | The checklist you design: field groups (such as *Exterior* or *Brakes*) holding the fields to answer. A form is **Draft**, **Published**, or **Archived**. |
+| **Inspection** | One completed run of a form, recorded against a vehicle and driver. Its details page is titled after the form, for example *Daily Walk-round Submission*. |
+| **Inspection Link** | A single-use link, protected by a 6-digit PIN, that lets someone fill in a published form without signing in to the console. |
+| **Follow-up** | The issue or work order raised from an inspection's failed checks, and resolving the inspection once the follow-up is under way. |
+
+## How Inspections Work
+
+**Build a form** → **Carry out the inspection** (in the console, or through an inspection link) → **Submit** → **Review the result** → **Follow up failed checks** → **Track the fix on the issue or work order**
+
+1. **Build a form.** Group the things to check and add a field for each one. **Pass / Fail** fields decide whether an inspection passes. Publish the form when it's ready.
+2. **Carry out the inspection.** Fill it in yourself from **Maintenance → Inspections**, or generate an inspection link and send it, with its PIN, to the person doing the check.
+3. **Submit.** Filing the inspection records the time and counts its passed and failed checks.
+4. **Review the result.** Every inspection shows a **Result** of **Passed** or **Failed**, how many checks failed, the answers, photos, and who submitted it.
+5. **Follow up.** Create an issue or a work order from the failed checks. Forms can also raise an issue or work order automatically when an inspection link submission has failures.
+6. **Track the fix.** The issue and work order link back to the inspection, and the inspection links to them. Resolve the inspection once follow-up is in hand.
+
+## Where Inspections Appear
+
+- **Maintenance → Inspections** — every inspection, with its result and failed count.
+- **Inspection Forms → [Form] → Submissions** — every inspection filed against that form.
+- **Vehicles → [Vehicle] → Inspections** — the vehicle's inspection history.
+- **Issues** and **Work Orders** — a **Linked Inspection** section on any issue or work order raised from an inspection.
+- **Maintenance Hub** — a **Failed Inspections** count that takes you to the inspections list.
+- **Radar** — failed inspections that have no issue or work order yet, follow-up still open, drafts that were never filed, and inspection links about to expire unused.
+
+## Permissions
+
+Inspection forms and inspections have their own permissions, which you grant through roles and policies in [Identity & Access](/docs/platform/identity-and-access/roles-and-permissions). Besides the usual view, create, update, and delete permissions, forms have separate **publish** and **archive** permissions, and inspections have separate **submit**, **create issue**, **create work order**, and **resolve** permissions. Actions you don't have permission for are hidden in the console.
+
+The built-in **MaintenanceManager** and **OperationsAdmin** policies include full access to inspection forms and inspections.
+
+## In This Section
+
+| Page | What it covers |
+| :--- | :--- |
+| [**Inspection Forms**](/docs/fleet-ops/maintenance/inspections/inspection-forms) | Creating a form, field groups, field types, failure rules, publishing, and editing |
+| [**Conducting Inspections**](/docs/fleet-ops/maintenance/inspections/conducting-inspections) | Filling in an inspection in the console, drafts and submitting, photos and signatures, and inspection links |
+| [**Reviewing & Follow-up**](/docs/fleet-ops/maintenance/inspections/reviewing-and-follow-up) | Reading results, creating issues and work orders from failed checks, resolving, and finding inspections across Fleet-Ops |
+
+Developers can file and read inspections through the [Inspections API reference](/docs/api/fleetbase/inspections).
