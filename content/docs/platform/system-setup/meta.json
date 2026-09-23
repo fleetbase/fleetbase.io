@@ -8,6 +8,7 @@
     "queue",
     "socket",
     "push-notifications",
+    "oauth-sign-in",
     "two-factor-authentication"
   ]
 }

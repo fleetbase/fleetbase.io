@@ -89,6 +89,8 @@ All API requests authenticate using one of two mechanisms:
 - **API Key** — A public/secret key pair generated per organisation in the Developer Console. Use the secret key for server-to-server requests; the public key for browser/app requests with limited scope.
 - **Session Token** — Browser-session tokens issued at console login, used for console-to-API communication.
 
+Console users sign in with a password or, when an administrator has configured it, with a Google, Microsoft, GitHub, or Apple account — see [OAuth Sign-in](/docs/platform/system-setup/oauth-sign-in). Either way the console ends up holding a session token.
+
 <Callout type="warn">Never expose your secret API key in client-side code or public repositories. Rotate keys immediately if they are compromised.</Callout>
 
 ## Frontend — Ember.js Console

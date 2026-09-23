@@ -1,0 +1,382 @@
+---
+title: OAuth Sign-in
+description: Let people sign in to the Fleetbase console with Google, Microsoft, GitHub, or Apple, and configure each provider from the admin settings.
+---
+
+# OAuth Sign-in
+
+OAuth sign-in lets people sign in to the console with an account they already have at Google, Microsoft, GitHub, or Apple instead of a Fleetbase password. Administrators choose which providers to offer, and each one is checked against the provider before it can be switched on. Navigate to **Admin → Auth Config → OAuth Sign-in** to configure it.
+
+<Callout type="info">Requires Fleetbase `0.7.64` or later. This page covers sign-in to the **console** for your team. Customer sign-in for Storefront is separate — see [Storefront → Customer Authentication](/docs/storefront/customers/authentication).</Callout>
+
+## How It Works
+
+Sign-in uses the OAuth 2.0 authorization code flow with PKCE, run entirely on the server:
+
+1. The person clicks **Continue with Google** (or another provider) on the sign-in page.
+2. The API sends them to the provider, which returns them to Fleetbase's callback URL.
+3. The API exchanges the code for the person's profile, then hands the console a one-time code that is redeemed immediately.
+
+A few properties are worth knowing before you configure anything:
+
+- **An account is only ever found through a linked provider identity, never by email address alone.** The first time someone uses a provider, they either link it to an existing account or create a new one.
+- **Provider access and refresh tokens are never stored.** Fleetbase reads the profile once and discards the tokens.
+- **Client secrets and Apple signing keys are stored encrypted** and are never sent back to the browser.
+- **Two-factor authentication still applies.** If a user has 2FA enabled, they are prompted for a code after the provider returns them.
+
+## General Settings
+
+The **Sign-in with OAuth** panel holds three instance-wide toggles.
+
+| Setting | Default | Description |
+| :--- | :--- | :--- |
+| **Enable OAuth sign-in** | On | Master switch. When off, no provider buttons are shown on the sign-in page. |
+| **Allow new sign-ups through a provider** | On | When off, only people who already have an account and have linked the provider can sign in with it. |
+| **Link existing accounts automatically** | On | When someone signs in with a provider for the first time and the provider has verified their email, link it to the console account with that confirmed email instead of asking them to link it themselves. |
+
+Automatic linking applies only when **every** one of these holds:
+
+- the provider verified the email address, and it is not an Apple private relay address;
+- exactly one account has that email address;
+- that account is a team member account — never a customer, contact, or driver;
+- the account's own email address is confirmed;
+- no account from that provider is linked to it yet.
+
+The account holder is emailed whenever a provider is linked to, or removed from, their account.
+
+## Callback URL
+
+Each provider panel shows a read-only **Callback URL**. Register it with the provider exactly as shown — providers match it character for character.
+
+```
+https://api.yourdomain.com/int/v1/auth/oauth/google/callback
+```
+
+The last path segment is the provider ID: `google`, `microsoft`, `github`, or `apple`. The origin comes from `OAUTH_REDIRECT_BASE` when it is set, and otherwise from `APP_URL`.
+
+<Callout type="warn">If your API sits behind a proxy or load balancer whose public URL differs from `APP_URL`, set `OAUTH_REDIRECT_BASE` to the public origin. Otherwise Fleetbase builds a callback URL the provider will reject.</Callout>
+
+## Setting Up a Provider
+
+Create an application in the provider's developer console, then paste the credentials into the matching panel in Fleetbase. Secret fields are write-only: once saved, they show `Saved (••••abcd) — leave blank to keep`, and leaving them blank keeps the stored value.
+
+<Tabs items={['Google', 'Microsoft', 'GitHub', 'Apple']}>
+<Tab value="Google">
+Google's console moved this configuration to the **Google Auth Platform** section. The older **APIs & Services → Credentials** path leads to the same clients.
+
+<Steps>
+  <Step>
+    ### Create or Select a Project
+
+    In the [Google Cloud console](https://console.cloud.google.com/auth/clients), open **Google Auth Platform → Clients** and select the project this sign-in belongs to, or create one.
+  </Step>
+  <Step>
+    ### Set the Audience
+
+    Under **Audience**, choose who may sign in:
+
+    | User type | Who can sign in |
+    | :--- | :--- |
+    | **Internal** | Only accounts in your Google Workspace organization. The project must belong to a Cloud organization |
+    | **External** | Any Google Account, subject to the publishing status below |
+
+    An external app starts in **Testing**, where only the test users you list can authorize it. Click **Publish app** to move it to **In production**.
+  </Step>
+  <Step>
+    ### Fill In Branding
+
+    Under **Branding**, set the app name, support email, and links users see on the consent screen.
+  </Step>
+  <Step>
+    ### Create a Web Application Client
+
+    On **Clients**, click **Create Client** and choose the application type **Web application**.
+  </Step>
+  <Step>
+    ### Add the Callback URL
+
+    Paste the Callback URL from the Fleetbase provider panel into **Authorized redirect URIs**.
+
+    Leave **Authorized JavaScript origins** empty. It is for browser-side flows, and it rejects URLs with a path — pasting the callback URL there is a common mistake.
+  </Step>
+  <Step>
+    ### Copy the Credentials
+
+    Copy the client ID and client secret into Fleetbase. The secret is shown only once; afterwards the console shows only its last four characters.
+  </Step>
+</Steps>
+
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| **Client ID** | Yes | Ends in `.apps.googleusercontent.com` |
+| **Client Secret** | Yes | Starts with `GOCSPX-`. Stored encrypted |
+| **Restrict to Workspace domain** | No | Only accounts in this Google Workspace domain may sign in (e.g. `example.com`) |
+
+**Redirect URI matching.** The scheme, case, and trailing slash must all match exactly. Wildcards, fragments, and query strings are not allowed. HTTPS is required, except for `localhost`, which may use `http`.
+
+<Callout type="warn">Changes to a Google client can take anywhere from five minutes to a few hours to take effect. If a redirect URI still fails right after you fix it, wait before changing anything else.</Callout>
+
+**Consent screen and verification.** Fleetbase asks only for a person's name, email address, and basic profile. Google treats those as non-sensitive scopes, so the app does not go through OAuth app verification, does not show the unverified-app warning, and its authorizations do not expire after seven days the way broader scopes do while an app is in testing. You only need Google's brand verification if you want a custom app name and logo on the consent screen.
+
+**Restricting to a Workspace domain.** Fleetbase sends your domain as a hint to Google, then re-checks the domain claim in the verified token on the server, which is what Google's own guidance requires — the request hint alone can be altered by the browser. Personal Google accounts carry no domain claim at all, so they are rejected when a domain is set. Someone outside the domain sees "Your account is not in an allowed domain."
+
+<Callout type="info">An OAuth client that goes unused for six months is deleted automatically, with an email warning 30 days beforehand. This catches staging instances that sit idle.</Callout>
+</Tab>
+<Tab value="Microsoft">
+<Steps>
+  <Step>
+    ### Register an Application
+
+    In the [Microsoft Entra admin center](https://entra.microsoft.com/), go to **Entra ID → App registrations → New registration**. Older documentation calls the same place **Identity → Applications → App registrations**.
+
+    Give the app a name, then choose **Supported account types**:
+
+    | Account types | Who can sign in | Use this tenant value |
+    | :--- | :--- | :--- |
+    | Single tenant only | Only accounts in your own directory | Your Directory (tenant) ID |
+    | Multiple Entra ID tenants | Work or school accounts in any directory | `organizations` |
+    | Any Entra ID tenant and personal Microsoft accounts | Work, school, and personal accounts | `common` |
+    | Personal accounts only | Personal Microsoft accounts | `consumers` |
+
+    The registration and the tenant value in Fleetbase must agree. Using `common` against a single-tenant registration fails with **AADSTS50194**.
+  </Step>
+  <Step>
+    ### Add the Redirect URI
+
+    Under **Manage → Authentication → Add a platform**, choose the **Web** tile, and enter the Callback URL from the Fleetbase provider panel.
+
+    Leave **ID tokens (used for implicit and hybrid flows)** unchecked. Fleetbase uses the authorization code flow and reads the ID token from the token response, not from the browser.
+  </Step>
+  <Step>
+    ### Create a Client Secret
+
+    Under **Certificates & secrets → Client secrets → New client secret**, add a description and an expiry, then copy the **Value** — not the **Secret ID**. The value is shown only on this page.
+  </Step>
+  <Step>
+    ### Add the Email Claims
+
+    Under **Manage → Token configuration → Add optional claim**, select the **ID** token type and add **email**. Then add `xms_edov`, which is how Microsoft states that the email's domain is verified.
+
+    `xms_edov` is often missing from the claim picker, because Microsoft restricts claims whose names begin with `xms_`. When it is, open **Manage → Manifest** and add it to `optionalClaims.idToken` by hand, alongside `email`. The manifest editor may show a validation warning after saving; the claim is still issued.
+  </Step>
+  <Step>
+    ### Copy the Credentials
+
+    Paste the **Application (client) ID** from the app's Overview page, the client secret value, and — if you are restricting sign-in to one directory — the **Directory (tenant) ID** into Fleetbase.
+  </Step>
+</Steps>
+
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| **Application (client) ID** | Yes | The GUID on the app registration's Overview page |
+| **Client Secret** | Yes | The secret **value**, not the secret ID. Stored encrypted |
+| **Directory (tenant) ID** | No | Defaults to `common`. Use the tenant **GUID** to restrict sign-in to one directory |
+
+<Callout type="warn">Microsoft client secrets always expire — 24 months is the longest allowed, and the portal offers 180 days by default. Sign-in stops working the day a secret expires, with **AADSTS7000215** or **AADSTS7000222** in the API log. Put a reminder in the calendar, and note that a registration can hold two secrets at once so you can roll one over before the old one lapses.</Callout>
+
+**Why `xms_edov` matters.** Any directory administrator can set a user's email address to whatever they like, including an address at a domain they do not own. Microsoft therefore says the `email` claim must not be used to decide who someone is. `xms_edov` is Microsoft asserting that the directory really owns the email's domain, and Fleetbase trusts an email address only when it is present and true, or when the token comes from the single directory you configured. Without it, people can still sign in and sign up, but they confirm their email address with a code, and automatic linking does not apply.
+
+<Callout type="warn">Do not set `acceptMappedClaims` in the manifest. Some third-party guides suggest it alongside `xms_edov`, but it belongs to a different feature, and Microsoft warns that enabling it on a multi-tenant app lets others define claim mappings for your app.</Callout>
+
+**Personal Microsoft accounts** come from the consumer directory `9188040d-6c67-4c5b-b112-36a304b66dad` and never carry `xms_edov`, so their email addresses are always treated as unverified.
+
+**Permissions.** No Microsoft Graph permission is needed for sign-in — Fleetbase reads the ID token and does not call Graph. The default **User.Read** permission on a new registration is harmless. Users consent for themselves on first sign-in, so admin consent is only needed in directories where user consent is switched off.
+
+**Redirect URI rules.** URIs are case-sensitive and must match exactly. `http://localhost` is accepted for local development, where the port is ignored. Avoid query strings: they are rejected outright for registrations that include personal accounts.
+</Tab>
+<Tab value="GitHub">
+<Steps>
+  <Step>
+    ### Choose an Owner
+
+    An OAuth app belongs either to your personal GitHub account or to an organization. Prefer an organization: the app then outlives any one person's account and is managed by the organization's owners.
+  </Step>
+  <Step>
+    ### Register the App
+
+    For a personal app, go to **Settings → Developer settings → OAuth Apps → New OAuth App**. For an organization, open the organization's **Settings → Developer settings → OAuth Apps**.
+  </Step>
+  <Step>
+    ### Fill In the Details
+
+    **Application name** and **Homepage URL** are shown to people when they authorize, so use values you are happy to make public. Enter the Callback URL from the Fleetbase provider panel as the **Authorization callback URL**.
+
+    You can add up to ten callback URLs with **Add callback URL**, which lets one app serve production, staging, and local development.
+  </Step>
+  <Step>
+    ### Leave the Extra Options Alone
+
+    **Enable Device Flow** is not used by Fleetbase — leave it unchecked. **Expire user access tokens** can keep its default, since Fleetbase reads the profile once and discards the GitHub token.
+  </Step>
+  <Step>
+    ### Generate a Client Secret
+
+    Generate a client secret and copy it into Fleetbase along with the client ID. The secret is shown only once. GitHub allows several secrets at a time, so rotate by adding a new one, deploying it, then deleting the old.
+  </Step>
+</Steps>
+
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| **Client ID** | Yes | Starts with `Ov23li` |
+| **Client Secret** | Yes | A 40-character secret. Stored encrypted. It does not expire |
+| **Authorization callback URL** | Yes | Must match exactly, including the port |
+
+**Callback matching.** GitHub matches the callback URL exactly. It offers an optional wildcard mode that allows subdomains and subdirectories, but GitHub warns that it widens your exposure, and Fleetbase does not need it — register the exact URLs instead. A port that differs never matches, wildcard or not.
+
+**Email addresses.** Fleetbase uses a person's primary GitHub email address, and only when GitHub reports it as verified. Someone whose primary address is unverified cannot complete sign-in — GitHub itself refuses with "The user must have a verified primary email." They should verify the address in their GitHub email settings and try again.
+
+<Callout type="info">If your organization restricts third-party application access, that governs access to organization **resources**, not sign-in. Fleetbase only reads the person's own profile and email address, so members can still sign in without an approved request.</Callout>
+</Tab>
+<Tab value="Apple">
+Sign in with Apple needs three things that reference one another: an **App ID** marked as primary, a **Services ID** configured against that App ID, and a **key** created against it too. The Services ID and the key each ask you to pick a primary App ID, so create the App ID first even though Fleetbase is a website and you may never ship an iOS app.
+
+All of this needs a paid **Apple Developer Program** membership, and the **Account Holder** or **Admin** role. A free Apple developer account has no access to Certificates, Identifiers & Profiles.
+
+<Steps>
+  <Step>
+    ### Create the App ID
+
+    In [Certificates, Identifiers & Profiles](https://developer.apple.com/account/resources/identifiers/list), select **Identifiers**, click the add button, choose **App IDs**, then **App**.
+
+    Enter a **Description** and an **Explicit App ID** (a bundle ID such as `com.example.app`), tick **Sign In with Apple** under **Capabilities**, then **Continue** and **Register**.
+  </Step>
+  <Step>
+    ### Mark It as a Primary App ID
+
+    Reopen the identifier, select **Sign in with Apple** under **Capabilities**, and click **Configure**. Choose **Enable as a primary App ID**, then **Save** in the dialog and **Save** at the top right.
+
+    Group with an existing primary App ID only when you already have one for a related app that should share the same user identity.
+  </Step>
+  <Step>
+    ### Create the Services ID
+
+    Back in **Identifiers**, click the add button and choose **Services IDs**. Enter a description and a reverse-domain identifier — for example `com.example.console` — then **Continue** and **Register**.
+
+    This identifier, not the App ID's bundle ID, is what goes in the Fleetbase **Services ID** field.
+  </Step>
+  <Step>
+    ### Configure the Website URLs
+
+    Select the Services ID you just made, tick **Sign in with Apple**, and click **Configure**. Choose the **primary App ID** from step 2, then enter:
+
+    - under **Domains and Subdomains**, your API's hostname, for example `api.example.com`;
+    - under **Return URLs**, the full Callback URL from the Fleetbase provider panel.
+
+    Click **Done**, **Continue**, then **Save**.
+  </Step>
+  <Step>
+    ### Create the Signing Key
+
+    Select **Keys**, click the add button, name the key, tick **Sign in with Apple**, and click **Configure**. Choose the same **primary App ID**, then **Continue** and **Register**.
+
+    Download the `.p8` file. Apple lets you download it once and keeps no copy — if you lose it, create a new key. Note the **Key ID** on the key's page, and your **Team ID** from **Membership details**.
+  </Step>
+  <Step>
+    ### Copy the Credentials
+
+    Paste the Services ID, Team ID, Key ID, and the entire contents of the `.p8` file into Fleetbase, including the `-----BEGIN PRIVATE KEY-----` line.
+  </Step>
+</Steps>
+
+| Field | Required | Description |
+| :--- | :--- | :--- |
+| **Services ID** | Yes | The Services identifier, for example `com.example.console` — not the App ID's bundle ID |
+| **Team ID** | Yes | Ten characters, from **Membership details** |
+| **Key ID** | Yes | Ten characters, from the key you created |
+| **Signing key (.p8)** | Yes | The whole file, including the `-----BEGIN PRIVATE KEY-----` line. Stored encrypted |
+
+<Callout type="warn">Apple requires an HTTPS return URL on a real domain. IP addresses and `localhost` are rejected, so Sign in with Apple cannot be tested against a local server — use an HTTPS tunnel or a staging domain.</Callout>
+
+**Domains and return URLs are separate registrations.** Registering `example.com` does not cover `api.example.com`, and registering the domain does not cover the return URL. Enter both. An individual account may register 10 website URLs, an organization 100.
+
+**Domain verification is not needed for sign-in.** The Configure dialog offers a file to download and a **Verify** button; you can ignore them. Domain proof matters only if you also set up Apple's private email relay under **Sign in with Apple for Email Communication**, which needs an SPF record so mail can reach `@privaterelay.appleid.com` addresses.
+
+<Callout type="info">Apple has no fixed client secret. Fleetbase mints a short-lived one from your signing key for every token request, so there is nothing that silently expires after six months — which is the usual way Sign in with Apple breaks in production. Keep the key itself valid, and don't turn the capability off on the App ID: that resets the saved configuration.</Callout>
+
+**Two Apple specifics worth knowing:**
+
+- A person's name is sent only on their **first** authorization, so it stays editable on the sign-up form and Fleetbase stores it then. It is not sent again.
+- People may hide their address behind a `@privaterelay.appleid.com` relay address. Relay addresses are never used for automatic linking or for matching an existing account.
+
+**If the check reports that Apple rejected the credentials**, Apple collapses several causes into one error. Check, in order: that the Services ID is in the **Services ID** field (not the App ID), that the Team ID is the team and not the key, that the `.p8` matches the Key ID, and that the Return URL is registered exactly as shown.
+</Tab>
+</Tabs>
+
+## Check Configuration
+
+Each provider panel has a **Check configuration** button. It tests the values currently in the form, saved or not, against the provider, and writes nothing. Fleetbase asks the provider for a token using a deliberately invalid authorization code and reads the error that comes back: a provider that complains about the code has accepted your credentials.
+
+A provider cannot be switched on until its check passes, and changing a live provider's credentials re-runs the check when you save. If it fails on save, nothing is saved.
+
+| Result | What it means |
+| :--- | :--- |
+| "… accepted these credentials." | The credentials and callback URL are good. You can now offer the provider |
+| "Missing: …" | A required field is empty. The message names the fields |
+| "The signing key could not be used to mint a client secret." | Apple only. The `.p8` contents do not match the Key ID, or the file is incomplete |
+| "… rejected these credentials." | Check the Client ID and Client Secret. For Microsoft, check you pasted the secret value and not the secret ID |
+| "… does not recognise the callback URL." | Register the callback URL with the provider exactly as shown |
+| "… could not be reached to check these credentials." | The API could not reach the provider. Check outbound network access, then try again |
+| "… gave an unexpected answer." | The credentials could not be confirmed either way. Check the API logs |
+
+Each message names the provider, for example "Google accepted these credentials."
+
+## Saving and Secrets
+
+Click **Save Changes** to apply. Settings take effect immediately — no restart is needed.
+
+Secrets you enter in the console are encrypted with the application key. Leaving a secret field blank keeps the value already stored.
+
+<Callout type="warn">Rotating `APP_KEY` makes saved provider secrets unreadable. Any provider configured through the console then counts as not configured and stops being offered until you re-enter its secret.</Callout>
+
+## Environment Variables
+
+Self-hosted instances can configure everything through the environment instead of the console. Values saved in the console take precedence over environment variables. Environment secrets are read as-is, without encryption.
+
+| Variable | Default | Description |
+| :--- | :--- | :--- |
+| `OAUTH_ENABLED` | `true` | Master switch for OAuth sign-in |
+| `OAUTH_ALLOW_REGISTRATION` | `true` | Allow new sign-ups through a provider |
+| `OAUTH_AUTO_LINK` | `true` | Link existing accounts automatically |
+| `OAUTH_REDIRECT_BASE` | `APP_URL` | Public origin of the API, used to build callback URLs |
+| `OAUTH_GOOGLE_ENABLED` | `false` | Offer Google. Also `OAUTH_GOOGLE_CLIENT_ID`, `OAUTH_GOOGLE_CLIENT_SECRET`, `OAUTH_GOOGLE_HOSTED_DOMAIN` |
+| `OAUTH_MICROSOFT_ENABLED` | `false` | Offer Microsoft. Also `OAUTH_MICROSOFT_CLIENT_ID`, `OAUTH_MICROSOFT_CLIENT_SECRET`, `OAUTH_MICROSOFT_TENANT` |
+| `OAUTH_GITHUB_ENABLED` | `false` | Offer GitHub. Also `OAUTH_GITHUB_CLIENT_ID`, `OAUTH_GITHUB_CLIENT_SECRET` |
+| `OAUTH_APPLE_ENABLED` | `false` | Offer Apple. Also `OAUTH_APPLE_CLIENT_ID`, `OAUTH_APPLE_TEAM_ID`, `OAUTH_APPLE_KEY_ID`, `OAUTH_APPLE_PRIVATE_KEY` |
+| `OAUTH_CONSOLE_CALLBACK_PATH` | `/auth/oauth/callback` | Console path the browser lands on after the provider |
+| `OAUTH_STRICT_IP_BINDING` | `false` | Reject a sign-in finished from a different IP address than it started from |
+| `OAUTH_TTL_AUTHORIZATION` | `600` | Seconds a provider round trip may take |
+| `OAUTH_TTL_HANDOFF` | `120` | Seconds the console has to redeem a completed sign-in |
+| `OAUTH_TTL_REGISTRATION_INTENT` | `900` | Seconds a new user has to finish the sign-up form |
+
+A provider is offered on the sign-in page only when it is switched on **and** every required field is filled in. An incomplete provider is hidden rather than shown as broken.
+
+## Requirements
+
+- **Migrations.** OAuth adds tables for linked identities and in-flight sign-ins. Run `deploy.sh` as part of the upgrade.
+- **Scheduler.** Expired sign-in states are pruned hourly by the scheduler.
+- **Queue and mail.** The emails sent when a provider is linked or unlinked are queued, so a queue worker and a working [mail driver](/docs/platform/system-setup/mail) are needed.
+- **Outbound HTTPS** from the API to each provider's token and signing-key endpoints.
+- **A developer account with each provider.** Sign in with Apple additionally needs a paid Apple Developer Program membership, and the Account Holder or Admin role.
+- **`CONSOLE_HOST`** must be correct. It is where the browser is sent once the provider hands the person back.
+
+## Troubleshooting
+
+| Symptom | Cause and fix |
+| :--- | :--- |
+| No provider buttons on the sign-in page | **Enable OAuth sign-in** is off, the provider is not switched on, or a required field is empty |
+| The provider reports a redirect URI mismatch | The registered URL differs from the Callback URL. Behind a proxy, set `OAUTH_REDIRECT_BASE` to the public API origin |
+| Google still rejects a redirect URI you just fixed | Changes to a Google client take five minutes to a few hours to take effect. Wait before changing anything else |
+| Microsoft sign-in stops working one day, having worked for months | The client secret expired. The API log shows **AADSTS7000215** or **AADSTS7000222**. Create a new secret and paste its **value** |
+| Microsoft rejects the credentials immediately | The **Secret ID** was pasted instead of the secret **Value**, or the secret belongs to another registration |
+| Apple rejects the credentials | Check the Services ID, Team ID, the `.p8` against its Key ID, and that the Return URL is registered exactly. Apple reports all of these the same way |
+| Sign in with Apple cannot be tested locally | Apple rejects IP addresses and `localhost`. Use an HTTPS tunnel or a staging domain |
+| A GitHub user cannot finish signing in | Their primary GitHub email address is unverified. GitHub refuses with "The user must have a verified primary email" |
+| Microsoft users are asked to verify an email they already own | The `xms_edov` optional claim is missing, or the tenant is `common`. Add the claim in Token configuration |
+| "Your account is not in an allowed domain." | The Google account is outside the Workspace domain set in **Restrict to Workspace domain** |
+| "An account with this email already exists." | That email already has an account. Sign in with a password and link the provider from **Your profile → Auth**, or turn on automatic linking |
+| "New sign-ups are not available." | **Allow new sign-ups through a provider** is off, and the person has no account yet |
+| "That sign-in link is no longer valid." or "That sign-in session expired." | The sign-in took too long, or the page was reloaded partway through. Start again |
+| "We could not reach the sign-in provider." | The API could not reach the provider, or could not verify the provider's token signature. Check outbound network access and the API logs |
+| "Too many attempts. Please try again shortly." | The per-IP rate limit was hit: 30 sign-in starts and 20 completions per minute, and 10 link attempts per minute per user |
+
+For what users see on their side — signing up, linking, and unlinking — see [Identity & Access → Signing In with a Provider](/docs/platform/identity-and-access/oauth-sign-in).
