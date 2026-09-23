@@ -549,6 +549,7 @@ echo "0 2 * * * root /usr/local/bin/fleetbase-backup.sh" | sudo tee /etc/cron.d/
 - [ ] API key generated in Developer Console
 - [ ] Test API call returns a valid response
 - [ ] Mail delivery working (send a test from System Setup → Mail)
+- [ ] OAuth callback URLs registered with each provider, if you offer provider sign-in
 - [ ] File upload working (upload a test file in the console)
 - [ ] Firewall rules confirmed (`ufw status`)
 - [ ] Automated backups scheduled and tested
@@ -564,6 +565,9 @@ Run `docker compose logs -f application` to see the Laravel error log. The most 
 
 **WebSocket connections fail**
 Confirm that `SOCKETCLUSTER_OPTIONS` in your override includes your console's origin. A misconfigured origin list causes the SocketCluster server to reject WebSocket upgrade requests.
+
+**Provider sign-in fails with a redirect URI mismatch**
+The callback URL Fleetbase builds must match the one registered with the provider exactly. Behind a proxy or load balancer whose public URL differs from `APP_URL`, set `OAUTH_REDIRECT_BASE` to the API's public origin, then copy the Callback URL shown in **Admin → Auth Config → OAuth Sign-in**. See [OAuth Sign-in](/docs/platform/system-setup/oauth-sign-in).
 
 **Migrations fail on deploy**
 Check `docker compose logs -f application` for the SQL error. Most migration failures are caused by a version mismatch between the code and the database — ensure you're pulling from the correct tag and running `git pull` before deploying.

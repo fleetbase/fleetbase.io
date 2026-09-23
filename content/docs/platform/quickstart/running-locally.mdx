@@ -204,6 +204,14 @@ All environment configuration is managed through `docker-compose.override.yml` f
           TWILIO_FROM: ""
     ```
 
+    **OAuth sign-in** — only needed if you offer Google, Microsoft, GitHub, or Apple sign-in. Providers are normally configured in **Admin → Auth Config → OAuth Sign-in**; set this when the API's public URL differs from `APP_URL`:
+
+    ```yaml
+          OAUTH_REDIRECT_BASE: ""     # public origin of the API, e.g. https://api.example.com
+    ```
+
+    See [OAuth Sign-in](/docs/platform/system-setup/oauth-sign-in) for the full list of variables.
+
     **WebSocket** — set on the `socket` service, not `application`:
 
     ```yaml

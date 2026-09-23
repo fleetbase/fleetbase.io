@@ -1,0 +1,99 @@
+---
+title: Signing In with a Provider
+description: Sign in or sign up with Google, Microsoft, GitHub, or Apple, and manage the providers linked to your Fleetbase account.
+sidebarTitle: OAuth Sign-in
+---
+
+# Signing In with a Provider
+
+If your administrator has set it up, you can sign in to the console with an account you already have at Google, Microsoft, GitHub, or Apple instead of a Fleetbase password. You can link more than one, and you can still keep your password.
+
+<Callout type="info">Provider sign-in is available only when an administrator has configured it. See [System Setup → OAuth Sign-in](/docs/platform/system-setup/oauth-sign-in) if you are setting it up.</Callout>
+
+## Signing In
+
+On the sign-in page, click **Continue with Google** — or Microsoft, GitHub, or Apple — under the **Or continue with** divider. You are sent to the provider, and back to the console once you approve.
+
+If two-factor authentication is enabled on your account, you are asked for your one-time code after the provider returns you. Provider sign-in never skips 2FA.
+
+The first time you use a provider, one of three things happens:
+
+| Situation | What happens |
+| :--- | :--- |
+| The provider is already linked to your account | You are signed in |
+| Automatic linking is on, the provider verified your email, and it matches your confirmed account email | The provider is linked to your account, you are signed in, and you are emailed about the new link |
+| Your email already has an account but cannot be linked automatically | You are asked to sign in another way and link the provider yourself — see [Linking a Provider](#linking-a-provider) |
+
+Your account is only ever found through a provider you have linked. Matching email addresses alone never signs anyone in.
+
+## Signing Up
+
+If your administrator allows new sign-ups through a provider, the same buttons appear on the sign-up page, above the **Or sign up with email** divider.
+
+<Steps>
+  <Step>
+    ### Choose a Provider
+
+    Click **Continue with Google**, Microsoft, GitHub, or Apple, and approve the request.
+  </Step>
+  <Step>
+    ### Finish the Sign-up Form
+
+    Your name and email address are filled in for you, and no password is needed — you will sign in with your provider from then on.
+
+    If the provider confirmed your email address, the email field is locked. Otherwise you can change it, and you confirm it with a code as usual.
+  </Step>
+  <Step>
+    ### Create the Account
+
+    When the provider has confirmed your email address, your account starts verified and no verification code is sent.
+  </Step>
+</Steps>
+
+Two things to know while you are signing up:
+
+- If you reload the sign-up page, start again from the provider button. The sign-up is only held for the length of one visit.
+- If you already have an account, clicking a provider button on the sign-up page signs you in instead of creating a second one.
+
+An email address that already has an account is never used to create another. Sign in and link the provider instead.
+
+## Linking a Provider
+
+Linking lets you sign in with a provider on an account you created with a password.
+
+<Steps>
+  <Step>
+    ### Open Your Profile
+
+    Click your avatar in the top-right corner of the console and select **Your profile**.
+  </Step>
+  <Step>
+    ### Find Connected Accounts
+
+    Click the **Auth** tab. The **Connected accounts** panel lists the providers you have linked under **Linked**, and the rest under **Available to link**.
+  </Step>
+  <Step>
+    ### Link the Provider
+
+    Click **Link** next to a provider and approve the request. You are returned to the **Auth** tab, and the provider moves to **Linked**.
+  </Step>
+</Steps>
+
+You can link one account per provider, and a provider account that is already linked to another Fleetbase user cannot be linked to yours.
+
+## Unlinking a Provider
+
+In **Connected accounts**, click **Unlink** next to a linked provider and confirm. You can link it again later.
+
+<Callout type="warn">You cannot remove your last way of signing in. If you have no password and only one linked provider, set a password or link another provider first — otherwise the **Unlink** button stays disabled.</Callout>
+
+You are emailed whenever a provider is linked to, or removed from, your account, so you find out if someone else does it.
+
+## Who Can Use Provider Sign-in
+
+Provider sign-in is for team member accounts, the same accounts that can sign in to the console with a password.
+
+- **Customers** sign in through the Customer Portal, not the console.
+- **Drivers and contacts** cannot sign in to the console at all. Drivers use the Navigator app.
+
+See [Users](/docs/platform/identity-and-access/users) for how account types differ, and [Two-Factor Authentication](/docs/platform/identity-and-access/two-factor-authentication) for the second step that applies to both password and provider sign-in.

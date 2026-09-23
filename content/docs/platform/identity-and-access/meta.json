@@ -6,6 +6,7 @@
     "policies",
     "groups",
     "organizations",
+    "oauth-sign-in",
     "two-factor-authentication"
   ]
 }

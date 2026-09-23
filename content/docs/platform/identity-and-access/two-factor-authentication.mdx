@@ -11,7 +11,9 @@ Two-factor authentication (2FA) adds a second verification step to login. After 
 | :--- | :--- | :--- |
 | **User** | Your profile → Auth | Each user for their own account |
 | **Organization** | Organization settings → Two Factor | Organization admins for their org's users |
-| **System-wide** | Admin → 2FA Config | Instance admins for all organizations |
+| **System-wide** | Admin → Auth Config → Two-Factor Auth | Instance admins for all organizations |
+
+2FA applies however you sign in. If you [sign in with a provider](/docs/platform/identity-and-access/oauth-sign-in), you are still asked for your one-time code afterwards.
 
 ---
 
@@ -82,6 +84,6 @@ Click **Save 2FA Settings** to apply. The enforcement toggle only appears when 2
 
 ## System-Wide 2FA
 
-Instance administrators can enable and enforce 2FA across the entire Fleetbase instance — for all users in all organizations. This is configured from **Admin → 2FA Config**.
+Instance administrators can enable and enforce 2FA across the entire Fleetbase instance — for all users in all organizations. This is configured from **Admin → Auth Config → Two-Factor Auth**.
 
 See [System Setup → Two-Factor Authentication](/docs/platform/system-setup/two-factor-authentication) for details.
