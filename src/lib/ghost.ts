@@ -107,6 +107,16 @@ function buildGhostUrl(pathname: string, params: Record<string, string>) {
   return `${apiUrl}/ghost/api/content/${pathname}?${searchParams.toString()}`;
 }
 
+class GhostRequestError extends Error {
+  status: number;
+
+  constructor(pathname: string, status: number) {
+    super(`Ghost Content API request failed for ${pathname} with status ${status}.`);
+    this.name = 'GhostRequestError';
+    this.status = status;
+  }
+}
+
 async function fetchGhost<T>(pathname: string, params: Record<string, string>) {
   const response = await fetch(buildGhostUrl(pathname, params), {
     headers: {
@@ -119,9 +129,7 @@ async function fetchGhost<T>(pathname: string, params: Record<string, string>) {
   });
 
   if (!response.ok) {
-    throw new Error(
-      `Ghost Content API request failed for ${pathname} with status ${response.status}.`,
-    );
+    throw new GhostRequestError(pathname, response.status);
   }
 
   return (await response.json()) as T;
@@ -224,13 +232,25 @@ export async function getAllBlogPosts() {
 }
 
 export async function getBlogPostBySlug(slug: string) {
-  const response = await fetchGhost<GhostPostsResponse>(
-    `posts/slug/${encodeURIComponent(slug)}/`,
-    {
-      include: 'authors,tags',
-      formats: 'html,plaintext',
-    },
-  );
+  let response: GhostPostsResponse;
+
+  try {
+    response = await fetchGhost<GhostPostsResponse>(
+      `posts/slug/${encodeURIComponent(slug)}/`,
+      {
+        include: 'authors,tags',
+        formats: 'html,plaintext',
+      },
+    );
+  } catch (error) {
+    // Ghost answers an unknown slug with 404: that is a missing post (the
+    // page renders notFound()), not a failed request.
+    if (error instanceof GhostRequestError && error.status === 404) {
+      return null;
+    }
+
+    throw error;
+  }
 
   const post = response.posts[0];
 
